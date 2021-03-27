@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+# Substrate Front End Template
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This template allows you to create a front-end application that connects to a
+[Substrate](https://github.com/paritytech/substrate) node back-end with minimal
+configuration. To learn about Substrate itself, visit the
+[Substrate Developer Hub](https://substrate.dev).
 
-## Available Scripts
+The template is built with [Create React App](https://github.com/facebook/create-react-app)
+and [Polkadot js API](https://polkadot.js.org/api/). Familiarity with these tools
+will be helpful, but the template strives to be self-explanatory.
 
-In the project directory, you can run:
+## Using The Template
 
-### `yarn start`
+### Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The codebase is installed using [git](https://git-scm.com/) and [yarn](https://yarnpkg.com/). This tutorial assumes you have installed yarn globally prior to installing it within the subdirectories. For the most recent version and how to install yarn, please refer to [yarn](https://yarnpkg.com/) documentation and installation guides. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+# Clone the repository
+git clone https://github.com/substrate-developer-hub/substrate-front-end-template.git
+cd substrate-front-end-template
+yarn install
+```
 
-### `yarn test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can start the template in development mode to connect to a locally running node
 
-### `yarn build`
+```bash
+yarn start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can also build the app in production mode,
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+yarn build
+```
+and open `build/index.html` in your favorite browser.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Configuration
 
-### `yarn eject`
+The template's configuration is stored in the `src/config` directory, with
+`common.json` being loaded first, then the environment-specific json file,
+and finally environment variables, with precedence.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* `development.json` affects the development environment
+* `test.json` affects the test environment, triggered in `yarn test` command.
+* `production.json` affects the production environment, triggered in
+`yarn build` command.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Some environment variables are read and integrated in the template `config` object,
+including:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* `REACT_APP_PROVIDER_SOCKET` overriding `config[PROVIDER_SOCKET]`
+* `REACT_APP_DEVELOPMENT_KEYRING` overriding `config[DEVELOPMENT_KEYRING]`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+More on [React environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables).
 
-## Learn More
+When writing and deploying your own front end, you should configure:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Custom types as JSON in `src/config/types.json`. See
+  [Extending types](https://polkadot.js.org/api/start/types.extend.html).
+* `PROVIDER_SOCKET` in `src/config/production.json` pointing to your own
+  deployed node.
+* `DEVELOPMENT_KEYRING` in `src/config/common.json` be set to `false`.
+  See [Keyring](https://polkadot.js.org/api/start/keyring.html).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Specifying Connecting Node
 
-### Code Splitting
+There are two ways to specify it:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* With `PROVIDER_SOCKET` in `{common, development, production}.json`.
+* With `rpc=<ws or wss connection>` query paramter after the URL. This overrides the above setting.
 
-### Analyzing the Bundle Size
+## Reusable Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### useSubstrate Custom Hook
 
-### Making a Progressive Web App
+The custom hook `useSubstrate` provides access to the Polkadot js API and thus the
+keyring and the blockchain itself. Specifically it exposes this API.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```js
+{
+  socket,
+  types,
+  keyring,
+  keyringState,
+  api,
+  apiState,
+}
+```
 
-### Advanced Configuration
+- `socket` - The remote provider socket it is connecting to.
+- `types` - The custom types used in the connected node.
+- `keyring` - A keyring of accounts available to the user.
+- `keyringState` - One of `"READY"` or `"ERROR"` states. `keyring` is valid
+only when `keyringState === "READY"`.
+- `api` - The remote api to the connected node.
+- `apiState` - One of `"CONNECTING"`, `"READY"`, or `"ERROR"` states. `api` is valid
+only when `apiState === "READY"`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### TxButton Component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The [TxButton](./src/substrate-lib/components/TxButton.js) handles basic
+[query](https://polkadot.js.org/api/start/api.query.html) and
+[transaction](https://polkadot.js.org/api/start/api.tx.html) requests to the
+connected node. You can reuse this component for a wide variety of queries and
+transactions. See [src/Transfer.js](./src/Transfer.js) for a transaction example
+and [src/ChainState.js](./src/ChainState.js) for a query example.
 
-### `yarn build` fails to minify
+### Account Selector
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The [Account Selector](./src/AccountSelector.js) provides the user with a unified way to
+select their account from a keyring. If the Balances module is installed in the runtime,
+it also displays the user's token balance. It is included in the template already.
