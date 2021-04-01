@@ -2,7 +2,7 @@ import { Header, Box, Avatar } from 'grommet';
 import { UserFemale } from 'grommet-icons';
 import AccountSelector from './Accounts';
 
-export default function PageHeader() {
+export default function PageHeader ({ loginHandler }) {
   return (
     <Header>
       <Box>Polkadot</Box>
@@ -10,7 +10,7 @@ export default function PageHeader() {
         <Avatar background="brand">
           <UserFemale />
         </Avatar>
-        <AccountSelector />
+        <AccountSelector setAccountAddress={loginHandler}/>
       </Box>
     </Header>
   );

@@ -35,7 +35,7 @@ function Accounts ({ setAccountAddress }) {
       valueKey = {{ key: 'value', reduce: true }}
       labelKey = 'text'
       children={(option, index, options, state) => (<Box>{option.text}</Box>)}
-      onChange={({ address }) => setAccount(address)}
+      onChange={({ value }) => setAccount(value)}
     />
   );
 }

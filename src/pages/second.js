@@ -8,11 +8,10 @@ import {
   CardFooter,
   Button,
 } from 'grommet';
-import PageHeader from '../PageHeader';
-export function Second() {
+
+export default function Second() {
   return (
     <Box align="center">
-      <PageHeader />
       <Main fill align="center" pad="large">
         <Heading>Let your friend know</Heading>
         <Box width="50%">

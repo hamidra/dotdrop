@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Box,
   Header,
@@ -8,12 +9,16 @@ import {
   Button,
   Main,
 } from 'grommet';
-import PageHeader from '../PageHeader';
 
-export default function First() {
+export default function First({ generateGiftHandler }) {
+  const [amount, setAmount] = useState('');
+  const [name, setName] = useState('');
+  const amountChangeHandler = (amount) => {
+    // toDO: validate the input is valid and in the range
+    setAmount(amount);
+  };
   return (
     <Box align="center">
-      <PageHeader />
       <Main align="center" pad="large">
         <Heading level="1">Dots are Awesome!</Heading>
         <Heading level="3" textAlign="center">
@@ -24,17 +29,31 @@ export default function First() {
           <Box>
             <Box>
               <Text>Gift value:</Text>
-              <TextInput placeholder="type here" />
+              <TextInput
+                placeholder="10"
+                value={amount}
+                onChange={(e) => {
+                  amountChangeHandler(e.target.value);
+                }}
+              />
             </Box>
             <Box>
               <Text>To who:</Text>
-              <TextInput placeholder="type here" />
+              <TextInput
+                placeholder="Bob"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </Box>
             <Button
               primary
               label="Generate"
               margin={{ top: 'xsmall' }}
               alignSelf="end"
+              onClick={() => {
+                console.log('clicked!');
+                generateGiftHandler({ amount, name, email: '' });
+              }}
             />
           </Box>
         </Form>
