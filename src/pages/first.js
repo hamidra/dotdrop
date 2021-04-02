@@ -68,7 +68,6 @@ export default function First({ generateGiftHandler, claimGiftHandler }) {
                   margin={{ top: 'xsmall' }}
                   alignSelf="end"
                   onClick={() => {
-                    console.log('clicked!');
                     generateGiftHandler({ amount, name, email: '' });
                   }}
                 />
@@ -90,7 +89,10 @@ export default function First({ generateGiftHandler, claimGiftHandler }) {
           <Button
             label="Redeem"
             size="large"
-            onClick={() => claimGiftHandler(secret)}
+            onClick={() => {
+              setSecret('');
+              claimGiftHandler(secret);
+            }}
           />
         </Box>
       </Main>

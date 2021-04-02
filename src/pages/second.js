@@ -29,9 +29,14 @@ export default function Second({
                 I'm sending you {amount} dots as a gift!
                 <br />
                 you can go to <a href="#">here</a> to claim your gift, and type
-                in the following secret message to claim those DOTs.
+                in the following secret message to claim your DOTs.
                 <br />
                 <h4>{secret}</h4>
+                The website will walk you through to create your own secure
+                Polkadot account
+                <br />
+                <br />
+                Enjoy!
               </pre>
             </CardBody>
           </Card>

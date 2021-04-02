@@ -161,8 +161,6 @@ function Body() {
         toAccount,
       };
       claimGift(claim);
-
-      setShowGift(true);
     } else {
       console.log('api not READY!' + apiState);
     }
@@ -208,10 +206,12 @@ function Body() {
           value={{ global: { colors: { brand: '#e6007a' } } }}>
           <Box>
             <PageHeader loginHandler={setLoginAccount} />
-            <First
-              generateGiftHandler={generateGiftHandler}
-              claimGiftHandler={claimGiftHandler}
-            />
+            {!showGift && (
+              <First
+                generateGiftHandler={generateGiftHandler}
+                claimGiftHandler={claimGiftHandler}
+              />
+            )}
             {showGift && (
               <Layer
                 onEsc={() => setShowGift(false)}
