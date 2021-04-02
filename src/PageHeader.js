@@ -1,16 +1,20 @@
-import { Header, Box, Avatar } from 'grommet';
-import { UserFemale } from 'grommet-icons';
+import { Header, Box, Avatar, Image } from 'grommet';
+import { UserAdmin } from 'grommet-icons';
 import AccountSelector from './Accounts';
 
-export default function PageHeader ({ loginHandler }) {
+export default function PageHeader({ loginHandler }) {
   return (
     <Header>
-      <Box>Polkadot</Box>
-      <Box direction="row">
+      <Box height="5rem" width="5rem">
+        <Image
+          src={`${process.env.PUBLIC_URL}/assets/Polkadot_symbol_color.png`}
+        />
+      </Box>
+      <Box direction="row" gap="small">
         <Avatar background="brand">
-          <UserFemale />
+          <UserAdmin />
         </Avatar>
-        <AccountSelector setAccountAddress={loginHandler}/>
+        <AccountSelector setAccountAddress={loginHandler} />
       </Box>
     </Header>
   );

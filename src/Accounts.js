@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Select, Box } from 'grommet';
 import { useSubstrate } from './substrate-lib';
 
-function Accounts ({ setAccountAddress }) {
+function Accounts({ setAccountAddress }) {
   const { keyring } = useSubstrate();
   const [accountSelected, setAccountSelected] = useState('');
 
@@ -11,7 +11,7 @@ function Accounts ({ setAccountAddress }) {
     key: account.address,
     value: account.address,
     text: account.meta.name.toUpperCase(),
-    icon: 'user'
+    icon: 'user',
   }));
 
   const initialAddress =
@@ -29,18 +29,21 @@ function Accounts ({ setAccountAddress }) {
   };
 
   return (
-    <Select
-      options={keyringOptions}
-      value = {accountSelected}
-      valueKey = {{ key: 'value', reduce: true }}
-      labelKey = 'text'
-      children={(option, index, options, state) => (<Box>{option.text}</Box>)}
-      onChange={({ value }) => setAccount(value)}
-    />
+    <Box>
+      <Select
+        options={keyringOptions}
+        value={accountSelected}
+        valueKey={{ key: 'value', reduce: true }}
+        labelKey="text"
+        children={(option, index, options, state) => <Box>{option.text}</Box>}
+        onChange={({ value }) => setAccount(value)}
+        size="small"
+      />
+    </Box>
   );
 }
 
-export default function AccountSelector (props) {
+export default function AccountSelector(props) {
   const { api, keyring } = useSubstrate();
   return keyring?.getPairs && api?.query ? <Accounts {...props} /> : null;
 }

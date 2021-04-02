@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Grommet, grommet, Box, Button, Text } from 'grommet';
+import { Grommet, ThemeContext, grommet, Box, Layer } from 'grommet';
 import PageHeader from './PageHeader';
 import First from './pages/first';
 import Second from './pages/second';
@@ -60,6 +60,48 @@ function Body() {
       });
   };
 
+  const claimGift = async ({ giftAccount, toAccount }) => {
+    console.log(
+      `Claiming the gift  ${giftAccount.address} to ${toAccount.address}`
+    );
+    const unsub = await api.tx.gift
+      .claim(toAccount.address)
+      .signAndSend(giftAccount, (result) => {
+        console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
+        if (result.status.isInBlock) {
+          console.log(
+            `Transaction included at blockHash ${result.status.asInBlock}`
+          );
+        } else if (result.status.isFinalized) {
+          console.log(
+            `Transaction finalized at blockHash ${result.status.asFinalized}`
+          );
+          unsub();
+        }
+      });
+  };
+
+  const removeGift = async ({ fromAccount, giftAccount }) => {
+    console.log(
+      `Removing the gift  ${giftAccount.address} by ${fromAccount.address}`
+    );
+    const unsub = await api.tx.gift
+      .remove(giftAccount.address)
+      .signAndSend(fromAccount, (result) => {
+        console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
+        if (result.status.isInBlock) {
+          console.log(
+            `Transaction included at blockHash ${result.status.asInBlock}`
+          );
+        } else if (result.status.isFinalized) {
+          console.log(
+            `Transaction finalized at blockHash ${result.status.asFinalized}`
+          );
+          unsub();
+        }
+      });
+  };
+
   const generateGiftHandler = async (giftInfo) => {
     if (!loginAccount) {
       console.log('no account is selected');
@@ -87,11 +129,69 @@ function Body() {
 
       setGiftInfo({
         secret: mnemonic,
-        name: giftInfo.name,
-        email: giftInfo.email,
+        name: giftInfo.name || '',
+        email: giftInfo.email || '',
         amount: giftInfo.amount,
       });
       setShowGift(true);
+    } else {
+      console.log('api not READY!' + apiState);
+    }
+  };
+
+  const claimGiftHandler = async (secret) => {
+    if (!loginAccount) {
+      console.log('no account is selected');
+    } else if (apiState === 'READY') {
+      // retrive gift account from secret
+      const mnemonic = secret;
+      const { pair } = keyring.addUri(
+        mnemonic,
+        null,
+        { name: 'gift' },
+        'ed25519'
+      );
+      const giftAccount = pair;
+
+      // load login account to transfer the gift to
+      const toAccount = await keyring.getPair(loginAccount);
+
+      const claim = {
+        giftAccount,
+        toAccount,
+      };
+      claimGift(claim);
+
+      setShowGift(true);
+    } else {
+      console.log('api not READY!' + apiState);
+    }
+  };
+
+  const removeGiftHandler = async (secret) => {
+    if (!loginAccount) {
+      console.log('no account is selected');
+    } else if (apiState === 'READY') {
+      // retrive gift account from secret
+      const mnemonic = secret;
+      const { pair } = keyring.addUri(
+        mnemonic,
+        null,
+        { name: 'gift' },
+        'ed25519'
+      );
+      const giftAccount = pair;
+
+      // load sender account
+      const fromAccount = await keyring.getPair(loginAccount);
+
+      const gift = {
+        giftAccount,
+        fromAccount,
+      };
+      removeGift(gift);
+
+      setShowGift(false);
     } else {
       console.log('api not READY!' + apiState);
     }
@@ -104,14 +204,24 @@ function Body() {
   return (
     <div>
       <Grommet theme={grommet}>
-        <Box>
-          <PageHeader loginHandler={setLoginAccount} />
-          {!showGift ? (
-            <First generateGiftHandler={generateGiftHandler} />
-          ) : (
-            <Second />
-          )}
-        </Box>
+        <ThemeContext.Extend
+          value={{ global: { colors: { brand: '#e6007a' } } }}>
+          <Box>
+            <PageHeader loginHandler={setLoginAccount} />
+            <First
+              generateGiftHandler={generateGiftHandler}
+              claimGiftHandler={claimGiftHandler}
+            />
+            {showGift && (
+              <Layer
+                onEsc={() => setShowGift(false)}
+                onClickOutside={() => setShowGift(false)}
+                animate="false">
+                <Second {...giftInfo} removeGiftHandler={removeGiftHandler} />
+              </Layer>
+            )}
+          </Box>
+        </ThemeContext.Extend>
       </Grommet>
       <DeveloperConsole />
     </div>

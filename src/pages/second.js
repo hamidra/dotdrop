@@ -9,27 +9,36 @@ import {
   Button,
 } from 'grommet';
 
-export default function Second() {
+export default function Second({
+  name,
+  email,
+  amount,
+  secret,
+  removeGiftHandler,
+}) {
   return (
     <Box align="center">
       <Main fill align="center" pad="large">
         <Heading>Let your friend know</Heading>
-        <Box width="50%">
-          <Card border="all">
+        <Box align="center">
+          <Card border="all" margin={{ bottom: '10px' }}>
             <CardBody pad="medium">
               <pre>
-                Hey! I'm sending you 5 dots as a gift!
+                Hey {name}!
                 <br />
-                you can go to <a href="#">here</a> to claim your gift, or go to
+                I'm sending you {amount} dots as a gift!
                 <br />
-                https://gift.polkadot.network,
+                you can go to <a href="#">here</a> to claim your gift, and type
+                in the following secret message to claim those DOTs.
                 <br />
-                and type in the following secret message to claim those DOTs.
+                <h4>{secret}</h4>
               </pre>
             </CardBody>
           </Card>
           <Box direction="row" fill justify="evenly">
-            <Button label="Print" /> <Button label="Email" />
+            <Button label="Print" />
+            <Button label="Email" as="a" href={`mailto:${email}`} />
+            <Button label="Remove" onClick={() => removeGiftHandler(secret)} />
           </Box>
         </Box>
       </Main>
