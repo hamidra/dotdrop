@@ -4,9 +4,10 @@ import AccountSelector from './Accounts';
 
 export default function PageHeader({ loginHandler }) {
   return (
-    <Header>
-      <Box height="5rem" width="5rem">
+    <Header height="6rem">
+      <Box height="100%">
         <Image
+          height="100%"
           src={`${process.env.PUBLIC_URL}/assets/Polkadot_symbol_color.png`}
         />
       </Box>

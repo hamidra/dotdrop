@@ -30,7 +30,7 @@ export default function First({ generateGiftHandler, claimGiftHandler }) {
         <Heading level="1">Dots are Awesome!</Heading>
         <Box align="center">
           <Heading level="3" textAlign="center">
-            Send some gifts to your friends and family and have them join
+            Send some DOTs to your friends and family and have them join
             polkadot network!
           </Heading>
           <Card background="light-1">
@@ -77,7 +77,7 @@ export default function First({ generateGiftHandler, claimGiftHandler }) {
         </Box>
         <Box>
           <Heading level="3" textAlign="center">
-            Claim your gifts that you've recieved!
+            Enter the 12 words secret below to claim the gifts!
           </Heading>
           <Box margin={{ bottom: '10px' }}>
             <TextArea

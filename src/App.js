@@ -1,5 +1,14 @@
 import { React, useState, useEffect } from 'react';
-import { Grommet, ThemeContext, grommet, Box, Layer } from 'grommet';
+import {
+  Grommet,
+  ThemeContext,
+  grommet,
+  Box,
+  Layer,
+  Card,
+  CardBody,
+  CardHeader,
+} from 'grommet';
 import PageHeader from './PageHeader';
 import First from './pages/first';
 import Second from './pages/second';
@@ -7,7 +16,11 @@ import Second from './pages/second';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
+import BN from 'bn.js';
 
+import { FormClose } from 'grommet-icons';
+
+const unitConst = new BN('1000000000000', 10);
 const ChainMeta = () => {
   const { api, apiState, keyring, keyringState, apiError } = useSubstrate();
   if (apiState === 'ERROR') return <div>apiError</div>;
@@ -43,8 +56,10 @@ function Body() {
     console.log(
       `Sending a gift from ${from.address} to ${to.address} of amount of ${amount}`
     );
+    const bnAmount = new BN(amount, 10);
+    const chainAmount = bnAmount.mul(unitConst);
     const unsub = await api.tx.gift
-      .gift(amount, to.address)
+      .gift(chainAmount.toString(), to.address)
       .signAndSend(from, (result) => {
         console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
         if (result.status.isInBlock) {
@@ -103,22 +118,28 @@ function Body() {
   };
 
   const generateGiftHandler = async (giftInfo) => {
-    if (!loginAccount) {
+    if (apiState !== 'READY') {
+      console.log('api not READY!' + apiState);
+      window.alert(
+        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
+      );
+    } else if (!loginAccount) {
       console.log('no account is selected');
-    } else if (apiState === 'READY') {
+      window.alert(
+        'You need to sign in with your account to be able to send a gift 🔑🔓'
+      );
+    } else {
       // load sender account
       const senderAccount = await keyring.getPair(loginAccount);
 
       // generate mnemonic and interim recipiant account
       const mnemonic = mnemonicGenerate();
       const recipiantName = giftInfo.name;
-      const { pair } = keyring.addUri(
+      const recipiantAccount = keyring.createFromUri(
         mnemonic,
-        null,
         { name: recipiantName },
         'ed25519'
       );
-      const recipiantAccount = pair;
       const gift = {
         from: senderAccount,
         to: recipiantAccount,
@@ -134,24 +155,28 @@ function Body() {
         amount: giftInfo.amount,
       });
       setShowGift(true);
-    } else {
-      console.log('api not READY!' + apiState);
     }
   };
 
   const claimGiftHandler = async (secret) => {
-    if (!loginAccount) {
+    if (apiState !== 'READY') {
+      console.log('api not READY!' + apiState);
+      window.alert(
+        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
+      );
+    } else if (!loginAccount) {
       console.log('no account is selected');
-    } else if (apiState === 'READY') {
+      window.alert(
+        'You need to sign in with your account to be able to send a gift 🔑🔓'
+      );
+    } else {
       // retrive gift account from secret
       const mnemonic = secret;
-      const { pair } = keyring.addUri(
+      const giftAccount = keyring.createFromUri(
         mnemonic,
-        null,
-        { name: 'gift' },
+        { name: 'interim_gift' },
         'ed25519'
       );
-      const giftAccount = pair;
 
       // load login account to transfer the gift to
       const toAccount = await keyring.getPair(loginAccount);
@@ -161,24 +186,28 @@ function Body() {
         toAccount,
       };
       claimGift(claim);
-    } else {
-      console.log('api not READY!' + apiState);
     }
   };
 
   const removeGiftHandler = async (secret) => {
-    if (!loginAccount) {
+    if (apiState !== 'READY') {
+      console.log('api not READY!' + apiState);
+      window.alert(
+        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
+      );
+    } else if (!loginAccount) {
       console.log('no account is selected');
-    } else if (apiState === 'READY') {
+      window.alert(
+        'You need to sign in with your account to be able to send a gift 🔑🔓'
+      );
+    } else {
       // retrive gift account from secret
       const mnemonic = secret;
-      const { pair } = keyring.addUri(
+      const giftAccount = keyring.createFromUri(
         mnemonic,
-        null,
-        { name: 'gift' },
+        { name: 'interim_gift' },
         'ed25519'
       );
-      const giftAccount = pair;
 
       // load sender account
       const fromAccount = await keyring.getPair(loginAccount);
@@ -190,8 +219,6 @@ function Body() {
       removeGift(gift);
 
       setShowGift(false);
-    } else {
-      console.log('api not READY!' + apiState);
     }
   };
 
@@ -203,7 +230,11 @@ function Body() {
     <div>
       <Grommet theme={grommet}>
         <ThemeContext.Extend
-          value={{ global: { colors: { brand: '#e6007a' } } }}>
+          value={{
+            global: {
+              colors: { brand: '#e6007a' },
+            },
+          }}>
           <Box>
             <PageHeader loginHandler={setLoginAccount} />
             {!showGift && (
@@ -217,7 +248,14 @@ function Body() {
                 onEsc={() => setShowGift(false)}
                 onClickOutside={() => setShowGift(false)}
                 animate="false">
-                <Second {...giftInfo} removeGiftHandler={removeGiftHandler} />
+                <Box height="3rem" direction="row" justify="end" pad="small">
+                  <FormClose onClick={() => setShowGift(false)} />
+                </Box>
+                <Second
+                  {...giftInfo}
+                  removeGiftHandler={removeGiftHandler}
+                  closeHandler={() => setShowGift(false)}
+                />
               </Layer>
             )}
           </Box>

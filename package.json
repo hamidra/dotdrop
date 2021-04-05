@@ -13,7 +13,7 @@
     "lint:ci": "eslint src/**/*.js --max-warnings=0",
     "lint:fix": "eslint --fix src/**/*.js",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build -m '[ci skip] Updates'"
+    "deploy": "gh-pages -d build -m 'deploy'"
   },
   "dependencies": {
     "@emotion/react": "^11.1.5",
@@ -27,6 +27,7 @@
     "@polkadot/util": "^5.6.3",
     "@polkadot/util-crypto": "^5.6.3",
     "@rebass/preset": "^4.0.5",
+    "bn.js": "^5.2.0",
     "emotion-theming": "^11.0.0",
     "grommet": "^2.17.1",
     "grommet-icons": "^4.5.0",
@@ -77,9 +78,9 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://substrate-developer-hub.github.io/substrate-front-end-template",
+  "homepage": "http://hamidra.github.io/dotdrop",
   "bugs": {
-    "url": "https://github.com/substrate-developer-hub/substrate-front-end-template/issues"
+    "url": "https://github.com/hamidra/dotdrop/issues"
   },
   "keywords": [
     "substrate",
