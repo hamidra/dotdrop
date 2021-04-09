@@ -1,11 +1,15 @@
+import { useContext } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
-
-export default function StoreSecret() {
+import { ClaimContext } from './ClaimMain';
+export default function CreateNewAccount() {
+  const { nextStep, prevStep } = useContext(ClaimContext);
   const label = 'I have stored my 12 words secret in a safe place.';
   return (
     <>
       <Row>
-        <Button>Back</Button>
+        <Col>
+          <Button onClick={() => prevStep()}>Back</Button>
+        </Col>
       </Row>
       <Row>
         <Col xs="12">
@@ -25,7 +29,9 @@ export default function StoreSecret() {
         </Col>
       </Row>
       <Row>
-        <Button>Next</Button>
+        <Col>
+          <Button onClick={() => nextStep()}>Next</Button>
+        </Col>
       </Row>
     </>
   );

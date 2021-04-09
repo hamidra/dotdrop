@@ -1,11 +1,13 @@
+import { useContext } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-
+import { ClaimContext } from './ClaimMain';
 export default function VerifySecret() {
+  const { prevStep, nextStep } = useContext(ClaimContext);
   return (
     <>
       <Row>
         <Col>
-          <Button>Back</Button>
+          <Button onClick={() => prevStep()}>Back</Button>
         </Col>
       </Row>
       <Row>
@@ -20,7 +22,7 @@ export default function VerifySecret() {
       </Row>
       <Row>
         <Col>
-          <Button>Redeem</Button>
+          <Button onClick={() => nextStep()}>Redeem</Button>
         </Col>
       </Row>
     </>

@@ -1,11 +1,16 @@
+import { useContext, useState } from 'react';
 import { Row, Col, Button, Card } from 'react-bootstrap';
-
-export default function CreateAccount() {
+import { Link } from 'react-router-dom';
+import { ClaimContext } from './ClaimMain';
+export default function CreateAccountOptions() {
+  const { nextStep } = useContext(ClaimContext);
   return (
     <>
       <Row>
         <Col>
-          <Button>Back</Button>
+          <Link to="/">
+            <Button>Back</Button>
+          </Link>
         </Col>
       </Row>
       <Row>
@@ -13,7 +18,7 @@ export default function CreateAccount() {
       </Row>
       <Row>
         <Col>
-          <Card>
+          <Card onClick={() => nextStep()}>
             <Card.Body>Create new Account</Card.Body>
           </Card>
         </Col>
