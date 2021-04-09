@@ -91,6 +91,7 @@ const loadAccounts = (state, dispatch) => {
     try {
       await web3Enable(config.APP_NAME);
       let allAccounts = await web3Accounts();
+      allAccounts.forEach((a) => console.log(a));
       allAccounts = allAccounts.map(({ address, meta }) => ({
         address,
         meta: { ...meta, name: `${meta.name} (${meta.source})` },
