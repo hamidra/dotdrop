@@ -7,6 +7,9 @@ import GenerateGift from './pages/gift/generate/GenerateGift';
 import LoadAccount from './pages/gift/generate/LoadAccounts';
 import PresentGift from './pages/gift/generate/PresentGift';
 import Greeting from './pages/gift/greeting';
+import { SubstrateContextProvider } from './substrate-lib';
+import { DeveloperConsole } from './substrate-lib/components';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +18,7 @@ import {
 } from 'react-router-dom';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 
-function App() {
+function Body() {
   return (
     <Router>
       <Container>
@@ -38,4 +41,11 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <SubstrateContextProvider>
+      <Body />
+      <DeveloperConsole />
+    </SubstrateContextProvider>
+  );
+}

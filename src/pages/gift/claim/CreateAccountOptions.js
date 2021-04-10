@@ -3,7 +3,11 @@ import { Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ClaimContext } from './ClaimMain';
 export default function CreateAccountOptions() {
-  const { nextStep } = useContext(ClaimContext);
+  const { nextStep, setAccountSource } = useContext(ClaimContext);
+  const optionClickHandler = (option) => {
+    setAccountSource(option);
+    nextStep();
+  };
   return (
     <>
       <Row>
@@ -18,7 +22,7 @@ export default function CreateAccountOptions() {
       </Row>
       <Row>
         <Col>
-          <Card onClick={() => nextStep()}>
+          <Card onClick={() => optionClickHandler('NEW_ACCOUNT')}>
             <Card.Body>Create new Account</Card.Body>
           </Card>
         </Col>

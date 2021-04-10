@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { ClaimContext } from './ClaimMain';
-export default function VerifySecret() {
-  const { prevStep, nextStep } = useContext(ClaimContext);
+export default function VerifySecret({ redeemSecret }) {
+  const { prevStep, nextStep, setRedeemSecret } = useContext(ClaimContext);
   return (
     <>
       <Row>
@@ -17,7 +17,11 @@ export default function VerifySecret() {
       </Row>
       <Row>
         <Col>
-          <textarea className="w-100"></textarea>
+          <textarea
+            className="w-100"
+            onChange={(e) => setRedeemSecret(e.target.value)}
+            value={redeemSecret}
+          />
         </Col>
       </Row>
       <Row>
