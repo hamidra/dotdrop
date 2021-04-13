@@ -1,3 +1,4 @@
+import { useContext, useState } from 'react';
 import {
   Row,
   Col,
@@ -7,20 +8,20 @@ import {
   Form,
   Card,
 } from 'react-bootstrap';
-export default function GenerateGift() {
+
+import { GenerateContext } from './GenerateMain';
+export default function GenerateGift({ account, generateGiftHandler }) {
+  const { nextStep, prevStep } = useContext(GenerateContext);
+  const [amount, setAmount] = useState('');
+  const [name, setName] = useState('');
+
   return (
     <>
       <Row>
         <Col>
-          <Button>Back</Button>
+          <Button onClick={() => prevStep()}>Back</Button>
         </Col>
-        <Col>
-          <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </DropdownButton>
-        </Col>
+        <Col>{account ? account.address : 'no account'}</Col>
       </Row>
       <Row>
         <Col>
@@ -29,14 +30,26 @@ export default function GenerateGift() {
               <Form>
                 <Form.Group as={Row} controlId="formGroupEmail">
                   <Form.Label>Gift value</Form.Label>
-                  <Form.Control type="number" placeholder="10" />
+                  <Form.Control
+                    type="number"
+                    placeholder="10"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
                 </Form.Group>
                 <Form.Group as={Row} controlId="formGroupEmail">
                   <Form.Label>To who</Form.Label>
-                  <Form.Control type="text" placeholder="Bob" />
+                  <Form.Control
+                    type="text"
+                    placeholder="Bob"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </Form.Group>
                 <Row>
-                  <Button>Generate</Button>
+                  <Button onClick={() => generateGiftHandler({ amount, name })}>
+                    Generate
+                  </Button>
                 </Row>
               </Form>
             </Card.Body>

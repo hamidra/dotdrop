@@ -1,12 +1,4 @@
 import { Container } from 'react-bootstrap';
-import Claimed from './pages/gift/claim/Claimed';
-import CreateAccount from './pages/gift/claim/CreateAccountOptions';
-import StoreSecret from './pages/gift/claim/CreateNewAccount';
-import VerifySecret from './pages/gift/claim/VerifySecret';
-import GenerateGift from './pages/gift/generate/GenerateGift';
-import LoadAccount from './pages/gift/generate/LoadAccounts';
-import PresentGift from './pages/gift/generate/PresentGift';
-import Greeting from './pages/gift/greeting';
 import { SubstrateContextProvider } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
 
@@ -17,6 +9,8 @@ import {
   Redirect,
 } from 'react-router-dom';
 import ClaimMain from './pages/gift/claim/ClaimMain';
+import GenerateMain from './pages/gift/generate/GenerateMain';
+import Greeting from './pages/gift/Greeting';
 
 function Body() {
   return (
@@ -27,7 +21,7 @@ function Body() {
             <ClaimMain />
           </Route>
           <Route path="/generate">
-            <LoadAccount />
+            <GenerateMain />
           </Route>
           <Route exact path="/">
             <Greeting />

@@ -1,8 +1,8 @@
 import { Row, Card, Col } from 'react-bootstrap';
 import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
-import CreateAccount from './claim/CreateAccountOptions';
-import LoadAccount from './generate/LoadAccounts';
 export default function Greeting() {
+  // rail manage seek lobster sad wrap symbol clever type math town cool
+  // gift =>
   return (
     <>
       <Row>There are no gifts better than some DOTs!</Row>

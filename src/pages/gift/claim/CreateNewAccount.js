@@ -10,7 +10,7 @@ export default function CreateNewAccount() {
   const { keyring } = useSubstrate();
   const createNewAccount = () => {
     const mnemonic = mnemonicGenerate();
-    const account = keyring.createFromUri(mnemonic, null, 'ed25519');
+    const account = keyring.createFromUri(mnemonic, null, 'sr25519');
     return { mnemonic, account };
   };
   const [newAccount, setNewAccount] = useState(createNewAccount());

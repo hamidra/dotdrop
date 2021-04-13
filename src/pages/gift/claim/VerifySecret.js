@@ -1,8 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { ClaimContext } from './ClaimMain';
-export default function VerifySecret({ redeemSecret }) {
-  const { prevStep, nextStep, setRedeemSecret } = useContext(ClaimContext);
+export default function VerifySecret({ claimGiftHandler }) {
+  const { prevStep } = useContext(ClaimContext);
+  const [redeemSecret, setRedeemSecret] = useState('');
   return (
     <>
       <Row>
@@ -26,7 +27,7 @@ export default function VerifySecret({ redeemSecret }) {
       </Row>
       <Row>
         <Col>
-          <Button onClick={() => nextStep()}>Redeem</Button>
+          <Button onClick={() => claimGiftHandler(redeemSecret)}>Redeem</Button>
         </Col>
       </Row>
     </>
