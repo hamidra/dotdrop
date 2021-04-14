@@ -5,6 +5,8 @@ import queryString from 'query-string';
 
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
+import * as polkadapp from '@polkadot/extension-dapp';
+
 import keyring from '@polkadot/ui-keyring';
 
 import config from '../config';
@@ -89,7 +91,9 @@ const loadAccounts = (state, dispatch) => {
   const asyncLoadAccounts = async () => {
     dispatch({ type: 'LOAD_KEYRING' });
     try {
-      await web3Enable(config.APP_NAME);
+      const injectedExt = await web3Enable(config.APP_NAME);
+      console.log(injectedExt);
+      window.polkadapp = polkadapp;
       let allAccounts = await web3Accounts();
       allAccounts.forEach((a) => console.log(a));
       allAccounts = allAccounts.map(({ address, meta }) => ({
