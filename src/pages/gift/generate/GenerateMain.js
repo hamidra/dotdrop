@@ -10,6 +10,7 @@ import { useSubstrate, giftPallet } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import ParityQRSigner from '../../../components/ParityQRSigner';
+import { web3FromSource } from '@polkadot/extension-dapp';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -70,10 +71,14 @@ export default function GenerateMain() {
       const isQR = false;
 
       // load sender account
-      if (account.meta.isExternal) {
+      if (account?.meta?.isExternal) {
         // it is an external account / needs QRSigner
         senderAccount = account.address;
         signer = new QRSigner(api.registry, setQrState);
+      } else if (account?.meta?.isInjected) {
+        senderAccount = account.address;
+        const injector = await web3FromSource(account.meta.source);
+        signer = injector?.signer;
       }
 
       // generate mnemonic and interim recipiant account

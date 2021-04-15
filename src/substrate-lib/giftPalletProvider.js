@@ -15,7 +15,7 @@ const createGift = async (api, { to, amount, pairOrAddress, signer }) => {
 
   const chainAmount = getChainAmount(api.registry.chainDecimals, amount);
   const tx = api.tx.gift.gift(chainAmount, to.address);
-  await tx.signAsync(pairOrAddress, signer && { signer });
+  await tx.signAsync(pairOrAddress, { signer });
   const unsub = await tx.send((result) => {
     console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
     if (result.status.isInBlock) {
