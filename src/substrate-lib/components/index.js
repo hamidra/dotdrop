@@ -1,3 +1,4 @@
 import DeveloperConsole from './DeveloperConsole';
+import QRSigner from './QrSigner';
 
-export { DeveloperConsole };
+export { DeveloperConsole, QRSigner };

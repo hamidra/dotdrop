@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useCallback } from 'react';
 import GenerateGift from './GenerateGift';
 import PresentGift from './PresentGift';
 import LoadAccountOptions from './LoadAccountOptions';
@@ -7,7 +7,9 @@ import ExtensionAccount from './account-options/ExtensionAccount';
 import HardwalletAccount from './account-options/HardwalletAccount';
 import SignerAccount from './account-options/SignerAccount';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
+import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
+import ParityQRSigner from '../../../components/ParityQRSigner';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -18,6 +20,17 @@ export default function GenerateMain() {
   const [step, setStep] = useState(0);
   const [account, setAccount] = useState(null);
   const [accountSource, setAccountSource] = useState(null);
+  const [showSigner, setShowSigner] = useState(false);
+
+  const [
+    { isQrHashed, qrAddress, qrPayload, qrResolve },
+    setQrState,
+  ] = useState({
+    isQrHashed: false,
+    qrAddress: '',
+    qrPayload: new Uint8Array(),
+  });
+
   const [gift, setGift] = useState(null);
 
   const nextStep = () => {
@@ -25,6 +38,20 @@ export default function GenerateMain() {
     setStep(step + 1);
   };
   const prevStep = () => setStep(step - 1);
+
+  let qrId = 0;
+  const _addQrSignature = useCallback(
+    ({ signature }) => {
+      qrResolve &&
+        qrResolve({
+          id: ++qrId,
+          signature,
+        });
+      setShowSigner(false);
+      nextStep();
+    },
+    [qrResolve]
+  );
 
   const generateGiftHandler = async (giftInfo) => {
     if (apiState !== 'READY') {
@@ -38,8 +65,16 @@ export default function GenerateMain() {
         'You need to sign in with your account to be able to send a gift 🔑🔓'
       );
     } else {
+      let senderAccount = account;
+      let signer = null;
+      const isQR = false;
+
       // load sender account
-      const senderAccount = account;
+      if (account.meta.isExternal) {
+        // it is an external account / needs QRSigner
+        senderAccount = account.address;
+        signer = new QRSigner(api.registry, setQrState);
+      }
 
       // generate mnemonic and interim recipiant account
       const mnemonic = mnemonicGenerate();
@@ -50,9 +85,10 @@ export default function GenerateMain() {
         'sr25519'
       );
       const gift = {
-        from: senderAccount,
         to: recipiantAccount,
         amount: giftInfo.amount,
+        pairOrAddress: senderAccount,
+        signer,
       };
 
       createGift(api, gift);
@@ -65,7 +101,11 @@ export default function GenerateMain() {
       });
 
       // ToDO: make it sync by showing a spinner while the gift is being registered on chain before moving to the next step!
-      nextStep();
+      if (account?.meta?.isExternal) {
+        setShowSigner(true);
+      } else {
+        nextStep();
+      }
     }
   };
 
@@ -115,12 +155,24 @@ export default function GenerateMain() {
       currentComponent = accountOption[accountSource];
       break;
     case 2:
-      currentComponent = (
-        <GenerateGift
-          account={account}
-          generateGiftHandler={generateGiftHandler}
-        />
-      );
+      if (showSigner) {
+        currentComponent = (
+          <ParityQRSigner
+            address={qrAddress}
+            genesisHash={api.genesisHash}
+            isHashed={isQrHashed}
+            onSignature={_addQrSignature}
+            payload={qrPayload}
+          />
+        );
+      } else {
+        currentComponent = (
+          <GenerateGift
+            account={account}
+            generateGiftHandler={generateGiftHandler}
+          />
+        );
+      }
       break;
     case 3:
       currentComponent = (

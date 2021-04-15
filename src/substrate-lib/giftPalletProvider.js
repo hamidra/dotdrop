@@ -8,27 +8,27 @@ const getChainAmount = (chainDecimal, amount) => {
   return bnAmount.mul(bnChainUnit).toString();
 };
 
-const createGift = async (api, { from, to, amount }) => {
+const createGift = async (api, { to, amount, pairOrAddress, signer }) => {
   console.log(
-    `Sending a gift from ${from.address} to ${to.address} of amount of ${amount}`
+    `Sending a gift from ${pairOrAddress} to ${to.address} of amount of ${amount}`
   );
 
   const chainAmount = getChainAmount(api.registry.chainDecimals, amount);
-  const unsub = await api.tx.gift
-    .gift(chainAmount, to.address)
-    .signAndSend(from, (result) => {
-      console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
-      if (result.status.isInBlock) {
-        console.log(
-          `Transaction included at blockHash ${result.status.asInBlock}`
-        );
-      } else if (result.status.isFinalized) {
-        console.log(
-          `Transaction finalized at blockHash ${result.status.asFinalized}`
-        );
-        unsub();
-      }
-    });
+  const tx = api.tx.gift.gift(chainAmount, to.address);
+  await tx.signAsync(pairOrAddress, signer && { signer });
+  const unsub = await tx.send((result) => {
+    console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
+    if (result.status.isInBlock) {
+      console.log(
+        `Transaction included at blockHash ${result.status.asInBlock}`
+      );
+    } else if (result.status.isFinalized) {
+      console.log(
+        `Transaction finalized at blockHash ${result.status.asFinalized}`
+      );
+      unsub();
+    }
+  });
 };
 
 const claimGift = async (api, { giftAccount, toAccount }) => {

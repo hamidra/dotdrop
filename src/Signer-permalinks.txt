@@ -1,0 +1,44 @@
+QR signer:
+1- When user click on send (Transfer Modal Opens):
+https://github.com/polkadot-js/apps/blob/8f47e79ffdc08a8c960ac4d56423c1a058316844/packages/page-accounts/src/modals/Transfer.tsx#L43
+and when user clicks on 'Make Transfer':
+https://github.com/polkadot-js/apps/blob/8f47e79ffdc08a8c960ac4d56423c1a058316844/packages/page-accounts/src/modals/Transfer.tsx#L205
+
+2- 'Make Transfer' button is  txButton: 
+https://github.com/polkadot-js/apps/blob/8f47e79ffdc08a8c960ac4d56423c1a058316844/packages/react-components/src/TxButton.tsx#L17
+
+on Click it runs _onSend:
+https://github.com/polkadot-js/apps/blob/8f47e79ffdc08a8c960ac4d56423c1a058316844/packages/react-components/src/TxButton.tsx#L53
+
+it creates and queues and extrinsic: queueExtrinsic(
+and sets isSending to true which opens Signer:
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/index.tsx#L88
+Which extrcats the transaction from queue:
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/index.tsx#L65
+And set the button for a signed transaction:
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/TxSigned.tsx#L178
+
+The txSigner extracts the flags using this utility 
+(which based on the account specifies if it is Signer account and hence flags.isQr=true):
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/util.ts#L30
+
+When 'sign via Qr' is clicked it invokes _doStart()
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/TxSigned.tsx#L312
+which will go to onSign:
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/TxSigned.tsx#L331
+Which calls signedAsync
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/TxSigned.tsx#L96
+which extracts the params using:
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/TxSigned.tsx#L149
+
+it extracts the params for Signer accounts as:
+['qr', address, { ...options, signer: new QrSigner(api.registry, setQrState) }];
+
+and the setQrState is setting the QRState as 
+{ isQrHashed, qrAddress, qrPayload, qrResolve }
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/TxSigned.tsx#L185
+
+and the actual signer is defined as:
+https://github.com/polkadot-js/apps/blob/bd78840d2142df121d182e8700b20308880dde0a/packages/react-signer/src/signers/QrSigner.ts#L10
+which implements a transaction signer based on signer interface:
+https://github.com/polkadot-js/api/blob/a1f07e32743eed1c27bf06ca6fb9118afdbfa839/packages/types/src/types/extrinsic.ts#L130
