@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 export default function AccounSelector({
   accounts,
@@ -6,7 +5,6 @@ export default function AccounSelector({
   setSelectedAccount,
 }) {
   const selectAccountHandler = (idx) => {
-    console.log(JSON.stringify(idx));
     setSelectedAccount(accounts[idx]);
   };
 
@@ -22,7 +20,6 @@ export default function AccounSelector({
         }
         size="lg"
         onSelect={(eventKey, e) => selectAccountHandler(eventKey)}>
-        <Dropdown.ItemText></Dropdown.ItemText>
         {accounts.map((account, idx) => {
           return (
             <Dropdown.Item

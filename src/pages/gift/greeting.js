@@ -5,7 +5,9 @@ export default function Greeting() {
   // gift =>
   return (
     <>
-      <Row>There are no gifts better than some DOTs!</Row>
+      <Row>
+        <Col>There are no gifts better than some DOTs!</Col>
+      </Row>
       <Row>
         <Col>
           <Link to="/claim">
@@ -14,7 +16,6 @@ export default function Greeting() {
             </Card>
           </Link>
         </Col>
-
         <Col>
           <Link to="/generate">
             <Card>

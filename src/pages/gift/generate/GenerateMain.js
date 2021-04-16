@@ -1,16 +1,16 @@
 import { createContext, useState, useCallback } from 'react';
 import GenerateGift from './GenerateGift';
 import PresentGift from './PresentGift';
-import LoadAccountOptions from './LoadAccountOptions';
-import ImportedAccount from './account-options/ImportedAccount';
-import ExtensionAccount from './account-options/ExtensionAccount';
-import HardwalletAccount from './account-options/HardwalletAccount';
-import SignerAccount from './account-options/SignerAccount';
+import ImportAccount from '../../../components/account/ImportAccount';
+import ExtensionAccount from '../../../components/account/ExtensionAccount';
+import HardwalletAccount from '../../../components/account/HardwalletAccount';
+import SignerAccount from '../../../components/account/SignerAccount';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import ParityQRSigner from '../../../components/ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
+import SelectAccountSource from './SelectAccountSource';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -149,7 +149,7 @@ export default function GenerateMain() {
   };
 
   const accountOption = {
-    IMPORTED_ACCOUNT: <ImportedAccount />,
+    IMPORTED_ACCOUNT: <ImportAccount />,
     EXTENSION_ACCOUNT: <ExtensionAccount />,
     HARDWALLET_ACCOUNT: <HardwalletAccount />,
     SIGNER_ACCOUNT: <SignerAccount />,
@@ -185,7 +185,7 @@ export default function GenerateMain() {
       );
       break;
     default:
-      currentComponent = <LoadAccountOptions />;
+      currentComponent = <SelectAccountSource />;
   }
   return (
     <GenerateContext.Provider

@@ -1,25 +1,21 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Col, Row, Button } from 'react-bootstrap';
-import { GenerateContext } from '../GenerateMain';
-import { useSubstrate } from '../../../../substrate-lib';
-export default function ImportedAccount() {
-  const { prevStep, nextStep, setAccount } = useContext(GenerateContext);
+import { useSubstrate } from '../../substrate-lib';
+export default function ImportAccount({ setAccount }) {
   const { keyring } = useSubstrate();
   const [accountSecret, setAccountSecret] = useState('');
   const importAccountFromSecret = async (accountSecret) => {
     // ToDO: verify mnemonic secret is valid
     // ToDO: add advanced option to load 'ed25519 and derived accounts
     const account = await keyring.createFromUri(accountSecret, null, 'sr25519');
+    return account;
+  };
+  const setAccountHandler = async () => {
+    const account = await importAccountFromSecret(accountSecret);
     setAccount(account);
-    nextStep();
   };
   return (
     <>
-      <Row>
-        <Col>
-          <Button onClick={() => prevStep()}>Back</Button>
-        </Col>
-      </Row>
       <Row>
         <Col>
           Enter the 12 words secret you have recieved to redeem your gift!
@@ -36,9 +32,7 @@ export default function ImportedAccount() {
       </Row>
       <Row>
         <Col>
-          <Button onClick={() => importAccountFromSecret(accountSecret)}>
-            Import
-          </Button>
+          <Button onClick={() => setAccountHandler()}>Import</Button>
         </Col>
       </Row>
     </>

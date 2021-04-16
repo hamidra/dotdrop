@@ -1,18 +1,15 @@
 import { QrScanAddress } from '@polkadot/react-qr';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import { useSubstrate } from '../../../../substrate-lib';
-import { GenerateContext } from '../GenerateMain';
+import { useSubstrate } from '../../substrate-lib';
 
-export default function SignerAccount() {
+export default function SignerAccount({ setAccount }) {
   // signer format
   // substrate:13Q6RcqeAjvUCrYhdKdeqzUpHMJRishtxLByQn9YkyvMsYKa:0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3:test
-  const { prevStep, nextStep, setAccount } = useContext(GenerateContext);
   const { keyring } = useSubstrate();
   const [showReader, setShowReader] = useState('true');
   const [externalAccount, setExternalAccount] = useState(null);
-  const onSendHandler = (scannedAccount) => {
-    console.log(scannedAccount);
+  const onScanHandler = (scannedAccount) => {
     if (scannedAccount.isAddress) {
       const account = keyring.keyring.addFromAddress(
         scannedAccount.content,
@@ -28,30 +25,24 @@ export default function SignerAccount() {
     }
   };
 
-  const cancelHandler = () => {
+  const onCancelHandler = () => {
     setExternalAccount(null);
     setShowReader(true);
   };
 
-  const addHandler = () => {
+  const setAccountHandler = () => {
     // ToDO: validate account is not empty
     setAccount(externalAccount);
-    nextStep();
   };
   return (
     <>
-      <Row>
-        <Col>
-          <Button onClick={() => prevStep()}>Back</Button>
-        </Col>
-      </Row>
       <Row>
         <Col>Scan your account QRCode from your signer app</Col>
       </Row>
       {showReader ? (
         <Row className="justify-content-center">
           <Col md="6">
-            <QrScanAddress onScan={(scanned) => onSendHandler(scanned)} />
+            <QrScanAddress onScan={(scanned) => onScanHandler(scanned)} />
           </Col>
         </Row>
       ) : (
@@ -61,10 +52,10 @@ export default function SignerAccount() {
       )}
       <Row>
         <Col>
-          <Button onClick={() => cancelHandler()}>Cancel</Button>
+          <Button onClick={() => onCancelHandler()}>Cancel</Button>
         </Col>
         <Col>
-          <Button onClick={() => addHandler()}>Add</Button>
+          <Button onClick={() => setAccountHandler()}>Add</Button>
         </Col>
       </Row>
     </>

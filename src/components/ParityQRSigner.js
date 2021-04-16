@@ -57,7 +57,9 @@ function ParityQRSigner({
           </div>
         </Col>
       </Row>
-      {sigError && <div>sigError</div>}
+      <Row>
+        <Col>{sigError && <div>sigError</div>}</Col>
+      </Row>
     </>
   );
 }
