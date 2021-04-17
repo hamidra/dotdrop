@@ -1,9 +1,15 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, createElement } from 'react';
 import Claimed from './Claimed';
-import CreateAccountOptions from './CreateAccountOptions';
 import VerifySecret from './VerifySecret';
-import CreateNewAccount from './CreateNewAccount';
-import { usesubstrate, giftPallet, useSubstrate } from '../../../substrate-lib';
+import NewAccount from '../../../components/account/NewAccount';
+import ExtensionAccount from '../../../components/account/ExtensionAccount';
+import HardwalletAccount from '../../../components/account/HardwalletAccount';
+import SignerAccount from '../../../components/account/SignerAccount';
+import Error from '../../../components/Error';
+import Processing from '../../../components/Processing';
+import SelectAccount from './SelectAccount';
+import SelectAccountSource from './SelectAccountSource';
+import { giftPallet, useSubstrate } from '../../../substrate-lib';
 
 const ClaimContext = createContext();
 
@@ -15,6 +21,36 @@ export default function ClaimMain() {
   const [step, setStep] = useState(0);
   const [account, setAccount] = useState(null);
   const [accountSource, setAccountSource] = useState(null);
+  const [processing, setProcessing] = useState(false);
+  const [processingError, setProcessingError] = useState(null);
+
+  const resetPresentation = () => {
+    setProcessing(false);
+    setProcessingError(null);
+  };
+  const _setStep = (step) => {
+    resetPresentation();
+    setStep(step);
+  };
+  const nextStep = () => {
+    _setStep(step + 1);
+  };
+  const prevStep = () => {
+    setProcessing(false);
+    _setStep(step - 1);
+  };
+  const jumpToStep = (step) => {
+    setProcessing(false);
+    _setStep(step);
+  };
+
+  const claimGiftCallback = ({ error, result }) => {
+    if (error) {
+      setProcessingError(error);
+    } else {
+      nextStep();
+    }
+  };
 
   const claimGiftHandler = async (secret) => {
     if (apiState !== 'READY') {
@@ -36,44 +72,65 @@ export default function ClaimMain() {
         'sr25519'
       );
 
-      // load login account to transfer the gift to
-      const toAccount = account;
+      // set the gift account as signing account
+      const signingAccount = { pairOrAddress: giftAccount };
 
+      // claim gift by the selected account
       const claim = {
-        giftAccount,
-        toAccount,
+        by: account,
       };
-      claimGift(api, claim);
+      claimGift(api, signingAccount, claim, claimGiftCallback);
 
-      nextStep();
+      setProcessing(true);
     }
   };
 
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
-  const accountOption = {
-    NEW_ACCOUNT: <CreateNewAccount />,
+  const setAccountHandler = (account) => {
+    setAccount(account);
+    nextStep();
   };
-  let currentComponent = <CreateAccountOptions />;
+
+  const accountOption = {
+    NEW_ACCOUNT: NewAccount,
+    EXTENSION_ACCOUNT: ExtensionAccount,
+    HARDWALLET_ACCOUNT: HardwalletAccount,
+    SIGNER_ACCOUNT: SignerAccount,
+  };
+
+  let currentStepComponent;
   switch (step) {
     case 1:
-      currentComponent = accountOption[accountSource];
+      currentStepComponent = (
+        <SelectAccount>
+          {createElement(accountOption[accountSource], { setAccountHandler })}
+        </SelectAccount>
+      );
       break;
     case 2:
-      currentComponent = <VerifySecret claimGiftHandler={claimGiftHandler} />;
+      currentStepComponent = (
+        <VerifySecret claimGiftHandler={claimGiftHandler} />
+      );
       break;
     case 3:
-      currentComponent = <Claimed />;
+      currentStepComponent = <Claimed />;
       break;
     default:
-      currentComponent = <CreateAccountOptions />;
+      currentStepComponent = <SelectAccountSource />;
+  }
+  let currentComponent;
+  if (processingError) {
+    currentComponent = <Error>{processingError}</Error>;
+  } else if (processing) {
+    currentComponent = <Processing />;
+  } else {
+    currentComponent = currentStepComponent;
   }
   return (
     <ClaimContext.Provider
       value={{
         nextStep,
         prevStep,
-        setAccount,
+        jumpToStep,
         setAccountSource,
       }}>
       {currentComponent}

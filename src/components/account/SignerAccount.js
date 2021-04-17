@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { useSubstrate } from '../../substrate-lib';
 
-export default function SignerAccount({ setAccount }) {
+export default function SignerAccount({ setAccountHandler }) {
   // signer format
   // substrate:13Q6RcqeAjvUCrYhdKdeqzUpHMJRishtxLByQn9YkyvMsYKa:0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3:test
   const { keyring } = useSubstrate();
@@ -30,9 +30,9 @@ export default function SignerAccount({ setAccount }) {
     setShowReader(true);
   };
 
-  const setAccountHandler = () => {
+  const _setAccountHandler = () => {
     // ToDO: validate account is not empty
-    setAccount(externalAccount);
+    setAccountHandler(externalAccount);
   };
   return (
     <>
@@ -55,7 +55,7 @@ export default function SignerAccount({ setAccount }) {
           <Button onClick={() => onCancelHandler()}>Cancel</Button>
         </Col>
         <Col>
-          <Button onClick={() => setAccountHandler()}>Add</Button>
+          <Button onClick={() => _setAccountHandler()}>Add</Button>
         </Col>
       </Row>
     </>

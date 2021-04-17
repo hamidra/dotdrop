@@ -1,16 +1,19 @@
-import { createContext, useState, useCallback } from 'react';
+import { createContext, useState, useCallback, createElement } from 'react';
 import GenerateGift from './GenerateGift';
 import PresentGift from './PresentGift';
 import ImportAccount from '../../../components/account/ImportAccount';
 import ExtensionAccount from '../../../components/account/ExtensionAccount';
 import HardwalletAccount from '../../../components/account/HardwalletAccount';
 import SignerAccount from '../../../components/account/SignerAccount';
+import Processing from '../../../components/Processing';
+import Error from '../../../components/Error';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import ParityQRSigner from '../../../components/ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import SelectAccountSource from './SelectAccountSource';
+import SelectAccount from './SelectAccount';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -18,10 +21,13 @@ export { GenerateContext };
 export default function GenerateMain() {
   const { apiState, api, keyring } = useSubstrate();
   const { removeGift, createGift } = giftPallet;
+
   const [step, setStep] = useState(0);
   const [account, setAccount] = useState(null);
   const [accountSource, setAccountSource] = useState(null);
   const [showSigner, setShowSigner] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [processingError, setProcessingError] = useState(null);
 
   const [
     { isQrHashed, qrAddress, qrPayload, qrResolve },
@@ -34,11 +40,26 @@ export default function GenerateMain() {
 
   const [gift, setGift] = useState(null);
 
-  const nextStep = () => {
-    console.log(`${step}=>${step + 1}`);
-    setStep(step + 1);
+  const resetPresentation = () => {
+    setProcessing(false);
+    setShowSigner(false);
+    setProcessingError(null);
   };
-  const prevStep = () => setStep(step - 1);
+  const _setStep = (step) => {
+    resetPresentation();
+    setStep(step);
+  };
+  const nextStep = () => {
+    _setStep(step + 1);
+  };
+  const prevStep = () => {
+    setProcessing(false);
+    _setStep(step - 1);
+  };
+  const jumpToStep = (step) => {
+    setProcessing(false);
+    _setStep(step);
+  };
 
   let qrId = 0;
   const _addQrSignature = useCallback(
@@ -49,10 +70,41 @@ export default function GenerateMain() {
           signature,
         });
       setShowSigner(false);
-      nextStep();
+      setProcessing(true);
     },
     [qrResolve]
   );
+
+  const createGiftCallback = ({ error, result }) => {
+    if (error) {
+      setProcessingError(error);
+    } else {
+      nextStep();
+    }
+  };
+
+  const removeGiftCallback = ({ error, result }) => {
+    if (error) {
+      setProcessingError(error);
+    } else {
+      jumpToStep(2);
+    }
+  };
+
+  const getSigningAccount = async (account) => {
+    let pairOrAddress = account;
+    let signer = null;
+    if (account?.meta?.isExternal) {
+      // it is an external account / needs QRSigner
+      pairOrAddress = account.address;
+      signer = new QRSigner(api.registry, setQrState);
+    } else if (account?.meta?.isInjected) {
+      pairOrAddress = account.address;
+      const injector = await web3FromSource(account.meta.source);
+      signer = injector?.signer;
+    }
+    return { pairOrAddress, signer };
+  };
 
   const generateGiftHandler = async (giftInfo) => {
     if (apiState !== 'READY') {
@@ -66,20 +118,8 @@ export default function GenerateMain() {
         'You need to sign in with your account to be able to send a gift 🔑🔓'
       );
     } else {
-      let senderAccount = account;
-      let signer = null;
-      const isQR = false;
-
-      // load sender account
-      if (account?.meta?.isExternal) {
-        // it is an external account / needs QRSigner
-        senderAccount = account.address;
-        signer = new QRSigner(api.registry, setQrState);
-      } else if (account?.meta?.isInjected) {
-        senderAccount = account.address;
-        const injector = await web3FromSource(account.meta.source);
-        signer = injector?.signer;
-      }
+      // load signing account
+      const signingAccount = await getSigningAccount(account);
 
       // generate mnemonic and interim recipiant account
       const mnemonic = mnemonicGenerate();
@@ -92,11 +132,9 @@ export default function GenerateMain() {
       const gift = {
         to: recipiantAccount,
         amount: giftInfo.amount,
-        pairOrAddress: senderAccount,
-        signer,
       };
 
-      createGift(api, gift);
+      createGift(api, signingAccount, gift, createGiftCallback);
 
       setGift({
         secret: mnemonic,
@@ -109,7 +147,7 @@ export default function GenerateMain() {
       if (account?.meta?.isExternal) {
         setShowSigner(true);
       } else {
-        nextStep();
+        setProcessing(true);
       }
     }
   };
@@ -126,6 +164,9 @@ export default function GenerateMain() {
         'You need to sign in with your account to be able to send a gift 🔑🔓'
       );
     } else {
+      // load signing account
+      const signingAccount = await getSigningAccount(account);
+
       // retrive gift account from secret
       const mnemonic = secret;
       const giftAccount = keyring.createFromUri(
@@ -134,67 +175,82 @@ export default function GenerateMain() {
         'sr25519'
       );
 
-      // load sender account
-      const fromAccount = account;
-
       const gift = {
-        giftAccount,
-        fromAccount,
+        to: giftAccount,
       };
-      removeGift(api, gift);
+      removeGift(api, signingAccount, gift, removeGiftCallback);
 
-      // go to generate gift
-      setStep(2);
+      if (account?.meta?.isExternal) {
+        setShowSigner(true);
+      } else {
+        // go to generate gift
+        setProcessing(true);
+      }
     }
   };
 
-  const accountOption = {
-    IMPORTED_ACCOUNT: <ImportAccount />,
-    EXTENSION_ACCOUNT: <ExtensionAccount />,
-    HARDWALLET_ACCOUNT: <HardwalletAccount />,
-    SIGNER_ACCOUNT: <SignerAccount />,
+  const setAccountHandler = (account) => {
+    setAccount(account);
+    nextStep();
   };
-  let currentComponent;
+
+  const accountOption = {
+    IMPORTED_ACCOUNT: ImportAccount,
+    EXTENSION_ACCOUNT: ExtensionAccount,
+    HARDWALLET_ACCOUNT: HardwalletAccount,
+    SIGNER_ACCOUNT: SignerAccount,
+  };
+
+  let currentStepComponent;
   switch (step) {
     case 1:
-      currentComponent = accountOption[accountSource];
+      currentStepComponent = (
+        <SelectAccount>
+          {createElement(accountOption[accountSource], { setAccountHandler })}
+        </SelectAccount>
+      );
       break;
     case 2:
-      if (showSigner) {
-        currentComponent = (
-          <ParityQRSigner
-            address={qrAddress}
-            genesisHash={api.genesisHash}
-            isHashed={isQrHashed}
-            onSignature={_addQrSignature}
-            payload={qrPayload}
-          />
-        );
-      } else {
-        currentComponent = (
-          <GenerateGift
-            account={account}
-            generateGiftHandler={generateGiftHandler}
-          />
-        );
-      }
+      currentStepComponent = (
+        <GenerateGift
+          account={account}
+          generateGiftHandler={generateGiftHandler}
+        />
+      );
       break;
     case 3:
-      currentComponent = (
+      currentStepComponent = (
         <PresentGift gift={gift} removeGiftHandler={removeGiftHandler} />
       );
       break;
     default:
-      currentComponent = <SelectAccountSource />;
+      currentStepComponent = <SelectAccountSource />;
+  }
+  let currentComponent;
+  if (processingError) {
+    currentComponent = <Error>{JSON.stringify(processingError)}</Error>;
+  } else if (processing) {
+    currentComponent = <Processing />;
+  } else if (showSigner) {
+    currentComponent = (
+      <ParityQRSigner
+        address={qrAddress}
+        genesisHash={api.genesisHash}
+        isHashed={isQrHashed}
+        onSignature={_addQrSignature}
+        payload={qrPayload}
+      />
+    );
+  } else {
+    currentComponent = currentStepComponent;
   }
   return (
     <GenerateContext.Provider
       value={{
         nextStep,
         prevStep,
-        setAccount,
+        jumpToStep,
         setAccountSource,
-        setGift,
       }}>
       {currentComponent}
     </GenerateContext.Provider>

@@ -11,7 +11,7 @@ import {
 
 import { GenerateContext } from './GenerateMain';
 export default function GenerateGift({ account, generateGiftHandler }) {
-  const { nextStep, prevStep } = useContext(GenerateContext);
+  const { jumpToStep } = useContext(GenerateContext);
   const [amount, setAmount] = useState('');
   const [name, setName] = useState('');
 
@@ -19,7 +19,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
     <>
       <Row>
         <Col>
-          <Button onClick={() => prevStep()}>Back</Button>
+          <Button onClick={() => jumpToStep(0)}>Back</Button>
         </Col>
         <Col>{account ? account.address : 'no account'}</Col>
       </Row>

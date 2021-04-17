@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import { GenerateContext } from './GenerateMain';
+import { ClaimContext } from './ClaimMain';
 
 export default function SelectAccount({ children }) {
-  const { jumpToStep } = useContext(GenerateContext);
+  const { jumpToStep } = useContext(ClaimContext);
   return (
     <>
       <Row>

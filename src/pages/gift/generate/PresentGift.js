@@ -1,10 +1,13 @@
 import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 export default function PresentGift({ gift, removeGiftHandler }) {
   const { name, amount, secret } = gift;
   return (
     <>
       <Row>
-        <Button>Home</Button>
+        <Link to="/">
+          <Button>Home</Button>
+        </Link>
       </Row>
       <Row>
         <Col>Let your firend know!</Col>

@@ -8,13 +8,8 @@ const getChainAmount = (chainDecimal, amount) => {
   return bnAmount.mul(bnChainUnit).toString();
 };
 
-const createGift = async (api, { to, amount, pairOrAddress, signer }) => {
-  console.log(
-    `Sending a gift from ${pairOrAddress} to ${to.address} of amount of ${amount}`
-  );
-
-  const chainAmount = getChainAmount(api.registry.chainDecimals, amount);
-  const tx = api.tx.gift.gift(chainAmount, to.address);
+const signAndSendTx = async (tx, signingAccount, cb) => {
+  const { pairOrAddress, signer } = signingAccount;
   await tx.signAsync(pairOrAddress, { signer });
   const unsub = await tx.send((result) => {
     console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
@@ -22,6 +17,7 @@ const createGift = async (api, { to, amount, pairOrAddress, signer }) => {
       console.log(
         `Transaction included at blockHash ${result.status.asInBlock}`
       );
+      cb && cb({ result });
     } else if (result.status.isFinalized) {
       console.log(
         `Transaction finalized at blockHash ${result.status.asFinalized}`
@@ -31,46 +27,40 @@ const createGift = async (api, { to, amount, pairOrAddress, signer }) => {
   });
 };
 
-const claimGift = async (api, { giftAccount, toAccount }) => {
+const createGift = async (api, signingAccount, gift, cb) => {
   console.log(
-    `Claiming the gift  ${giftAccount.address} to ${toAccount.address}`
+    `Sending a gift from ${signingAccount} to ${gift.to} of amount of ${gift.amount}`
   );
-  const unsub = await api.tx.gift
-    .claim(toAccount.address)
-    .signAndSend(giftAccount, (result) => {
-      console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
-      if (result.status.isInBlock) {
-        console.log(
-          `Transaction included at blockHash ${result.status.asInBlock}`
-        );
-      } else if (result.status.isFinalized) {
-        console.log(
-          `Transaction finalized at blockHash ${result.status.asFinalized}`
-        );
-        unsub();
-      }
-    });
+  try {
+    const chainAmount = getChainAmount(api.registry.chainDecimals, gift.amount);
+    const tx = api.tx.gift.gift(chainAmount, gift.to.address);
+    await signAndSendTx(tx, signingAccount, cb);
+  } catch (error) {
+    console.log(error);
+    cb && cb({ error });
+  }
 };
 
-const removeGift = async (api, { fromAccount, giftAccount }) => {
+const claimGift = async (api, signingAccount, claim, cb) => {
   console.log(
-    `Removing the gift  ${giftAccount.address} by ${fromAccount.address}`
+    `Claiming the gift  ${signingAccount?.pairOrAddress?.address} to ${claim?.by?.address}`
   );
-  const unsub = await api.tx.gift
-    .remove(giftAccount.address)
-    .signAndSend(fromAccount, (result) => {
-      console.log(`Current status is ${JSON.stringify(result, null, 2)}`);
-      if (result.status.isInBlock) {
-        console.log(
-          `Transaction included at blockHash ${result.status.asInBlock}`
-        );
-      } else if (result.status.isFinalized) {
-        console.log(
-          `Transaction finalized at blockHash ${result.status.asFinalized}`
-        );
-        unsub();
-      }
-    });
+  try {
+    const tx = api.tx.gift.claim(claim.by.address);
+    await signAndSendTx(tx, signingAccount, cb);
+  } catch (error) {
+    cb && cb({ error });
+  }
+};
+
+const removeGift = async (api, signingAccount, gift, cb) => {
+  console.log(`Removing the gift  ${gift.to} by ${signingAccount}`);
+  try {
+    const tx = api.tx.gift.remove(gift.to.address);
+    await signAndSendTx(tx, signingAccount, cb);
+  } catch (error) {
+    cb && cb({ error });
+  }
 };
 const giftPallet = { createGift, claimGift, removeGift };
 export default giftPallet;

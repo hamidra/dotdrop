@@ -3,12 +3,12 @@ import { Row, Col, Button } from 'react-bootstrap';
 import AccountSelector from './AccountSelector';
 import { useSubstrate } from '../../substrate-lib';
 
-export default function ExtensionAccount({ setAccount }) {
+export default function ExtensionAccount({ setAccountHandler }) {
   const [selectedAccount, setSelectedAccount] = useState(null);
   const { keyring } = useSubstrate();
   const accounts = keyring.getPairs();
-  const setAccountHandler = () => {
-    setAccount(selectedAccount);
+  const _setAccountHandler = () => {
+    setAccountHandler(selectedAccount);
   };
   return (
     <>
@@ -21,7 +21,7 @@ export default function ExtensionAccount({ setAccount }) {
           />
         </Col>
         <Col className="w-100">
-          <Button onClick={() => setAccountHandler()}>Add</Button>
+          <Button onClick={() => _setAccountHandler()}>Add</Button>
         </Col>
       </Row>
     </>

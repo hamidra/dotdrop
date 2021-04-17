@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Col, Row, Button } from 'react-bootstrap';
 import { useSubstrate } from '../../substrate-lib';
-export default function ImportAccount({ setAccount }) {
+export default function ImportAccount({ setAccountHandler }) {
   const { keyring } = useSubstrate();
   const [accountSecret, setAccountSecret] = useState('');
   const importAccountFromSecret = async (accountSecret) => {
@@ -10,9 +10,9 @@ export default function ImportAccount({ setAccount }) {
     const account = await keyring.createFromUri(accountSecret, null, 'sr25519');
     return account;
   };
-  const setAccountHandler = async () => {
+  const _setAccountHandler = async () => {
     const account = await importAccountFromSecret(accountSecret);
-    setAccount(account);
+    setAccountHandler(account);
   };
   return (
     <>
@@ -32,7 +32,7 @@ export default function ImportAccount({ setAccount }) {
       </Row>
       <Row>
         <Col>
-          <Button onClick={() => setAccountHandler()}>Import</Button>
+          <Button onClick={() => _setAccountHandler()}>Import</Button>
         </Col>
       </Row>
     </>
