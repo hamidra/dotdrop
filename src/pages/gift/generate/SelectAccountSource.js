@@ -39,12 +39,12 @@ export default function SelectAccountSource() {
           </Link>
         </Col>
       </Row>
-      <Row>
-        <Col>How would you like to access your account?</Col>
+      <Row className="py-5">
+        <Col className="text-center">
+          <h1>How would you like to access your account?</h1>
+        </Col>
       </Row>
-      <Row>
-        <AccountOptions options={sourceOptions} />
-      </Row>
+      <AccountOptions options={sourceOptions} />
     </>
   );
 }

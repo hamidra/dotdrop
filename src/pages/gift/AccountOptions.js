@@ -1,19 +1,20 @@
-import { Row, Col, Button, Card } from 'react-bootstrap';
-import { useContext } from 'react';
-import { GenerateContext } from './generate/GenerateMain';
-import { Link } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
+import OptionCard from '../../components/OptionCard';
 export default function AccountOptions({ options }) {
   return (
     <>
-      <Row>
+      <Row
+        xs={1}
+        md={2}
+        className="mt-5 mx-auto justify-content-center align-items-center">
         {options.map((option) => (
-          <Col>
-            <Card
+          <Col className="d-flex justify-content-center align-items-center">
+            <OptionCard
               onClick={() => {
                 option.selectHandler();
               }}>
-              <Card.Body>{option.label}</Card.Body>
-            </Card>
+              <h4>{option.label}</h4>
+            </OptionCard>
           </Col>
         ))}
       </Row>

@@ -39,8 +39,10 @@ export default function SelectAccountSource() {
           </Link>
         </Col>
       </Row>
-      <Row>
-        <Col>Let’s deposit your gift to your Polkadot Account</Col>
+      <Row className="py-5">
+        <Col className="text-center">
+          <h1>Let’s deposit your gift to your Polkadot Account</h1>
+        </Col>
       </Row>
       <Row>
         <AccountOptions options={sourceOptions} />
