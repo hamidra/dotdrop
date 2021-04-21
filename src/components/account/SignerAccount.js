@@ -1,6 +1,7 @@
 import { QrScanAddress } from '@polkadot/react-qr';
 import { useState } from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import Button from '../CustomButton';
 import { useSubstrate } from '../../substrate-lib';
 
 export default function SignerAccount({ setAccountHandler }) {
@@ -36,28 +37,33 @@ export default function SignerAccount({ setAccountHandler }) {
   };
   return (
     <>
-      <Row>
-        <Col>Scan your account QRCode from your signer app</Col>
+      <Row className="p-3 text-center">
+        <Col>
+          <h3>Scan your account QRCode from your signer app</h3>
+        </Col>
       </Row>
       {showReader ? (
-        <Row className="justify-content-center">
-          <Col md="6">
+        <Row className="justify-content-center align-items-center">
+          <Col md="6" style={{ height: 400 }}>
             <QrScanAddress onScan={(scanned) => onScanHandler(scanned)} />
           </Col>
         </Row>
       ) : (
-        <Row>
-          <Col>{externalAccount.address}</Col>
+        <Row className="justify-content-center align-items-center">
+          <Col
+            style={{ height: 400 }}
+            className="d-flex flex-column justify-content-center align-items-center text-center">
+            <h4>{externalAccount?.meta?.name} </h4>
+            <br />
+            <div>{externalAccount?.address}</div>
+          </Col>
+          <div className="w-100" />
+          <Col md="6" className="d-flex justify-content-between">
+            <Button onClick={() => onCancelHandler()}>Cancel</Button>
+            <Button onClick={() => _setAccountHandler()}>Add</Button>
+          </Col>
         </Row>
       )}
-      <Row>
-        <Col>
-          <Button onClick={() => onCancelHandler()}>Cancel</Button>
-        </Col>
-        <Col>
-          <Button onClick={() => _setAccountHandler()}>Add</Button>
-        </Col>
-      </Row>
     </>
   );
 }

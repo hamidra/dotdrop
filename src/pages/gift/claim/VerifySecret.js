@@ -6,9 +6,14 @@ export default function VerifySecret({ claimGiftHandler }) {
   const [redeemSecret, setRedeemSecret] = useState('');
   return (
     <>
-      <Row>
+      <Row className="p-4">
         <Col>
-          <Button onClick={() => prevStep()}>Back</Button>
+          <Button
+            variant="outline-dark"
+            className="shadow-sm"
+            onClick={() => prevStep()}>
+            Back
+          </Button>
         </Col>
       </Row>
       <Row>

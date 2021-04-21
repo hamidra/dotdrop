@@ -1,13 +1,6 @@
 import { useContext, useState } from 'react';
-import {
-  Row,
-  Col,
-  Button,
-  Dropdown,
-  DropdownButton,
-  Form,
-  Card,
-} from 'react-bootstrap';
+import { Row, Col, Form, Card } from 'react-bootstrap';
+import Button from '../../../components/CustomButton';
 
 import { GenerateContext } from './GenerateMain';
 export default function GenerateGift({ account, generateGiftHandler }) {
@@ -17,9 +10,9 @@ export default function GenerateGift({ account, generateGiftHandler }) {
 
   return (
     <>
-      <Row>
+      <Row className="p-4">
         <Col>
-          <Button onClick={() => jumpToStep(0)}>Back</Button>
+          <Button onClick={() => jumpToStep(0)}>{'< Back'}</Button>
         </Col>
         <Col>{account ? account.address : 'no account'}</Col>
       </Row>

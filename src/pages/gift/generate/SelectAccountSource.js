@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import AccountOptions from '../AccountOptions';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import Button from '../../../components/CustomButton';
 import { Link } from 'react-router-dom';
 import { GenerateContext } from './GenerateMain';
 
@@ -32,14 +33,14 @@ export default function SelectAccountSource() {
   ];
   return (
     <>
-      <Row>
+      <Row className="p-4">
         <Col>
           <Link to="/">
-            <Button>Back</Button>
+            <Button>{'< Back'}</Button>
           </Link>
         </Col>
       </Row>
-      <Row className="py-5">
+      <Row className="py-3">
         <Col className="text-center">
           <h1>How would you like to access your account?</h1>
         </Col>

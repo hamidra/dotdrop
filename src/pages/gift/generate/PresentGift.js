@@ -1,10 +1,11 @@
-import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
+import Button from '../../../components/CustomButton';
 import { Link } from 'react-router-dom';
 export default function PresentGift({ gift, removeGiftHandler }) {
   const { name, amount, secret } = gift;
   return (
     <>
-      <Row>
+      <Row className="p-4">
         <Link to="/">
           <Button>Home</Button>
         </Link>
