@@ -45,7 +45,9 @@ export default function SelectAccountSource() {
           <h1>How would you like to access your account?</h1>
         </Col>
       </Row>
-      <AccountOptions options={sourceOptions} />
+      <Row>
+        <AccountOptions options={sourceOptions} />
+      </Row>
     </>
   );
 }

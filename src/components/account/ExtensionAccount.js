@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import AccountSelector from './AccountSelector';
+import Button from '../CustomButton';
 import { useSubstrate } from '../../substrate-lib';
 
 export default function ExtensionAccount({ setAccountHandler }) {
@@ -12,15 +13,23 @@ export default function ExtensionAccount({ setAccountHandler }) {
   };
   return (
     <>
-      <Row className="justify-content-center">
-        <Col className="w-100">
+      <Row className="p-3 text-center">
+        <Col>
+          <h3>Select the account you want to use</h3>
+        </Col>
+      </Row>
+      <Row className="p-5 justify-content-center">
+        <Col
+          style={{ height: 200 }}
+          className="d-flex flex-column justify-content-center align-items-center text-center">
           <AccountSelector
             accounts={accounts}
             selectedAccount={selectedAccount}
             setSelectedAccount={setSelectedAccount}
           />
         </Col>
-        <Col className="w-100">
+        <div className="w-100" />
+        <Col className="d-flex justify-content-end">
           <Button onClick={() => _setAccountHandler()}>Add</Button>
         </Col>
       </Row>
