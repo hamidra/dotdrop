@@ -84,6 +84,7 @@ export default function ClaimMain() {
       const claim = {
         by: account,
       };
+
       claimGift(api, signingAccount, claim, claimGiftCallback);
 
       setProcessingMsg('Transferring your gift to your account...');
@@ -138,11 +139,14 @@ export default function ClaimMain() {
         setAccountSource,
       }}>
       {currentStepComponent}
-      <Processing show={processing} message={processingMsg} />
       <ErrorModal
         show={!!processingError}
         message={processingError}
         handleClose={() => resetPresentation()}
+      />
+      <Processing
+        show={!processingError && processing}
+        message={processingMsg}
       />
     </ClaimContext.Provider>
   );

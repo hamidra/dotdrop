@@ -149,12 +149,11 @@ export default function GenerateMain() {
         amount: giftInfo.amount,
       });
 
-      setProcessingMsg('Generating the gift on the blockchain...');
-
       // ToDO: make it sync by showing a spinner while the gift is being registered on chain before moving to the next step!
       if (account?.meta?.isExternal) {
         setShowSigner(true);
       } else {
+        setProcessingMsg('Generating the gift on the blockchain...');
         setProcessing(true);
       }
     }
@@ -186,14 +185,14 @@ export default function GenerateMain() {
       const gift = {
         to: giftAccount,
       };
-      removeGift(api, signingAccount, gift, removeGiftCallback);
 
-      setProcessingMsg('Removing the gift from the blockchain...');
+      removeGift(api, signingAccount, gift, removeGiftCallback);
 
       if (account?.meta?.isExternal) {
         setShowSigner(true);
       } else {
         // go to generate gift
+        setProcessingMsg('Removing the gift from the blockchain...');
         setProcessing(true);
       }
     }
@@ -265,11 +264,14 @@ export default function GenerateMain() {
         setAccountSource,
       }}>
       {currentComponent}
-      <Processing show={processing} message={processingMsg} />
       <ErrorModal
         show={!!processingError}
         message={processingError}
         handleClose={() => resetPresentation()}
+      />
+      <Processing
+        show={!processingError && processing}
+        message={processingMsg}
       />
     </GenerateContext.Provider>
   );

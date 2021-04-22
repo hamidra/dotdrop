@@ -64,23 +64,29 @@ const reducer = (state, action) => {
 // Connecting to the Substrate node
 
 const connect = (state, dispatch) => {
-  const { apiState, socket, jsonrpc, types } = state;
-  // We only want this function to be performed once
-  if (apiState) return;
+  try {
+    const { apiState, socket, jsonrpc, types } = state;
+    // We only want this function to be performed once
+    if (apiState) return;
+    dispatch({ type: 'CONNECT_INIT' });
 
-  dispatch({ type: 'CONNECT_INIT' });
+    const provider = new WsProvider(socket);
+    const _api = new ApiPromise({ provider, types, rpc: jsonrpc });
 
-  const provider = new WsProvider(socket);
-  const _api = new ApiPromise({ provider, types, rpc: jsonrpc });
-
-  // Set listeners for disconnection and reconnection event.
-  _api.on('connected', () => {
-    dispatch({ type: 'CONNECT', payload: _api });
-    // `ready` event is not emitted upon reconnection and is checked explicitly here.
-    _api.isReady.then((_api) => dispatch({ type: 'CONNECT_SUCCESS' }));
-  });
-  _api.on('ready', () => dispatch({ type: 'CONNECT_SUCCESS' }));
-  _api.on('error', (err) => dispatch({ type: 'CONNECT_ERROR', payload: err }));
+    // Set listeners for disconnection and reconnection event.
+    _api.on('connected', () => {
+      dispatch({ type: 'CONNECT', payload: _api });
+      // `ready` event is not emitted upon reconnection and is checked explicitly here.
+      _api.isReady.then((_api) => dispatch({ type: 'CONNECT_SUCCESS' }));
+    });
+    _api.on('ready', () => dispatch({ type: 'CONNECT_SUCCESS' }));
+    _api.on('error', (err) =>
+      dispatch({ type: 'CONNECT_ERROR', payload: err })
+    );
+  } catch (err) {
+    console.error(err);
+    dispatch({ type: 'CONNECT_ERROR', payload: err });
+  }
 };
 
 ///

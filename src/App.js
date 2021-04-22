@@ -4,10 +4,11 @@ import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
+  useRouteMatch,
 } from 'react-router-dom';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
@@ -16,28 +17,28 @@ import Greeting from './pages/gift/Greeting';
 function Body() {
   const { apiState } = useSubstrate();
   return (
-    <Router>
-      <Container>
+    <Container>
+      <Router>
         <Switch>
-          <Route path="/claim">
+          <Route path={'/claim'}>
             <ClaimMain />
           </Route>
-          <Route path="/generate">
+          <Route path={'/generate'}>
             <GenerateMain />
           </Route>
-          <Route exact path="/">
+          <Route exact path={'/'}>
             <Greeting />
           </Route>
-          <Route path="/">
-            <Redirect to="/" />
+          <Route path={'/'}>
+            <Redirect to={'/'} />
           </Route>
         </Switch>
         <Processing
           show={apiState !== 'READY'}
           message="Connecting to the blockchain network..."
         />
-      </Container>
-    </Router>
+      </Router>
+    </Container>
   );
 }
 
