@@ -22,8 +22,7 @@ export default function Claimed() {
                   <h1>Congradulations!!</h1>
                   <h3> 🎉🥳🎊 🎁</h3>
                   <p>
-                    Your gift has been claimed and tranferred to the following
-                    account!
+                    Your gift has been claimed and tranferred to your account!
                   </p>
                   <p></p>
                 </Col>

@@ -5,7 +5,7 @@ import NewAccount from '../../../components/account/NewAccount';
 import ExtensionAccount from '../../../components/account/ExtensionAccount';
 import HardwalletAccount from '../../../components/account/HardwalletAccount';
 import SignerAccount from '../../../components/account/SignerAccount';
-import Error from '../../../components/Error';
+import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
 import SelectAccount from './SelectAccount';
 import SelectAccountSource from './SelectAccountSource';
@@ -86,14 +86,20 @@ export default function ClaimMain() {
       };
       claimGift(api, signingAccount, claim, claimGiftCallback);
 
-      setProcessingMsg('Transferring yout gift to your account...');
+      setProcessingMsg('Transferring your gift to your account...');
       setProcessing(true);
     }
   };
 
   const setAccountHandler = (account) => {
-    setAccount(account);
-    nextStep();
+    if (account) {
+      setAccount(account);
+      nextStep();
+    } else {
+      handleError(
+        new Error('No account was selected, please login with your account!')
+      );
+    }
   };
 
   const accountOption = {
@@ -133,7 +139,7 @@ export default function ClaimMain() {
       }}>
       {currentStepComponent}
       <Processing show={processing} message={processingMsg} />
-      <Error
+      <ErrorModal
         show={!!processingError}
         message={processingError}
         handleClose={() => resetPresentation()}

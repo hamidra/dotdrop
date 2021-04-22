@@ -5,6 +5,13 @@ import { ClaimContext } from './ClaimMain';
 export default function VerifySecret({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
   const [redeemSecret, setRedeemSecret] = useState('');
+  const redeemHandler = () => {
+    // ToDO: add better input validation to verify redeemSecret is not empty,
+    // and is indeed a valid mnemonic phrase
+    if (redeemSecret) {
+      claimGiftHandler(redeemSecret);
+    }
+  };
   return (
     <>
       <Row className="p-4">
@@ -36,9 +43,7 @@ export default function VerifySecret({ claimGiftHandler }) {
                 </Col>
                 <div className="w-100" />
                 <Col className="d-flex justify-content-end">
-                  <Button onClick={() => claimGiftHandler(redeemSecret)}>
-                    Redeem
-                  </Button>
+                  <Button onClick={() => redeemHandler()}>Redeem</Button>
                 </Col>
               </Row>
             </Card.Body>

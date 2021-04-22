@@ -12,8 +12,12 @@ export default function ImportAccount({ setAccountHandler }) {
     return account;
   };
   const _setAccountHandler = async () => {
-    const account = await importAccountFromSecret(accountSecret);
-    setAccountHandler(account);
+    // ToDO: add better input validation to verify accountSecret is not empty,
+    // and is indeed a valid mnemonic phrase
+    if (accountSecret) {
+      const account = await importAccountFromSecret(accountSecret);
+      setAccountHandler(account);
+    }
   };
   return (
     <>

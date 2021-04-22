@@ -6,7 +6,7 @@ import ExtensionAccount from '../../../components/account/ExtensionAccount';
 import HardwalletAccount from '../../../components/account/HardwalletAccount';
 import SignerAccount from '../../../components/account/SignerAccount';
 import Processing from '../../../components/Processing';
-import Error from '../../../components/Error';
+import ErrorModal from '../../../components/Error';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
@@ -200,8 +200,14 @@ export default function GenerateMain() {
   };
 
   const setAccountHandler = (account) => {
-    setAccount(account);
-    nextStep();
+    if (account) {
+      setAccount(account);
+      nextStep();
+    } else {
+      handleError(
+        new Error('No account was selected, please login with your account!')
+      );
+    }
   };
 
   const accountOption = {
@@ -260,7 +266,7 @@ export default function GenerateMain() {
       }}>
       {currentComponent}
       <Processing show={processing} message={processingMsg} />
-      <Error
+      <ErrorModal
         show={!!processingError}
         message={processingError}
         handleClose={() => resetPresentation()}
