@@ -28,6 +28,7 @@ export default function GenerateMain() {
   const [showSigner, setShowSigner] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
+  const [processingMsg, setProcessingMsg] = useState('');
 
   const [
     { isQrHashed, qrAddress, qrPayload, qrResolve },
@@ -44,6 +45,7 @@ export default function GenerateMain() {
     setProcessing(false);
     setShowSigner(false);
     setProcessingError(null);
+    setProcessingMsg('');
   };
   const _setStep = (step) => {
     resetPresentation();
@@ -53,11 +55,9 @@ export default function GenerateMain() {
     _setStep(step + 1);
   };
   const prevStep = () => {
-    setProcessing(false);
     _setStep(step - 1);
   };
   const jumpToStep = (step) => {
-    setProcessing(false);
     _setStep(step);
   };
 
@@ -75,9 +75,15 @@ export default function GenerateMain() {
     [qrResolve]
   );
 
+  const handleError = (error) => {
+    setProcessing(false);
+    setProcessingMsg(null);
+    setProcessingError(error.message);
+  };
+
   const createGiftCallback = ({ error, result }) => {
     if (error) {
-      setProcessingError(error);
+      handleError(error);
     } else {
       nextStep();
     }
@@ -85,7 +91,7 @@ export default function GenerateMain() {
 
   const removeGiftCallback = ({ error, result }) => {
     if (error) {
-      setProcessingError(error);
+      handleError(error);
     } else {
       jumpToStep(2);
     }
@@ -143,6 +149,8 @@ export default function GenerateMain() {
         amount: giftInfo.amount,
       });
 
+      setProcessingMsg('Generating the gift on the blockchain...');
+
       // ToDO: make it sync by showing a spinner while the gift is being registered on chain before moving to the next step!
       if (account?.meta?.isExternal) {
         setShowSigner(true);
@@ -179,6 +187,8 @@ export default function GenerateMain() {
         to: giftAccount,
       };
       removeGift(api, signingAccount, gift, removeGiftCallback);
+
+      setProcessingMsg('Removing the gift from the blockchain...');
 
       if (account?.meta?.isExternal) {
         setShowSigner(true);
@@ -227,11 +237,7 @@ export default function GenerateMain() {
       currentStepComponent = <SelectAccountSource />;
   }
   let currentComponent;
-  if (processingError) {
-    currentComponent = <Error>{JSON.stringify(processingError)}</Error>;
-  } else if (processing) {
-    currentComponent = <Processing />;
-  } else if (showSigner) {
+  if (showSigner) {
     currentComponent = (
       <ParityQRSigner
         address={qrAddress}
@@ -253,6 +259,12 @@ export default function GenerateMain() {
         setAccountSource,
       }}>
       {currentComponent}
+      <Processing show={processing} message={processingMsg} />
+      <Error
+        show={!!processingError}
+        message={processingError}
+        handleClose={() => resetPresentation()}
+      />
     </GenerateContext.Provider>
   );
 }

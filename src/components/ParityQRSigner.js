@@ -27,7 +27,7 @@ function ParityQRSigner({
             ? `${signature.substr(0, 24)}…${signature.substr(-22)}`
             : signature;
         setSigError(
-          'Non-signature, non-hex data received from QR. Data contains "{{sample}}" instead of a hex-only signature. Please present the correct signature generated from the QR presented for submission.'
+          `Non-signature, non-hex data received from QR. Data contains ${sample} instead of a hex-only signature. Please present the correct signature generated from the QR presented for submission.`
         );
       }
     },
@@ -35,33 +35,40 @@ function ParityQRSigner({
   );
 
   if (!address) {
-    return <Spinner label={'Preparing QR for signing'} />;
+    return (
+      <>
+        <Row>
+          <Col>{'Preparing QR for signing'}</Col>
+        </Row>
+        <Spinner animation="border" />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Row>
+          <Col>
+            <div>
+              <QrDisplayPayload
+                address={address}
+                cmd={isHashed ? CMD_HASH : CMD_MORTAL}
+                genesisHash={genesisHash}
+                payload={payload}
+              />
+            </div>
+          </Col>
+          <Col>
+            <div>
+              <QrScanSignature onScan={_onSignature} />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>{sigError && <div>sigError</div>}</Col>
+        </Row>
+      </>
+    );
   }
-
-  return (
-    <>
-      <Row>
-        <Col>
-          <div>
-            <QrDisplayPayload
-              address={address}
-              cmd={isHashed ? CMD_HASH : CMD_MORTAL}
-              genesisHash={genesisHash}
-              payload={payload}
-            />
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <QrScanSignature onScan={_onSignature} />
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col>{sigError && <div>sigError</div>}</Col>
-      </Row>
-    </>
-  );
 }
 
 export default ParityQRSigner;

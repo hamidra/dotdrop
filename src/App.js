@@ -1,6 +1,7 @@
 import { Container } from 'react-bootstrap';
-import { SubstrateContextProvider } from './substrate-lib';
+import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
+import Processing from './components/Processing';
 
 import {
   BrowserRouter as Router,
@@ -13,6 +14,7 @@ import GenerateMain from './pages/gift/generate/GenerateMain';
 import Greeting from './pages/gift/Greeting';
 
 function Body() {
+  const { apiState } = useSubstrate();
   return (
     <Router>
       <Container>
@@ -30,6 +32,10 @@ function Body() {
             <Redirect to="/" />
           </Route>
         </Switch>
+        <Processing
+          show={apiState !== 'READY'}
+          message="Connecting to the blockchain network..."
+        />
       </Container>
     </Router>
   );

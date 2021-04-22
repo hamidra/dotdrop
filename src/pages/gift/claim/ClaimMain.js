@@ -23,6 +23,7 @@ export default function ClaimMain() {
   const [accountSource, setAccountSource] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
+  const [processingMsg, setProcessingMsg] = useState('');
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -36,17 +37,21 @@ export default function ClaimMain() {
     _setStep(step + 1);
   };
   const prevStep = () => {
-    setProcessing(false);
     _setStep(step - 1);
   };
   const jumpToStep = (step) => {
-    setProcessing(false);
     _setStep(step);
+  };
+
+  const handleError = (error) => {
+    setProcessing(false);
+    setProcessingMsg(null);
+    setProcessingError(error.message);
   };
 
   const claimGiftCallback = ({ error, result }) => {
     if (error) {
-      setProcessingError(error);
+      handleError(error);
     } else {
       nextStep();
     }
@@ -81,6 +86,7 @@ export default function ClaimMain() {
       };
       claimGift(api, signingAccount, claim, claimGiftCallback);
 
+      setProcessingMsg('Transferring yout gift to your account...');
       setProcessing(true);
     }
   };
@@ -117,14 +123,6 @@ export default function ClaimMain() {
     default:
       currentStepComponent = <SelectAccountSource />;
   }
-  let currentComponent;
-  if (processingError) {
-    currentComponent = <Error>{processingError}</Error>;
-  } else if (processing) {
-    currentComponent = <Processing />;
-  } else {
-    currentComponent = currentStepComponent;
-  }
   return (
     <ClaimContext.Provider
       value={{
@@ -133,7 +131,13 @@ export default function ClaimMain() {
         jumpToStep,
         setAccountSource,
       }}>
-      {currentComponent}
+      {currentStepComponent}
+      <Processing show={processing} message={processingMsg} />
+      <Error
+        show={!!processingError}
+        message={processingError}
+        handleClose={() => resetPresentation()}
+      />
     </ClaimContext.Provider>
   );
 }
