@@ -1,8 +1,5 @@
 import { useContext } from 'react';
-import AccountOptions from '../AccountOptions';
-import { Row, Col } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
-import { Link } from 'react-router-dom';
+import { Row, Col, Button, Card } from 'react-bootstrap';
 import { GenerateContext } from './GenerateMain';
 
 export default function SelectAccountSource() {
@@ -33,21 +30,40 @@ export default function SelectAccountSource() {
   ];
   return (
     <>
-      <Row className="p-4">
-        <Col>
-          <Link to="/">
-            <Button>{'< Back'}</Button>
-          </Link>
-        </Col>
-      </Row>
-      <Row className="py-3">
-        <Col className="text-center">
-          <h1>How would you like to access your account?</h1>
-        </Col>
-      </Row>
-      <Row>
-        <AccountOptions options={sourceOptions} />
-      </Row>
+      <Card style={{ width: 800, maxWidth: '100%' }} className="shadow">
+        <Card.Body>
+          <Row className="align-iterms-center text-center">
+            <Col>
+              <h3>Connect Account</h3>
+            </Col>
+            <div className="w-100" />
+            <Col>
+              <Button variant="outline-primary">
+                Load with Polkadot Extension
+              </Button>
+            </Col>
+            <div className="w-100" />
+            <Col xs="12">
+              <hr />
+            </Col>
+          </Row>
+          <Row className="align-iterms-center">
+            <Col>
+              <Card className="rounded-lg">
+                <Card.Body>Ledger</Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card className="rounded-lg">
+                <Card.Body>Parity Signer</Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Card.Body>
+        <Card.Footer>
+          By connecting an account, I accept the terms and conditions
+        </Card.Footer>
+      </Card>
     </>
   );
 }

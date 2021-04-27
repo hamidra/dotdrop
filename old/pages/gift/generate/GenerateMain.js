@@ -12,10 +12,8 @@ import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import ParityQRSigner from '../../../components/ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
-import SelectAccount from './SelectAccount';
-import Landing from './Landing';
-import { Row, Col } from 'react-bootstrap';
 import SelectAccountSource from './SelectAccountSource';
+import SelectAccount from './SelectAccount';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -221,7 +219,11 @@ export default function GenerateMain() {
   let currentStepComponent;
   switch (step) {
     case 1:
-      currentStepComponent = <SelectAccountSource />;
+      currentStepComponent = (
+        <SelectAccount>
+          {createElement(accountOption[accountSource], { setAccountHandler })}
+        </SelectAccount>
+      );
       break;
     case 2:
       currentStepComponent = (
@@ -237,7 +239,7 @@ export default function GenerateMain() {
       );
       break;
     default:
-      currentStepComponent = <Landing />;
+      currentStepComponent = <SelectAccountSource />;
   }
   let currentComponent;
   if (showSigner) {
@@ -261,11 +263,7 @@ export default function GenerateMain() {
         jumpToStep,
         setAccountSource,
       }}>
-      <Row className="justify-content-center align-items-center">
-        <Col className="d-flex justify-content-center align-items-center">
-          {currentComponent}
-        </Col>
-      </Row>
+      {currentComponent}
       <ErrorModal
         show={!!processingError}
         message={processingError}

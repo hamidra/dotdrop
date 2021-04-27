@@ -1,0 +1,17 @@
+// Custom.scss
+
+// Button
+$btn-border-radius: 1.5rem;
+$btn-border-radius-lg: 2rem;
+$btn-border-radius-sm: 1.5rem;
+
+// Card
+$card-border-radius: 20px;
+
+// Set booststrap custom theme
+$theme-colors: (
+  'primary': #e6007a,
+);
+
+// import should be at the end
+@import '~bootstrap/scss/bootstrap';
