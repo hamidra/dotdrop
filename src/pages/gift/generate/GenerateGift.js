@@ -1,20 +1,20 @@
 import { useContext, useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
-
+import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 export default function GenerateGift({ account, generateGiftHandler }) {
-  const { jumpToStep } = useContext(GenerateContext);
+  const { prevStep } = useContext(GenerateContext);
   const [amount, setAmount] = useState('');
   const [amountError, setAmountError] = useState('');
-  const [name, setName] = useState('');
-  const [nameError, setNameError] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const validate = () => {
     let error = false;
-    if (!name) {
+    if (!email) {
       error = true;
-      setNameError('Please enter a valid name');
+      setEmailError('Please enter a valid email');
     }
     if (!amount) {
       error = true;
@@ -24,76 +24,77 @@ export default function GenerateGift({ account, generateGiftHandler }) {
   };
   return (
     <>
-      <Row className="p-4 justify-content-between">
-        <Col>
-          <Button onClick={() => jumpToStep(0)}>{'< Back'}</Button>
-        </Col>
-        <Col>Gift Dots</Col>
-      </Row>
-      <Row className="justify-content-center align-items-center">
-        <Col className="d-flex justify-content-center align-items-center">
-          <Card style={{ width: 600, maxWidth: '100%' }} className="shadow">
-            <Card.Body>
-              <Row className="p-3 text-center">
-                <Col>
-                  <h3>Generate a gift</h3>
+      <Card.Body>
+        <CardHeader title={'Gift Dots'} backClickHandler={() => prevStep()} />
+
+        <Row className="justify-content-center align-items-center">
+          <Col className="d-flex flex-column justify-content-center align-items-center">
+            <p className="text-center">
+              Send DOTs to your friends and familiy, and have them join the
+              Polkadot Network today.
+            </p>
+            <Form autoComplete="off" className="w-100">
+              <Form.Group className="row" controlId="formGroupEmail">
+                <Col md="6">
+                  <Form.Label>Recipient Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Bob"
+                    value={email}
+                    onChange={(e) => {
+                      setEmailError('');
+                      setEmail(e.target.value);
+                    }}
+                  />
                 </Col>
-              </Row>
-              <Row className="justify-content-center align-items-center">
-                <Col
-                  style={{ height: 200 }}
-                  className="d-flex flex-column justify-content-center align-items-center">
-                  <Form>
-                    <Form.Group as={Row} controlId="formGroupEmail">
-                      <Form.Label>Gift value</Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="10"
-                        value={amount}
-                        onChange={(e) => {
-                          setAmountError('');
-                          setAmount(e.target.value);
-                        }}
-                      />
-                    </Form.Group>
-                    {amountError && (
-                      <Form.Label style={{ color: 'red' }}>
-                        <em>!{amountError}</em>
-                      </Form.Label>
-                    )}
-                    <Form.Group as={Row} controlId="formGroupEmail">
-                      <Form.Label>To who</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Bob"
-                        value={name}
-                        onChange={(e) => {
-                          setNameError('');
-                          setName(e.target.value);
-                        }}
-                      />
-                    </Form.Group>
-                    {nameError && (
-                      <Form.Label style={{ color: 'red' }}>
-                        <em>!{nameError}</em>
-                      </Form.Label>
-                    )}
-                  </Form>
+                <Col md="6" className="mt-2 mt-md-0">
+                  <Form.Label>Confirm Recipient Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Bob"
+                    value={email}
+                    onChange={(e) => {
+                      setEmailError('');
+                      setEmail(e.target.value);
+                    }}
+                  />
                 </Col>
                 <div className="w-100" />
-                <Col className="d-flex justify-content-end">
-                  <Button
-                    onClick={() =>
-                      validate() && generateGiftHandler({ amount, name })
-                    }>
-                    Generate
-                  </Button>
+                <Col>
+                  {emailError && (
+                    <Form.Text style={{ color: 'red' }}>{emailError}</Form.Text>
+                  )}
                 </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+              </Form.Group>
+
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Amount</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="10"
+                  value={amount}
+                  onChange={(e) => {
+                    setAmountError('');
+                    setAmount(e.target.value);
+                  }}
+                />
+                {amountError && (
+                  <Form.Text style={{ color: 'red' }}>{amountError}</Form.Text>
+                )}
+              </Form.Group>
+            </Form>
+          </Col>
+          <div className="w-100" />
+          <Col className="d-flex justify-content-end">
+            <Button
+              onClick={() =>
+                validate() && generateGiftHandler({ amount, email })
+              }>
+              Generate
+            </Button>
+          </Col>
+        </Row>
+      </Card.Body>
     </>
   );
 }

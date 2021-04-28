@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap';
+import Button from '../../../components/CustomButton';
 import { useContext } from 'react';
 import { GenerateContext } from './GenerateMain';
 export default function Landing() {

@@ -1,8 +1,10 @@
 import { QrScanAddress } from '@polkadot/react-qr';
 import { useState, useContext } from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
+import Button from '../../../components/CustomButton';
 import { useSubstrate } from '../../../substrate-lib';
 import { GenerateContext } from './GenerateMain';
+import CardHeader from '../../../components/CardHeader';
 
 export default function SignerAccount({ setAccountHandler }) {
   // signer format
@@ -36,36 +38,34 @@ export default function SignerAccount({ setAccountHandler }) {
     // ToDO: validate account is not empty
     setAccountHandler(externalAccount);
   };
+  const title = 'Scan your account QRCode from your signer app';
   return (
     <>
-      <Row className="p-3 text-center">
-        <div onClick={() => prevStep()}>{'<-'}</div>
-        <Col>
-          <h3>Scan your account QRCode from your signer app</h3>
-        </Col>
-      </Row>
-      {showReader ? (
+      <Card.Body>
+        <CardHeader title={title} backClickHandler={() => prevStep()} />
         <Row className="justify-content-center align-items-center">
-          <Col md="6" style={{ height: 400 }}>
-            <QrScanAddress onScan={(scanned) => onScanHandler(scanned)} />
-          </Col>
+          {showReader ? (
+            <Col md="6" style={{ height: 400 }}>
+              <QrScanAddress onScan={(scanned) => onScanHandler(scanned)} />
+            </Col>
+          ) : (
+            <>
+              <Col
+                style={{ height: 400 }}
+                className="d-flex flex-column justify-content-center align-items-center text-center">
+                <h4>{externalAccount?.meta?.name} </h4>
+                <br />
+                <div>{externalAccount?.address}</div>
+              </Col>
+              <div className="w-100" />
+              <Col md="6" className="d-flex justify-content-between">
+                <Button onClick={() => onCancelHandler()}>Cancel</Button>
+                <Button onClick={() => _setAccountHandler()}>Add</Button>
+              </Col>
+            </>
+          )}
         </Row>
-      ) : (
-        <Row className="justify-content-center align-items-center">
-          <Col
-            style={{ height: 400 }}
-            className="d-flex flex-column justify-content-center align-items-center text-center">
-            <h4>{externalAccount?.meta?.name} </h4>
-            <br />
-            <div>{externalAccount?.address}</div>
-          </Col>
-          <div className="w-100" />
-          <Col md="6" className="d-flex justify-content-between">
-            <Button onClick={() => onCancelHandler()}>Cancel</Button>
-            <Button onClick={() => _setAccountHandler()}>Add</Button>
-          </Col>
-        </Row>
-      )}
+      </Card.Body>
     </>
   );
 }

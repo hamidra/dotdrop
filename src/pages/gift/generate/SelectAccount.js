@@ -1,15 +1,16 @@
 import { useContext } from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
+import { Card } from 'react-bootstrap';
+import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 
-export default function SelectAccount({ children }) {
-  const { jumpToStep } = useContext(GenerateContext);
+export default function SelectAccount({ title, children }) {
+  const { prevStep } = useContext(GenerateContext);
   return (
     <>
-      <Card style={{ width: 800, maxWidth: '100%' }} className="shadow">
-        <Card.Body>{children}</Card.Body>
-      </Card>
+      <Card.Body>
+        <CardHeader title={title} backClickHandler={() => prevStep()} />
+        {children}
+      </Card.Body>
     </>
   );
 }

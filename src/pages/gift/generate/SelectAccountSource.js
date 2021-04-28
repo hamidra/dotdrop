@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
+import Button from '../../../components/CustomButton';
 import { GenerateContext } from './GenerateMain';
 
 export default function SelectAccountSource() {
