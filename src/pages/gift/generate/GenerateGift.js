@@ -28,13 +28,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
         <Col>
           <Button onClick={() => jumpToStep(0)}>{'< Back'}</Button>
         </Col>
-        <Col className="text-right">
-          {account
-            ? account?.meta?.name
-              ? account?.meta?.name.toUpperCase()
-              : account.address
-            : 'No account'}
-        </Col>
+        <Col>Gift Dots</Col>
       </Row>
       <Row className="justify-content-center align-items-center">
         <Col className="d-flex justify-content-center align-items-center">

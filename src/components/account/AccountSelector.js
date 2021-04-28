@@ -15,7 +15,7 @@ export default function AccounSelector({
         as={ButtonGroup}
         onSelect={(eventKey, e) => selectAccountHandler(eventKey)}>
         <Dropdown.Toggle
-          variant="outline-dark"
+          variant="outline-primary"
           id="dropdown-item-button"
           className="w-100"
           size="lg">

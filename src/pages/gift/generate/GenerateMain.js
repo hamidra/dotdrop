@@ -1,10 +1,9 @@
 import { createContext, useState, useCallback, createElement } from 'react';
 import GenerateGift from './GenerateGift';
 import PresentGift from './PresentGift';
-import ImportAccount from '../../../components/account/ImportAccount';
-import ExtensionAccount from '../../../components/account/ExtensionAccount';
-import HardwalletAccount from '../../../components/account/HardwalletAccount';
-import SignerAccount from '../../../components/account/SignerAccount';
+import ConnectExtension from './ConnectExtension';
+import ConnectHardwallet from './ConnectHardwallet';
+import ConnectSigner from './ConnectSigner';
 import Processing from '../../../components/Processing';
 import ErrorModal from '../../../components/Error';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
@@ -14,8 +13,9 @@ import ParityQRSigner from '../../../components/ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import SelectAccount from './SelectAccount';
 import Landing from './Landing';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Card, Container } from 'react-bootstrap';
 import SelectAccountSource from './SelectAccountSource';
+import Header from '../Header';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -211,11 +211,16 @@ export default function GenerateMain() {
     }
   };
 
+  const accountName = account
+    ? account?.meta?.name
+      ? account?.meta?.name.toUpperCase()
+      : account.address
+    : 'No account';
+
   const accountOption = {
-    IMPORTED_ACCOUNT: ImportAccount,
-    EXTENSION_ACCOUNT: ExtensionAccount,
-    HARDWALLET_ACCOUNT: HardwalletAccount,
-    SIGNER_ACCOUNT: SignerAccount,
+    EXTENSION: ConnectExtension,
+    HARDWALLET: ConnectHardwallet,
+    SIGNER: ConnectSigner,
   };
 
   let currentStepComponent;
@@ -224,6 +229,11 @@ export default function GenerateMain() {
       currentStepComponent = <SelectAccountSource />;
       break;
     case 2:
+      currentStepComponent = createElement(accountOption[accountSource], {
+        setAccountHandler,
+      });
+      break;
+    case 3:
       currentStepComponent = (
         <GenerateGift
           account={account}
@@ -231,7 +241,7 @@ export default function GenerateMain() {
         />
       );
       break;
-    case 3:
+    case 4:
       currentStepComponent = (
         <PresentGift gift={gift} removeGiftHandler={removeGiftHandler} />
       );
@@ -261,20 +271,25 @@ export default function GenerateMain() {
         jumpToStep,
         setAccountSource,
       }}>
-      <Row className="justify-content-center align-items-center">
-        <Col className="d-flex justify-content-center align-items-center">
-          {currentComponent}
-        </Col>
-      </Row>
-      <ErrorModal
-        show={!!processingError}
-        message={processingError}
-        handleClose={() => resetPresentation()}
-      />
-      <Processing
-        show={!processingError && processing}
-        message={processingMsg}
-      />
+      <Header selectedAccount={account && accountName} />
+      <Container>
+        <Row className="justify-content-center align-items-center">
+          <Col className="d-flex justify-content-center align-items-center">
+            <Card style={{ width: 800, maxWidth: '100%' }} className="shadow">
+              {currentComponent}
+            </Card>
+          </Col>
+        </Row>
+        <ErrorModal
+          show={!!processingError}
+          message={processingError}
+          handleClose={() => resetPresentation()}
+        />
+        <Processing
+          show={!processingError && processing}
+          message={processingMsg}
+        />
+      </Container>
     </GenerateContext.Provider>
   );
 }
