@@ -8,7 +8,7 @@ import { giftPallet, useSubstrate } from '../../../substrate-lib';
 import Landing from './Landing';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import CreateNewAccount from './CreateNewAccount';
+import CreateNewAccount from './new-account/CreateNewAccount';
 import LoadExistingAccount from './LoadExistingAccount';
 
 const ClaimContext = createContext();
@@ -94,7 +94,7 @@ export default function ClaimMain() {
 
   const setAccountSourceHandler = (accountSource) => {
     setAccountSource(accountSource);
-    jumpToStep(2);
+    nextStep();
   };
 
   const setAddressHandler = (account) => {
@@ -116,20 +116,20 @@ export default function ClaimMain() {
   let currentStepComponent;
   switch (step) {
     case 1:
-      currentStepComponent = <SelectAccountSource />;
-      break;
-    case 2:
       currentStepComponent = createElement(accountOption[accountSource], {
         setAddressHandler: setAddressHandler,
+        prevStepHandler: () => {
+          prevStep();
+        },
       });
 
       break;
-    case 3:
+    case 2:
       currentStepComponent = (
         <VerifySecret claimGiftHandler={claimGiftHandler} />
       );
       break;
-    case 4:
+    case 3:
       currentStepComponent = <Claimed />;
       break;
     default:

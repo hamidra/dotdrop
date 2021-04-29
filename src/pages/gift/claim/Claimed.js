@@ -1,36 +1,29 @@
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Image } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
-import { Link } from 'react-router-dom';
+import CardHeader from '../../../components/CardHeader';
+import confetti from '../../../images/confetti.png';
 
-export default function Claimed() {
+export default function Claimed({ amount }) {
   return (
     <>
-      <Row className="p-4">
-        <Link to="/">
-          <Button>Home</Button>
-        </Link>
-      </Row>
-      <Row className="justify-content-center align-items-center">
-        <Col className="d-flex justify-content-center align-items-center">
-          <Card style={{ width: 800, maxWidth: '100%' }} className="shadow">
-            <Card.Body>
-              <Row className="justify-content-center align-items-center">
-                <Col
-                  md="8"
-                  style={{ height: 400 }}
-                  className="d-flex flex-column justify-content-center align-items-center">
-                  <h1>Congradulations!!</h1>
-                  <h3> 🎉🥳🎊 🎁</h3>
-                  <p>
-                    Your gift has been claimed and tranferred to your account!
-                  </p>
-                  <p></p>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <Card.Body>
+        <CardHeader title={'Congratulations!'} />
+        <Row className="justify-content-center align-items-center">
+          <Col className="d-flex flex-column justify-content-center align-items-center">
+            <Image style={{ width: 120 }} src={confetti} />
+            <p className="text-center">
+              Your Polkadot account has been funded and your gift of {amount}{' '}
+              DOTs has been successfully transferred.
+            </p>
+            <p></p>
+          </Col>
+        </Row>
+        <Row className="justify-content-center align-items-center">
+          <Col className="d-flex flex-column justify-content-center align-items-center">
+            <Button>See Account</Button>
+          </Col>
+        </Row>
+      </Card.Body>
     </>
   );
 }

@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Form } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import { ClaimContext } from './ClaimMain';
+import CardHeader from '../../../components/CardHeader';
 export default function VerifySecret({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
   const [redeemSecret, setRedeemSecret] = useState('');
@@ -14,42 +15,39 @@ export default function VerifySecret({ claimGiftHandler }) {
   };
   return (
     <>
-      <Row className="p-4">
-        <Col>
-          <Button onClick={() => prevStep()}>{'< Back'}</Button>
-        </Col>
-      </Row>
-      <Row className="justify-content-center align-items-center">
-        <Col className="d-flex justify-content-center align-items-center">
-          <Card style={{ width: 800, maxWidth: '100%' }} className="shadow">
-            <Card.Body>
-              <Row className="p-3 text-center">
-                <Col>
-                  <h3>
-                    Enter the 12 words secret you have recieved to redeem your
-                    gift!
-                  </h3>
-                </Col>
-              </Row>
-              <Row className="justify-content-center align-items-center">
-                <Col
-                  style={{ height: 200 }}
-                  className="d-flex flex-column justify-content-center align-items-center text-center">
-                  <textarea
-                    className="w-50 h-75"
-                    onChange={(e) => setRedeemSecret(e.target.value)}
-                    value={redeemSecret}
-                  />
-                </Col>
-                <div className="w-100" />
-                <Col className="d-flex justify-content-end">
-                  <Button onClick={() => redeemHandler()}>Redeem</Button>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <Card.Body>
+        <CardHeader
+          title={'Claim Your Gift'}
+          backClickHandler={() => prevStep()}
+        />
+        <Row className="justify-content-center align-items-center">
+          <Col className="d-flex flex-column justify-content-center align-items-center">
+            <p className="text-center">
+              Enter the secret hash you have received to claim your gift.
+            </p>
+          </Col>
+        </Row>
+        <Row className="justify-content-center align-items-center">
+          <Col>
+            <Form autoComplete="off" className="w-100">
+              <Form.Group controlId="formGroupWord1">
+                <Form.Label>Secret Gift Hash</Form.Label>
+                <Form.Control
+                  type="input"
+                  placeholder="0x4rt6..."
+                  onChange={(e) => setRedeemSecret(e.target.value)}
+                  value={redeemSecret}
+                />
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="d-flex justify-content-center">
+            <Button onClick={() => redeemHandler()}>Claim</Button>
+          </Col>
+        </Row>
+      </Card.Body>
     </>
   );
 }
