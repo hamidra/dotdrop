@@ -11,7 +11,6 @@ import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import ParityQRSigner from '../../../components/ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
-import SelectAccount from './SelectAccount';
 import Landing from './Landing';
 import { Row, Col, Card, Container } from 'react-bootstrap';
 import SelectAccountSource from './SelectAccountSource';

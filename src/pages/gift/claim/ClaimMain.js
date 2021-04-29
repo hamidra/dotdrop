@@ -1,15 +1,15 @@
 import { createContext, useState, createElement } from 'react';
 import Claimed from './Claimed';
 import VerifySecret from './VerifySecret';
-import NewAccount from '../../../components/account/NewAccount';
-import ExtensionAccount from '../../../components/account/ExtensionAccount';
-import HardwalletAccount from '../../../components/account/HardwalletAccount';
-import SignerAccount from '../../../components/account/SignerAccount';
 import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
-import SelectAccount from './SelectAccount';
 import SelectAccountSource from './SelectAccountSource';
 import { giftPallet, useSubstrate } from '../../../substrate-lib';
+import Landing from './Landing';
+import Header from '../Header';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import CreateNewAccount from './CreateNewAccount';
+import LoadExistingAccount from './LoadExistingAccount';
 
 const ClaimContext = createContext();
 
@@ -19,7 +19,7 @@ export default function ClaimMain() {
   const { claimGift } = giftPallet;
 
   const [step, setStep] = useState(0);
-  const [account, setAccount] = useState(null);
+  const [address, setAddress] = useState(null);
   const [accountSource, setAccountSource] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
@@ -63,7 +63,7 @@ export default function ClaimMain() {
       window.alert(
         'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
       );
-    } else if (!account) {
+    } else if (!address) {
       console.log('no account is selected');
       window.alert(
         'You need to sign in with your account to be able to send a gift 🔑🔓'
@@ -82,7 +82,7 @@ export default function ClaimMain() {
 
       // claim gift by the selected account
       const claim = {
-        by: account,
+        by: address,
       };
 
       claimGift(api, signingAccount, claim, claimGiftCallback);
@@ -92,9 +92,14 @@ export default function ClaimMain() {
     }
   };
 
-  const setAccountHandler = (account) => {
+  const setAccountSourceHandler = (accountSource) => {
+    setAccountSource(accountSource);
+    jumpToStep(2);
+  };
+
+  const setAddressHandler = (account) => {
     if (account) {
-      setAccount(account);
+      setAddress(account);
       nextStep();
     } else {
       handleError(
@@ -104,31 +109,31 @@ export default function ClaimMain() {
   };
 
   const accountOption = {
-    NEW_ACCOUNT: NewAccount,
-    EXTENSION_ACCOUNT: ExtensionAccount,
-    HARDWALLET_ACCOUNT: HardwalletAccount,
-    SIGNER_ACCOUNT: SignerAccount,
+    NEW: CreateNewAccount,
+    EXISTING: LoadExistingAccount,
   };
 
   let currentStepComponent;
   switch (step) {
     case 1:
-      currentStepComponent = (
-        <SelectAccount>
-          {createElement(accountOption[accountSource], { setAccountHandler })}
-        </SelectAccount>
-      );
+      currentStepComponent = <SelectAccountSource />;
       break;
     case 2:
+      currentStepComponent = createElement(accountOption[accountSource], {
+        setAddressHandler: setAddressHandler,
+      });
+
+      break;
+    case 3:
       currentStepComponent = (
         <VerifySecret claimGiftHandler={claimGiftHandler} />
       );
       break;
-    case 3:
+    case 4:
       currentStepComponent = <Claimed />;
       break;
     default:
-      currentStepComponent = <SelectAccountSource />;
+      currentStepComponent = <Landing />;
   }
   return (
     <ClaimContext.Provider
@@ -136,9 +141,18 @@ export default function ClaimMain() {
         nextStep,
         prevStep,
         jumpToStep,
-        setAccountSource,
+        setAccountSourceHandler,
       }}>
-      {currentStepComponent}
+      <Header selectedAccount={address} />
+      <Container>
+        <Row className="justify-content-center align-items-center">
+          <Col className="d-flex justify-content-center align-items-center">
+            <Card style={{ width: 650, maxWidth: '100%' }} className="shadow">
+              {currentStepComponent}
+            </Card>
+          </Col>
+        </Row>
+      </Container>
       <ErrorModal
         show={!!processingError}
         message={processingError}
