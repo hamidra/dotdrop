@@ -9,7 +9,9 @@ import Landing from './Landing';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import CreateNewAccount from './new-account/CreateNewAccount';
-import LoadExistingAccount from './existing-account/LoadExistingAccount';
+import EnterExistingAccount from './existing-account/EnterExistingAccount';
+import ConnectExtension from '../accounts/ConnectExtension';
+import ConnectSigner from '../accounts/ConnectSigner';
 
 const ClaimContext = createContext();
 
@@ -110,7 +112,9 @@ export default function ClaimMain() {
 
   const accountOption = {
     NEW: CreateNewAccount,
-    EXISTING: LoadExistingAccount,
+    EXISTING: EnterExistingAccount,
+    EXTENSION: ConnectExtension,
+    SIGNER: ConnectSigner,
   };
 
   if (step < 1 && address) {

@@ -15,7 +15,7 @@ export default function SelectAccountSource() {
     <>
       <Card.Body>
         <CardHeader title="Connect Account" />
-        <Row className="align-iterms-center text-center">
+        <Row className="align-items-center justify-content-center text-center">
           <Col>
             <Button
               variant="outline-primary"
@@ -28,7 +28,7 @@ export default function SelectAccountSource() {
             <hr />
           </Col>
         </Row>
-        <Row className="align-iterms-center">
+        <Row className="align-items-center">
           <Col>
             <Card
               className="rounded-lg"

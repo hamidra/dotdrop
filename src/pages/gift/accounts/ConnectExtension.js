@@ -7,6 +7,7 @@ import CardHeader from '../../../components/CardHeader';
 
 export default function ExtensionAccount({
   setAccountHandler,
+  setAddressHandler,
   title,
   prevStepHandler,
 }) {
@@ -14,7 +15,8 @@ export default function ExtensionAccount({
   const [selectedAccount, setSelectedAccount] = useState(null);
   const accounts = keyring.getPairs();
   const _setAccountHandler = () => {
-    setAccountHandler(selectedAccount);
+    setAccountHandler && setAccountHandler(selectedAccount);
+    setAddressHandler && setAddressHandler(selectedAccount.address);
   };
   return (
     <>

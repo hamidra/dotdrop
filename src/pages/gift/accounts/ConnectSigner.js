@@ -5,7 +5,11 @@ import Button from '../../../components/CustomButton';
 import { useSubstrate } from '../../../substrate-lib';
 import CardHeader from '../../../components/CardHeader';
 
-export default function SignerAccount({ setAccountHandler, prevStepHandler }) {
+export default function SignerAccount({
+  setAccountHandler,
+  setAddressHandler,
+  prevStepHandler,
+}) {
   // signer format
   // substrate:13Q6RcqeAjvUCrYhdKdeqzUpHMJRishtxLByQn9YkyvMsYKa:0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3:test
   const { keyring } = useSubstrate();
@@ -34,7 +38,8 @@ export default function SignerAccount({ setAccountHandler, prevStepHandler }) {
 
   const _setAccountHandler = () => {
     // ToDO: validate account is not empty
-    setAccountHandler(externalAccount);
+    setAccountHandler && setAccountHandler(externalAccount);
+    setAddressHandler && setAddressHandler(externalAccount.address);
   };
   const title = 'Scan your account QRCode from your signer app';
   return (

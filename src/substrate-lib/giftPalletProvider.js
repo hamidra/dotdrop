@@ -43,10 +43,13 @@ const createGift = async (api, signingAccount, gift, cb) => {
 
 const claimGift = async (api, signingAccount, claim, cb) => {
   console.log(
-    `Claiming the gift  ${signingAccount?.pairOrAddress?.address} to ${claim?.by?.address}`
+    `Claiming the gift  ${signingAccount?.pairOrAddress?.address} to ${claim?.by}`
   );
   try {
-    const tx = api.tx.gift.claim(claim.by.address);
+    if (!claim?.by) {
+      throw new Error('No address was specified to redeem the gift to');
+    }
+    const tx = api.tx.gift.claim(claim?.by);
     await signAndSendTx(tx, signingAccount, cb);
   } catch (error) {
     cb && cb({ error });

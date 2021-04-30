@@ -7,30 +7,59 @@ export default function Landing() {
   const { setAccountSourceHandler } = useContext(ClaimContext);
   return (
     <>
+      {' '}
       <Card.Body>
-        <CardHeader title={'Dot Account'} />
+        <CardHeader title="Dot Account" />
         <Row className="justify-content-center align-items-center">
           <Col className="d-flex flex-column justify-content-center align-items-center">
             <p className="text-center">
               <span className="d-block">
                 Create a new Polkadot account to transfer your gift to.
               </span>
-              <span className="d-block">Or add an existing account.</span>
             </p>
             <Button
               variant="outline-primary"
               onClick={() => setAccountSourceHandler('NEW')}>
               Create polkadot Account
             </Button>
+          </Col>
+          <div className="w-100" />
+          <Col xs="12">
+            <hr />
+          </Col>
+        </Row>
+        <Row className="align-items-center">
+          <Col>
+            <Card
+              className="rounded-lg"
+              onClick={() => setAccountSourceHandler('EXTENSION')}>
+              <Card.Body>Load With Polkadot Extension</Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            <Card
+              className="rounded-lg"
+              onClick={() => setAccountSourceHandler('SIGNER')}>
+              <Card.Body>Scan from Parity Signer</Card.Body>
+            </Card>
+          </Col>
+          <div className="w-100" />
+          <Col className="d-flex flex-column justify-content-center align-items-center">
             <div className="p-2">Or</div>
             <Button
               variant="link"
               onClick={() => setAccountSourceHandler('EXISTING')}>
-              Add Existing Account
+              Enter Address Manually
             </Button>
           </Col>
         </Row>
       </Card.Body>
+      <Card.Footer>
+        <span>By connecting an account, I accept the </span>
+        <a href="policy" target="_blank">
+          terms and conditions
+        </a>
+      </Card.Footer>
     </>
   );
 }
