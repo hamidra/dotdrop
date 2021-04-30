@@ -46,7 +46,7 @@ export default function SelectAccountSource() {
         </Row>
       </Card.Body>
       <Card.Footer>
-        By connecting an account, I accept the
+        <span>By connecting an account, I accept the </span>
         <a href="policy" target="_blank">
           terms and conditions
         </a>

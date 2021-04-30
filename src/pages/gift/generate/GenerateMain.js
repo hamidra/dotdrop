@@ -1,9 +1,9 @@
 import { createContext, useState, useCallback, createElement } from 'react';
 import GenerateGift from './GenerateGift';
 import PresentGift from './PresentGift';
-import ConnectExtension from './ConnectExtension';
-import ConnectHardwallet from './ConnectHardwallet';
-import ConnectSigner from './ConnectSigner';
+import ConnectExtension from '../accounts/ConnectExtension';
+import ConnectHardwallet from '../accounts/ConnectHardwallet';
+import ConnectSigner from '../accounts/ConnectSigner';
 import Processing from '../../../components/Processing';
 import ErrorModal from '../../../components/Error';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
@@ -222,32 +222,34 @@ export default function GenerateMain() {
     SIGNER: ConnectSigner,
   };
 
-  let currentStepComponent;
-  switch (step) {
-    case 1:
-      currentStepComponent = <SelectAccountSource />;
-      break;
-    case 2:
-      currentStepComponent = createElement(accountOption[accountSource], {
-        setAccountHandler,
-      });
-      break;
-    case 3:
-      currentStepComponent = (
-        <GenerateGift
-          account={account}
-          generateGiftHandler={generateGiftHandler}
-        />
-      );
-      break;
-    case 4:
-      currentStepComponent = (
-        <PresentGift gift={gift} removeGiftHandler={removeGiftHandler} />
-      );
-      break;
-    default:
-      currentStepComponent = <Landing />;
+  if (step < 2 && account) {
+    setAccount(null);
   }
+  const steps = [];
+  // Step-0
+  steps.push(<Landing />);
+
+  // Step-1
+  steps.push(<SelectAccountSource />);
+
+  // Step-2
+  steps.push(
+    createElement(accountOption[accountSource], {
+      setAccountHandler,
+      prevStepHandler: prevStep,
+    })
+  );
+
+  // Step-3
+  steps.push(
+    <GenerateGift account={account} generateGiftHandler={generateGiftHandler} />
+  );
+
+  // Step-4
+  steps.push(<PresentGift gift={gift} removeGiftHandler={removeGiftHandler} />);
+
+  const currentStepComponent = steps[step];
+
   let currentComponent;
   if (showSigner) {
     currentComponent = (
@@ -271,10 +273,12 @@ export default function GenerateMain() {
         setAccountSource,
       }}>
       <Header selectedAccount={account && accountName} />
-      <Container>
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex justify-content-center align-items-center">
-            <Card style={{ width: 650, maxWidth: '100%' }} className="shadow">
+      <Container className="justify-content-center align-items-center">
+        <Row className="my-2 my-md-5 justify-content-center align-items-center">
+          <Col className="my-md-5 d-flex justify-content-center align-items-center">
+            <Card
+              style={{ width: 600, maxWidth: '100%', minHeight: 500 }}
+              className="shadow">
               {currentComponent}
             </Card>
           </Col>

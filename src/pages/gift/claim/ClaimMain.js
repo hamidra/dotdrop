@@ -9,7 +9,7 @@ import Landing from './Landing';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import CreateNewAccount from './new-account/CreateNewAccount';
-import LoadExistingAccount from './LoadExistingAccount';
+import LoadExistingAccount from './existing-account/LoadExistingAccount';
 
 const ClaimContext = createContext();
 
@@ -31,7 +31,7 @@ export default function ClaimMain() {
   };
   const _setStep = (step) => {
     resetPresentation();
-    setStep(step);
+    setStep(step % steps.length);
   };
   const nextStep = () => {
     _setStep(step + 1);
@@ -113,28 +113,31 @@ export default function ClaimMain() {
     EXISTING: LoadExistingAccount,
   };
 
-  let currentStepComponent;
-  switch (step) {
-    case 1:
-      currentStepComponent = createElement(accountOption[accountSource], {
-        setAddressHandler: setAddressHandler,
-        prevStepHandler: () => {
-          prevStep();
-        },
-      });
-
-      break;
-    case 2:
-      currentStepComponent = (
-        <VerifySecret claimGiftHandler={claimGiftHandler} />
-      );
-      break;
-    case 3:
-      currentStepComponent = <Claimed />;
-      break;
-    default:
-      currentStepComponent = <Landing />;
+  if (step < 1 && address) {
+    setAddress(null);
   }
+  const steps = [];
+  // Step-0
+  steps.push(<Landing />);
+
+  // Step-1
+  steps.push(
+    createElement(accountOption[accountSource], {
+      setAddressHandler: setAddressHandler,
+      prevStepHandler: () => {
+        prevStep();
+      },
+    })
+  );
+
+  // Step-2
+  steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
+
+  // Step-3
+  steps.push(<Claimed />);
+
+  const currentStepComponent = steps[step];
+
   return (
     <ClaimContext.Provider
       value={{
@@ -145,9 +148,11 @@ export default function ClaimMain() {
       }}>
       <Header selectedAccount={address} />
       <Container>
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex justify-content-center align-items-center">
-            <Card style={{ width: 650, maxWidth: '100%' }} className="shadow">
+        <Row className="my-2 my-md-5 justify-content-center align-items-center">
+          <Col className="my-md-5 d-flex justify-content-center align-items-center">
+            <Card
+              style={{ width: 650, maxWidth: '100%', minHeight: 500 }}
+              className="shadow">
               {currentStepComponent}
             </Card>
           </Col>

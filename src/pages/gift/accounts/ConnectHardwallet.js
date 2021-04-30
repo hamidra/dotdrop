@@ -1,14 +1,11 @@
-import { useContext } from 'react';
-import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
 import { Row, Col, Card } from 'react-bootstrap';
-export default function HardwalletAccount() {
-  const { prevStep } = useContext(GenerateContext);
+export default function HardwalletAccount({ prevStepHandler }) {
   const title = 'Connecting Harware Wallet Account';
   return (
     <>
       <Card.Body>
-        <CardHeader title={title} backClickHandler={() => prevStep()} />
+        <CardHeader title={title} backClickHandler={prevStepHandler} />
         <Row className="p-5 justify-content-center">
           <Col
             style={{ height: 200 }}

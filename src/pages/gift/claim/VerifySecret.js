@@ -44,7 +44,7 @@ export default function VerifySecret({ claimGiftHandler }) {
         </Row>
         <Row>
           <Col className="d-flex justify-content-center">
-            <Button onClick={() => redeemHandler()}>Claim</Button>
+            <Button onClick={() => redeemHandler()}>Claim Gift</Button>
           </Col>
         </Row>
       </Card.Body>

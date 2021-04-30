@@ -12,12 +12,11 @@ export default function AccounSelector({
     <>
       <Dropdown
         className="w-100"
-        as={ButtonGroup}
         onSelect={(eventKey, e) => selectAccountHandler(eventKey)}>
         <Dropdown.Toggle
           variant="outline-primary"
           id="dropdown-item-button"
-          className="w-100"
+          className="w-100 rounded"
           size="lg">
           {selectedAccount
             ? selectedAccount?.meta?.name || selectedAccount.address

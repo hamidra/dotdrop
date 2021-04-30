@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
 import { useSubstrate } from '../../../../substrate-lib';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
-import Button from '../../../../components/CustomButton';
 import PresentAccountPhrase from './PresentAccountPhrase';
 import VerifyAccountPhrase from './VerifyAccountPhrase';
 
@@ -10,7 +8,6 @@ export default function CreateNewAccount({
   setAddressHandler,
   prevStepHandler,
 }) {
-  const label = 'I have stored my 12 words secret in a safe place.';
   const { keyring } = useSubstrate();
   const [step, setStep] = useState(0);
 
@@ -42,10 +39,13 @@ export default function CreateNewAccount({
     const account = keyring.createFromUri(mnemonic, null, 'sr25519');
     return { mnemonic, account };
   };
+
   const newAccount = createNewAccount();
+
   const _setAddressHandler = async () => {
     setAddressHandler(newAccount.account.address);
   };
+
   const mnemonicWords = newAccount?.mnemonic
     ? newAccount.mnemonic.split(' ').map((word) => word.trim())
     : [];
@@ -59,6 +59,7 @@ export default function CreateNewAccount({
       prevStepHandler={prevStepHandler}
     />
   );
+
   // add Step-1
   steps.push(
     <VerifyAccountPhrase

@@ -1,15 +1,17 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import { useSubstrate } from '../../../substrate-lib';
-import { GenerateContext } from './GenerateMain';
 import AccountSelector from '../../../components/account/AccountSelector';
 import CardHeader from '../../../components/CardHeader';
 
-export default function ExtensionAccount({ setAccountHandler }) {
+export default function ExtensionAccount({
+  setAccountHandler,
+  title,
+  prevStepHandler,
+}) {
   const { keyring } = useSubstrate();
   const [selectedAccount, setSelectedAccount] = useState(null);
-  const { prevStep } = useContext(GenerateContext);
   const accounts = keyring.getPairs();
   const _setAccountHandler = () => {
     setAccountHandler(selectedAccount);
@@ -18,8 +20,8 @@ export default function ExtensionAccount({ setAccountHandler }) {
     <>
       <Card.Body>
         <CardHeader
-          title="Select Your Account"
-          backClickHandler={() => prevStep()}
+          title={title || 'Select Your Account'}
+          backClickHandler={prevStepHandler}
         />
         <Row className="p-5 justify-content-center">
           <Col

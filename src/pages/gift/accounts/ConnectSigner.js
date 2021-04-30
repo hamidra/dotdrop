@@ -1,18 +1,16 @@
 import { QrScanAddress } from '@polkadot/react-qr';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import { useSubstrate } from '../../../substrate-lib';
-import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
 
-export default function SignerAccount({ setAccountHandler }) {
+export default function SignerAccount({ setAccountHandler, prevStepHandler }) {
   // signer format
   // substrate:13Q6RcqeAjvUCrYhdKdeqzUpHMJRishtxLByQn9YkyvMsYKa:0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3:test
   const { keyring } = useSubstrate();
   const [showReader, setShowReader] = useState('true');
   const [externalAccount, setExternalAccount] = useState(null);
-  const { prevStep } = useContext(GenerateContext);
   const onScanHandler = (scannedAccount) => {
     if (scannedAccount.isAddress) {
       const account = keyring.keyring.addFromAddress(
@@ -42,7 +40,7 @@ export default function SignerAccount({ setAccountHandler }) {
   return (
     <>
       <Card.Body>
-        <CardHeader title={title} backClickHandler={() => prevStep()} />
+        <CardHeader title={title} backClickHandler={() => prevStepHandler()} />
         <Row className="justify-content-center align-items-center">
           {showReader ? (
             <Col md="6" style={{ height: 400 }}>
