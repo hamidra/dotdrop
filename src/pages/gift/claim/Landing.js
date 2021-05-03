@@ -7,7 +7,6 @@ export default function Landing() {
   const { setAccountSourceHandler } = useContext(ClaimContext);
   return (
     <>
-      {' '}
       <Card.Body>
         <CardHeader title="Dot Account" />
         <Row className="justify-content-center align-items-center">

@@ -16,7 +16,6 @@
     "deploy": "gh-pages -d build -m 'deploy'"
   },
   "dependencies": {
-    "@emotion/react": "^11.1.5",
     "@polkadot/api": "^3.9.3",
     "@polkadot/extension-dapp": "^0.37.1",
     "@polkadot/keyring": "^5.6.3",
@@ -27,12 +26,8 @@
     "@polkadot/ui-settings": "^0.69.1",
     "@polkadot/util": "^5.6.3",
     "@polkadot/util-crypto": "^5.6.3",
-    "@rebass/preset": "^4.0.5",
     "bn.js": "^5.2.0",
     "bootstrap": "^4.6.0",
-    "emotion-theming": "^11.0.0",
-    "grommet": "^2.17.1",
-    "grommet-icons": "^4.5.0",
     "node-sass": "^5.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.5",
@@ -42,7 +37,6 @@
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.2",
-    "rebass": "^4.0.7",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
@@ -68,7 +62,7 @@
     ]
   },
   "engines": {
-    "node": ">=12",
+    "node": ">=14",
     "npm": ">=6"
   },
   "browserslist": {

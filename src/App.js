@@ -1,4 +1,3 @@
-import { Container } from 'react-bootstrap';
 import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';

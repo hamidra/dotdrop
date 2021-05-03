@@ -3,7 +3,6 @@ import Claimed from './Claimed';
 import VerifySecret from './VerifySecret';
 import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
-import SelectAccountSource from './SelectAccountSource';
 import { giftPallet, useSubstrate } from '../../../substrate-lib';
 import Landing from './Landing';
 import Header from '../Header';
