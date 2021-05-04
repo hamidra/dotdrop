@@ -16,8 +16,7 @@ export default function AccounSelector({
         <Dropdown.Toggle
           variant="outline-primary"
           id="dropdown-item-button"
-          className="w-100 rounded"
-          size="lg">
+          className="w-100 rounded">
           {selectedAccount
             ? selectedAccount?.meta?.name || selectedAccount.address
             : 'Select an account'}

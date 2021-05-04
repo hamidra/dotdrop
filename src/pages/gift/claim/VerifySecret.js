@@ -16,37 +16,42 @@ export default function VerifySecret({ claimGiftHandler }) {
   return (
     <>
       <Card.Body>
-        <CardHeader
-          title={'Claim Your Gift'}
-          backClickHandler={() => prevStep()}
-        />
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
-            <p className="text-center">
-              Enter the secret hash you have received to claim your gift.
-            </p>
-          </Col>
-        </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col>
-            <Form autoComplete="off" className="w-100">
-              <Form.Group controlId="formGroupWord1">
-                <Form.Label>Secret Gift Hash</Form.Label>
-                <Form.Control
-                  type="input"
-                  placeholder="0x4rt6..."
-                  onChange={(e) => setRedeemSecret(e.target.value)}
-                  value={redeemSecret}
-                />
-              </Form.Group>
-            </Form>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="d-flex justify-content-center">
-            <Button onClick={() => redeemHandler()}>Claim Gift</Button>
-          </Col>
-        </Row>
+        <CardHeader title={'Claim Your Gift'} backClickHandler={prevStep} />
+        <div className="p-3">
+          <Row className="justify-content-center align-items-center">
+            <Col className="text-center">
+              <p>
+                Every Polkadot account needs a minimum balance to be active on
+                the network.
+              </p>
+              <p className="pt-2">
+                Enter the secret hash you have received
+                <br />
+                to claim your gift and fund your account.
+              </p>
+            </Col>
+          </Row>
+          <Row className="pt-4 justify-content-center align-items-center">
+            <Col>
+              <Form autoComplete="off" className="w-100">
+                <Form.Group controlId="formGroupWord1">
+                  <Form.Label>Secret Gift Hash</Form.Label>
+                  <Form.Control
+                    type="input"
+                    placeholder="0x4rt6..."
+                    onChange={(e) => setRedeemSecret(e.target.value)}
+                    value={redeemSecret}
+                  />
+                </Form.Group>
+              </Form>
+            </Col>
+          </Row>
+          <Row className=" pt-5 justify-content-center align-items-center">
+            <Col className="d-flex justify-content-center">
+              <Button onClick={() => redeemHandler()}>Claim Gift</Button>
+            </Col>
+          </Row>
+        </div>
       </Card.Body>
     </>
   );

@@ -25,21 +25,24 @@ export default function ExtensionAccount({
           title={title || 'Select Your Account'}
           backClickHandler={prevStepHandler}
         />
-        <Row className="p-5 justify-content-center">
-          <Col
-            style={{ height: 200 }}
-            className="d-flex flex-column justify-content-center align-items-center text-center">
-            <AccountSelector
-              accounts={accounts}
-              selectedAccount={selectedAccount}
-              setSelectedAccount={setSelectedAccount}
-            />
-          </Col>
-          <div className="w-100" />
-          <Col className="d-flex justify-content-end">
-            <Button onClick={() => _setAccountHandler()}>Add</Button>
-          </Col>
-        </Row>
+        <div className="p-3">
+          <Row className="p-5 justify-content-center">
+            <Col
+              style={{ height: 200 }}
+              className="d-flex flex-column justify-content-center align-items-center text-center">
+              <AccountSelector
+                accounts={accounts}
+                selectedAccount={selectedAccount}
+                setSelectedAccount={setSelectedAccount}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="pt-4 d-flex justify-content-center">
+              <Button onClick={() => _setAccountHandler()}>Claim Gift</Button>
+            </Col>
+          </Row>
+        </div>
       </Card.Body>
     </>
   );

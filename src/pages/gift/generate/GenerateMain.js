@@ -9,11 +9,11 @@ import ErrorModal from '../../../components/Error';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
-import ParityQRSigner from '../../../components/ParityQRSigner';
+import ParityQRSigner from '../ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import Landing from './Landing';
 import { Row, Col, Card, Container } from 'react-bootstrap';
-import SelectAccountSource from './SelectAccountSource';
+import ConnectAccount from './ConnectAccount';
 import Header from '../Header';
 
 const GenerateContext = createContext();
@@ -230,7 +230,7 @@ export default function GenerateMain() {
   steps.push(<Landing />);
 
   // Step-1
-  steps.push(<SelectAccountSource />);
+  steps.push(<ConnectAccount />);
 
   // Step-2
   steps.push(
@@ -259,6 +259,7 @@ export default function GenerateMain() {
         isHashed={isQrHashed}
         onSignature={_addQrSignature}
         payload={qrPayload}
+        prevStepHandler={prevStep}
       />
     );
   } else {

@@ -48,13 +48,15 @@ export default function SignerAccount({
         <CardHeader title={title} backClickHandler={() => prevStepHandler()} />
         <Row className="justify-content-center align-items-center">
           {showReader ? (
-            <Col md="6" style={{ height: 400 }}>
-              <QrScanAddress onScan={(scanned) => onScanHandler(scanned)} />
+            <Col className="d-flex justify-content-center">
+              <div style={{ width: 400, height: 400 }}>
+                <QrScanAddress onScan={(scanned) => onScanHandler(scanned)} />
+              </div>
             </Col>
           ) : (
             <>
               <Col
-                style={{ height: 400 }}
+                style={{ height: 300 }}
                 className="d-flex flex-column justify-content-center align-items-center text-center">
                 <h4>{externalAccount?.meta?.name} </h4>
                 <br />

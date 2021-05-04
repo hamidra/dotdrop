@@ -3,7 +3,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
-export default function SelectAccountSource() {
+export default function ConnectAccount() {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
   const optionSelectHandler = (accountSource) => {
@@ -15,7 +15,7 @@ export default function SelectAccountSource() {
     <>
       <Card.Body>
         <CardHeader title="Connect Account" />
-        <Row className="align-items-center justify-content-center text-center">
+        <Row className="align-items-center flex-column justify-content-center text-center pt-5">
           <Col>
             <Button
               variant="outline-primary"
@@ -23,12 +23,13 @@ export default function SelectAccountSource() {
               Load with Polkadot Extension
             </Button>
           </Col>
-          <div className="w-100" />
+        </Row>
+        <Row className="pt-4">
           <Col xs="12">
             <hr />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center pt-4">
           <Col>
             <Card
               className="rounded-lg"

@@ -3,7 +3,7 @@ import backArrow from '../images/back-arrow.png';
 export default function CardHeader({ title, backClickHandler }) {
   return (
     <>
-      <Row className="align-items-center text-center position-relative">
+      <Row className="align-items-center text-center position-relative py-2">
         {backClickHandler && (
           <Image
             src={backArrow}
@@ -11,8 +11,8 @@ export default function CardHeader({ title, backClickHandler }) {
               width: 20,
               position: 'absolute',
               left: 10,
-              top: 5,
-              zIndex: 1010,
+              top: '1rem',
+              zIndex: 5,
             }}
             onClick={() => backClickHandler()}
           />

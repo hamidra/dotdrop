@@ -1,7 +1,8 @@
 // import Button from '../../../components/CustomButton';
 import { useContext } from 'react';
 import { ClaimContext } from './ClaimMain';
-import { Card, Row, Col, Button } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
+import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
 export default function Landing() {
   const { setAccountSourceHandler } = useContext(ClaimContext);
@@ -10,7 +11,7 @@ export default function Landing() {
       <Card.Body>
         <CardHeader title="Dot Account" />
         <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
+          <Col className="d-flex flex-column justify-content-center align-items-center pt-4">
             <p className="text-center">
               <span className="d-block">
                 Create a new Polkadot account to transfer your gift to.
@@ -22,12 +23,13 @@ export default function Landing() {
               Create polkadot Account
             </Button>
           </Col>
-          <div className="w-100" />
+        </Row>
+        <Row className="pt-4">
           <Col xs="12">
             <hr />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center pt-4">
           <Col>
             <Card
               className="rounded-lg"

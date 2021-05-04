@@ -15,35 +15,39 @@ export default function LoadExistingAccount({
       <Card.Body>
         <CardHeader
           title={'Account Address'}
-          backClickHandler={() => prevStepHandler()}
+          backClickHandler={prevStepHandler}
         />
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
-            <p className="text-center">
-              Enter your the existing Polkadot account address below
-            </p>
-          </Col>
-        </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col>
-            <Form autoComplete="off" className="w-100">
-              <Form.Group controlId="formAccountAddressGroup">
-                <Form.Label>Account Address</Form.Label>
-                <Form.Control
-                  type="input"
-                  placeholder="12YS..."
-                  onChange={(e) => setAddress(e.target.value)}
-                  value={address}
-                />
-              </Form.Group>
-            </Form>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="d-flex justify-content-center">
-            <Button onClick={() => _setAddressHandler()}>Claim Gift</Button>
-          </Col>
-        </Row>
+        <div className="p-3">
+          <Row className="justify-content-center align-items-center">
+            <Col className="d-flex flex-column justify-content-center align-items-center">
+              <p className="text-center">
+                Enter your existing Polkadot account address below
+              </p>
+            </Col>
+          </Row>
+          <Row
+            style={{ height: 200 }}
+            className="justify-content-center align-items-center">
+            <Col>
+              <Form autoComplete="off" className="w-100">
+                <Form.Group controlId="formAccountAddressGroup">
+                  <Form.Label>Account Address</Form.Label>
+                  <Form.Control
+                    type="input"
+                    placeholder="12YS..."
+                    onChange={(e) => setAddress(e.target.value)}
+                    value={address}
+                  />
+                </Form.Group>
+              </Form>
+            </Col>
+          </Row>
+          <Row className="pt-5">
+            <Col className="d-flex justify-content-center">
+              <Button onClick={() => _setAddressHandler()}>Claim Gift</Button>
+            </Col>
+          </Row>
+        </div>
       </Card.Body>
     </>
   );

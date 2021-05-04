@@ -27,12 +27,14 @@ export default function GenerateGift({ account, generateGiftHandler }) {
       <Card.Body>
         <CardHeader title={'Gift Dots'} backClickHandler={() => prevStep()} />
 
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
+        <Row className="justify-content-center flex-column align-items-center pt-4">
+          <Col>
             <p className="text-center">
               Send DOTs to your friends and familiy, and have them join the
               Polkadot Network today.
             </p>
+          </Col>
+          <Col className="d-flex justify-content-center align-items-center pt-4">
             <Form autoComplete="off" className="w-100">
               <Form.Group className="row" controlId="formGroupEmail">
                 <Col md="6">
@@ -84,13 +86,12 @@ export default function GenerateGift({ account, generateGiftHandler }) {
               </Form.Group>
             </Form>
           </Col>
-          <div className="w-100" />
-          <Col className="d-flex justify-content-end">
+          <Col className="d-flex justify-content-center p-4">
             <Button
               onClick={() =>
                 validate() && generateGiftHandler({ amount, email })
               }>
-              Generate
+              Generate Gift
             </Button>
           </Col>
         </Row>

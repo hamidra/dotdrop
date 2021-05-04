@@ -10,15 +10,18 @@ export default function Landing() {
       <Card.Body>
         <CardHeader title={'Gift Some Dots'} />
         <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
-            <p className="text-center">
-              Send DOTs to your friends and familiy, and have them join the
-              Polkadot Network today.
-            </p>
-            <div className="w-100" />
-            <Button variant="outline-primary" onClick={() => nextStep()}>
-              Send a New Gift
-            </Button>
+          <Col className="d-flex flex-column justify-content-around align-items-center">
+            <div className="p-4">
+              <p className="text-center">
+                Send DOTs to your friends and familiy, and have them join the
+                Polkadot Network today.
+              </p>
+            </div>
+            <div className="pt-5">
+              <Button variant="outline-primary" onClick={() => nextStep()}>
+                Send a New Gift
+              </Button>
+            </div>
           </Col>
         </Row>
       </Card.Body>

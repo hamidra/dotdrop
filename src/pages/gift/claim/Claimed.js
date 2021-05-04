@@ -8,18 +8,17 @@ export default function Claimed({ amount }) {
     <>
       <Card.Body>
         <CardHeader title={'Congratulations!'} />
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
+        <Row className="justify-content-center flex-column align-items-center">
+          <Col className="pt-4 d-flex justify-content-center align-items-center">
             <Image style={{ width: 120 }} src={confetti} />
+          </Col>
+          <Col className="pt-5">
             <p className="text-center">
               Your Polkadot account has been funded and your gift of {amount}{' '}
               DOTs has been successfully transferred.
             </p>
-            <p></p>
           </Col>
-        </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
+          <Col className="pt-5 d-flex justify-content-center align-items-center">
             <Button>See Account</Button>
           </Col>
         </Row>
