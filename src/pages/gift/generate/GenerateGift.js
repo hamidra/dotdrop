@@ -5,22 +5,40 @@ import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 export default function GenerateGift({ account, generateGiftHandler }) {
   const { prevStep } = useContext(GenerateContext);
-  const [amount, setAmount] = useState('');
-  const [amountError, setAmountError] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+
+  const [formValues, setFormValues] = useState({
+    amount: '',
+    email: '',
+    confirmEmail: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    amount: '',
+    email: '',
+    confirmEmail: '',
+  });
 
   const validate = () => {
-    let error = false;
-    if (!email) {
-      error = true;
-      setEmailError('Please enter a valid email');
+    const errors = {};
+    let isValid = true;
+    const { email, confirmEmail, amount } = formValues;
+    if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+      isValid = false;
+      errors.email = 'Please enter a valid email.';
+    } else if (email != confirmEmail) {
+      isValid = false;
+      errors.confirmEmail = "The email addresses did'nt match";
     }
+
     if (!amount) {
-      error = true;
-      setAmountError('Please enter the gift value');
+      isValid = false;
+      errors.amount = 'Please enter the gift amount';
     }
-    return !error;
+    setFormErrors({ ...formErrors, ...errors });
+    return isValid;
+  };
+  const _generateGiftHandler = () => {
+    const { email, amount } = formValues;
+    validate() && generateGiftHandler({ email, amount });
   };
   return (
     <>
@@ -42,10 +60,11 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   <Form.Control
                     type="email"
                     placeholder="Bob"
-                    value={email}
+                    value={formValues?.email}
+                    isInvalid={formErrors?.email}
                     onChange={(e) => {
-                      setEmailError('');
-                      setEmail(e.target.value);
+                      setFormErrors({ ...formErrors, email: '' });
+                      setFormValues({ ...formValues, email: e.target.value });
                     }}
                   />
                 </Col>
@@ -54,17 +73,23 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   <Form.Control
                     type="email"
                     placeholder="Bob"
-                    value={email}
+                    value={formValues?.confirmEmail}
+                    isInvalid={formErrors?.confirmEmail}
                     onChange={(e) => {
-                      setEmailError('');
-                      setEmail(e.target.value);
+                      setFormErrors({ ...formErrors, confirmEmail: '' });
+                      setFormValues({
+                        ...formValues,
+                        confirmEmail: e.target.value,
+                      });
                     }}
                   />
                 </Col>
                 <div className="w-100" />
                 <Col>
-                  {emailError && (
-                    <Form.Text style={{ color: 'red' }}>{emailError}</Form.Text>
+                  {(formErrors?.email || formErrors?.confirmEmail) && (
+                    <Form.Text className="text-danger">
+                      {formErrors?.email || formErrors?.confirmEmail}
+                    </Form.Text>
                   )}
                 </Col>
               </Form.Group>
@@ -74,23 +99,23 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                 <Form.Control
                   type="number"
                   placeholder="10"
-                  value={amount}
+                  value={formValues?.amount}
+                  isInvalid={formErrors?.amount}
                   onChange={(e) => {
-                    setAmountError('');
-                    setAmount(e.target.value);
+                    setFormErrors({ ...formErrors, amount: '' });
+                    setFormValues({ ...formValues, amount: e.target.value });
                   }}
                 />
-                {amountError && (
-                  <Form.Text style={{ color: 'red' }}>{amountError}</Form.Text>
+                {formErrors?.amount && (
+                  <Form.Text className="text-danger">
+                    {formErrors?.amount}
+                  </Form.Text>
                 )}
               </Form.Group>
             </Form>
           </Col>
           <Col className="d-flex justify-content-center p-4">
-            <Button
-              onClick={() =>
-                validate() && generateGiftHandler({ amount, email })
-              }>
+            <Button onClick={() => _generateGiftHandler()}>
               Generate Gift
             </Button>
           </Col>

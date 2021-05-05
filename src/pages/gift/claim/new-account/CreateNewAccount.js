@@ -40,7 +40,7 @@ export default function CreateNewAccount({
     return { mnemonic, account };
   };
 
-  const newAccount = createNewAccount();
+  const [newAccount, setNewAccount] = useState(createNewAccount());
 
   const _setAddressHandler = async () => {
     setAddressHandler(newAccount.account.address);
@@ -63,6 +63,7 @@ export default function CreateNewAccount({
   // add Step-1
   steps.push(
     <VerifyAccountPhrase
+      mnemonicWords={mnemonicWords}
       nextStepHandler={() => _setAddressHandler()}
       prevStepHandler={prevStep}
     />

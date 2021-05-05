@@ -2,13 +2,28 @@ import { useState } from 'react';
 import { Row, Col, Card, Form } from 'react-bootstrap';
 import Button from '../../../../components/CustomButton';
 import CardHeader from '../../../../components/CardHeader';
+import { useSubstrate, utils } from '../../../../substrate-lib';
+
 export default function LoadExistingAccount({
   setAddressHandler,
   prevStepHandler,
 }) {
+  const { chainInfo } = useSubstrate();
+
   const [address, setAddress] = useState('');
+  const [addressError, setAddressError] = useState('');
+
+  const validate = () => {
+    let isValid = true;
+    if (!address || !utils.validateAddress(address, chainInfo?.ss58Format)) {
+      isValid = false;
+      setAddressError('Please enter a valid address');
+    }
+    return isValid;
+  };
+
   const _setAddressHandler = () => {
-    address && setAddressHandler(address);
+    validate(address) && setAddressHandler(address);
   };
   return (
     <>
@@ -35,9 +50,18 @@ export default function LoadExistingAccount({
                   <Form.Control
                     type="input"
                     placeholder="12YS..."
-                    onChange={(e) => setAddress(e.target.value)}
+                    isInValid={addressError}
+                    onChange={(e) => {
+                      setAddressError('');
+                      setAddress(e.target.value);
+                    }}
                     value={address}
                   />
+                  {addressError && (
+                    <Form.Text className="text-danger">
+                      {addressError}
+                    </Form.Text>
+                  )}
                 </Form.Group>
               </Form>
             </Col>

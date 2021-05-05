@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import Button from '../../../../components/CustomButton';
@@ -8,7 +9,9 @@ export default function CreateNewAccount({
   prevStepHandler,
 }) {
   const label = 'I have stored my seed phrase in a safe place.';
-
+  const [checked, setChecked] = useState(false);
+  const [checkedError, setCheckedError] = useState('');
+  const checkedErrorMessage = 'Please confirm you have saved your account';
   return (
     <>
       <Card.Body>
@@ -37,10 +40,29 @@ export default function CreateNewAccount({
           </Row>
           <Row className="flex-column justify-content-center align-items-center">
             <Col>
-              <Form.Check type="checkbox" label={label} />
+              <Form.Check
+                type="checkbox"
+                value={checked}
+                label={label}
+                isInValid={checkedError}
+                onChange={(e) => {
+                  setCheckedError('');
+                  setChecked(e.target.checked);
+                }}
+              />
+              {checkedError && (
+                <Form.Text className="text-danger">{checkedError}</Form.Text>
+              )}
             </Col>
             <Col className="pt-5 d-flex justify-content-center">
-              <Button onClick={() => nextStepHandler()}>Next</Button>
+              <Button
+                onClick={() =>
+                  checked
+                    ? nextStepHandler()
+                    : setCheckedError(checkedErrorMessage)
+                }>
+                Next
+              </Button>
             </Col>
           </Row>
         </div>

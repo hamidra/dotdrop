@@ -27,12 +27,15 @@ const INIT_STATE = {
   api: null,
   apiError: null,
   apiState: null,
+  chainInfo: null,
 };
 
 ///
 // Reducer function for `useReducer`
 
 const reducer = (state, action) => {
+  let api;
+  let chainInfo;
   switch (action.type) {
     case 'CONNECT_INIT':
       return { ...state, apiState: 'CONNECT_INIT' };
@@ -41,7 +44,15 @@ const reducer = (state, action) => {
       return { ...state, api: action.payload, apiState: 'CONNECTING' };
 
     case 'CONNECT_SUCCESS':
-      return { ...state, apiState: 'READY' };
+      api = action?.payload;
+      chainInfo = {
+        decimals: api?.registry?.chainDecimals[0] || 12,
+        token: api?.registry?.chainTokens[0] || 'Unit',
+        genesisHash: api?.genesisHash,
+        ss58Format: api?.registry?.chainSS58 || 42,
+      };
+      console.log(chainInfo);
+      return { ...state, apiState: 'READY', chainInfo: chainInfo };
 
     case 'CONNECT_ERROR':
       return { ...state, apiState: 'ERROR', apiError: action.payload };
@@ -77,9 +88,13 @@ const connect = (state, dispatch) => {
     _api.on('connected', () => {
       dispatch({ type: 'CONNECT', payload: _api });
       // `ready` event is not emitted upon reconnection and is checked explicitly here.
-      _api.isReady.then((_api) => dispatch({ type: 'CONNECT_SUCCESS' }));
+      _api.isReady.then((_api) =>
+        dispatch({ type: 'CONNECT_SUCCESS', payload: _api })
+      );
     });
-    _api.on('ready', () => dispatch({ type: 'CONNECT_SUCCESS' }));
+    _api.on('ready', () =>
+      dispatch({ type: 'CONNECT_SUCCESS', payload: _api })
+    );
     _api.on('error', (err) =>
       dispatch({ type: 'CONNECT_ERROR', payload: err })
     );

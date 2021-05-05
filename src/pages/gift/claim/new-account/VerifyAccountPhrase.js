@@ -11,7 +11,18 @@ export default function VerifyAccountPhrase({
   const [check2, setCheck2] = useState('');
   const [errors, setErrors] = useState({ check1: '', check2: '' });
   const validate = () => {
-    return true;
+    let isValid = true;
+    const phraseErrors = {};
+    if (check1 !== mnemonicWords[1]) {
+      isValid = false;
+      phraseErrors.check1 = 'Please enter the correct phrase';
+    }
+    if (check2 !== mnemonicWords[8]) {
+      isValid = false;
+      phraseErrors.check2 = 'Please enter the correct phrase';
+    }
+    setErrors({ ...errors, ...phraseErrors });
+    return isValid;
   };
   return (
     <Card.Body>

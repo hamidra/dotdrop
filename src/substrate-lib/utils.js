@@ -1,12 +1,16 @@
+import { decodeAddress, encodeAddress } from '@polkadot/keyring';
+import { hexToU8a, isHex, u8aToHex } from '@polkadot/util';
+
 const utils = {
-  paramConversion: {
-    num: [
-      'Compact<Balance>',
-      'BalanceOf',
-      'u8', 'u16', 'u32', 'u64', 'u128',
-      'i8', 'i16', 'i32', 'i64', 'i128'
-    ]
-  }
+  validateAddress: (address, ss58Format) => {
+    try {
+      const decodedAddress = decodeAddress(address, ss58Format);
+      const encodedAddress = encodeAddress(decodedAddress, ss58Format);
+      return address === encodedAddress;
+    } catch (error) {
+      return false;
+    }
+  },
 };
 
 export default utils;
