@@ -210,11 +210,9 @@ export default function GenerateMain() {
     }
   };
 
-  const accountName = account
+  const accountName = account?.meta?.name
     ? account?.meta?.name
-      ? account?.meta?.name.toUpperCase()
-      : account.address
-    : 'No account';
+    : account?.address;
 
   const accountOption = {
     EXTENSION: ConnectExtension,
@@ -273,7 +271,7 @@ export default function GenerateMain() {
         jumpToStep,
         setAccountSource,
       }}>
-      <Header selectedAccount={account && accountName} />
+      <Header selectedAccount={accountName} />
       <Container className="justify-content-center align-items-center">
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-5 d-flex justify-content-center align-items-center">

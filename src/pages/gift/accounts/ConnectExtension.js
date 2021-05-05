@@ -26,7 +26,7 @@ export default function ExtensionAccount({
           backClickHandler={prevStepHandler}
         />
         <div className="p-3">
-          <Row className="p-5 justify-content-center">
+          <Row className="p-md-5 justify-content-center">
             <Col
               style={{ height: 200 }}
               className="d-flex flex-column justify-content-center align-items-center text-center">
@@ -34,6 +34,7 @@ export default function ExtensionAccount({
                 accounts={accounts}
                 selectedAccount={selectedAccount}
                 setSelectedAccount={setSelectedAccount}
+                maxStrlength={15}
               />
             </Col>
           </Row>
