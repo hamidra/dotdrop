@@ -3,7 +3,29 @@ import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
 import { Link } from 'react-router-dom';
 export default function PresentGift({ gift, removeGiftHandler }) {
-  const { name, amount, secret } = gift;
+  const { email, amount, secret } = gift;
+  const mailSubject = 'Sending you some DOTs';
+  const mailBody = `
+  Hey! \n 
+  I'm sending you ${amount} dots as a gift! you can go follow this link 
+  and type in the following secret message to claim your DOTs. 
+  \n \n 
+  ${secret} 
+  \n \n 
+  The website will walk you through to create your own secure
+  Polkadot account. \n 
+  Enjoy!`;
+  const mailToLink = `${email}?subject=${mailSubject}&body=${encodeURIComponent(
+    mailBody
+  )}`;
+
+  const mailToHandler = () => {
+    window.location.href = `mailto:${mailToLink}`;
+  };
+
+  const printHandler = () => {
+    window.print();
+  };
   return (
     <>
       <Card.Body>
@@ -22,9 +44,9 @@ export default function PresentGift({ gift, removeGiftHandler }) {
               <Card.Body>
                 <p>
                   Hey! <br />
-                  I'm sending you {amount} dots as a gift! you can go follow
-                  this link and type in the following secret message to claim
-                  your DOTs.
+                  I'm sending you {amount} dots as a gift! you can follow this
+                  link and type in the following secret message to claim your
+                  DOTs.
                   <strong
                     style={{
                       backgroundColor: '#EDF1F5',
@@ -47,8 +69,8 @@ export default function PresentGift({ gift, removeGiftHandler }) {
         </Row>
         <Row>
           <Col className="px-5 d-flex justify-content-around">
-            <Button>Print</Button>
-            <Button>Email</Button>
+            <Button onClick={() => printHandler()}>Print</Button>
+            <Button onClick={() => mailToHandler()}>Email</Button>
             <Button onClick={() => removeGiftHandler(secret)}>Remove</Button>
           </Col>
         </Row>

@@ -65,7 +65,7 @@ export default function SignerAccount({
               <div className="w-100" />
               <Col md="6" className="d-flex justify-content-between">
                 <Button onClick={() => onCancelHandler()}>Cancel</Button>
-                <Button onClick={() => _setAccountHandler()}>Add</Button>
+                <Button onClick={() => _setAccountHandler()}>Connect</Button>
               </Col>
             </>
           )}

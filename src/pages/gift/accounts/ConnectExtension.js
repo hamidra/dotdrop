@@ -40,7 +40,7 @@ export default function ExtensionAccount({
           </Row>
           <Row>
             <Col className="pt-4 d-flex justify-content-center">
-              <Button onClick={() => _setAccountHandler()}>Claim Gift</Button>
+              <Button onClick={() => _setAccountHandler()}>Connect</Button>
             </Col>
           </Row>
         </div>

@@ -26,7 +26,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
       errors.email = 'Please enter a valid email.';
     } else if (email != confirmEmail) {
       isValid = false;
-      errors.confirmEmail = "The email addresses did'nt match";
+      errors.confirmEmail = "The email addresses did'nt match.";
     }
 
     if (!amount) {
@@ -59,7 +59,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   <Form.Label>Recipient Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="Bob"
+                    placeholder=""
                     value={formValues?.email}
                     isInvalid={formErrors?.email}
                     onChange={(e) => {
@@ -72,7 +72,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   <Form.Label>Confirm Recipient Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="Bob"
+                    placeholder=""
                     value={formValues?.confirmEmail}
                     isInvalid={formErrors?.confirmEmail}
                     onChange={(e) => {
@@ -98,7 +98,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                 <Form.Label>Amount</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="10"
+                  placeholder=""
                   value={formValues?.amount}
                   isInvalid={formErrors?.amount}
                   onChange={(e) => {

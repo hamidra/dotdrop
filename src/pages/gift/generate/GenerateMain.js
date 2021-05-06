@@ -8,7 +8,7 @@ import Processing from '../../../components/Processing';
 import ErrorModal from '../../../components/Error';
 import { useSubstrate, giftPallet } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
-import { mnemonicGenerate } from '@polkadot/util-crypto';
+import { mnemonicGenerate, randomAsHex } from '@polkadot/util-crypto';
 import ParityQRSigner from '../ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import Landing from './Landing';
@@ -30,6 +30,7 @@ export default function GenerateMain() {
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
+  const [gift, setGift] = useState(null);
 
   const [
     { isQrHashed, qrAddress, qrPayload, qrResolve },
@@ -39,8 +40,6 @@ export default function GenerateMain() {
     qrAddress: '',
     qrPayload: new Uint8Array(),
   });
-
-  const [gift, setGift] = useState(null);
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -98,6 +97,12 @@ export default function GenerateMain() {
     }
   };
 
+  const generateGiftAccount = () => {
+    const seed = randomAsHex(10);
+    const account = keyring.createFromUri(seed, null, 'sr25519');
+    return { seed, account };
+  };
+
   const getSigningAccount = async (account) => {
     let pairOrAddress = account;
     let signer = null;
@@ -129,13 +134,8 @@ export default function GenerateMain() {
       const signingAccount = await getSigningAccount(account);
 
       // generate mnemonic and interim recipiant account
-      const mnemonic = mnemonicGenerate();
-      const recipiantName = giftInfo.name;
-      const recipiantAccount = keyring.createFromUri(
-        mnemonic,
-        { name: recipiantName },
-        'sr25519'
-      );
+
+      const { seed, account: recipiantAccount } = generateGiftAccount();
       const gift = {
         to: recipiantAccount,
         amount: giftInfo.amount,
@@ -144,7 +144,7 @@ export default function GenerateMain() {
       createGift(api, signingAccount, gift, createGiftCallback);
 
       setGift({
-        secret: mnemonic,
+        secret: seed,
         name: giftInfo.name || '',
         email: giftInfo.email || '',
         amount: giftInfo.amount,
