@@ -10,7 +10,6 @@ import {
 } from 'react-router-dom';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
-import Greeting from './pages/gift/Greeting';
 
 function Body() {
   const { apiState } = useSubstrate();
@@ -18,7 +17,7 @@ function Body() {
     <>
       <Switch>
         <Route path={'/about'}>
-          <div />
+          <GenerateMain />
         </Route>
         <Route path={'/claim'}>
           <ClaimMain />
@@ -27,7 +26,7 @@ function Body() {
           <GenerateMain />
         </Route>
         <Route exact path={'/'}>
-          <Greeting />
+          <GenerateMain />
         </Route>
         <Route path={'/'}>
           <Redirect to={'/'} />
