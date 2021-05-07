@@ -15,5 +15,8 @@ $theme-colors: (
   'primary': #e6007a,
 );
 
+// headings
+$headings-font-weight: bold;
+
 // import should be at the end
 @import '~bootstrap/scss/bootstrap';

@@ -16,15 +16,15 @@ export default function Header({ selectedAccount }) {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <Nav.Item>
-              <Nav.Link onClick={() => history.push('about')}>About</Nav.Link>
+              <Nav.Link onClick={() => history.push('/about')}>About</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link onClick={() => history.push('claim')}>
+              <Nav.Link onClick={() => history.push('/claim')}>
                 Claim Gift
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link onClick={() => history.push('generate')}>
+              <Nav.Link onClick={() => history.push('/generate')}>
                 New Gift
               </Nav.Link>
             </Nav.Item>

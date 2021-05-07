@@ -2,8 +2,10 @@ import { Row, Col, Card, Image } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
 import confetti from '../../../images/confetti.png';
+import { useHistory } from 'react-router-dom';
 
-export default function Claimed({ amount }) {
+export default function Claimed({ amount, accountAddress }) {
+  const history = useHistory();
   return (
     <>
       <Card.Body>
@@ -19,7 +21,9 @@ export default function Claimed({ amount }) {
             </p>
           </Col>
           <Col className="pt-5 d-flex justify-content-center align-items-center">
-            <Button>See Account</Button>
+            <Button onClick={() => history.push(`/account/${accountAddress}`)}>
+              See Account
+            </Button>
           </Col>
         </Row>
       </Card.Body>

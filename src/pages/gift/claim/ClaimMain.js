@@ -137,7 +137,7 @@ export default function ClaimMain() {
   steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
 
   // Step-3
-  steps.push(<Claimed />);
+  steps.push(<Claimed accountAddress={address} />);
 
   const currentStepComponent = steps[step];
 
