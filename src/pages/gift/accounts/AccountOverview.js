@@ -63,8 +63,8 @@ export default function AccountOverview() {
   return (
     <>
       <Header />
-      <Row className="p-5">
-        <Col>
+      <Row className="p-5 my-5">
+        <Col className="d-flex justify-content-end px-5">
           <Card
             style={{ width: 450, maxWidth: '100%', minHeight: 450 }}
             className="shadow">
