@@ -7,6 +7,22 @@ $btn-border-radius: 1.5rem;
 $btn-border-radius-lg: 2rem;
 $btn-border-radius-sm: 1.5rem;
 
+.card-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  background-color: #FFF !important;
+  border-radius: 8px !important;
+  border-color: #D5DBE0 !important;
+  color: #1E1E1E !important;
+  padding: 0.75rem !important;
+  text-align: left !important; 
+}
+
+.card-button:hover {
+  background-color: #F9FAFB !important;
+}
+
 // Card
 $card-border-radius: 20px;
 

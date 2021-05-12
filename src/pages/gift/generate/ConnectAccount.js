@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
+import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
 export default function ConnectAccount () {
@@ -31,18 +32,18 @@ export default function ConnectAccount () {
         </Row>
         <Row className="align-items-center pt-4">
           <Col>
-            <Card
-              className="rounded-lg"
-              onClick={() => optionSelectHandler('HARDWALLET')}>
-              <Card.Body>Ledger</Card.Body>
-            </Card>
+            <CardButton
+              onClick={() => optionSelectHandler('HARDWALLET')}
+            >
+              Ledger
+            </CardButton>
           </Col>
           <Col>
-            <Card
-              className="rounded-lg"
-              onClick={() => optionSelectHandler('SIGNER')}>
-              <Card.Body>Parity Signer</Card.Body>
-            </Card>
+            <CardButton
+              onClick={() => optionSelectHandler('SIGNER')}
+            >
+              Parity Signer
+            </CardButton>
           </Col>
         </Row>
       </Card.Body>
