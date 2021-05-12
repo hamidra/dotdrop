@@ -20,7 +20,7 @@ export default function Landing () {
             <Button
               variant="outline-primary"
               onClick={() => setAccountSourceHandler('NEW')}>
-              Create polkadot Account
+              Create Polkadot Account
             </Button>
           </Col>
         </Row>
