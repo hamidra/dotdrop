@@ -17,17 +17,12 @@ export default function VerifySecret({ claimGiftHandler }) {
     <>
       <Card.Body>
         <CardHeader title={'Claim Your Gift'} backClickHandler={prevStep} />
-        <div className="p-3">
+        <div>
           <Row className="justify-content-center align-items-center">
             <Col className="text-center">
               <p>
                 Every Polkadot account needs a minimum balance to be active on
-                the network.
-              </p>
-              <p className="pt-2">
-                Enter the secret hash you have received
-                <br />
-                to claim your gift and fund your account.
+                the network. Enter the secret hash you have received to claim your gift and fund your account.
               </p>
             </Col>
           </Row>
