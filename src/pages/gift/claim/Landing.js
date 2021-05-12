@@ -4,7 +4,7 @@ import { ClaimContext } from './ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
-export default function Landing() {
+export default function Landing () {
   const { setAccountSourceHandler } = useContext(ClaimContext);
   return (
     <>
@@ -56,10 +56,12 @@ export default function Landing() {
         </Row>
       </Card.Body>
       <Card.Footer>
-        <span>By connecting an account, I accept the </span>
-        <a href="policy" target="_blank">
-          terms and conditions
-        </a>
+        <span>By connecting an account, I accept the
+          <a href="policy" target="_blank">
+            &nbsp;terms and conditions
+          </a>
+          .
+        </span>
       </Card.Footer>
     </>
   );

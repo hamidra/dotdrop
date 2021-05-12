@@ -3,7 +3,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
-export default function ConnectAccount() {
+export default function ConnectAccount () {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
   const optionSelectHandler = (accountSource) => {
@@ -47,10 +47,12 @@ export default function ConnectAccount() {
         </Row>
       </Card.Body>
       <Card.Footer>
-        <span>By connecting an account, I accept the </span>
-        <a href="policy" target="_blank">
-          terms and conditions
-        </a>
+        <span>By connecting an account, I accept the
+          <a href="policy" target="_blank">
+            &nbsp;terms and conditions
+          </a>
+          .
+        </span>
       </Card.Footer>
     </>
   );
