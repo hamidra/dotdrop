@@ -15,8 +15,14 @@ $theme-colors: (
   'primary': #e6007a,
 );
 
+$gray-100: #F9FAFB;
+$gray-500: #D5DBE0;
+$gray-600: #6C757D;
+$gray-900: #1E1E1E;
+
 // headings
 $headings-font-weight: bold;
+$h2-font-size: 2.5rem;
 
 // import should be at the end
 @import '~bootstrap/scss/bootstrap';
