@@ -35,6 +35,7 @@ export default function Landing () {
             <CardButton
               logo='extension'
               onClick={() => setAccountSourceHandler('EXTENSION')}
+              smallFont={true}
             >
               Load With Polkadot Extension
             </CardButton>
@@ -43,6 +44,7 @@ export default function Landing () {
             <CardButton
               logo='signer'
               onClick={() => setAccountSourceHandler('SIGNER')}
+              smallFont={true}
             >
               Scan from Parity Signer
             </CardButton>

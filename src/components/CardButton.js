@@ -5,7 +5,7 @@ import signerLogo from '../images/signer_logo_128.png';
 import extensionLogo from '../images/extension_logo_128.png';
 import ledgerLogo from '../images/ledger_logo_128.png';
 
-const CardButton = ({ children, logo, onClick }) => {
+const CardButton = ({ children, logo, onClick, smallFont }) => {
   let image = '';
 
   if (logo === 'signer') {
@@ -20,6 +20,7 @@ const CardButton = ({ children, logo, onClick }) => {
         <Button
             className='card-button'
             onClick={onClick}
+            style={smallFont ? { fontSize: '14px' } : { fontSize: '16px' }}
         >
             <Image
               src={image}
@@ -34,7 +35,7 @@ const CardButton = ({ children, logo, onClick }) => {
             </Image>
             {children}
             <div className='flex-grow-1'></div>
-            <MdChevronRight style={{ fontSize: '1.5rem', color: '#6C757D' }} />
+            <MdChevronRight style={{ flexShrink: '0', fontSize: '24px', color: '#6C757D' }} />
         </Button>
   );
 };
