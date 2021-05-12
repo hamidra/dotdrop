@@ -10,6 +10,10 @@ $btn-border-radius-sm: 1.5rem;
 // Card
 $card-border-radius: 20px;
 
+.card-body {
+  padding: 2rem !important;
+}
+
 .card-footer {
   display: flex;
   justify-content: center;

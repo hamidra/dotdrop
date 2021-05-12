@@ -32,7 +32,7 @@ export default function LoadExistingAccount({
           title={'Account Address'}
           backClickHandler={prevStepHandler}
         />
-        <div className="p-3">
+        <div>
           <Row className="justify-content-center align-items-center">
             <Col className="d-flex flex-column justify-content-center align-items-center">
               <p className="text-center">
