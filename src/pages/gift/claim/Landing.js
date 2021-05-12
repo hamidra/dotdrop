@@ -33,6 +33,7 @@ export default function Landing () {
         <Row className="align-items-center pt-4">
           <Col>
             <CardButton
+              logo='extension'
               onClick={() => setAccountSourceHandler('EXTENSION')}
             >
               Load With Polkadot Extension
@@ -40,6 +41,7 @@ export default function Landing () {
           </Col>
           <Col>
             <CardButton
+              logo='signer'
               onClick={() => setAccountSourceHandler('SIGNER')}
             >
               Scan from Parity Signer

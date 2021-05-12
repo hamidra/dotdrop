@@ -33,6 +33,7 @@ export default function ConnectAccount () {
         <Row className="align-items-center pt-4">
           <Col>
             <CardButton
+              logo='ledger'
               onClick={() => optionSelectHandler('HARDWALLET')}
             >
               Ledger
@@ -40,6 +41,7 @@ export default function ConnectAccount () {
           </Col>
           <Col>
             <CardButton
+              logo='signer'
               onClick={() => optionSelectHandler('SIGNER')}
             >
               Parity Signer
