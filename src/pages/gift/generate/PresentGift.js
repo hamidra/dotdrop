@@ -7,7 +7,8 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   const mailSubject = 'Sending you some DOTs';
   const mailBody = `
   Hey! \n 
-  I'm sending you ${amount} dots as a gift! you can go follow this link 
+  I'm sending you ${amount} dots as a gift! you can go to \n
+  https://hamidra.github.io/dotdrop/#/claim \n
   and type in the following secret message to claim your DOTs. 
   \n \n 
   ${secret} 
