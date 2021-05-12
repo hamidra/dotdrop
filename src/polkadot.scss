@@ -16,9 +16,22 @@ $theme-colors: (
 );
 
 $gray-100: #F9FAFB;
-$gray-500: #D5DBE0;
+$gray-300: #D5DBE0;
 $gray-600: #6C757D;
 $gray-900: #1E1E1E;
+
+// Form
+.form-label {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+$form-group-margin-bottom: 2rem;
+
+$input-border-radius: 0.5rem;
+$input-border-color: $gray-300;
+$input--color: $gray-900;
+$input-height: 2.5rem;
 
 // headings
 $headings-font-weight: bold;
