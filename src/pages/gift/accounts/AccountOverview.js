@@ -86,17 +86,20 @@ export default function AccountOverview() {
                   title="Balance (Free)"
                   value={
                     balance?.free &&
-                    `${utils.toUnit(balance.free, chainInfo?.decimals)} DOTs`
+                    `${utils.fromChainUnit(
+                      balance.free,
+                      chainInfo?.decimals
+                    )} ${chainInfo?.token}`
                   }
                 />
                 <AccountField
                   title="Balance (Reserved)"
                   value={
                     balance?.reserved &&
-                    `${utils.toUnit(
+                    `${utils.fromChainUnit(
                       balance.reserved,
                       chainInfo?.decimals
-                    )} DOTs`
+                    )} ${chainInfo?.token}`
                   }
                 />
               </Row>

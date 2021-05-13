@@ -1,13 +1,4 @@
-import BN from 'bn.js';
-
-const getChainAmount = (chainDecimal, amount) => {
-  const bn10 = new BN('10', 10);
-  const bnChainDecimal = new BN(chainDecimal, 10);
-  const bnChainUnit = bn10.pow(bnChainDecimal);
-  const bnAmount = new BN(amount, 10);
-  return bnAmount.mul(bnChainUnit).toString();
-};
-
+import utils from './substrateUtils';
 const signAndSendTx = async (tx, signingAccount, cb) => {
   const { pairOrAddress, signer } = signingAccount;
   await tx.signAsync(pairOrAddress, { signer });
@@ -32,7 +23,10 @@ const createGift = async (api, signingAccount, gift, cb) => {
     `Sending a gift from ${signingAccount} to ${gift.to} of amount of ${gift.amount}`
   );
   try {
-    const chainAmount = getChainAmount(api.registry.chainDecimals, gift.amount);
+    const chainAmount = utils.toChainUnit(
+      gift.amount,
+      api.registry.chainDecimals
+    );
     const tx = api.tx.gift.gift(chainAmount, gift.to.address);
     await signAndSendTx(tx, signingAccount, cb);
   } catch (error) {

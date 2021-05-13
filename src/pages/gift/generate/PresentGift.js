@@ -27,6 +27,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   const printHandler = () => {
     window.print();
   };
+
   return (
     <>
       <Card.Body>
