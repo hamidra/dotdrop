@@ -7,3 +7,21 @@ body {
 #root {
   min-height: 100vh;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable,
+  .printable * {
+    visibility: visible;
+    font-size: 15pt;
+    margin: 5mm 5mm 5mm 5mm;
+  }
+
+  .printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

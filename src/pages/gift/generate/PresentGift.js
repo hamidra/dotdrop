@@ -7,7 +7,8 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   const mailSubject = 'Sending you some DOTs';
   const mailBody = `
   Hey! \n 
-  I'm sending you ${amount} dots as a gift! you can go follow this link 
+  I'm sending you ${amount} dots as a gift! you can go to \n
+  https://hamidra.github.io/dotdrop/#/claim \n
   and type in the following secret message to claim your DOTs. 
   \n \n 
   ${secret} 
@@ -26,6 +27,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   const printHandler = () => {
     window.print();
   };
+
   return (
     <>
       <Card.Body>
@@ -40,7 +42,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
         </Row>
         <Row className="justify-content-center align-items-center my-4 mx-2">
           <Col>
-            <Card>
+            <Card className="printable">
               <Card.Body>
                 <p>
                   Hey! <br />

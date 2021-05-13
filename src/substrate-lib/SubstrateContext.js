@@ -47,9 +47,10 @@ const reducer = (state, action) => {
       api = action?.payload;
       chainInfo = {
         decimals: api?.registry?.chainDecimals[0] || 12,
-        token: api?.registry?.chainTokens[0] || 'Unit',
+        token: api?.registry?.chainTokens[0] || 'DOT',
         genesisHash: api?.genesisHash,
         ss58Format: api?.registry?.chainSS58 || 42,
+        existentialDeposit: api?.consts?.balances?.existentialDeposit || 0,
       };
       console.log(chainInfo);
       return { ...state, apiState: 'READY', chainInfo: chainInfo };
