@@ -26,17 +26,14 @@ const AccountField = ({ title, value }) => {
   );
 };
 const WalletInfoField = ({ title, subtitle, ...props }) => {
-  const [logo, setLogo] = useState('');
-
-  useEffect(() => {
-    if (title === 'Polkadot Extension') {
-      setLogo(extensionLogo);
-    } else if (title === 'Parity Signer') {
-      setLogo(signerLogo);
-    } else if (title === 'Hardware Wallet') {
-      setLogo(ledgerLogo);
-    }
-  }, [title]);
+  let logo = '';
+  if (title === 'Polkadot Extension') {
+    logo = extensionLogo;
+  } else if (title === 'Parity Signer') {
+    logo = signerLogo;
+  } else if (title === 'Hardware Wallet') {
+    logo = ledgerLogo;
+  }
 
   return (
     <Media className='d-flex' style={{ alignItems: 'center' }} {...props}>
