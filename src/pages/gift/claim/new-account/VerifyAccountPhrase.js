@@ -30,7 +30,7 @@ export default function VerifyAccountPhrase({
         title={'Verify Phrase'}
         backClickHandler={() => prevStepHandler()}
       />
-      <div className="p-3">
+      <div>
         <Row className="justify-content-center pt-3 align-items-center">
           <Col>
             <p className="text-center">

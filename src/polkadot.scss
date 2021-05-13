@@ -1,0 +1,79 @@
+// Custom.scss
+// set font family
+$font-family-base: 'Work Sans', sans-serif;
+
+// Button
+$btn-border-radius: 1.5rem;
+$btn-border-radius-lg: 2rem;
+$btn-border-radius-sm: 1.5rem;
+
+.card-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  background-color: #FFF !important;
+  border-radius: 8px !important;
+  border-color: #D5DBE0 !important;
+  color: #1E1E1E !important;
+  padding: 0.75rem !important;
+  text-align: left !important; 
+}
+
+.card-button:hover {
+  background-color: #F9FAFB !important;
+  box-shadow: 0 .25rem .5rem rgba(#000, .1);
+}
+
+// Card
+$card-border-radius: 20px;
+
+.card-body {
+  padding: 2rem !important;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem !important;
+  font-size: 14px;
+}
+
+// Set booststrap custom theme
+$theme-colors: (
+  'primary': #e6007a,
+);
+
+$gray-100: #F9FAFB;
+$gray-300: #D5DBE0;
+$gray-600: #6C757D;
+$gray-900: #1E1E1E;
+
+// Form
+.form-label {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+$form-group-margin-bottom: 2rem;
+
+$input-border-radius: 0.5rem;
+$input-border-color: $gray-300;
+$input--color: $gray-900;
+$input-height: 2.5rem;
+
+// headings
+$headings-font-weight: bold;
+$h2-font-size: 2.5rem;
+$h4-font-size: 1.25rem;
+$h5-font-size: 1rem;
+
+// Navbar
+$navbar-nav-link-padding-x: 1.5rem;
+$navbar-dark-color: #FFF;
+$navbar-dark-hover-color: #FFF;
+
+// Radii
+$border-radius: 0.5rem;
+
+// import should be at the end
+@import '~bootstrap/scss/bootstrap';

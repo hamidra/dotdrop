@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
+import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
-export default function ConnectAccount() {
+export default function ConnectAccount () {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
   const optionSelectHandler = (accountSource) => {
@@ -31,26 +32,30 @@ export default function ConnectAccount() {
         </Row>
         <Row className="align-items-center pt-4">
           <Col>
-            <Card
-              className="rounded-lg"
-              onClick={() => optionSelectHandler('HARDWALLET')}>
-              <Card.Body>Ledger</Card.Body>
-            </Card>
+            <CardButton
+              logo='ledger'
+              onClick={() => optionSelectHandler('HARDWALLET')}
+            >
+              Ledger
+            </CardButton>
           </Col>
           <Col>
-            <Card
-              className="rounded-lg"
-              onClick={() => optionSelectHandler('SIGNER')}>
-              <Card.Body>Parity Signer</Card.Body>
-            </Card>
+            <CardButton
+              logo='signer'
+              onClick={() => optionSelectHandler('SIGNER')}
+            >
+              Parity Signer
+            </CardButton>
           </Col>
         </Row>
       </Card.Body>
       <Card.Footer>
-        <span>By connecting an account, I accept the </span>
-        <a href="policy" target="_blank">
-          terms and conditions
-        </a>
+        <span>By connecting an account, I accept the
+          <a href="policy" target="_blank">
+            &nbsp;terms and conditions
+          </a>
+          .
+        </span>
       </Card.Footer>
     </>
   );

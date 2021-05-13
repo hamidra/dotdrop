@@ -8,9 +8,9 @@ export default function Header({ selectedAccount }) {
 
   return (
     <>
-      <Navbar bg="primary" variant="dark" expand="md">
+      <Navbar bg="primary" className='pl-5 pr-4 py-3' variant="dark" expand="md">
         <Navbar.Brand onClick={() => history.push('/')}>
-          Polkadot Gift
+          <strong>Polkadot Gifts</strong>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">

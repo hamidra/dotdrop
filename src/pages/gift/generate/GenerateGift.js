@@ -176,7 +176,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
               </Form.Group>
             </Form>
           </Col>
-          <Col className="d-flex justify-content-center p-4">
+          <Col className="d-flex justify-content-center">
             <Button onClick={() => _generateGiftHandler()}>
               Generate Gift
             </Button>

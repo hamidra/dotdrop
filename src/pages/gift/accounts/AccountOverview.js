@@ -4,7 +4,10 @@ import { useParams } from 'react-router-dom';
 import Header from '../Header';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { stringHelpers } from '../../../utils';
-import holder64 from '../../../images/Rectangle64.png';
+import extensionLogo from '../../../images/extension_logo_128.png';
+import ledgerLogo from '../../../images/ledger_logo_128.png';
+import signerLogo from '../../../images/signer_logo_128.png';
+
 const AccountField = ({ title, value }) => {
   return (
     <Col className="mt-3 d-flex justify-content-between align-items-center">
@@ -23,12 +26,21 @@ const AccountField = ({ title, value }) => {
   );
 };
 const WalletInfoField = ({ title, subtitle, ...props }) => {
+  let logo = '';
+  if (title === 'Polkadot Extension') {
+    logo = extensionLogo;
+  } else if (title === 'Parity Signer') {
+    logo = signerLogo;
+  } else if (title === 'Hardware Wallet') {
+    logo = ledgerLogo;
+  }
+
   return (
-    <Media {...props}>
-      <img width={64} height={64} className="mr-4" src={holder64} alt={title} />
+    <Media className='d-flex' style={{ alignItems: 'center' }} {...props}>
+      <img width={64} height={64} className="mr-3 rounded" src={logo} alt={title} />
       <Media.Body>
-        <h5>{title}</h5>
-        <p>{subtitle}</p>
+        <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
+        <div>{subtitle}</div>
       </Media.Body>
     </Media>
   );
@@ -68,7 +80,10 @@ export default function AccountOverview() {
           <Card
             style={{ width: 450, maxWidth: '100%', minHeight: 450 }}
             className="shadow">
-            <Card.Header className="bg-transparent border-0">
+            <Card.Header
+              className="bg-transparent border-0"
+              style={{ padding: '2rem 2rem 0 2rem' }}
+            >
               <h3 className="font-weight-bold">Account Details</h3>
             </Card.Header>
             <Card.Body>
@@ -113,22 +128,22 @@ export default function AccountOverview() {
         </Col>
         <Col className="d-flex flex-column align-items-start justify-content-center">
           <div>
-            <h3>DOT Wallets</h3>
+            <h4>DOT Wallets</h4>
             <p>Import your account to one of the following wallets:</p>
           </div>
           <WalletInfoField
-            className="mt-3"
+            className="mt-4"
             title="Polkadot Extension"
             subtitle="Easy-to-use browser wallet"
           />
           <WalletInfoField
-            className="mt-3"
+            className="mt-4"
             title="Parity Signer"
             subtitle="Secure offline wallet"
           />
           <WalletInfoField
-            className="mt-3"
-            title="Hardware wallet"
+            className="mt-4"
+            title="Hardware Wallet"
             subtitle="Secure offline wallet"
           />
         </Col>

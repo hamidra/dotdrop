@@ -3,8 +3,9 @@ import { useContext } from 'react';
 import { ClaimContext } from './ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
+import CardButton from '../../../components/CardButton';
 import CardHeader from '../../../components/CardHeader';
-export default function Landing() {
+export default function Landing () {
   const { setAccountSourceHandler } = useContext(ClaimContext);
   return (
     <>
@@ -20,7 +21,7 @@ export default function Landing() {
             <Button
               variant="outline-primary"
               onClick={() => setAccountSourceHandler('NEW')}>
-              Create polkadot Account
+              Create Polkadot Account
             </Button>
           </Col>
         </Row>
@@ -31,18 +32,22 @@ export default function Landing() {
         </Row>
         <Row className="align-items-center pt-4">
           <Col>
-            <Card
-              className="rounded-lg"
-              onClick={() => setAccountSourceHandler('EXTENSION')}>
-              <Card.Body>Load With Polkadot Extension</Card.Body>
-            </Card>
+            <CardButton
+              logo='extension'
+              onClick={() => setAccountSourceHandler('EXTENSION')}
+              smallFont={true}
+            >
+              Load With Polkadot Extension
+            </CardButton>
           </Col>
           <Col>
-            <Card
-              className="rounded-lg"
-              onClick={() => setAccountSourceHandler('SIGNER')}>
-              <Card.Body>Scan from Parity Signer</Card.Body>
-            </Card>
+            <CardButton
+              logo='signer'
+              onClick={() => setAccountSourceHandler('SIGNER')}
+              smallFont={true}
+            >
+              Scan from Parity Signer
+            </CardButton>
           </Col>
           <div className="w-100" />
           <Col className="d-flex flex-column justify-content-center align-items-center">
@@ -56,10 +61,12 @@ export default function Landing() {
         </Row>
       </Card.Body>
       <Card.Footer>
-        <span>By connecting an account, I accept the </span>
-        <a href="policy" target="_blank">
-          terms and conditions
-        </a>
+        <span>By connecting an account, I accept the
+          <a href="policy" target="_blank">
+            &nbsp;terms and conditions
+          </a>
+          .
+        </span>
       </Card.Footer>
     </>
   );

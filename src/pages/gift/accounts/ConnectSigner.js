@@ -41,11 +41,20 @@ export default function SignerAccount({
     setAccountHandler && setAccountHandler(externalAccount);
     setAddressHandler && setAddressHandler(externalAccount.address);
   };
-  const title = 'Scan your account QRCode from your signer app';
+
   return (
     <>
       <Card.Body>
-        <CardHeader title={title} backClickHandler={() => prevStepHandler()} />
+        <CardHeader title='Scan QR Code' backClickHandler={() => prevStepHandler()} />
+        <Row className="justify-content-center align-items-center">
+          <Col className="d-flex flex-column justify-content-center align-items-center pt-4">
+            <p className="text-center">
+              <span className="d-block">
+                Scan your account QRCode from your signer app.
+              </span>
+            </p>
+          </Col>
+        </Row>
         <Row className="justify-content-center align-items-center">
           {showReader ? (
             <Col className="d-flex justify-content-center">
