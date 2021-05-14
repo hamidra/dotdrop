@@ -120,7 +120,7 @@ const loadAccounts = (state, dispatch) => {
       allAccounts.forEach((a) => console.log(a));
       allAccounts = allAccounts.map(({ address, meta }) => ({
         address,
-        meta: { ...meta, name: `${meta.name} (${meta.source})` },
+        meta: { ...meta, name: `${meta.name}` },
       }));
       keyring.loadAll(
         { isDevelopment: config.DEVELOPMENT_KEYRING },
