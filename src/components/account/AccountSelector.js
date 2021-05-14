@@ -30,7 +30,7 @@ const CustomMenu = React.forwardRef(
         style={style}
         className={className}
         aria-labelledby={labeledBy}>
-        <Form className="mx-2">
+        <Form className="mx-2 mb-2">
           <Form.Control
             autoFocus
             placeholder="Type to filter..."
