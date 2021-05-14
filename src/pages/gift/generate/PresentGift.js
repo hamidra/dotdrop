@@ -7,7 +7,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   const mailSubject = 'Sending you some DOTs';
   const mailBody = `
   Hey! \n 
-  I'm sending you ${amount} dots as a gift! you can go to \n
+  I'm sending you ${amount > 1 ? `${amount} DOTs` : `${amount} DOT`} as a gift! You can go to \n
   https://hamidra.github.io/dotdrop/#/claim \n
   and type in the following secret message to claim your DOTs. 
   \n \n 
@@ -43,10 +43,12 @@ export default function PresentGift({ gift, removeGiftHandler }) {
         <Row className="justify-content-center align-items-center my-4 mx-2">
           <Col>
             <Card className="printable">
-              <Card.Body>
+              <Card.Body className='p-4'>
                 <p>
-                  Hey! <br />
-                  I'm sending you {amount} dots as a gift! you can follow this
+                  Hey!
+                </p>
+                <p>
+                  I'm sending you {amount > 1 ? `${amount} DOTs` : `${amount} DOT`} as a gift! You can follow this
                   link and type in the following secret message to claim your
                   DOTs.
                   <strong
@@ -57,12 +59,14 @@ export default function PresentGift({ gift, removeGiftHandler }) {
                       padding: '5px',
                       marginTop: '20px',
                       marginBottom: '20px',
-                      borderRadius: '5px',
+                      borderRadius: '5px'
                     }}>
                     {secret}
                   </strong>
                   The website will walk you through to create your own secure
-                  Polkadot account. <br />
+                  Polkadot account.
+                </p>
+                <p>
                   Enjoy!
                 </p>
               </Card.Body>
