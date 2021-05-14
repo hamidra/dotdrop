@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Dropdown, Row, Col, Form } from 'react-bootstrap';
+import { Dropdown, Media, Form } from 'react-bootstrap';
 import { stringHelpers } from '../../utils';
+import Identicon from '@polkadot/react-identicon';
 
+const namePaddingLen = 10;
+const addressPaddingLen = 5;
 const CustomMenu = React.forwardRef(
   (
     { children, style, className, 'aria-labelledby': labeledBy, account },
@@ -41,19 +44,32 @@ const CustomMenu = React.forwardRef(
   }
 );
 
-const CustomItem = React.forwardRef(({ account, onClick }, ref) => {
-  const nameStr = stringHelpers.truncateMiddle(account?.meta?.name, 10);
-  const addressStr = stringHelpers.truncateMiddle(account?.address, 5);
+const CustomItem = React.forwardRef(({ account, onClick, active }, ref) => {
+  const nameStr = stringHelpers.truncateMiddle(
+    account?.meta?.name,
+    namePaddingLen
+  );
+  const addressStr = stringHelpers.truncateMiddle(
+    account?.address,
+    addressPaddingLen
+  );
   return (
     <>
-      <div
+      <Media
+        className="d-flex align-items-center p-2 border-top"
+        active={active}
         onClick={(e) => {
           e.preventDefault();
           onClick(e);
         }}>
-        <div>{nameStr}</div>
-        <div>{addressStr}</div>
-      </div>
+        <div className="mr-2">
+          <Identicon value={account?.address} size={40} theme="polkadot" />
+        </div>
+        <Media.Body>
+          <div>{nameStr}</div>
+          <div>{addressStr}</div>
+        </Media.Body>
+      </Media>
     </>
   );
 });
@@ -66,10 +82,21 @@ export default function AccounSelector({
   const selectAccountHandler = (idx) => {
     setSelectedAccount(accounts[idx]);
   };
-  let label = selectedAccount
-    ? selectedAccount?.meta?.name || selectedAccount.address
-    : 'Select an account';
-  label = stringHelpers.truncateMiddle(label, maxStrlength);
+  const shortName = stringHelpers.truncateMiddle(
+    selectedAccount?.meta?.name,
+    namePaddingLen
+  );
+  const shortAddress = stringHelpers.truncateMiddle(
+    selectedAccount?.address,
+    addressPaddingLen
+  );
+  const label = selectedAccount ? (
+    <>
+      <strong>{shortName}</strong> : {shortAddress}
+    </>
+  ) : (
+    'Select an account'
+  );
   return (
     <>
       <Dropdown
