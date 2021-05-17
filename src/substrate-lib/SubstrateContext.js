@@ -24,6 +24,7 @@ const INIT_STATE = {
   types: config.types,
   keyring: null,
   keyringState: null,
+  balances: null,
   api: null,
   apiError: null,
   apiState: null,
@@ -67,6 +68,9 @@ const reducer = (state, action) => {
     case 'KEYRING_ERROR':
       return { ...state, keyring: null, keyringState: 'ERROR' };
 
+    case 'BALANCE_UPDATE':
+      const { address, balance } = action.payload;
+      return { ...state, balances: { ...state?.balances, [address]: balance } };
     default:
       throw new Error(`Unknown type: ${action.type}`);
   }
@@ -117,22 +121,23 @@ const loadAccounts = (state, dispatch) => {
       console.log(injectedExt);
       window.polkadapp = polkadapp;
       let allAccounts = await web3Accounts();
-      allAccounts.forEach((a) => console.log(a));
       allAccounts = allAccounts.map(({ address, meta }) => ({
         address,
         meta: { ...meta, name: `${meta.name}` },
       }));
+
+      // toDO: subscribe to extension account updates
       keyring.loadAll(
         { isDevelopment: config.DEVELOPMENT_KEYRING },
         allAccounts
       );
+
       dispatch({ type: 'SET_KEYRING', payload: keyring });
     } catch (e) {
       console.error(e);
       dispatch({ type: 'KEYRING_ERROR' });
     }
   };
-
   const { keyringState } = state;
   // If `keyringState` is not null `asyncLoadAccounts` is running.
   if (keyringState) return;
@@ -142,6 +147,20 @@ const loadAccounts = (state, dispatch) => {
   // This is the heavy duty work
   loadAccts = true;
   asyncLoadAccounts();
+};
+
+let isLoadingBalances = false;
+const loadBalances = (state, dispatch) => {
+  // balances should only be loaded once, and then updates are happened through subscription
+  if (!isLoadingBalances) {
+    isLoadingBalances = true;
+    // get the balance for all addresses in keyring:
+    state.keyring.getAccounts().forEach(({ address }) => {
+      state.api.query.system.account(address, ({ data: balance }) => {
+        dispatch({ type: 'BALANCE_UPDATE', payload: { address, balance } });
+      });
+    });
+  }
 };
 
 const SubstrateContext = React.createContext();
@@ -157,8 +176,16 @@ const SubstrateContextProvider = (props) => {
 
   const [state, dispatch] = useReducer(reducer, initState);
   connect(state, dispatch);
-  loadAccounts(state, dispatch);
 
+  // load accounts when api is ready
+  if (state.apiState === 'READY') {
+    loadAccounts(state, dispatch);
+  }
+
+  if (state.apiState === 'READY' && state.keyringState === 'READY') {
+    loadBalances(state, dispatch);
+  }
+  console.log(state);
   return (
     <SubstrateContext.Provider value={state}>
       {props.children}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, Media, Form } from 'react-bootstrap';
+import { Dropdown, Media, Form, Row, Col } from 'react-bootstrap';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
 
@@ -44,38 +44,48 @@ const CustomMenu = React.forwardRef(
   }
 );
 
-const CustomItem = React.forwardRef(({ account, onClick, active }, ref) => {
-  const nameStr = stringHelpers.truncateMiddle(
-    account?.meta?.name,
-    namePaddingLen
-  );
-  const addressStr = stringHelpers.truncateMiddle(
-    account?.address,
-    addressPaddingLen
-  );
-  return (
-    <>
-      <Media
-        className="d-flex align-items-center p-2 border-top"
-        active={active}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick(e);
-        }}>
-        <div className="mr-2">
-          <Identicon value={account?.address} size={40} theme="polkadot" />
-        </div>
-        <Media.Body>
-          <div>{nameStr}</div>
-          <div>{addressStr}</div>
-        </Media.Body>
-      </Media>
-    </>
-  );
-});
+const CustomItem = React.forwardRef(
+  ({ account, balance, onClick, active }, ref) => {
+    const nameStr = stringHelpers.truncateMiddle(
+      account?.meta?.name,
+      namePaddingLen
+    );
+    const addressStr = stringHelpers.truncateMiddle(
+      account?.address,
+      addressPaddingLen
+    );
+    const balanceStr = `${balance}`;
+    return (
+      <>
+        <Media
+          className="d-flex align-items-center p-2 border-top"
+          active={active}
+          onClick={(e) => {
+            e.preventDefault();
+            onClick(e);
+          }}>
+          <div className="mr-2">
+            <Identicon value={account?.address} size={40} theme="polkadot" />
+          </div>
+          <Media.Body>
+            <Row>
+              <Col>
+                <div>{nameStr}</div>
+                <div>{addressStr}</div>
+              </Col>
+              <Col>
+                <div className="text-right">{`${balanceStr} DOTs`}</div>
+              </Col>
+            </Row>
+          </Media.Body>
+        </Media>
+      </>
+    );
+  }
+);
 export default function AccounSelector({
   accounts,
-  maxStrlength,
+  balances,
   selectedAccount,
   setSelectedAccount,
 }) {
@@ -115,6 +125,7 @@ export default function AccounSelector({
                 eventKey={idx}
                 active={account.address === selectedAccount?.address}
                 account={account}
+                balance={balances && balances[account?.address]}
                 as={CustomItem}
               />
             );
