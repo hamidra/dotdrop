@@ -5,7 +5,7 @@ import PolkadotLogo from '../../images/polkadot_logo_footer.png';
 export default function Footer ({ selectedAccount }) {
   return (
     <footer
-      className='d-flex flex-row px-5 py-4'
+      className='d-flex px-5 py-4'
       variant="light"
       expand="md"
       style={{ backgroundColor: '#F9FAFB' }}
@@ -20,7 +20,7 @@ export default function Footer ({ selectedAccount }) {
         <strong>Polkadot Gifts</strong> lets you send DOT gifts <br/>to
         friends and family members.
       </div>
-      <div className='flex-grow-1'/>
+      <div className='footer-grow flex-grow-1'/>
       <div
         className='mt-1'
         style={{ color: '#6C757D', fontSize: '12px' }}
