@@ -1,9 +1,10 @@
 import { createContext, useState, createElement } from 'react';
+import { utils, giftPallet, useSubstrate } from '../../../substrate-lib';
 import Claimed from './Claimed';
 import VerifySecret from './VerifySecret';
 import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
-import { giftPallet, useSubstrate } from '../../../substrate-lib';
+
 import Landing from './Landing';
 import Footer from '../Footer';
 import Header from '../Header';
@@ -17,7 +18,7 @@ const ClaimContext = createContext();
 
 export { ClaimContext };
 export default function ClaimMain() {
-  const { keyring, apiState, api } = useSubstrate();
+  const { keyring, apiState, api, chainInfo } = useSubstrate();
   const { claimGift } = giftPallet;
 
   const [step, setStep] = useState(0);
@@ -26,6 +27,7 @@ export default function ClaimMain() {
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
+  const [claimedAmount, setClaimedAmount] = useState('');
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -55,6 +57,16 @@ export default function ClaimMain() {
     if (error) {
       handleError(error);
     } else {
+      const { events } = result;
+      const giftClaimedEvent = events.filter(({ event }) =>
+        api?.events?.gift?.GiftClaimed?.is(event)
+      );
+      const {
+        event: { data },
+      } = giftClaimedEvent[0];
+      let claimedAmount = data && data[1].toString();
+      claimedAmount = utils.fromChainUnit(claimedAmount, chainInfo.decimals);
+      setClaimedAmount(claimedAmount);
       nextStep();
     }
   };
@@ -138,7 +150,7 @@ export default function ClaimMain() {
   steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
 
   // Step-3
-  steps.push(<Claimed accountAddress={address} />);
+  steps.push(<Claimed accountAddress={address} amount={claimedAmount} />);
 
   const currentStepComponent = steps[step];
 

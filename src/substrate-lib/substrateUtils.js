@@ -1,6 +1,15 @@
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex, u8aToHex } from '@polkadot/util';
 import BN from 'bn.js';
+
+const trimEnd = (str, char) => {
+  let i = str.length;
+  while (i > 0 && str.charAt(i - 1) === char) {
+    i -= 1;
+  }
+  return str.substring(0, i);
+};
+
 const utils = {
   validateAddress: (address, ss58Format) => {
     try {
@@ -11,26 +20,44 @@ const utils = {
       return false;
     }
   },
-  fromChainUnit: (value, chainDecimals, decimalPoints) => {
-    if (!value || !chainDecimals) {
+  fromChainUnit: (value, chainDecimal, decimalPoints) => {
+    if (!value || !chainDecimal) {
       return value;
     }
+    chainDecimal = parseInt(chainDecimal);
     const B10 = new BN(10);
-    const BChainDecimal = new BN(chainDecimals);
-    const BnChainUnit = B10.pow(BChainDecimal);
-    const dm = new BN(value).divmod(BnChainUnit);
-    return `${dm.div.toString()}.${dm.mod.toString().substr(0, decimalPoints)}`;
+    const BChainDecimal = new BN(chainDecimal);
+    const BChainUnit = B10.pow(BChainDecimal);
+    const dm = new BN(value).divmod(BChainUnit);
+    const wholeStr = dm.div.toString();
+    const decimalStr = trimEnd(
+      dm.mod.toString().padStart(chainDecimal, '0'),
+      '0'
+    );
+    let result = wholeStr;
+    if (decimalStr) {
+      result += `.${decimalStr.substr(0, decimalPoints)}`;
+    }
+    return result;
   },
 
-  toChainUnit: (value, chainDecimals) => {
-    if (!value || !chainDecimals) {
+  toChainUnit: (value, chainDecimal) => {
+    if (!value || !chainDecimal) {
       return value;
     }
+    chainDecimal = parseInt(chainDecimal);
     const B10 = new BN(10);
-    const BChainDecimal = new BN(chainDecimals);
-    const BnChainUnit = B10.pow(BChainDecimal);
-    const BnAmount = new BN(value, 10);
-    return BnAmount.mul(BnChainUnit).toString();
+    let [wholeVal, decimalVal] = value.split('.');
+    decimalVal = decimalVal && decimalVal.substr(0, chainDecimal);
+    const decimalValLen = decimalVal?.length || 0;
+    const BWholeVal = new BN(wholeVal);
+    const BDecimalVal = new BN(decimalVal || 0);
+
+    const BChainWholeVal = BWholeVal.mul(B10.pow(new BN(chainDecimal)));
+    const BChainDecimalVal = BDecimalVal.mul(
+      B10.pow(new BN(chainDecimal - decimalValLen))
+    );
+    return BChainWholeVal.add(BChainDecimalVal).toString();
   },
 
   isAboveMinDeposit: (units, minDeposit) => {
