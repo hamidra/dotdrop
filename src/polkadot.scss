@@ -2,6 +2,12 @@
 // set font family
 $font-family-base: 'Work Sans', sans-serif;
 
+// Balance Text
+.balance-text {
+  font-size: 0.85rem !important;
+  color: #757575 !important;
+}
+
 // Button
 $btn-border-radius: 1.5rem;
 $btn-border-radius-lg: 2rem;
@@ -11,17 +17,17 @@ $btn-border-radius-sm: 1.5rem;
   display: inline-flex !important;
   align-items: center !important;
   width: 100% !important;
-  background-color: #FFF !important;
+  background-color: #fff !important;
   border-radius: 8px !important;
-  border-color: #D5DBE0 !important;
-  color: #1E1E1E !important;
+  border-color: #d5dbe0 !important;
+  color: #1e1e1e !important;
   padding: 0.75rem !important;
-  text-align: left !important; 
+  text-align: left !important;
 }
 
 .card-button:hover {
-  background-color: #F9FAFB !important;
-  box-shadow: 0 .25rem .5rem rgba(#000, .1);
+  background-color: #f9fafb !important;
+  box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
 }
 
 // Card
@@ -43,10 +49,10 @@ $theme-colors: (
   'primary': #e6007a,
 );
 
-$gray-100: #F9FAFB;
-$gray-300: #D5DBE0;
-$gray-600: #6C757D;
-$gray-900: #1E1E1E;
+$gray-100: #f9fafb;
+$gray-300: #d5dbe0;
+$gray-600: #6c757d;
+$gray-900: #1e1e1e;
 
 // Form
 .form-label {
@@ -69,8 +75,8 @@ $h5-font-size: 1rem;
 
 // Navbar
 $navbar-nav-link-padding-x: 1.5rem;
-$navbar-dark-color: #FFF;
-$navbar-dark-hover-color: #FFF;
+$navbar-dark-color: #fff;
+$navbar-dark-hover-color: #fff;
 
 // Radii
 $border-radius: 0.5rem;

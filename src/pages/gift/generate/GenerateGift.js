@@ -155,8 +155,8 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   />
                   <InputGroup.Append>
                     <InputGroup.Text
-                      style={formErrors?.amount ? { borderColor: 'red' } : {}}
-                      className="bg-transparent border-left-0 text-muted">
+                      style={{ ...(formErrors?.amount && borderColor: 'red') }}
+                      className="bg-transparent border-left-0 balance-text">
                       {balance?.free
                         ? `${utils.fromChainUnit(
                             balance.free,

@@ -74,7 +74,7 @@ const CustomItem = React.forwardRef(
                 <div>{addressStr}</div>
               </Col>
               <Col>
-                <div className="text-right">{`${balanceStr} DOTs`}</div>
+                <div className="text-md-right balance-text">{`${balanceStr} DOTs`}</div>
               </Col>
             </Row>
           </Media.Body>
