@@ -30,6 +30,23 @@ $btn-border-radius-sm: 1.5rem;
   box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
 }
 
+.checkbox-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  border-color: #d5dbe0 !important;
+  color: #1e1e1e !important;
+  padding: 0.75rem !important;
+  text-align: left !important;
+}
+
+.checkbox-button:hover {
+  background-color: #f9fafb !important;
+  box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
+}
+
 // Card
 $card-border-radius: 20px;
 
