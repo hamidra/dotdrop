@@ -14,6 +14,7 @@ import { web3FromSource } from '@polkadot/extension-dapp';
 import Landing from './Landing';
 import { Row, Col, Card, Container } from 'react-bootstrap';
 import ConnectAccount from './ConnectAccount';
+import Footer from '../Footer';
 import Header from '../Header';
 
 const GenerateContext = createContext();
@@ -292,6 +293,7 @@ export default function GenerateMain() {
           message={processingMsg}
         />
       </Container>
+      <Footer />
     </GenerateContext.Provider>
   );
 }

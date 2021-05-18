@@ -6,6 +6,7 @@ import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
 
 import Landing from './Landing';
+import Footer from '../Footer';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import CreateNewAccount from './new-account/CreateNewAccount';
@@ -173,6 +174,7 @@ export default function ClaimMain() {
           </Col>
         </Row>
       </Container>
+      <Footer />
       <ErrorModal
         show={!!processingError}
         message={processingError}

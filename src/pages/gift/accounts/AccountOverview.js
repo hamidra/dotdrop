@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, Row, Col, Spinner, Media } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import Footer from '../Footer';
 import Header from '../Header';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { stringHelpers } from '../../../utils';
@@ -148,6 +149,7 @@ export default function AccountOverview() {
           />
         </Col>
       </Row>
+      <Footer />
     </>
   );
 }

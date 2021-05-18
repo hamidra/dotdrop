@@ -1,4 +1,8 @@
 // Custom.scss
+/* @import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/mixins/_breakpoints.scss'; */
+
 // set font family
 $font-family-base: 'Work Sans', sans-serif;
 
@@ -83,6 +87,24 @@ $input-border-radius: 0.5rem;
 $input-border-color: $gray-300;
 $input--color: $gray-900;
 $input-height: 2.5rem;
+
+// Footer
+/* @include media-breakpoint-between(xs, sm) {
+  footer {
+    flex-direction: column !important;
+    gap: 12px;
+  }
+
+  .footer-grow {
+    display: none;
+  }
+}
+
+@include media-breakpoint-between(md, xxl) {
+  footer {
+    flex-direction: row !important;
+  }
+} */
 
 // headings
 $headings-font-weight: bold;
