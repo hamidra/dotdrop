@@ -24,7 +24,7 @@ const ConnectExistingAccount = () => {
                 Enter Address Manually
                 </Button>
             </Col>
-            <div className='d-flex flex-row align-items-center py-4'>
+            <div className='d-flex flex-row align-items-center py-5'>
                 <div className='d-flex flex-grow-1 border-top'></div>
                 <div className='px-2'>Or connect with</div>
                 <div className='d-flex flex-grow-1 border-top'></div>
