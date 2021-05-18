@@ -3,10 +3,9 @@ import { useContext } from 'react';
 import { ClaimContext } from './ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
-import CardButton from '../../../components/CardButton';
 import CardHeader from '../../../components/CardHeader';
 export default function Landing () {
-  const { setAccountSourceHandler } = useContext(ClaimContext);
+  const { nextStep, setAccountSourceHandler } = useContext(ClaimContext);
   return (
     <>
       <Card.Body>
@@ -25,37 +24,19 @@ export default function Landing () {
             </Button>
           </Col>
         </Row>
-        <Row className="pt-4">
+        {/* <Row className="pt-4">
           <Col xs="12">
             <hr />
           </Col>
-        </Row>
+        </Row> */}
+        <div className="p-2">Or</div>
         <Row className="align-items-center pt-4">
-          <Col>
-            <CardButton
-              logo='extension'
-              onClick={() => setAccountSourceHandler('EXTENSION')}
-              smallFont={true}
-            >
-              Load With Polkadot Extension
-            </CardButton>
-          </Col>
-          <Col>
-            <CardButton
-              logo='signer'
-              onClick={() => setAccountSourceHandler('SIGNER')}
-              smallFont={true}
-            >
-              Scan from Parity Signer
-            </CardButton>
-          </Col>
           <div className="w-100" />
           <Col className="d-flex flex-column justify-content-center align-items-center">
-            <div className="p-2">Or</div>
             <Button
               variant="link"
-              onClick={() => setAccountSourceHandler('EXISTING')}>
-              Enter Address Manually
+              onClick={() => nextStep()}>
+              Connect Existing Account
             </Button>
           </Col>
         </Row>

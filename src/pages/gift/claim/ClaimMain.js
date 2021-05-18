@@ -10,6 +10,7 @@ import Footer from '../Footer';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import CreateNewAccount from './new-account/CreateNewAccount';
+import ConnectExistingAccount from './existing-account/ConnectExistingAccount';
 import EnterExistingAccount from './existing-account/EnterExistingAccount';
 import ConnectExtension from '../accounts/ConnectExtension';
 import ConnectSigner from '../accounts/ConnectSigner';
@@ -62,7 +63,7 @@ export default function ClaimMain() {
         api?.events?.gift?.GiftClaimed?.is(event)
       );
       const {
-        event: { data },
+        event: { data }
       } = giftClaimedEvent[0];
       let claimedAmount = data && data[1].toString();
       claimedAmount = utils.fromChainUnit(claimedAmount, chainInfo.decimals);
@@ -96,7 +97,7 @@ export default function ClaimMain() {
 
       // claim gift by the selected account
       const claim = {
-        by: address,
+        by: address
       };
 
       claimGift(api, signingAccount, claim, claimGiftCallback);
@@ -108,7 +109,7 @@ export default function ClaimMain() {
 
   const setAccountSourceHandler = (accountSource) => {
     setAccountSource(accountSource);
-    nextStep();
+    jumpToStep(2);
   };
 
   const setAddressHandler = (account) => {
@@ -126,7 +127,7 @@ export default function ClaimMain() {
     NEW: CreateNewAccount,
     EXISTING: EnterExistingAccount,
     EXTENSION: ConnectExtension,
-    SIGNER: ConnectSigner,
+    SIGNER: ConnectSigner
   };
 
   if (step < 1 && address) {
@@ -136,20 +137,23 @@ export default function ClaimMain() {
   // Step-0
   steps.push(<Landing />);
 
-  // Step-1
+  // Step-1 (skipped, if new account)
+  steps.push(<ConnectExistingAccount />);
+
+  // Step-2
   steps.push(
     createElement(accountOption[accountSource], {
       setAddressHandler: setAddressHandler,
       prevStepHandler: () => {
         prevStep();
-      },
+      }
     })
   );
 
-  // Step-2
+  // Step-3
   steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
 
-  // Step-3
+  // Step-4
   steps.push(<Claimed accountAddress={address} amount={claimedAmount} />);
 
   const currentStepComponent = steps[step];
@@ -160,7 +164,7 @@ export default function ClaimMain() {
         nextStep,
         prevStep,
         jumpToStep,
-        setAccountSourceHandler,
+        setAccountSourceHandler
       }}>
       <Header selectedAccount={address} />
       <Container>
