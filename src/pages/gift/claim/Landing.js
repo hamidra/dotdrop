@@ -24,12 +24,11 @@ export default function Landing () {
             </Button>
           </Col>
         </Row>
-        {/* <Row className="pt-4">
-          <Col xs="12">
-            <hr />
-          </Col>
-        </Row> */}
-        <div className="p-2">Or</div>
+        <div className='d-flex flex-row align-items-center py-4'>
+            <div className='d-flex flex-grow-1 border-top'></div>
+            <div className='px-3'>Or</div>
+            <div className='d-flex flex-grow-1 border-top'></div>
+        </div>
         <Row className="align-items-center pt-4">
           <div className="w-100" />
           <Col className="d-flex flex-column justify-content-center align-items-center">

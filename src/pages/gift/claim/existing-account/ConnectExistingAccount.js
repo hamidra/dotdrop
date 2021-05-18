@@ -11,7 +11,7 @@ const ConnectExistingAccount = () => {
   return (
       <Card.Body>
           <CardHeader title="Connect Account" />
-          <Row className="justify-content-center align-items-center">
+          <Col className="justify-content-center align-items-center">
             <Col className="d-flex flex-column justify-content-center align-items-center pt-4">
                 <p className="text-center">
                 <span className="d-block">
@@ -24,25 +24,30 @@ const ConnectExistingAccount = () => {
                 Enter Address Manually
                 </Button>
             </Col>
-            <Col>
-                <CardButton
-                logo='extension'
-                onClick={() => setAccountSourceHandler('EXTENSION')}
-                smallFont={true}
-                >
-                Load With Polkadot Extension
-                </CardButton>
-            </Col>
-            <Col>
-                <CardButton
-                logo='signer'
-                onClick={() => setAccountSourceHandler('SIGNER')}
-                smallFont={true}
-                >
-                Scan from Parity Signer
-                </CardButton>
-            </Col>
-          </Row>
+            <div className='d-flex flex-row align-items-center py-4'>
+                <div className='d-flex flex-grow-1 border-top'></div>
+                <div className='px-2'>Or connect with</div>
+                <div className='d-flex flex-grow-1 border-top'></div>
+            </div>
+            <Row>
+                <Col>
+                    <CardButton
+                    logo='extension'
+                    onClick={() => setAccountSourceHandler('EXTENSION')}
+                    >
+                        Polkadot Extension
+                    </CardButton>
+                </Col>
+                <Col>
+                    <CardButton
+                    logo='signer'
+                    onClick={() => setAccountSourceHandler('SIGNER')}
+                    >
+                        Parity Signer
+                    </CardButton>
+                </Col>
+            </Row>
+          </Col>
       </Card.Body>
   );
 };
