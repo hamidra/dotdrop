@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ClaimContext } from '../ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
-import Button from '../../../../components/CustomButton';
+import LinkButton from '../../../../components/LinkButton';
 import CardButton from '../../../../components/CardButton';
 import CardHeader from '../../../../components/CardHeader';
 
