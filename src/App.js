@@ -2,6 +2,7 @@ import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';
 import AccountOverview from './pages/gift/accounts/AccountOverview';
+import Footer from './pages/gift/Footer';
 import {
   HashRouter as Router,
   Switch,
@@ -49,8 +50,9 @@ export default function App() {
     <SubstrateContextProvider>
       <Router>
         <Body />
-        <DeveloperConsole />
       </Router>
+      <Footer />
+      <DeveloperConsole />
     </SubstrateContextProvider>
   );
 }

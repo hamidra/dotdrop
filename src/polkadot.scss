@@ -97,6 +97,12 @@ $input-border-color: $gray-300;
 $input--color: $gray-900;
 $input-height: 2.5rem;
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 // Footer
 /* @include media-breakpoint-between(xs, sm) {
   footer {
