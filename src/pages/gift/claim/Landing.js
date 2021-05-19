@@ -1,11 +1,9 @@
-// import Button from '../../../components/CustomButton';
 import { useContext } from 'react';
 import { ClaimContext } from './ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
-export default function Landing () {
-  const { nextStep, setAccountSourceHandler } = useContext(ClaimContext);
+export default function Landing({ setAccountSourceHandler }) {
   return (
     <>
       <Card.Body>
@@ -24,24 +22,25 @@ export default function Landing () {
             </Button>
           </Col>
         </Row>
-        <div className='d-flex flex-row align-items-center py-5'>
-            <div className='d-flex flex-grow-1 border-top'></div>
-            <div className='px-3'>Or</div>
-            <div className='d-flex flex-grow-1 border-top'></div>
+        <div className="d-flex flex-row align-items-center py-5">
+          <div className="d-flex flex-grow-1 border-top"></div>
+          <div className="px-3">Or</div>
+          <div className="d-flex flex-grow-1 border-top"></div>
         </div>
         <Row className="align-items-center">
           <div className="w-100" />
           <Col className="d-flex flex-column justify-content-center align-items-center">
             <Button
               variant="link"
-              onClick={() => nextStep()}>
+              onClick={() => setAccountSourceHandler('EXISTING')}>
               Connect Existing Account
             </Button>
           </Col>
         </Row>
       </Card.Body>
       <Card.Footer>
-        <span>By connecting an account, I accept the
+        <span>
+          By connecting an account, I accept the
           <a href="policy" target="_blank">
             &nbsp;terms and conditions
           </a>

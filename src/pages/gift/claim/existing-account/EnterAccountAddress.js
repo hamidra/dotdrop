@@ -4,7 +4,7 @@ import Button from '../../../../components/CustomButton';
 import CardHeader from '../../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../../substrate-lib';
 
-export default function LoadExistingAccount({
+export default function EnterAccountAddress({
   setAddressHandler,
   prevStepHandler,
 }) {
@@ -50,7 +50,7 @@ export default function LoadExistingAccount({
                   <Form.Control
                     type="input"
                     placeholder="12YS..."
-                    isInValid={addressError}
+                    isInvalid={!!addressError}
                     onChange={(e) => {
                       setAddressError('');
                       setAddress(e.target.value);
