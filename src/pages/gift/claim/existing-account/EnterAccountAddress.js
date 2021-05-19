@@ -4,7 +4,7 @@ import Button from '../../../../components/CustomButton';
 import CardHeader from '../../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../../substrate-lib';
 
-export default function LoadExistingAccount({
+export default function EnterAccountAddress({
   setAddressHandler,
   prevStepHandler,
 }) {

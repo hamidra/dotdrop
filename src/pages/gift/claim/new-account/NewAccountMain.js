@@ -4,10 +4,7 @@ import { mnemonicGenerate } from '@polkadot/util-crypto';
 import PresentAccountPhrase from './PresentAccountPhrase';
 import VerifyAccountPhrase from './VerifyAccountPhrase';
 
-export default function CreateNewAccount({
-  setAddressHandler,
-  prevStepHandler,
-}) {
+export default function NewAccountMain({ setAddressHandler, prevStepHandler }) {
   const { keyring } = useSubstrate();
   const [step, setStep] = useState(0);
 

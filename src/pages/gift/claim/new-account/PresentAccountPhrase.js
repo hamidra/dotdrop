@@ -3,7 +3,7 @@ import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import Button from '../../../../components/CustomButton';
 
-export default function CreateNewAccount({
+export default function PresentAccountPhrase({
   mnemonicWords,
   nextStepHandler,
   prevStepHandler,
