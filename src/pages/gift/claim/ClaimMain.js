@@ -137,14 +137,17 @@ export default function ClaimMain() {
   steps.push(<Landing />);
 
   // Step-1
-  steps.push(
+  const AccountOptionElement = accountOption[accountSource] ? (
     createElement(accountOption[accountSource], {
       setAddressHandler: setAddressHandler,
       prevStepHandler: () => {
         prevStep();
       },
     })
+  ) : (
+    <div>No account type is selected</div>
   );
+  steps.push(AccountOptionElement);
 
   // Step-2
   steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
