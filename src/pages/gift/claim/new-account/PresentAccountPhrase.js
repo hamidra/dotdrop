@@ -33,7 +33,7 @@ export default function CreateNewAccount({
           </Row>
           <Row className="p-5 justify-content-center align-items-center">
             {mnemonicWords.map((word, index) => (
-              <Col md={4}>
+              <Col md={4} key={index}>
                 <div className=" d-flex flex-row border-bottom border-primary">
                   <div className="text-secondary"> {`${index + 1}.`}</div>
                   <div className="text-center m-auto">{`${word}`}</div>
