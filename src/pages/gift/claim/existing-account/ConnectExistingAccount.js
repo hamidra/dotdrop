@@ -19,18 +19,8 @@ const ConnectExistingAccount = ({
               Connect an existing Polkadot account.
             </span>
           </p>
-          <Button
-            variant="outline-primary"
-            onClick={() => setExistingAccountSourceHandler('ENTER')}>
-            Enter Address Manually
-          </Button>
         </Col>
-        <div className="d-flex flex-row align-items-center py-5">
-          <div className="d-flex flex-grow-1 border-top"></div>
-          <div className="px-2">Or connect with</div>
-          <div className="d-flex flex-grow-1 border-top"></div>
-        </div>
-        <Row>
+        <Row className='pt-4'>
           <Col>
             <CardButton
               logo="extension"
@@ -45,6 +35,18 @@ const ConnectExistingAccount = ({
               Parity Signer
             </CardButton>
           </Col>
+        </Row>
+        <div className="d-flex flex-row align-items-center py-5">
+          <div className="d-flex flex-grow-1 border-top"></div>
+          <div className="px-2">Or</div>
+          <div className="d-flex flex-grow-1 border-top"></div>
+        </div>
+        <Row className='justify-content-center'>
+          <LinkButton
+            className='tertiary-button'
+            onClick={() => setExistingAccountSourceHandler('ENTER')}>
+            Enter Address Manually
+          </LinkButton>
         </Row>
       </Col>
     </Card.Body>
