@@ -50,7 +50,7 @@ export default function LoadExistingAccount({
                   <Form.Control
                     type="input"
                     placeholder="12YS..."
-                    isInValid={addressError}
+                    isInvalid={!!addressError}
                     onChange={(e) => {
                       setAddressError('');
                       setAddress(e.target.value);

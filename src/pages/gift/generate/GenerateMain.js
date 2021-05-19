@@ -33,14 +33,12 @@ export default function GenerateMain() {
   const [processingMsg, setProcessingMsg] = useState('');
   const [gift, setGift] = useState(null);
 
-  const [
-    { isQrHashed, qrAddress, qrPayload, qrResolve },
-    setQrState,
-  ] = useState({
-    isQrHashed: false,
-    qrAddress: '',
-    qrPayload: new Uint8Array(),
-  });
+  const [{ isQrHashed, qrAddress, qrPayload, qrResolve }, setQrState] =
+    useState({
+      isQrHashed: false,
+      qrAddress: '',
+      qrPayload: new Uint8Array(),
+    });
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -232,12 +230,15 @@ export default function GenerateMain() {
   steps.push(<ConnectAccount />);
 
   // Step-2
-  steps.push(
+  const AccountOptionElement = accountOption[accountSource] ? (
     createElement(accountOption[accountSource], {
       setAccountHandler,
       prevStepHandler: prevStep,
     })
+  ) : (
+    <div>No account type is selected</div>
   );
+  steps.push(AccountOptionElement);
 
   // Step-3
   steps.push(

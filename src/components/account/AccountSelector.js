@@ -122,6 +122,7 @@ export default function AccounSelector({
           {accounts.map((account, idx) => {
             return (
               <Dropdown.Item
+                key={account.address || idx}
                 eventKey={idx}
                 active={account.address === selectedAccount?.address}
                 account={account}

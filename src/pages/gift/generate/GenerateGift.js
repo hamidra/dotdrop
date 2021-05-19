@@ -106,7 +106,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                     type="email"
                     placeholder=""
                     value={formValues?.email}
-                    isInvalid={formErrors?.email}
+                    isInvalid={!!formErrors?.email}
                     onChange={(e) => {
                       setFormErrors({ ...formErrors, email: '' });
                       setFormValues({ ...formValues, email: e.target.value });
@@ -119,7 +119,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                     type="email"
                     placeholder=""
                     value={formValues?.confirmEmail}
-                    isInvalid={formErrors?.confirmEmail}
+                    isInvalid={!!formErrors?.confirmEmail}
                     onChange={(e) => {
                       setFormErrors({ ...formErrors, confirmEmail: '' });
                       setFormValues({
@@ -155,7 +155,9 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   />
                   <InputGroup.Append>
                     <InputGroup.Text
-                      style={{ ...(formErrors?.amount && borderColor: 'red') }}
+                      style={{
+                        ...(formErrors?.amount ? { borderColor: 'red' } : {}),
+                      }}
                       className="bg-transparent border-left-0 balance-text">
                       {balance?.free
                         ? `${utils.fromChainUnit(
