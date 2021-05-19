@@ -47,7 +47,7 @@ export default function CreateNewAccount({
                 type="checkbox"
                 value={checked}
                 label={label}
-                isInValid={checkedError}
+                isInvalid={!!checkedError}
                 onChange={(e) => {
                   setCheckedError('');
                   setChecked(e.target.checked);
