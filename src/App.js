@@ -8,6 +8,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
 
@@ -17,7 +18,7 @@ function Body() {
     <>
       <Switch>
         <Route path={'/about'}>
-          <GenerateMain />
+          <AboutMain />
         </Route>
         <Route path={'/claim'}>
           <ClaimMain />
