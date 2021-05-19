@@ -9,8 +9,9 @@ import Landing from './Landing';
 import Footer from '../Footer';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import CreateNewAccount from './new-account/CreateNewAccount';
-import EnterExistingAccount from './existing-account/EnterExistingAccount';
+import NewAccountMain from './new-account/NewAccountMain';
+import ConnectExistingAccount from './existing-account/ConnectExistingAccount';
+import ExistingAccountMain from './existing-account/ExistingAccountMain';
 import ConnectExtension from '../accounts/ConnectExtension';
 import ConnectSigner from '../accounts/ConnectSigner';
 
@@ -123,10 +124,8 @@ export default function ClaimMain() {
   };
 
   const accountOption = {
-    NEW: CreateNewAccount,
-    EXISTING: EnterExistingAccount,
-    EXTENSION: ConnectExtension,
-    SIGNER: ConnectSigner,
+    NEW: NewAccountMain,
+    EXISTING: ExistingAccountMain,
   };
 
   if (step < 1 && address) {
@@ -134,7 +133,7 @@ export default function ClaimMain() {
   }
   const steps = [];
   // Step-0
-  steps.push(<Landing />);
+  steps.push(<Landing setAccountSourceHandler={setAccountSourceHandler} />);
 
   // Step-1
   const AccountOptionElement = accountOption[accountSource] ? (
@@ -163,7 +162,6 @@ export default function ClaimMain() {
         nextStep,
         prevStep,
         jumpToStep,
-        setAccountSourceHandler,
       }}>
       <Header selectedAccount={address} />
       <Container>
