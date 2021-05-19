@@ -30,6 +30,7 @@
     "bn.js": "^5.2.0",
     "bootstrap": "^4.6.0",
     "node-sass": "^5.0.0",
+    "phosphor-react": "^1.2.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.5",
     "react": "^16.14.0",
