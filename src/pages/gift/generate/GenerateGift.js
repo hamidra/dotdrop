@@ -87,17 +87,11 @@ export default function GenerateGift({ account, generateGiftHandler }) {
   };
   return (
     <>
-      <Card.Body>
-        <CardHeader title={'Gift Dots'} backClickHandler={() => prevStep()} />
-
-        <Row className="justify-content-center flex-column align-items-center pt-4">
-          <Col>
-            <p className="text-center">
-              Send DOTs to your friends and familiy, and have them join the
-              Polkadot Network today.
-            </p>
-          </Col>
-          <Col className="d-flex justify-content-center align-items-center pt-4">
+      <Card.Body className='d-flex flex-column'>
+        <CardHeader title={'Gift Dots'} cardText='Send DOTs to your friends and familiy, and have them join the
+              Polkadot Network today.' backClickHandler={() => prevStep()} />
+        <Row className="justify-content-center flex-column align-items-center pt-2">
+          <Col className="d-flex justify-content-center align-items-center pt-5">
             <Form autoComplete="off" className="w-100">
               <Form.Group className="row" controlId="formGroupEmail">
                 <Col md="6">
@@ -178,12 +172,13 @@ export default function GenerateGift({ account, generateGiftHandler }) {
               </Form.Group>
             </Form>
           </Col>
-          <Col className="d-flex justify-content-center">
+        </Row>
+        <div className='d-flex flex-grow-1'/>
+        <div className="d-flex justify-content-center">
             <Button onClick={() => _generateGiftHandler()}>
               Generate Gift
             </Button>
-          </Col>
-        </Row>
+        </div>
       </Card.Body>
     </>
   );

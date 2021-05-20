@@ -25,21 +25,15 @@ export default function VerifyAccountPhrase({
     return isValid;
   };
   return (
-    <Card.Body>
+    <Card.Body className='d-flex flex-column'>
       <CardHeader
         title={'Verify Phrase'}
+        cardText='Enter the following words from the seed phrase to complete the
+        setup process.'
         backClickHandler={() => prevStepHandler()}
       />
       <div>
-        <Row className="justify-content-center pt-3 align-items-center">
-          <Col>
-            <p className="text-center">
-              Enter the following words from the seed phrase to complete the
-              setup process.
-            </p>
-          </Col>
-        </Row>
-        <Row className="justify-content-center pt-3 flex-column align-items-center">
+        <Row className="pt-5 flex-column">
           <Col>
             <Form autoComplete="off" className="w-100">
               <Form.Group controlId="formGroupWord1">
@@ -79,15 +73,16 @@ export default function VerifyAccountPhrase({
               </Form.Group>
             </Form>
           </Col>
-          <Col className="d-flex pt-4 justify-content-center align-items-center">
+        </Row>
+      </div>
+      <div className='flex-grow-1'/>
+      <Col className="d-flex pt-4 justify-content-center align-items-center">
             <Button
               variant="outline-primary"
               onClick={() => validate() && nextStepHandler()}>
               Verify Phrase
             </Button>
           </Col>
-        </Row>
-      </div>
     </Card.Body>
   );
 }
