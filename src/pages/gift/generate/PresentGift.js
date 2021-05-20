@@ -31,18 +31,14 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   return (
     <>
       <Card.Body>
-        <CardHeader title={'Add Message'} />
-        <Row className="justify-content-center align-items-center">
-          <Col>
-            <p className="text-center">
-              Send DOTs to your friends and familiy, and have them join the
-              Polkadot Network today.
-            </p>
-          </Col>
-        </Row>
+        <CardHeader
+          title={'Add Message'}
+          cardText='Send DOTs to your friends and familiy, and have them join the
+          Polkadot Network today.'
+        />
         <Row className="justify-content-center align-items-center my-4 mx-2">
           <Col>
-            <Card className="printable">
+            <Card className="printable border">
               <Card.Body className='p-4'>
                 <p>
                   Hey!

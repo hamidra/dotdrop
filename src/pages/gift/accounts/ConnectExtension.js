@@ -31,9 +31,9 @@ export default function ExtensionAccount({
   };
   return (
     <>
-      <Card.Body>
+      <Card.Body className='d-flex flex-column'>
         <CardHeader
-          title={title || 'Select Your Account'}
+          title={title || 'Select Account'}
           backClickHandler={prevStepHandler}
         />
         <div className="p-3">
@@ -50,12 +50,12 @@ export default function ExtensionAccount({
               />
             </Col>
           </Row>
-          <Row>
+        </div>
+        <Row>
             <Col className="pt-4 d-flex justify-content-center">
               <Button onClick={() => _setAccountHandler()}>Connect</Button>
             </Col>
           </Row>
-        </div>
       </Card.Body>
     </>
   );

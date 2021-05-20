@@ -4,23 +4,20 @@ import { Card, Row, Col } from 'react-bootstrap';
 import LinkButton from '../../../../components/LinkButton';
 import CardButton from '../../../../components/CardButton';
 import CardHeader from '../../../../components/CardHeader';
+import Divider from '../../../../components/Divider';
 
 const ConnectExistingAccount = ({
   setExistingAccountSourceHandler,
   prevStepHandler,
 }) => {
   return (
-    <Card.Body>
-      <CardHeader title="Connect Account" backClickHandler={prevStepHandler} />
-      <Col className="justify-content-center align-items-center">
-        <Col className="d-flex flex-column justify-content-center align-items-center pt-4">
-          <p className="text-center">
-            <span className="d-block">
-              Connect an existing Polkadot account.
-            </span>
-          </p>
-        </Col>
-        <Row className='pt-4'>
+    <Card.Body className='d-flex flex-column'>
+      <CardHeader
+        title="Connect Account"
+        cardText='Connect an existing Polkadot account.'
+        backClickHandler={prevStepHandler} />
+      <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
+        <Row>
           <Col>
             <CardButton
               logo="extension"
@@ -36,12 +33,8 @@ const ConnectExistingAccount = ({
             </CardButton>
           </Col>
         </Row>
-        <div className="d-flex flex-row align-items-center py-5">
-          <div className="d-flex flex-grow-1 border-top"></div>
-          <div className="px-2">Or</div>
-          <div className="d-flex flex-grow-1 border-top"></div>
-        </div>
-        <Row className='justify-content-center'>
+        <Divider text='Or' />
+        <Row className='justify-content-center pb-4'>
           <LinkButton
             className='tertiary-button'
             onClick={() => setExistingAccountSourceHandler('ENTER')}>

@@ -1,25 +1,29 @@
-import { Row, Col, Image } from 'react-bootstrap';
-import backArrow from '../images/back-arrow.png';
-export default function CardHeader ({ title, backClickHandler }) {
+import { Row, Col } from 'react-bootstrap';
+import { ArrowLeft } from 'phosphor-react';
+
+export default function CardHeader ({ cardText, title, backClickHandler }) {
   return (
     <>
-      <Row className="align-items-center text-center position-relative py-2">
-        <Col style={{ marginLeft: 25, marginRight: 25 }}>
+      <Row
+        className="align-items-center text-center position-relative pt-2 no-gutters"
+        style={{ marginBottom: '2rem' }}
+      >
+        <Col>
           {backClickHandler && (
-            <Image
-              src={backArrow}
+            <ArrowLeft
+              size={24}
+              onClick={() => backClickHandler()}
               style={{
-                width: 20,
                 position: 'absolute',
                 left: 10,
-                top: '1rem',
-                zIndex: 5,
+                top: '0.75rem',
+                color: '#9CA3AF',
                 cursor: 'pointer'
               }}
-              onClick={() => backClickHandler()}
             />
           )}
           <h2>{title}</h2>
+          <p className='text-center text-card'>{cardText}</p>
         </Col>
       </Row>
     </>

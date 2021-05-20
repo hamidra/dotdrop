@@ -277,7 +277,7 @@ export default function GenerateMain() {
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-5 d-flex justify-content-center align-items-center">
             <Card
-              style={{ width: 600, maxWidth: '100%', minHeight: 500 }}
+              style={{ width: 664, maxWidth: '100%', minHeight: 540 }}
               className="shadow">
               {currentComponent}
             </Card>

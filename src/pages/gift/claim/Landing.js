@@ -2,41 +2,35 @@ import { useContext } from 'react';
 import { ClaimContext } from './ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
+import LinkButton from '../../../components/LinkButton';
 import CardHeader from '../../../components/CardHeader';
-export default function Landing({ setAccountSourceHandler }) {
+import Divider from '../../../components/Divider';
+
+export default function Landing ({ setAccountSourceHandler }) {
   return (
     <>
-      <Card.Body>
-        <CardHeader title="Dot Account" />
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center pt-4">
-            <p className="text-center">
-              <span className="d-block">
-                Create a new Polkadot account to transfer your gift to.
-              </span>
-            </p>
+      <Card.Body className='d-flex flex-column'>
+        <CardHeader
+          title="Dot Account"
+          cardText='Create a new Polkadot account to transfer your gift to.'
+        />
+        <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
+          <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
             <Button
               variant="outline-primary"
               onClick={() => setAccountSourceHandler('NEW')}>
               Create Polkadot Account
             </Button>
-          </Col>
-        </Row>
-        <div className="d-flex flex-row align-items-center py-5">
-          <div className="d-flex flex-grow-1 border-top"></div>
-          <div className="px-3">Or</div>
-          <div className="d-flex flex-grow-1 border-top"></div>
-        </div>
-        <Row className="align-items-center">
-          <div className="w-100" />
-          <Col className="d-flex flex-column justify-content-center align-items-center">
-            <Button
+          </Row>
+          <Divider text='Or'/>
+          <Row className="d-flex flex-column justify-content-center align-items-center">
+            <LinkButton
               variant="link"
               onClick={() => setAccountSourceHandler('EXISTING')}>
               Connect Existing Account
-            </Button>
-          </Col>
-        </Row>
+            </LinkButton>
+          </Row>
+        </Col>
       </Card.Body>
       <Card.Footer>
         <span>

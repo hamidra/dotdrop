@@ -30,48 +30,41 @@ export default function EnterAccountAddress({
       <Card.Body>
         <CardHeader
           title={'Account Address'}
+          cardText='Enter your existing Polkadot account address below'
           backClickHandler={prevStepHandler}
         />
-        <div>
-          <Row className="justify-content-center align-items-center">
-            <Col className="d-flex flex-column justify-content-center align-items-center">
-              <p className="text-center">
-                Enter your existing Polkadot account address below
-              </p>
-            </Col>
-          </Row>
-          <Row
-            style={{ height: 200 }}
-            className="justify-content-center align-items-center">
-            <Col>
-              <Form autoComplete="off" className="w-100">
-                <Form.Group controlId="formAccountAddressGroup">
-                  <Form.Label>Account Address</Form.Label>
-                  <Form.Control
-                    type="input"
-                    placeholder="12YS..."
-                    isInvalid={!!addressError}
-                    onChange={(e) => {
-                      setAddressError('');
-                      setAddress(e.target.value);
-                    }}
-                    value={address}
-                  />
-                  {addressError && (
-                    <Form.Text className="text-danger">
-                      {addressError}
-                    </Form.Text>
-                  )}
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
-          <Row className="pt-5">
-            <Col className="d-flex justify-content-center">
-              <Button onClick={() => _setAddressHandler()}>Claim Gift</Button>
-            </Col>
-          </Row>
-        </div>
+        <Row
+          style={{ height: 200 }}
+          className="justify-content-center align-items-center">
+          <Col>
+            <Form autoComplete="off" className="w-100">
+              <Form.Group controlId="formAccountAddressGroup">
+                <Form.Label>Account Address</Form.Label>
+                <Form.Control
+                  type="input"
+                  placeholder="12YS..."
+                  isInvalid={!!addressError}
+                  onChange={(e) => {
+                    setAddressError('');
+                    setAddress(e.target.value);
+                  }}
+                  value={address}
+                />
+                {addressError && (
+                  <Form.Text className="text-danger">
+                    {addressError}
+                  </Form.Text>
+                )}
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+        <div className="flex-grow-1" />
+        <Row>
+          <Col className="d-flex justify-content-center">
+            <Button onClick={() => _setAddressHandler()}>Claim Gift</Button>
+          </Col>
+        </Row>
       </Card.Body>
     </>
   );
