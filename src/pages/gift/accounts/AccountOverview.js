@@ -37,8 +37,14 @@ const WalletInfoField = ({ title, subtitle, ...props }) => {
   }
 
   return (
-    <Media className='d-flex' style={{ alignItems: 'center' }} {...props}>
-      <img width={64} height={64} className="mr-3 rounded" src={logo} alt={title} />
+    <Media className="d-flex" style={{ alignItems: 'center' }} {...props}>
+      <img
+        width={64}
+        height={64}
+        className="mr-3 rounded"
+        src={logo}
+        alt={title}
+      />
       <Media.Body>
         <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
         <div>{subtitle}</div>
@@ -83,8 +89,7 @@ export default function AccountOverview() {
             className="shadow">
             <Card.Header
               className="bg-transparent border-0"
-              style={{ padding: '2rem 2rem 0 2rem' }}
-            >
+              style={{ padding: '2rem 2rem 0 2rem' }}>
               <h3 className="font-weight-bold">Account Details</h3>
             </Card.Header>
             <Card.Body>
@@ -149,7 +154,6 @@ export default function AccountOverview() {
           />
         </Col>
       </Row>
-      <Footer />
     </>
   );
 }
