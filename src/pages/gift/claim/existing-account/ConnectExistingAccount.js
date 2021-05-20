@@ -12,44 +12,36 @@ const ConnectExistingAccount = ({
 }) => {
   return (
     <Card.Body className='d-flex flex-column'>
-      <CardHeader title="Connect Account" backClickHandler={prevStepHandler} />
-      <Col className="align-items-center">
-        <Col className="d-flex flex-column align-items-center pt-3">
-          <p className="text-center text-card">
-            <span className="d-block">
-              Connect an existing Polkadot account.
-            </span>
-          </p>
-        </Col>
+      <CardHeader
+        title="Connect Account"
+        cardText='Connect an existing Polkadot account.'
+        backClickHandler={prevStepHandler} />
+      <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
+        <Row>
+          <Col>
+            <CardButton
+              logo="extension"
+              onClick={() => setExistingAccountSourceHandler('EXTENSION')}>
+              Polkadot Extension
+            </CardButton>
+          </Col>
+          <Col>
+            <CardButton
+              logo="signer"
+              onClick={() => setExistingAccountSourceHandler('SIGNER')}>
+              Parity Signer
+            </CardButton>
+          </Col>
+        </Row>
+        <Divider text='Or' />
+        <Row className='justify-content-center pb-4'>
+          <LinkButton
+            className='tertiary-button'
+            onClick={() => setExistingAccountSourceHandler('ENTER')}>
+            Enter Address Manually
+          </LinkButton>
+        </Row>
       </Col>
-      <div className='flex-grow-1 align-items-center'>
-        <div>
-          <Row>
-            <Col>
-              <CardButton
-                logo="extension"
-                onClick={() => setExistingAccountSourceHandler('EXTENSION')}>
-                Polkadot Extension
-              </CardButton>
-            </Col>
-            <Col>
-              <CardButton
-                logo="signer"
-                onClick={() => setExistingAccountSourceHandler('SIGNER')}>
-                Parity Signer
-              </CardButton>
-            </Col>
-          </Row>
-          <Divider text='Or' />
-          <Row className='justify-content-center'>
-            <LinkButton
-              className='tertiary-button'
-              onClick={() => setExistingAccountSourceHandler('ENTER')}>
-              Enter Address Manually
-            </LinkButton>
-          </Row>
-        </div>
-      </div>
     </Card.Body>
   );
 };

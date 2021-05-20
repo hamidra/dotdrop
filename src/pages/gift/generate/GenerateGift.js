@@ -88,10 +88,14 @@ export default function GenerateGift({ account, generateGiftHandler }) {
   return (
     <>
       <Card.Body className='d-flex flex-column'>
-        <CardHeader title={'Gift Dots'} cardText='Send DOTs to your friends and familiy, and have them join the
-              Polkadot Network today.' backClickHandler={() => prevStep()} />
-        <Row className="justify-content-center flex-column align-items-center pt-2">
-          <Col className="d-flex justify-content-center align-items-center pt-5">
+        <CardHeader
+          title={'Gift Dots'}
+          cardText='Send DOTs to your friends and familiy, and have them join the
+            Polkadot Network today.'
+          backClickHandler={() => prevStep()}
+        />
+        <Row className="flex-column align-items-center">
+          <Col className="d-flex justify-content-center align-items-center pt-4">
             <Form autoComplete="off" className="w-100">
               <Form.Group className="row" controlId="formGroupEmail">
                 <Col md="6">
