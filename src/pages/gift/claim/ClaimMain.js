@@ -9,10 +9,8 @@ import Landing from './Landing';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
-import ConnectExistingAccount from './existing-account/ConnectExistingAccount';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
-import ConnectExtension from '../accounts/ConnectExtension';
-import ConnectSigner from '../accounts/ConnectSigner';
+import Confetti from 'react-confetti';
 
 const ClaimContext = createContext();
 
@@ -163,6 +161,7 @@ export default function ClaimMain() {
         jumpToStep,
       }}>
       <Header selectedAccount={address} />
+      {step === 3 && <Confetti />}
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-5 d-flex justify-content-center align-items-center">
