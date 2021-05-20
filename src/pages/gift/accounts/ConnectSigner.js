@@ -45,16 +45,11 @@ export default function SignerAccount({
   return (
     <>
       <Card.Body>
-        <CardHeader title='Scan QR Code' backClickHandler={() => prevStepHandler()} />
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center pt-4">
-            <p className="text-center">
-              <span className="d-block">
-                Scan your account QRCode from your signer app.
-              </span>
-            </p>
-          </Col>
-        </Row>
+        <CardHeader
+          title='Scan QR Code'
+          cardText='Scan your account QRCode from your Signer app.'
+          backClickHandler={() => prevStepHandler()}
+        />
         <Row className="justify-content-center align-items-center">
           {showReader ? (
             <Col className="d-flex justify-content-center">

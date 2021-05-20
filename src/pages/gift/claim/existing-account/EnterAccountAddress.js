@@ -30,16 +30,10 @@ export default function EnterAccountAddress({
       <Card.Body>
         <CardHeader
           title={'Account Address'}
+          cardText='Enter your existing Polkadot account address below'
           backClickHandler={prevStepHandler}
         />
         <div>
-          <Row className="justify-content-center align-items-center">
-            <Col className="d-flex flex-column justify-content-center align-items-center">
-              <p className="text-center">
-                Enter your existing Polkadot account address below
-              </p>
-            </Col>
-          </Row>
           <Row
             style={{ height: 200 }}
             className="justify-content-center align-items-center">
