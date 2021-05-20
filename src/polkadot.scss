@@ -58,6 +58,10 @@ $btn-border-radius-sm: 1.5rem;
 // Card
 $card-border-radius: 20px;
 
+.card {
+  border: none !important;
+}
+
 .card-body {
   padding: 2rem !important;
 }
@@ -80,6 +84,11 @@ $gray-600: #6c757d;
 $gray-900: #1e1e1e;
 
 // Fonts
+.text-card {
+  font-size: 1.125rem;
+  color: $gray-600;
+}
+
 .text-large {
   font-size: 1.25rem;
 }
