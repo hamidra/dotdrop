@@ -9,31 +9,28 @@ import Divider from '../../../components/Divider';
 export default function Landing ({ setAccountSourceHandler }) {
   return (
     <>
-      <Card.Body>
+      <Card.Body className='d-flex flex-column'>
         <CardHeader
           title="Dot Account"
           cardText='Create a new Polkadot account to transfer your gift to.'
         />
-        <Row className="justify-content-center align-items-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center pt-2">
+        <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
+          <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
             <Button
               variant="outline-primary"
               onClick={() => setAccountSourceHandler('NEW')}>
               Create Polkadot Account
             </Button>
-          </Col>
-        </Row>
-        <Divider text='Or'/>
-        <Row className="align-items-center">
-          <div className="w-100" />
-          <Col className="d-flex flex-column justify-content-center align-items-center">
+          </Row>
+          <Divider text='Or'/>
+          <Row className="d-flex flex-column justify-content-center align-items-center">
             <LinkButton
               variant="link"
               onClick={() => setAccountSourceHandler('EXISTING')}>
               Connect Existing Account
             </LinkButton>
-          </Col>
-        </Row>
+          </Row>
+        </Col>
       </Card.Body>
       <Card.Footer>
         <span>
