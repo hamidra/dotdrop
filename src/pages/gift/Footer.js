@@ -5,22 +5,29 @@ import PolkadotLogo from '../../images/polkadot_logo_footer.png';
 export default function Footer({ selectedAccount }) {
   return (
     <footer
-      className="footer d-flex px-5 py-4"
+      className="footer d-flex flex-column flex-sm-row"
       variant="light"
       expand="md"
       style={{ backgroundColor: '#F9FAFB' }}>
-      <a
-        href="https://polkadot.network"
-        target="_blank"
-        rel="noopener noreferrer">
-        <img width={154} className="mr-5" src={PolkadotLogo} alt={'Polkadot'} />
-      </a>
-      <div className="mt-1" style={{ fontSize: '12px' }}>
+      <div style={{ margin: '8px' }}>
+        <a
+          href="https://polkadot.network"
+          target="_blank"
+          rel="noopener noreferrer">
+          <img
+            width={154}
+            className="mr-5"
+            src={PolkadotLogo}
+            alt={'Polkadot'}
+          />
+        </a>
+      </div>
+      <div style={{ fontSize: '12px', margin: '8px' }}>
         <strong>Polkadot Gifts</strong> lets you send DOT gifts <br />
         to friends and family members.
       </div>
       <div className="footer-grow flex-grow-1" />
-      <div className="mt-1" style={{ color: '#6C757D', fontSize: '12px' }}>
+      <div style={{ color: '#6C757D', fontSize: '12px', margin: '8px' }}>
         <div>© {new Date().getFullYear()} All rights reserved.</div>
         <div className="d-flex flex-row">
           <div>Terms &amp; Conditions</div>
