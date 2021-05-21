@@ -44,13 +44,13 @@ const reducer = (state, action) => {
       return { ...state, api: action.payload, apiState: 'CONNECTING' };
 
     case 'CONNECT_SUCCESS':
-      api = action?.payload;
+      api = action.payload;
       chainInfo = {
-        decimals: api?.registry?.chainDecimals[0] || 12,
-        token: api?.registry?.chainTokens[0] || 'DOT',
-        genesisHash: api?.genesisHash,
-        ss58Format: api?.registry?.chainSS58 || 42,
-        existentialDeposit: api?.consts?.balances?.existentialDeposit || 0,
+        decimals: api.registry?.chainDecimals[0] || 12,
+        token: api.registry?.chainTokens[0] || 'DOT',
+        genesisHash: api.genesisHash,
+        ss58Format: api.registry?.chainSS58 || 42,
+        existentialDeposit: api.consts?.balances?.existentialDeposit || 0,
       };
       console.log(chainInfo);
       return { ...state, apiState: 'READY', chainInfo: chainInfo };
@@ -121,18 +121,18 @@ const loadAccounts = (state, dispatch) => {
       let allAccounts = await web3Accounts();
 
       // filter the accounts that are enabled for the network
-      allAccounts = allAccounts
-        .filter(
-          ({ meta: { genesis } }) => !genesis || genesis === state.genesisHash
-        )
-        .map(({ address, meta }) => ({
-          address,
-          meta: { ...meta, name: `${meta.name}` },
-        }));
+      allAccounts = allAccounts.map(({ address, meta }) => ({
+        address,
+        meta: { ...meta, name: `${meta.name}` },
+      }));
 
       // toDO: subscribe to extension account updates
       keyring.loadAll(
-        { isDevelopment: config.DEVELOPMENT_KEYRING },
+        {
+          genesisHash: state.chainInfo.genesisHash,
+          isDevelopment: config.DEVELOPMENT_KEYRING,
+          ss58Format: state.chainInfo.ss58Format,
+        },
         allAccounts
       );
 
