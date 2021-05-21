@@ -88,6 +88,19 @@ $card-border-radius: 20px;
   border-top-color: #d5dbe0 !important;
 }
 
+.card-header-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 576px) {
+  .card-header-title {
+    font-size: 2.5rem;
+  }
+}
+
 // Set booststrap custom theme
 $theme-colors: (
   'primary': #e6007a,
