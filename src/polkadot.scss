@@ -18,12 +18,19 @@ $font-family-base: 'Work Sans', sans-serif;
 }
 
 .image-box:hover {
-  //background-color: #f9fafb !important;
-  //box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
-  //position: relative;
-  //top: 5px;
-  //left: 5px;
   transform: scale(1.25);
+}
+
+.blurred {
+  filter: blur(0.3rem);
+}
+
+.overlay-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 
 // Button
