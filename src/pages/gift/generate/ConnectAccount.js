@@ -50,9 +50,9 @@ export default function ConnectAccount () {
         </Row>
       </Card.Body>
       <Card.Footer>
-        <span>By connecting an account, I accept the
+        <span>By connecting an account, I accept the&nbsp;
           <a href="policy" target="_blank">
-            &nbsp;terms and conditions
+            terms and conditions
           </a>
           .
         </span>

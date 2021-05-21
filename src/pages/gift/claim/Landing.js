@@ -34,9 +34,9 @@ export default function Landing ({ setAccountSourceHandler }) {
       </Card.Body>
       <Card.Footer>
         <span>
-          By connecting an account, I accept the
+          By connecting an account, I accept the&nbsp;
           <a href="policy" target="_blank">
-            &nbsp;terms and conditions
+            terms and conditions
           </a>
           .
         </span>
