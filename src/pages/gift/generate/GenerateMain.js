@@ -2,7 +2,7 @@ import { createContext, useState, useCallback, createElement } from 'react';
 import GenerateGift from './GenerateGift';
 import PresentGift from './PresentGift';
 import ConnectExtension from '../accounts/ConnectExtension';
-import ConnectHardwallet from '../accounts/ConnectHardwallet';
+import LedgerMain from '../accounts/LedgerWallet/LedgerMain';
 import ConnectSigner from '../accounts/ConnectSigner';
 import Processing from '../../../components/Processing';
 import ErrorModal from '../../../components/Error';
@@ -214,7 +214,7 @@ export default function GenerateMain() {
 
   const accountOption = {
     EXTENSION: ConnectExtension,
-    HARDWALLET: ConnectHardwallet,
+    HARDWALLET: LedgerMain,
     SIGNER: ConnectSigner,
   };
 

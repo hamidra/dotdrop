@@ -9,6 +9,23 @@ $font-family-base: 'Work Sans', sans-serif;
   color: #757575 !important;
 }
 
+.image-box {
+  max-height: 3rem;
+  height: auto;
+  max-width: 90%;
+  width: auto;
+  transition: transform 0.2s;
+}
+
+.image-box:hover {
+  //background-color: #f9fafb !important;
+  //box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
+  //position: relative;
+  //top: 5px;
+  //left: 5px;
+  transform: scale(1.25);
+}
+
 // Button
 $btn-border-radius: 1.5rem;
 $btn-border-radius-lg: 2rem;
@@ -89,6 +106,10 @@ $gray-900: #1e1e1e;
 
 .text-large {
   font-size: 1.25rem;
+}
+
+.step-text {
+  font-size: 1.125rem;
 }
 
 // Form
