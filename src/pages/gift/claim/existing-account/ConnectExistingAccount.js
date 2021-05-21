@@ -11,14 +11,15 @@ const ConnectExistingAccount = ({
   prevStepHandler,
 }) => {
   return (
-    <Card.Body className='d-flex flex-column'>
+    <Card.Body className="d-flex flex-column">
       <CardHeader
         title="Connect Account"
-        cardText='Connect an existing Polkadot account.'
-        backClickHandler={prevStepHandler} />
+        cardText="Connect an existing Polkadot account."
+        backClickHandler={prevStepHandler}
+      />
       <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
         <Row>
-          <Col>
+          <Col className="mb-3">
             <CardButton
               logo="extension"
               onClick={() => setExistingAccountSourceHandler('EXTENSION')}>
@@ -33,10 +34,10 @@ const ConnectExistingAccount = ({
             </CardButton>
           </Col>
         </Row>
-        <Divider text='Or' />
-        <Row className='justify-content-center pb-4'>
+        <Divider text="Or" />
+        <Row className="justify-content-center pb-4">
           <LinkButton
-            className='tertiary-button'
+            className="tertiary-button"
             onClick={() => setExistingAccountSourceHandler('ENTER')}>
             Enter Address Manually
           </LinkButton>
