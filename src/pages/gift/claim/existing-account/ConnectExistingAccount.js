@@ -26,7 +26,7 @@ const ConnectExistingAccount = ({
               Polkadot Extension
             </CardButton>
           </Col>
-          <Col>
+          <Col className="mb-3">
             <CardButton
               logo="signer"
               onClick={() => setExistingAccountSourceHandler('SIGNER')}>

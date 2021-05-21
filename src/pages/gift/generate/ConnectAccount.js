@@ -38,7 +38,7 @@ export default function ConnectAccount() {
               Ledger
             </CardButton>
           </Col>
-          <Col>
+          <Col className="mb-3">
             <CardButton
               logo="signer"
               onClick={() => optionSelectHandler('SIGNER')}>

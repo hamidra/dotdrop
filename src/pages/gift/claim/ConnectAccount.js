@@ -1,18 +1,16 @@
-import { useContext } from 'react';
-import { ClaimContext } from './ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
 import LinkButton from '../../../components/LinkButton';
 import CardHeader from '../../../components/CardHeader';
 import Divider from '../../../components/Divider';
 
-export default function Landing ({ setAccountSourceHandler }) {
+export default function ConnectAccount({ setAccountSourceHandler }) {
   return (
     <>
-      <Card.Body className='d-flex flex-column'>
+      <Card.Body className="d-flex flex-column">
         <CardHeader
           title="Dot Account"
-          cardText='Create a new Polkadot account to transfer your gift to.'
+          cardText="Create a new Polkadot account to transfer your gift to."
         />
         <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
           <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
@@ -22,7 +20,7 @@ export default function Landing ({ setAccountSourceHandler }) {
               Create Polkadot Account
             </Button>
           </Row>
-          <Divider text='Or'/>
+          <Divider text="Or" />
           <Row className="d-flex flex-column justify-content-center align-items-center">
             <LinkButton
               variant="link"
