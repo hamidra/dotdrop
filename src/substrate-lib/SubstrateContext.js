@@ -5,7 +5,6 @@ import queryString from 'query-string';
 
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
-import * as polkadapp from '@polkadot/extension-dapp';
 
 import keyring from '@polkadot/ui-keyring';
 
@@ -119,12 +118,17 @@ const loadAccounts = (state, dispatch) => {
     try {
       const injectedExt = await web3Enable(config.APP_NAME);
       console.log(injectedExt);
-      window.polkadapp = polkadapp;
       let allAccounts = await web3Accounts();
-      allAccounts = allAccounts.map(({ address, meta }) => ({
-        address,
-        meta: { ...meta, name: `${meta.name}` },
-      }));
+
+      // filter the accounts that are enabled for the network
+      allAccounts = allAccounts
+        .filter(
+          ({ meta: { genesis } }) => !genesis || genesis === state.genesisHash
+        )
+        .map(({ address, meta }) => ({
+          address,
+          meta: { ...meta, name: `${meta.name}` },
+        }));
 
       // toDO: subscribe to extension account updates
       keyring.loadAll(
