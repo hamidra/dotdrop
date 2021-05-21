@@ -1,20 +1,23 @@
 {
   "files": {
-    "main.css": "/dotdrop/static/css/main.b2147bb6.chunk.css",
-    "main.js": "/dotdrop/static/js/main.35c1110a.chunk.js",
-    "main.js.map": "/dotdrop/static/js/main.35c1110a.chunk.js.map",
+    "main.css": "/dotdrop/static/css/main.031e75d1.chunk.css",
+    "main.js": "/dotdrop/static/js/main.0a79bcc4.chunk.js",
+    "main.js.map": "/dotdrop/static/js/main.0a79bcc4.chunk.js.map",
     "runtime-main.js": "/dotdrop/static/js/runtime-main.4056a458.js",
     "runtime-main.js.map": "/dotdrop/static/js/runtime-main.4056a458.js.map",
-    "static/js/2.97f3f085.chunk.js": "/dotdrop/static/js/2.97f3f085.chunk.js",
-    "static/js/2.97f3f085.chunk.js.map": "/dotdrop/static/js/2.97f3f085.chunk.js.map",
+    "static/js/2.cd3fdd76.chunk.js": "/dotdrop/static/js/2.cd3fdd76.chunk.js",
+    "static/js/2.cd3fdd76.chunk.js.map": "/dotdrop/static/js/2.cd3fdd76.chunk.js.map",
     "index.html": "/dotdrop/index.html",
-    "static/css/main.b2147bb6.chunk.css.map": "/dotdrop/static/css/main.b2147bb6.chunk.css.map",
-    "static/js/2.97f3f085.chunk.js.LICENSE.txt": "/dotdrop/static/js/2.97f3f085.chunk.js.LICENSE.txt"
+    "static/css/main.031e75d1.chunk.css.map": "/dotdrop/static/css/main.031e75d1.chunk.css.map",
+    "static/js/2.cd3fdd76.chunk.js.LICENSE.txt": "/dotdrop/static/js/2.cd3fdd76.chunk.js.LICENSE.txt",
+    "static/media/extension-add.7ee829d8.png": "/dotdrop/static/media/extension-add.7ee829d8.png",
+    "static/media/extension-ledger.8cd0dd3b.png": "/dotdrop/static/media/extension-ledger.8cd0dd3b.png",
+    "static/media/ledger-install.e27f49a0.png": "/dotdrop/static/media/ledger-install.e27f49a0.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4056a458.js",
-    "static/js/2.97f3f085.chunk.js",
-    "static/css/main.b2147bb6.chunk.css",
-    "static/js/main.35c1110a.chunk.js"
+    "static/js/2.cd3fdd76.chunk.js",
+    "static/css/main.031e75d1.chunk.css",
+    "static/js/main.0a79bcc4.chunk.js"
   ]
 }
