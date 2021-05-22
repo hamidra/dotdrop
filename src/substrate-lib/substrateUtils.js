@@ -60,10 +60,10 @@ const utils = {
     return BChainWholeVal.add(BChainDecimalVal).toString();
   },
 
-  isAboveMinDeposit: (units, minDeposit) => {
-    const BUnits = new BN(units, 10);
-    const BMinDeposit = new BN(minDeposit, 10);
-    return BUnits.gte(BMinDeposit);
+  gteChainUnits: (units1, units2) => {
+    const BUnits1 = new BN(units1, 10);
+    const BUnits2 = new BN(units2, 10);
+    return BUnits1.gte(BUnits2);
   },
 };
 
