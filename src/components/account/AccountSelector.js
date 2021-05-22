@@ -48,7 +48,7 @@ const AccountToggleItem = ({ account, balance }) => {
   }
   return (
     <>
-      <div className="account-toggle-item d-flex flex-row align-items-center p-2">
+      <div className="account-toggle-item rounded border border-primary d-flex flex-row align-items-center p-2">
         <div className="w-100">{ContentElement}</div>
         <div style={{ marginLeft: caretMargin }}>
           <CaretDown size={caretSize} />
@@ -154,7 +154,7 @@ export default function AccounSelector({
         <Dropdown.Toggle
           as="div"
           id="dropdown-item-button"
-          className="w-100 rounded border border-primary account-dropdown-toggle">
+          className="w-100 account-dropdown-toggle">
           <AccountToggleItem
             account={selectedAccount}
             balance={balances && balances[selectedAccount?.address]}
