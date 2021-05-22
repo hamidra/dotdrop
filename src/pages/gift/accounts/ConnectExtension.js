@@ -15,12 +15,14 @@ export default function ExtensionAccount({
   const [selectedAccount, setSelectedAccount] = useState(null);
   const accounts = keyring.getPairs();
   const accountsBalances = {};
+  const balanceDecimalPoints = 4;
   balances &&
     accounts?.forEach(({ address }) => {
       if (address && balances[address]) {
         accountsBalances[address] = utils.fromChainUnit(
           balances[address]?.free,
-          chainInfo.decimals
+          chainInfo.decimals,
+          balanceDecimalPoints
         );
       }
     });

@@ -2,10 +2,63 @@ import React, { useState } from 'react';
 import { Dropdown, Media, Form, Row, Col } from 'react-bootstrap';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
+import { CaretDown } from 'phosphor-react';
 
 const namePaddingLen = 10;
 const addressPaddingLen = 5;
-const CustomMenu = React.forwardRef(
+
+const AccountToggleItem = ({ account, balance }) => {
+  const nameStr = stringHelpers.truncateMiddle(
+    account?.meta?.name,
+    namePaddingLen
+  );
+  const addressStr = stringHelpers.truncateMiddle(
+    account?.address,
+    addressPaddingLen
+  );
+  const balanceStr = `${balance}`;
+  const caretSize = 24;
+  const caretMargin = 5;
+  let ContentElement;
+  if (account) {
+    ContentElement = (
+      <Media className="d-flex align-items-center">
+        <div className="mr-2">
+          <Identicon value={account?.address} size={40} theme="polkadot" />
+        </div>
+        <Media.Body>
+          <Row>
+            <Col>
+              <div className="text-left">{nameStr}</div>
+              <div className="text-left">{addressStr}</div>
+            </Col>
+            <Col>
+              <div className="text-left text-md-right balance-text">{`${balanceStr} DOTs`}</div>
+            </Col>
+          </Row>
+        </Media.Body>
+      </Media>
+    );
+  } else {
+    ContentElement = (
+      <div style={{ marginLeft: caretSize + caretMargin, fontSize: '1.25rem' }}>
+        Select Account
+      </div>
+    );
+  }
+  return (
+    <>
+      <div className="account-toggle-item d-flex flex-row align-items-center p-2">
+        <div className="w-100">{ContentElement}</div>
+        <div style={{ marginLeft: caretMargin }}>
+          <CaretDown size={caretSize} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+const AccountDropdownMenu = React.forwardRef(
   (
     { children, style, className, 'aria-labelledby': labeledBy, account },
     ref
@@ -44,7 +97,7 @@ const CustomMenu = React.forwardRef(
   }
 );
 
-const CustomItem = React.forwardRef(
+const AccountDropdownItem = React.forwardRef(
   ({ account, balance, onClick, active }, ref) => {
     const nameStr = stringHelpers.truncateMiddle(
       account?.meta?.name,
@@ -92,33 +145,22 @@ export default function AccounSelector({
   const selectAccountHandler = (idx) => {
     setSelectedAccount(accounts[idx]);
   };
-  const shortName = stringHelpers.truncateMiddle(
-    selectedAccount?.meta?.name,
-    namePaddingLen
-  );
-  const shortAddress = stringHelpers.truncateMiddle(
-    selectedAccount?.address,
-    addressPaddingLen
-  );
-  const label = selectedAccount ? (
-    <>
-      <strong>{shortName}</strong> : {shortAddress}
-    </>
-  ) : (
-    'Select an account'
-  );
+
   return (
     <>
       <Dropdown
         className="w-100"
         onSelect={(eventKey, e) => selectAccountHandler(eventKey)}>
         <Dropdown.Toggle
-          variant="outline-primary"
+          as="div"
           id="dropdown-item-button"
-          className="w-100 rounded">
-          {label}
+          className="w-100 rounded border border-primary account-dropdown-toggle">
+          <AccountToggleItem
+            account={selectedAccount}
+            balance={balances && balances[selectedAccount?.address]}
+          />
         </Dropdown.Toggle>
-        <Dropdown.Menu style={{ minWidth: '100%' }} as={CustomMenu}>
+        <Dropdown.Menu style={{ minWidth: '100%' }} as={AccountDropdownMenu}>
           {accounts.map((account, idx) => {
             return (
               <Dropdown.Item
@@ -127,7 +169,7 @@ export default function AccounSelector({
                 active={account.address === selectedAccount?.address}
                 account={account}
                 balance={balances && balances[account?.address]}
-                as={CustomItem}
+                as={AccountDropdownItem}
               />
             );
           })}
