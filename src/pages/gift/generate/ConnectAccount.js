@@ -17,7 +17,7 @@ export default function ConnectAccount() {
       <Card.Body>
         <CardHeader title="Connect Account" />
         <Row className="align-items-center flex-column justify-content-center text-center pt-5">
-          <Col sm="6" className="mb-3">
+          <Col sm="6">
             <CardButton
               logo="extension"
               onClick={() => optionSelectHandler('EXTENSION')}>
