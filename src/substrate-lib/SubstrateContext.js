@@ -52,6 +52,12 @@ const reducer = (state, action) => {
         ss58Format: api.registry?.chainSS58 || 42,
         existentialDeposit: api.consts?.balances?.existentialDeposit || 0,
       };
+
+      // ToDo: remove this when the pallet is deployed on polkadot
+      // default substrate token to Dot for demo pupose
+      if (chainInfo?.token === 'Unit') {
+        chainInfo.token = 'Dot';
+      }
       console.log(chainInfo);
       return { ...state, apiState: 'READY', chainInfo: chainInfo };
 
