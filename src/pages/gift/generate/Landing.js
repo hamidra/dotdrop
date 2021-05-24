@@ -10,8 +10,8 @@ export default function Landing() {
       <Card.Body>
         <CardHeader
           title={'Gift Some Dots'}
-          cardText='Send DOTs to your friends and familiy, and have them join the
-          Polkadot Network today.'
+          cardText="Send DOTs to your friends and familiy, and have them join the
+          Polkadot Network today."
         />
         <Row className="justify-content-center align-items-center">
           <Col className="d-flex flex-column justify-content-around align-items-center">
@@ -20,6 +20,9 @@ export default function Landing() {
                 Send a New Gift
               </Button>
             </div>
+            <a className="pt-3" href="#/About" target="_blank">
+              {'How do gifts work'}
+            </a>
           </Col>
         </Row>
       </Card.Body>
