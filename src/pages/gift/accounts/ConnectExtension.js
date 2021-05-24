@@ -39,19 +39,18 @@ export default function ExtensionAccount({
           cardText={'Select your polkadot account below:'}
           backClickHandler={prevStepHandler}
         />
-        <div className="p-3">
-          <Row className="p-md-5 justify-content-center">
-            <Col className="d-flex flex-column justify-content-center align-items-center text-center">
-              <AccountSelector
-                accounts={accounts}
-                balances={accountsBalances}
-                selectedAccount={selectedAccount}
-                setSelectedAccount={setSelectedAccount}
-                maxStrlength={15}
-              />
-            </Col>
-          </Row>
-        </div>
+        <Row className="p-md-5 justify-content-center">
+          <Col className="d-flex flex-column justify-content-center align-items-center text-center">
+            <AccountSelector
+              accounts={accounts}
+              balances={accountsBalances}
+              selectedAccount={selectedAccount}
+              setSelectedAccount={setSelectedAccount}
+              maxStrlength={15}
+            />
+          </Col>
+        </Row>
+        <div className="d-flex flex-grow-1" />
         <Row>
           <Col className="pt-4 d-flex justify-content-center">
             <Button onClick={() => _setAccountHandler()}>Connect</Button>
