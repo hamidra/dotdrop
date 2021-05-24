@@ -27,7 +27,7 @@ const AccountToggleItem = ({ account, balance }) => {
           <Identicon value={account?.address} size={40} theme="polkadot" />
         </div>
         <Media.Body>
-          <Row>
+          <Row className="flex-column flex-sm-row">
             <Col>
               <div className="text-left">{nameStr}</div>
               <div className="text-left">{addressStr}</div>
@@ -121,7 +121,7 @@ const AccountDropdownItem = React.forwardRef(
             <Identicon value={account?.address} size={40} theme="polkadot" />
           </div>
           <Media.Body>
-            <Row>
+            <Row className="flex-column flex-sm-row">
               <Col>
                 <div>{nameStr}</div>
                 <div>{addressStr}</div>
