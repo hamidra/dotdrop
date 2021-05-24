@@ -13,11 +13,11 @@ export default function VerifyAccountPhrase({
   const validate = () => {
     let isValid = true;
     const phraseErrors = {};
-    if (check1 !== mnemonicWords[1]) {
+    if (check1?.toLocaleLowerCase() !== mnemonicWords[1].toLocaleLowerCase()) {
       isValid = false;
       phraseErrors.check1 = 'Please enter the correct phrase';
     }
-    if (check2 !== mnemonicWords[8]) {
+    if (check2?.toLowerCase() !== mnemonicWords[8]?.toLocaleLowerCase()) {
       isValid = false;
       phraseErrors.check2 = 'Please enter the correct phrase';
     }
@@ -25,11 +25,11 @@ export default function VerifyAccountPhrase({
     return isValid;
   };
   return (
-    <Card.Body className='d-flex flex-column'>
+    <Card.Body className="d-flex flex-column">
       <CardHeader
         title={'Verify Phrase'}
-        cardText='Enter the following words from the seed phrase to complete the
-        setup process.'
+        cardText="Enter the following words from the seed phrase to complete the
+        setup process."
         backClickHandler={() => prevStepHandler()}
       />
       <div>
@@ -44,7 +44,7 @@ export default function VerifyAccountPhrase({
                   value={check1}
                   onChange={(e) => {
                     setErrors({ ...errors, check1: '' });
-                    setCheck1(e.target.value);
+                    setCheck1(e.target.value?.toLowerCase());
                   }}
                 />
                 {errors && errors.check1 && (
@@ -62,7 +62,7 @@ export default function VerifyAccountPhrase({
                   value={check2}
                   onChange={(e) => {
                     setErrors({ ...errors, check2: '' });
-                    setCheck2(e.target.value);
+                    setCheck2(e.target.value?.toLowerCase());
                   }}
                 />
                 {errors && errors.check2 && (
@@ -75,14 +75,14 @@ export default function VerifyAccountPhrase({
           </Col>
         </Row>
       </div>
-      <div className='flex-grow-1'/>
+      <div className="flex-grow-1" />
       <Col className="d-flex pt-4 justify-content-center align-items-center">
-            <Button
-              variant="outline-primary"
-              onClick={() => validate() && nextStepHandler()}>
-              Verify Phrase
-            </Button>
-          </Col>
+        <Button
+          variant="outline-primary"
+          onClick={() => validate() && nextStepHandler()}>
+          Verify Phrase
+        </Button>
+      </Col>
     </Card.Body>
   );
 }
