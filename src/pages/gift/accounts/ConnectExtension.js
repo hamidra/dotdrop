@@ -29,20 +29,19 @@ export default function ExtensionAccount({
 
   const _setAccountHandler = () => {
     setAccountHandler && setAccountHandler(selectedAccount);
-    setAddressHandler && setAddressHandler(selectedAccount.address);
+    setAddressHandler && setAddressHandler(selectedAccount?.address);
   };
   return (
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={title || 'Select Account'}
+          cardText={'Select your polkadot account below:'}
           backClickHandler={prevStepHandler}
         />
         <div className="p-3">
           <Row className="p-md-5 justify-content-center">
-            <Col
-              style={{ height: 200 }}
-              className="d-flex flex-column justify-content-center align-items-center text-center">
+            <Col className="d-flex flex-column justify-content-center align-items-center text-center">
               <AccountSelector
                 accounts={accounts}
                 balances={accountsBalances}
