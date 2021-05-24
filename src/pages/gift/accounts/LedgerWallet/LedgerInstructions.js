@@ -18,7 +18,7 @@ export default function LedgerInstructions({
         <CardHeader
           title={title}
           backClickHandler={prevStepHandler}
-          cardText="Follow instructions to import your ledger account to Polkadot extension."
+          cardText="Follow below instructions to import your Ledger account into Polkadot extension."
         />
         <Row className="py-5 justify-content-center">
           <Col className="d-flex flex-column justify-content-center align-items-center">
@@ -28,7 +28,7 @@ export default function LedgerInstructions({
                   <div className="mb-3">
                     <span className="step-text">
                       Install polkadot App and create a polkadot account on your
-                      Ledger device. &nbsp;
+                      Ledger device.&nbsp;
                     </span>
                     <a
                       href="https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT-"
@@ -47,7 +47,7 @@ export default function LedgerInstructions({
                 <li className="step-item">
                   <div className="mb-3">
                     <span className="step-text">
-                      Add your ledger account into Polkadot extension. &nbsp;
+                      Add your Ledger account to Polkadot extension.&nbsp;
                     </span>
                     <a
                       href={`${extensionLink}`}
