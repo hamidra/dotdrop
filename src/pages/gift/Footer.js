@@ -28,6 +28,11 @@ export default function Footer({ selectedAccount }) {
           to friends and family members.
         </div>
         <div className="footer-grow flex-grow-1" />
+        <div style={{ fontSize: '12px', margin: '8px' }}>
+          <strong>Never</strong> share your account seed or private key <br />
+          directly with this or any other site.
+        </div>
+        <div className="footer-grow flex-grow-1" />
         <div style={{ color: '#6C757D', fontSize: '12px', margin: '8px' }}>
           <div>© {new Date().getFullYear()} All rights reserved.</div>
           <div className="d-flex flex-row">
