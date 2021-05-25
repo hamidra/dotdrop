@@ -1,5 +1,6 @@
 import { Row, Col, Card } from 'react-bootstrap';
 import Button from '../../../components/CustomButton';
+import LinkButton from '../../../components/LinkButton';
 import CardHeader from '../../../components/CardHeader';
 import { Link } from 'react-router-dom';
 export default function PresentGift({ gift, removeGiftHandler }) {
@@ -70,10 +71,10 @@ export default function PresentGift({ gift, removeGiftHandler }) {
           </Col>
         </Row>
         <Row>
-          <Col className="px-5 d-flex justify-content-around">
-            <Button onClick={() => printHandler()}>Print</Button>
-            <Button onClick={() => mailToHandler()}>Email</Button>
-            <Button onClick={() => removeGiftHandler(secret)}>Remove</Button>
+          <Col className="px-5 d-flex justify-content-end">
+            <LinkButton className='ml-3' onClick={() => removeGiftHandler(secret)}>Delete</LinkButton>
+            <LinkButton className='ml-3' onClick={() => printHandler()}>Print</LinkButton>
+            <Button className='ml-3' onClick={() => mailToHandler()}>Email</Button>
           </Col>
         </Row>
       </Card.Body>

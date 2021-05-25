@@ -42,6 +42,10 @@ $btn-border-radius-sm: 1.5rem;
   box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
 }
 
+.link-button:hover {
+  color: #C40061 !important;
+}
+
 .link-button:focus {
   box-shadow: none !important;
 }

@@ -8,7 +8,7 @@ export default function Claimed({ amount, accountAddress }) {
   const history = useHistory();
   return (
     <>
-      <Card.Body>
+      <Card.Body className='d-flex flex-column'>
         <CardHeader title={'Congratulations!'} />
         <Row className="justify-content-center flex-column align-items-center">
           <Col className="pt-4 d-flex justify-content-center align-items-center">
@@ -20,12 +20,13 @@ export default function Claimed({ amount, accountAddress }) {
               DOTs has been successfully transferred.
             </p>
           </Col>
-          <Col className="pt-5 d-flex justify-content-center align-items-center">
-            <Button onClick={() => history.push(`/account/${accountAddress}`)}>
-              See Account
-            </Button>
-          </Col>
         </Row>
+        <div className='flex-grow-1'/>
+        <Col className="pt-5 d-flex justify-content-center align-items-center">
+          <Button onClick={() => history.push(`/account/${accountAddress}`)}>
+            See Account
+          </Button>
+        </Col>
       </Card.Body>
     </>
   );
