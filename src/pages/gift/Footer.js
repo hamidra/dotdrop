@@ -23,13 +23,13 @@ export default function Footer({ selectedAccount }) {
             />
           </a>
         </div>
-        <div style={{ fontSize: '12px', margin: '8px' }}>
-          <strong>Polkadot Gifts</strong> lets you send DOT gifts <br />
+        <div style={{ fontSize: '12px', margin: '8px', width: '300px' }}>
+          <strong>Polkadot Gifts</strong> lets you send DOT gifts
           to friends and family members.
         </div>
         <div className="footer-grow flex-grow-1" />
-        <div style={{ fontSize: '12px', margin: '8px' }}>
-          <strong>Never</strong> share your account seed or private key <br />
+        <div style={{ fontSize: '12px', margin: '8px', width: '300px' }}>
+          <strong>Never</strong> share your account seed or private key
           directly with this or any other site.
         </div>
         <div className="footer-grow flex-grow-1" />
