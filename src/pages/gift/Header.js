@@ -1,8 +1,25 @@
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { stringHelpers } from '../../utils';
-import AccountSelector from '../../components/account/AccountSelector';
+import Identicon from '@polkadot/react-identicon';
 
+const AccountInfoBox = ({ accountAddress }) => {
+  const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
+  return (
+    <Media className="d-flex align-items-center">
+      <div>
+        <Identicon value={accountAddress} size={20} theme="polkadot" />
+      </div>
+      <Media.Body>
+        <Row>
+          <Col>
+            <div className="text-left">{addressStr}</div>
+          </Col>
+        </Row>
+      </Media.Body>
+    </Media>
+  );
+};
 export default function Header({ selectedAccount }) {
   const history = useHistory();
 
@@ -12,7 +29,7 @@ export default function Header({ selectedAccount }) {
         bg="primary"
         className="pl-5 pr-4 py-3"
         variant="dark"
-        expand="md">
+        expand="sm">
         <Container>
           <Navbar.Brand onClick={() => history.push('/')}>
             <strong>Polkadot Gifts</strong>
@@ -40,11 +57,16 @@ export default function Header({ selectedAccount }) {
             </Nav>
           </Navbar.Collapse>
           {selectedAccount && (
-            <div
-              style={{ minWidth: '5rem' }}
-              className="py-1 px-2 mx-2 bg-white text-dark rounded text-center">
-              {stringHelpers.truncateMiddle(selectedAccount, 5)}
-            </div>
+            <>
+              <div className="w-100 d-sm-none" />
+              <Nav className="flex-grow-0 justify-content-end">
+                <div
+                  style={{ minWidth: '5rem' }}
+                  className="py-1 px-2 bg-white text-dark rounded text-center">
+                  <AccountInfoBox accountAddress={selectedAccount} />
+                </div>
+              </Nav>
+            </>
           )}
         </Container>
       </Navbar>

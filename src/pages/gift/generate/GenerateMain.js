@@ -208,10 +208,6 @@ export default function GenerateMain() {
     }
   };
 
-  const accountName = account?.meta?.name
-    ? account?.meta?.name
-    : account?.address;
-
   const accountOption = {
     EXTENSION: ConnectExtension,
     HARDWALLET: LedgerMain,
@@ -272,7 +268,7 @@ export default function GenerateMain() {
         jumpToStep,
         setAccountSource,
       }}>
-      <Header selectedAccount={accountName} />
+      <Header selectedAccount={account?.address} />
       <Container className="justify-content-center align-items-center">
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-5 d-flex justify-content-center align-items-center">

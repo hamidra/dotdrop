@@ -11,7 +11,7 @@ export default function FAQ() {
     <p className="pb-3">
       Polkadot is a blockchain, that connects other blockchains. DOT is the
       utility token of Polkadot, that serves different functions in the network.
-      Find out more about Polkadot
+      Find out more about Polkadot&nbsp;
       <a
         href="https://polkadot.network"
         target="_blank"
@@ -30,7 +30,7 @@ export default function FAQ() {
     'Try reaching out to your recipient personally. If your recipient still does not claim the gift, there is an option to revoke it and return the gift amount to your account.';
   const a6 = (
     <p className="pb-3">
-      Please contact
+      Please contact&nbsp;
       <a href="mailto:support@polkadot.network">support@polkadot.network</a>.
     </p>
   );

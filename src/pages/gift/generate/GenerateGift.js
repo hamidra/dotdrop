@@ -21,6 +21,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
   });
 
   const [balance, setBalance] = useState(null);
+  const balanceDecimalPoints = 2;
 
   useEffect(() => {
     let unsub;
@@ -64,10 +65,11 @@ export default function GenerateGift({ account, generateGiftHandler }) {
       errors.amount = 'Please enter the gift amount';
     }
 
+    // check if the gift amount is above existential deposit
     if (
       chainAmount &&
       chainInfo?.existentialDeposit &&
-      !utils.isAboveMinDeposit(chainAmount, chainInfo.existentialDeposit)
+      !utils.gteChainUnits(chainAmount, chainInfo.existentialDeposit)
     ) {
       const minDeposit = utils.fromChainUnit(
         chainInfo.existentialDeposit,
@@ -77,8 +79,22 @@ export default function GenerateGift({ account, generateGiftHandler }) {
       errors.amount = `The amount is below ${minDeposit} ${chainInfo.token}, the existential deposit for a Polkadot account.`;
     }
 
-    setFormErrors({ ...formErrors, ...errors });
+    // check if the account has enough funds to pay the gift amount
+    if (
+      balance?.free &&
+      chainAmount &&
+      !utils.gteChainUnits(balance?.free, chainAmount)
+    ) {
+      isValid = false;
+      const freeBalance = utils.fromChainUnit(
+        balance?.free,
+        chainInfo.decimals,
+        balanceDecimalPoints
+      );
+      errors.amount = `The account balance of ${freeBalance} ${chainInfo.token} is not anough to pay the gift amount of ${amount} ${chainInfo.token}`;
+    }
 
+    setFormErrors({ ...formErrors, ...errors });
     return isValid;
   };
   const _generateGiftHandler = () => {
@@ -87,11 +103,11 @@ export default function GenerateGift({ account, generateGiftHandler }) {
   };
   return (
     <>
-      <Card.Body className='d-flex flex-column'>
+      <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Gift Dots'}
-          cardText='Send DOTs to your friends and familiy, and have them join the
-            Polkadot Network today.'
+          cardText="Send DOTs to your friends and familiy, and have them join the
+            Polkadot Network today."
           backClickHandler={() => prevStep()}
         />
         <Row className="flex-column align-items-center">
@@ -161,7 +177,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                         ? `${utils.fromChainUnit(
                             balance.free,
                             chainInfo?.decimals,
-                            2
+                            balanceDecimalPoints
                           )} ${chainInfo?.token} available`
                         : `${chainInfo?.token}`}
                     </InputGroup.Text>
@@ -177,11 +193,9 @@ export default function GenerateGift({ account, generateGiftHandler }) {
             </Form>
           </Col>
         </Row>
-        <div className='d-flex flex-grow-1'/>
+        <div className="d-flex flex-grow-1" />
         <div className="d-flex justify-content-center">
-            <Button onClick={() => _generateGiftHandler()}>
-              Generate Gift
-            </Button>
+          <Button onClick={() => _generateGiftHandler()}>Generate Gift</Button>
         </div>
       </Card.Body>
     </>

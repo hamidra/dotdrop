@@ -5,7 +5,7 @@ import VerifySecret from './VerifySecret';
 import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
 
-import Landing from './Landing';
+import ConnectAccount from './ConnectAccount';
 import Header from '../Header';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
@@ -130,7 +130,9 @@ export default function ClaimMain() {
   }
   const steps = [];
   // Step-0
-  steps.push(<Landing setAccountSourceHandler={setAccountSourceHandler} />);
+  steps.push(
+    <ConnectAccount setAccountSourceHandler={setAccountSourceHandler} />
+  );
 
   // Step-1
   const AccountOptionElement = accountOption[accountSource] ? (
