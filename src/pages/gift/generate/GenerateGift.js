@@ -118,7 +118,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   <Form.Label>Recipient Email</Form.Label>
                   <Form.Control
                     type="email"
-                    autoComplete="nope"
+                    autoComplete="off"
                     placeholder=""
                     value={formValues?.email}
                     isInvalid={!!formErrors?.email}
