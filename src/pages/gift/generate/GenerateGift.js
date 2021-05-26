@@ -4,6 +4,7 @@ import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
+import { stringHelpers } from '../../../utils';
 export default function GenerateGift({ account, generateGiftHandler }) {
   const { api, apiState, chainInfo } = useSubstrate();
 
@@ -166,7 +167,10 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                     value={formValues?.amount}
                     onChange={(e) => {
                       setFormErrors({ ...formErrors, amount: '' });
-                      setFormValues({ ...formValues, amount: e.target.value });
+                      setFormValues({
+                        ...formValues,
+                        amount: stringHelpers.formatBalance(e.target.value),
+                      });
                     }}
                   />
                   <InputGroup.Append>

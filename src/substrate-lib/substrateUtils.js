@@ -3,6 +3,9 @@ import { hexToU8a, isHex, u8aToHex } from '@polkadot/util';
 import BN from 'bn.js';
 
 const trimEnd = (str, char) => {
+  if (!str) {
+    return str;
+  }
   let i = str.length;
   while (i > 0 && str.charAt(i - 1) === char) {
     i -= 1;
