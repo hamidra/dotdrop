@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import Button from '../../../../components/CustomButton';
-import { BsFillEyeFill, BsFillEyeSlashFill, BsEye } from 'react-icons/bs';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
+import { FaCopy } from 'react-icons/fa';
 
 export default function PresentAccountPhrase({
   mnemonicWords,
@@ -12,6 +14,7 @@ export default function PresentAccountPhrase({
   const label = 'I have stored my seed phrase in a safe place.';
   const [blurred, setBlurred] = useState(true);
   const [checked, setChecked] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const checkedErrorMessage = 'Please confirm you have saved your account';
   const revealSecret = () => {
@@ -36,13 +39,13 @@ export default function PresentAccountPhrase({
         />
         <div
           style={{ position: 'relative' }}
-          className="p-4 d-flex justify-content-center align-items-center flex-column"
+          className="container px-4 pb-4 d-flex justify-content-center align-items-center flex-column"
           onClick={() => {
             revealSecret();
           }}>
           <div
-            className={`mb-3 text-button text-center ${
-              !blurred ? 'd-inline-block' : 'd-none'
+            className={`text-button text-center ${
+              !blurred ? 'visible' : 'invisible'
             }`}
             onClick={() => hideSecret()}>
             <BsFillEyeSlashFill
@@ -55,6 +58,25 @@ export default function PresentAccountPhrase({
             />
             <span>{'Hide secret words'}</span>
           </div>
+          <Row className="align-self-end">
+            <Col className={`text-button ${copied ? 'color-danger' : ''}`}>
+              <CopyToClipboard
+                text={mnemonicWords.join(' ')}
+                onCopy={(result) => {
+                  setCopied(result);
+                }}>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <FaCopy
+                    style={{
+                      flexShrink: '0',
+                      fontSize: '24px',
+                    }}
+                  />
+                  <span>{copied ? ' copied!' : ''}</span>
+                </div>
+              </CopyToClipboard>
+            </Col>
+          </Row>
           <Row
             style={{ fontSize: '1.25rem' }}
             className={`justify-content-center align-items-center ${
@@ -70,7 +92,7 @@ export default function PresentAccountPhrase({
             ))}
           </Row>
           <div
-            className={`text-center overlay-center ${
+            className={`text-center pt-4 overlay-center ${
               blurred ? 'd-block' : 'd-none'
             }`}>
             <BsFillEyeFill
