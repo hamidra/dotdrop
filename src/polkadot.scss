@@ -25,25 +25,17 @@ $btn-border-radius-sm: 1.5rem;
   box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
 }
 
-.checkbox-button {
-  display: inline-flex !important;
-  align-items: center !important;
-  width: 100% !important;
-  background-color: #fff !important;
-  border-radius: 8px !important;
-  border-color: #d5dbe0 !important;
-  color: #1e1e1e !important;
+.text-button {
   padding: 0.75rem !important;
-  text-align: left !important;
+  cursor: pointer;
 }
 
-.checkbox-button:hover {
-  background-color: #f9fafb !important;
-  box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
+.text-button:hover {
+  color: #c40061 !important;
 }
 
 .link-button:hover {
-  color: #C40061 !important;
+  color: #c40061 !important;
 }
 
 .link-button:focus {

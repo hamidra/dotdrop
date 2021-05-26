@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import Button from '../../../../components/CustomButton';
+import { BsFillEyeFill, BsFillEyeSlashFill, BsEye } from 'react-icons/bs';
 
 export default function PresentAccountPhrase({
   mnemonicWords,
@@ -13,8 +14,15 @@ export default function PresentAccountPhrase({
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const checkedErrorMessage = 'Please confirm you have saved your account';
-  const toggleBlurred = () => {
-    setBlurred(!blurred);
+  const revealSecret = () => {
+    if (blurred) {
+      setBlurred(false);
+    }
+  };
+  const hideSecret = () => {
+    if (!blurred) {
+      setBlurred(true);
+    }
   };
   return (
     <>
@@ -28,12 +36,28 @@ export default function PresentAccountPhrase({
         />
         <div
           style={{ position: 'relative' }}
+          className="p-4 d-flex justify-content-center align-items-center flex-column"
           onClick={() => {
-            toggleBlurred();
+            revealSecret();
           }}>
+          <div
+            className={`mb-3 text-button text-center ${
+              !blurred ? 'd-inline-block' : 'd-none'
+            }`}
+            onClick={() => hideSecret()}>
+            <BsFillEyeSlashFill
+              style={{
+                flexShrink: '0',
+                fontSize: '24px',
+                marginBottom: 5,
+                marginRight: 5,
+              }}
+            />
+            <span>{'Hide secret words'}</span>
+          </div>
           <Row
             style={{ fontSize: '1.25rem' }}
-            className={`p-5 justify-content-center align-items-center ${
+            className={`justify-content-center align-items-center ${
               blurred ? 'blurred' : ''
             }`}>
             {mnemonicWords.map((word, index) => (
@@ -46,12 +70,16 @@ export default function PresentAccountPhrase({
             ))}
           </Row>
           <div
-            style={{ fontSize: '2rem' }}
-            className={`overlay-center ${blurred ? 'd-block' : 'd-none'}`}>
-            {'Reveal'}
+            className={`text-center overlay-center ${
+              blurred ? 'd-block' : 'd-none'
+            }`}>
+            <BsFillEyeFill
+              style={{ flexShrink: '0', fontSize: '24px', marginBottom: 5 }}
+            />
+            <p>{'Click here to reveal your secret words'}</p>
           </div>
         </div>
-
+        <div className="d-flex flex-grow-1" />
         <Row className="flex-column justify-content-center align-items-center">
           <Col className="ml-2">
             <Form.Check
@@ -69,8 +97,7 @@ export default function PresentAccountPhrase({
             )}
           </Col>
         </Row>
-        <div className="d-flex flex-grow-1" />
-        <div className="pt-5 d-flex justify-content-center">
+        <div className="pt-4 d-flex justify-content-center">
           <Button
             onClick={() =>
               checked ? nextStepHandler() : setCheckedError(checkedErrorMessage)
