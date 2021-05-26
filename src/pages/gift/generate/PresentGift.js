@@ -24,7 +24,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   )}`;
 
   const mailToHandler = () => {
-    window.location.href = `mailto:${mailToLink}`;
+    window.open(`mailto:${mailToLink}`, 'sendGiftEmail');
   };
 
   const printHandler = () => {
