@@ -2,6 +2,7 @@ import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex, u8aToHex } from '@polkadot/util';
 import BN from 'bn.js';
 
+const balancePrecision = 5;
 const trimEnd = (str, char) => {
   if (!str) {
     return str;
@@ -22,6 +23,19 @@ const utils = {
     } catch (error) {
       return false;
     }
+  },
+  formatBalance: (balance, decimalPoints) => {
+    if (!balance) {
+      return balance;
+    }
+    decimalPoints =
+      decimalPoints === undefined ? balancePrecision : decimalPoints;
+    const [wholeVal, decimalVal] = balance.split('.');
+    let result = wholeVal;
+    if (decimalVal) {
+      result += `.${trimEnd(decimalVal?.substr(0, decimalPoints), '0')}`;
+    }
+    return result;
   },
   fromChainUnit: (value, chainDecimal, decimalPoints) => {
     if (!value || !chainDecimal) {
