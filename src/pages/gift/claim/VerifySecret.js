@@ -15,11 +15,11 @@ export default function VerifySecret({ claimGiftHandler }) {
   };
   return (
     <>
-      <Card.Body className='d-flex flex-column'>
+      <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Claim Your Gift'}
-          cardText='Every Polkadot account needs a minimum balance to be active on
-          the network. Enter the secret hash you have received to claim your gift and fund your account.'
+          cardText="Every Polkadot account needs a minimum balance to be active on
+          the network. Enter the secret hash you have received to claim your gift and fund your account."
           backClickHandler={prevStep}
         />
         <Row className="pt-4 justify-content-center align-items-center">
@@ -30,14 +30,16 @@ export default function VerifySecret({ claimGiftHandler }) {
                 <Form.Control
                   type="input"
                   placeholder="0x4rt6..."
-                  onChange={(e) => setRedeemSecret(e.target.value)}
+                  onChange={(e) =>
+                    setRedeemSecret(e?.target?.value?.trim() || '')
+                  }
                   value={redeemSecret}
                 />
               </Form.Group>
             </Form>
           </Col>
         </Row>
-        <div className='d-flex flex-grow-1' />
+        <div className="d-flex flex-grow-1" />
         <Row className=" pt-5 justify-content-center align-items-center">
           <Col className="d-flex justify-content-center">
             <Button onClick={() => redeemHandler()}>Claim Gift</Button>
