@@ -24,6 +24,14 @@ export default function GenerateGift({ account, generateGiftHandler }) {
   const [balance, setBalance] = useState(null);
   const balanceDecimalPoints = 2;
 
+  const _setAmount = (value) => {
+    const pattern = /^([0-9]+.?[0-9]{0,5})?$/i;
+    setFormValues({
+      ...formValues,
+      amount: pattern.test(value) ? value : formValues?.amount,
+    });
+  };
+
   useEffect(() => {
     let unsub;
     setBalance(null);
@@ -98,10 +106,12 @@ export default function GenerateGift({ account, generateGiftHandler }) {
     setFormErrors({ ...formErrors, ...errors });
     return isValid;
   };
+
   const _generateGiftHandler = () => {
     const { email, amount } = formValues;
     validate() && generateGiftHandler({ email, amount });
   };
+
   return (
     <>
       <Card.Body className="d-flex flex-column">
@@ -160,17 +170,15 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                 <Form.Label>Amount</Form.Label>
                 <InputGroup>
                   <Form.Control
-                    type="number"
-                    placeholder=""
+                    type="text"
+                    autoComplete="nope"
+                    placeholder="enter a positive number"
                     style={formErrors?.amount ? { borderColor: 'red' } : {}}
                     className="border-right-0"
                     value={formValues?.amount}
                     onChange={(e) => {
                       setFormErrors({ ...formErrors, amount: '' });
-                      setFormValues({
-                        ...formValues,
-                        amount: stringHelpers.formatBalance(e.target.value),
-                      });
+                      _setAmount(e?.target?.value);
                     }}
                   />
                   <InputGroup.Append>
