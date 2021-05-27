@@ -4,6 +4,7 @@ import Button from '../../../components/CustomButton';
 import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
+import Divider from '../../../components/Divider';
 export default function ConnectAccount () {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
@@ -18,19 +19,14 @@ export default function ConnectAccount () {
         <CardHeader title="Connect Account" />
         <Row className="align-items-center flex-column justify-content-center text-center pt-5">
           <Col sm="6">
-            <CardButton
-              logo="extension"
+            <Button
               onClick={() => optionSelectHandler('EXTENSION')}>
-              Polkadot Extension
-            </CardButton>
+              Connect to Polkadot Extension
+            </Button>
           </Col>
         </Row>
-        <Row className="pt-4">
-          <Col xs="12">
-            <hr />
-          </Col>
-        </Row>
-        <Row className="align-items-center pt-4">
+        <Divider text='or connect to' />
+        <Row className="align-items-center">
           <Col sm="6" className="mb-3">
             <CardButton
               logo="ledger"
@@ -49,7 +45,7 @@ export default function ConnectAccount () {
       </Card.Body>
       <Card.Footer>
         <span>
-          By connecting an account, I accept the
+          By connecting an account, I accept the&nbsp;
           <a href="policy" target="_blank">
             terms and conditions
           </a>
