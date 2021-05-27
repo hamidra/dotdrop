@@ -39,7 +39,7 @@ function Body() {
       </Switch>
       <Processing
         show={apiState !== 'READY'}
-        message="Connecting to the blockchain network..."
+        message="Connecting to Polkadot..."
       />
     </>
   );

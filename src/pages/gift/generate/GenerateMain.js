@@ -152,7 +152,7 @@ export default function GenerateMain() {
       if (account?.meta?.isExternal) {
         setShowSigner(true);
       } else {
-        setProcessingMsg('Generating the gift on the blockchain...');
+        setProcessingMsg('Generating the gift on Polkadot...');
         setProcessing(true);
       }
     }
