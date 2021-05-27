@@ -2,6 +2,14 @@ import { Card, Row, Col, Form } from 'react-bootstrap';
 import Button from '../../../../components/CustomButton';
 import CardHeader from '../../../../components/CardHeader';
 import { useState } from 'react';
+
+const randomIdx = (length) => {
+  const random1 = Math.floor(Math.random() * length);
+  let random2 = Math.floor(Math.random() * length);
+  random2 = random2 === random1 ? (random2 * 2) % length : random2;
+  return [random1, random2].sort((a, b) => a - b);
+};
+
 export default function VerifyAccountPhrase({
   mnemonicWords,
   nextStepHandler,
@@ -10,14 +18,17 @@ export default function VerifyAccountPhrase({
   const [check1, setCheck1] = useState('');
   const [check2, setCheck2] = useState('');
   const [errors, setErrors] = useState({ check1: '', check2: '' });
+
+  const [randIdx, setRandIdx] = useState(randomIdx(mnemonicWords.length));
+
   const validate = () => {
     let isValid = true;
     const phraseErrors = {};
-    if (check1?.toLocaleLowerCase() !== mnemonicWords[1].toLocaleLowerCase()) {
+    if (check1?.toLowerCase() !== mnemonicWords[randIdx[0]].toLowerCase()) {
       isValid = false;
       phraseErrors.check1 = 'Please enter the correct phrase';
     }
-    if (check2?.toLowerCase() !== mnemonicWords[8]?.toLocaleLowerCase()) {
+    if (check2?.toLowerCase() !== mnemonicWords[randIdx[1]]?.toLowerCase()) {
       isValid = false;
       phraseErrors.check2 = 'Please enter the correct phrase';
     }
@@ -37,14 +48,14 @@ export default function VerifyAccountPhrase({
           <Col>
             <Form autoComplete="off" className="w-100">
               <Form.Group controlId="formGroupWord1">
-                <Form.Label>Word #2</Form.Label>
+                <Form.Label>{`Word #${randIdx[0] + 1}`}</Form.Label>
                 <Form.Control
                   type="input"
-                  placeholder="Word #2"
+                  placeholder={`Word #${randIdx[0] + 1}`}
                   value={check1}
                   onChange={(e) => {
                     setErrors({ ...errors, check1: '' });
-                    setCheck1(e.target.value?.toLowerCase());
+                    setCheck1(e?.target?.value?.trim().toLowerCase());
                   }}
                 />
                 {errors && errors.check1 && (
@@ -55,14 +66,14 @@ export default function VerifyAccountPhrase({
               </Form.Group>
 
               <Form.Group controlId="formGroupWord1">
-                <Form.Label>Word #9</Form.Label>
+                <Form.Label>{`Word #${randIdx[1] + 1}`}</Form.Label>
                 <Form.Control
                   type="input"
-                  placeholder="Word #9"
+                  placeholder={`Word #${randIdx[1] + 1}`}
                   value={check2}
                   onChange={(e) => {
                     setErrors({ ...errors, check2: '' });
-                    setCheck2(e.target.value?.toLowerCase());
+                    setCheck2(e?.target?.value?.trim().toLowerCase());
                   }}
                 />
                 {errors && errors.check2 && (
