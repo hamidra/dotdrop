@@ -172,7 +172,6 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   <Form.Control
                     type="text"
                     autoComplete="nope"
-                    placeholder="enter a positive number"
                     style={formErrors?.amount ? { borderColor: 'red' } : {}}
                     className="border-right-0"
                     value={formValues?.amount}
