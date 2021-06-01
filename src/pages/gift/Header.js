@@ -1,4 +1,4 @@
-import { Container, Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
+import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
@@ -9,7 +9,7 @@ const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
   return (
     <Media className="d-flex align-items-center">
-      <div>
+      <div className='mr-1'>
         <Identicon value={accountAddress} size={20} theme="polkadot" />
       </div>
       <Media.Body>
@@ -73,10 +73,10 @@ export default function Header ({ selectedAccount }) {
         {selectedAccount && (
           <>
             <div className="w-100 d-sm-none" />
-            <Nav className="flex-grow-0 justify-content-end">
+            <Nav className="flex-grow-0 justify-content-end p-1 mr-2 shadow-sm">
               <div
-                style={{ minWidth: '5rem' }}
-                className="py-1 px-2 bg-white text-dark rounded text-center">
+                style={{ minWidth: '5rem', fontWeight: '400' }}
+                className="py-1 px-3 bg-white rounded text-center">
                 <AccountInfoBox accountAddress={selectedAccount} />
               </div>
             </Nav>
