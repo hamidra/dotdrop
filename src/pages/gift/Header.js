@@ -1,5 +1,5 @@
 import { Container, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
 
@@ -22,35 +22,41 @@ const AccountInfoBox = ({ accountAddress }) => {
 };
 export default function Header({ selectedAccount }) {
   const history = useHistory();
+  const location = useLocation();
 
   return (
     <>
       <Navbar
-        bg="primary"
         className="pl-5 pr-4 py-3"
         variant="dark"
         expand="sm">
         <Container>
-          <Navbar.Brand onClick={() => history.push('/')}>
-            <strong>Polkadot Gifts</strong>
-          </Navbar.Brand>
+          {/* <Navbar.Brand onClick={() => history.push('/')}>
+            <strong>{location.pathname}</strong>
+          </Navbar.Brand> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
-            className="justify-content-end">
-            <Nav>
-              <Nav.Item>
+            className="justify-content-center">
+            <Nav className='nav-pills shadow-sm p-1'>
+              {/* <Nav.Item>
                 <Nav.Link onClick={() => history.push('/about')}>
                   About
                 </Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
               <Nav.Item>
-                <Nav.Link onClick={() => history.push('/claim')}>
+                <Nav.Link
+                  className={location.pathname === '/claim' && 'active'}
+                  onClick={() => history.push('/claim')}
+                >
                   Claim Gift
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link onClick={() => history.push('/generate')}>
+                <Nav.Link
+                  className={location.pathname === '/generate' && 'active'}
+                  onClick={() => history.push('/generate')}
+                >
                   New Gift
                 </Nav.Link>
               </Nav.Item>

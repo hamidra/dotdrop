@@ -50,7 +50,7 @@ $card-border-radius: 20px;
 }
 
 .card-body {
-  padding: 2rem !important;
+  padding: 1.5rem !important;
 }
 
 .card-footer {
@@ -80,6 +80,7 @@ $theme-colors: (
 );
 
 $gray-100: #f9fafb;
+$gray-200: #F0F2F5;
 $gray-300: #d5dbe0;
 $gray-600: #6c757d;
 $gray-900: #1e1e1e;
@@ -125,9 +126,18 @@ $h4-font-size: 1.25rem;
 $h5-font-size: 1rem;
 
 // Navbar
+.navbar-nav {
+  border-radius: 2rem;
+  font-weight: 500; 
+}
+
+$nav-pills-border-radius: 1.5rem !important;
+$nav-pills-link-active-color: $gray-900 !important;
+$nav-pills-link-active-bg: $gray-200 !important;
+
 $navbar-nav-link-padding-x: 1.5rem;
-$navbar-dark-color: #fff;
-$navbar-dark-hover-color: #fff;
+$navbar-dark-color: $gray-600;
+$navbar-dark-hover-color: $gray-900;
 
 // Radii
 $border-radius: 0.5rem;
