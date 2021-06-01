@@ -1,0 +1,107 @@
+/* Timeline holder */
+ul.timeline {
+  list-style-type: none;
+  position: relative;
+  padding-left: 1.5rem;
+
+  ul {
+    list-style: none;
+
+    li {
+      &:before {
+        content: "\2022";
+        font-size: 1rem;
+        color: $white;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+
+      &.timeline-checked:before {
+        color: $primary;
+      }
+    }
+  }
+
+  .rounded {
+    border-radius: 1.375rem !important;
+  }
+}
+
+/* Timeline vertical line */
+ul.timeline:before {
+  content: " ";
+  background: $secondary-lighter;
+  display: inline-block;
+  position: absolute;
+  left: 16px;
+  width: 1px;
+  height: calc(100% + 13.5rem);
+  top: -6rem;
+  border-radius: 1rem;
+  opacity: 0.4;
+}
+
+li.timeline-item {
+  border: 0 !important;
+  border: 0 !important;
+  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.4) !important;
+  margin-bottom: 1.5rem;
+  background: #272b2f;
+}
+
+/* Timeline item circle marker */
+li.timeline-item::before {
+  content: " ";
+  background: $secondary;
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid $secondary-darker;
+  margin-top: 3px;
+  margin-left: -4.78rem;
+  width: 19px;
+  height: 19px;
+}
+
+.timeline-launch {
+  li.timeline-item.past:before {
+    background: $primary;
+  }
+  li.timeline-item.current {
+    border: solid 1px $primary !important;
+  }
+  li.timeline-item.current:before {
+    background: $primary;
+    margin-left: -4.82rem;
+  }
+}
+
+ul.timeline.timeline-parachains {
+  &:before {
+    display: none;
+  }
+
+  li {
+    &:before {
+      display: none;
+    }
+
+    &.timeline-item {
+      background: $secondary-lighter;
+
+      p {
+        @extend .text-dark;
+      }
+    }
+
+    &.timeline-item-next p {
+      @extend .text-secondary;
+    }
+
+    &.current {
+      background: white;
+      border: solid 1px $primary !important;
+    }
+  }
+}

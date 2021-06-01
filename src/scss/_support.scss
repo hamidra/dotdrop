@@ -1,0 +1,31 @@
+#support-link {
+  font-size: 14px;
+  padding: 4px 15px;
+  border-radius: 1.5rem !important;
+}
+
+#support-icon {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 52px;
+  height: 52px;
+  z-index: 9999;
+  padding: 14px;
+  border-radius: 52px;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(150%) scale(1);
+
+  img {
+    margin-top: -2px;
+  }
+}
+
+#support-icon.is-visible {
+  transform: translateY(0) scale(1);
+
+  &:hover {
+    transform: translateY(0) scale(1.1);
+    background: $primary !important;
+  }
+}

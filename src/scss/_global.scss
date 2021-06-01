@@ -1,0 +1,50 @@
+html {
+  background-color: $secondary-darker;
+}
+
+body {
+  color: $black;
+  background: transparent;
+}
+
+.header-bg {
+  display: none;
+
+  @media (min-width: 992px) {
+    display: block;
+    position: relative;
+    height: 120px;
+    background: white;
+  }
+}
+
+section {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+
+  @media (min-width: 576px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  @media (min-width: 768px) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+footer {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+
+  @media (min-width: 576px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+a.back-to-top.sticky-viewport-bottom.position-fixed {
+  display: none !important;
+}
