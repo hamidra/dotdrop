@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { DotsThree, Gift } from 'phosphor-react';
+import PolkadotCircle from '../../images/polkadot-circle.png';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
@@ -32,9 +33,20 @@ export default function Header({ selectedAccount }) {
         variant="dark"
         expand="sm">
         <Container>
-          {/* <Navbar.Brand onClick={() => history.push('/')}>
-            <strong>{location.pathname}</strong>
-          </Navbar.Brand> */}
+          <Navbar.Brand>
+            <a
+              href='https://polkadot.network'
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+            <img
+              width={40}
+              className='p-1 shadow-sm rounded-circle'
+              src={PolkadotCircle}
+              alt={'Polkadot'}
+            />
+            </a>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
