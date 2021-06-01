@@ -75,6 +75,8 @@ export default function Header({ selectedAccount }) {
               </Nav>
             </>
           )}
+          <Dropdown
+            id="dropdown-item-button"
           >
             <Dropdown.Toggle
               className='p-1 rounded shadow-sm'
