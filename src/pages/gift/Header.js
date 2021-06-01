@@ -1,7 +1,8 @@
-import { Container, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
+import { Container, Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
+import { DotsThree, Gift } from 'phosphor-react';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
@@ -74,6 +75,27 @@ export default function Header({ selectedAccount }) {
               </Nav>
             </>
           )}
+          >
+            <Dropdown.Toggle
+              className='p-1 rounded shadow-sm'
+              type="button"
+              data-toggle="dropdown"
+              id="dropdownMenuButton"
+            >
+            <DotsThree size={30} weight="bold" />
+            </Dropdown.Toggle>
+            <Dropdown.Menu
+              aria-labelledby="dropdownMenuButton"
+              className='dropdown-menu-right mt-2 shadow'
+            >
+              <Dropdown.Item
+                className='px-3'
+                onClick={() => history.push('/about')}
+              >
+                <Gift className='mr-1' size={18} />About Gifts
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Container>
       </Navbar>
     </>

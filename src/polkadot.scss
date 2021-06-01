@@ -128,7 +128,34 @@ $h5-font-size: 1rem;
 // Navbar
 .navbar-nav {
   border-radius: 2rem;
-  font-weight: 500; 
+  font-weight: 500;
+}
+
+.navbar {
+  .dropdown-toggle::after { content: none };
+
+  #dropdownMenuButton {
+    background-color: #FFF !important;
+    border: none;
+    color: $gray-600;
+
+    :hover {
+      background-color: $gray-100;
+      color: $gray-900;
+    }
+  }
+
+  .dropdown-menu {
+    border: none;
+
+    .dropdown-item {
+      color: $gray-600;
+    }
+
+    .dropdown-item:hover {
+      color: $gray-900 !important;
+    }
+  }
 }
 
 $nav-pills-border-radius: 1.5rem !important;
