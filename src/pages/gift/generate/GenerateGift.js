@@ -11,27 +11,8 @@ export default function GenerateGift({ account, generateGiftHandler }) {
 
   const { prevStep } = useContext(GenerateContext);
 
-  const [formValues, setFormValues] = useState({
-    amount: '',
-    email: '',
-    confirmEmail: '',
-  });
-  const [formErrors, setFormErrors] = useState({
-    amount: '',
-    email: '',
-    confirmEmail: '',
-  });
-
   const [balance, setBalance] = useState(null);
   const balanceDecimalPoints = 2;
-
-  const _setAmount = (value) => {
-    const pattern = /^([0-9]+.?[0-9]{0,5})?$/i;
-    setFormValues({
-      ...formValues,
-      amount: pattern.test(value) ? value : formValues?.amount,
-    });
-  };
 
   useEffect(() => {
     let unsub;
@@ -56,13 +37,16 @@ export default function GenerateGift({ account, generateGiftHandler }) {
     return () => unsub && unsub();
   }, [api, apiState, account, chainInfo]);
 
-  const validate = ({ email, confirmEmail, amount }) => {
+  const validate = ({ recipientEmail, confirmEmail, amount }) => {
     const errors = {};
     const chainAmount = utils.toChainUnit(amount, chainInfo.decimals);
 
-    if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      errors.email = 'Please enter a valid email.';
-    } else if (email !== confirmEmail) {
+    if (
+      !recipientEmail ||
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(recipientEmail)
+    ) {
+      errors.recipientEmail = 'Please enter a valid email.';
+    } else if (recipientEmail !== confirmEmail) {
       errors.confirmEmail = "The email addresses did'nt match.";
     }
 
@@ -98,21 +82,26 @@ export default function GenerateGift({ account, generateGiftHandler }) {
     }
     return errors;
   };
+
+  const _setAmount = (value) => {
+    const pattern = /^([0-9]+\.?[0-9]{0,5})?$/i;
+    formik.setValues({
+      ...formik.values,
+      amount: pattern.test(value) ? value : formik.values.amount,
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       amount: '',
-      email: '',
+      recipientEmail: '',
       confirmEmail: '',
     },
     validate,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: ({ recipientEmail, amount }) => {
+      generateGiftHandler({ recipientEmail, amount });
     },
   });
-  const _generateGiftHandler = () => {
-    // const { email, amount } = formValues;
-    // validate() && generateGiftHandler({ email, amount });
-  };
 
   return (
     <>
@@ -129,23 +118,36 @@ export default function GenerateGift({ account, generateGiftHandler }) {
               autoComplete="off"
               className="w-100"
               onSubmit={formik.handleSubmit}>
-              <Form.Group className="row" controlId="formGroupEmail">
+              <Form.Group className="row">
                 <Col md="6">
-                  <Form.Label>Recipient Email</Form.Label>
+                  <Form.Label htmlFor="recipientEmail">
+                    Recipient Email
+                  </Form.Label>
                   <Form.Control
-                    id="email"
-                    name="email"
+                    id="recipientEmail"
+                    name="recipientEmail"
                     type="email"
                     autoComplete="off"
                     placeholder=""
-                    value={formik.values.email}
-                    isInvalid={formik.errors.email}
+                    value={formik.values.recipientEmail}
+                    isInvalid={
+                      formik.touched.recipientEmail &&
+                      !!formik.errors.recipientEmail
+                    }
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
+                  {formik.touched.recipientEmail &&
+                    !!formik.errors.recipientEmail && (
+                      <Form.Text className="text-danger">
+                        {formik.errors.recipientEmail}
+                      </Form.Text>
+                    )}
                 </Col>
                 <Col md="6" className="mt-2 mt-md-0">
-                  <Form.Label>Confirm Recipient Email</Form.Label>
+                  <Form.Label htmlFor="confirmEmail">
+                    Confirm Recipient Email
+                  </Form.Label>
                   <Form.Control
                     id="confirmEmail"
                     name="confirmEmail"
@@ -153,40 +155,47 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                     autoComplete="nope"
                     placeholder=""
                     value={formik.values.confirmEmail}
-                    isInvalid={!!formik.errors.confirmEmail}
+                    isInvalid={
+                      formik.touched.confirmEmail &&
+                      !!formik.errors.confirmEmail
+                    }
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                </Col>
-                <div className="w-100" />
-                <Col>
-                  {(formik?.errors?.email || formik?.errors?.confirmEmail) && (
-                    <Form.Text className="text-danger">
-                      {formik?.errors?.email || formik?.errors?.confirmEmail}
-                    </Form.Text>
-                  )}
+                  {formik.touched.confirmEmail &&
+                    !!formik.errors.confirmEmail && (
+                      <Form.Text className="text-danger">
+                        {formik.errors.confirmEmail}
+                      </Form.Text>
+                    )}
                 </Col>
               </Form.Group>
 
-              <Form.Group controlId="formGroupEmail">
-                <Form.Label>Amount</Form.Label>
+              <Form.Group>
+                <Form.Label htmlFor="amount">Amount</Form.Label>
                 <InputGroup>
                   <Form.Control
                     id="amount"
                     name="amount"
                     type="text"
                     autoComplete="nope"
-                    placeholder="enter a positive number"
-                    style={formik?.errors?.amount ? { borderColor: 'red' } : {}}
+                    placeholder=""
+                    style={
+                      formik.touched.amount && !!formik.errors.amount
+                        ? { borderColor: 'red' }
+                        : {}
+                    }
                     className="border-right-0"
                     value={formik.values.amount}
-                    onChange={formik.handleChange}
+                    onChange={(e) => {
+                      _setAmount(e.target.value);
+                    }}
                     onBlur={formik.handleBlur}
                   />
                   <InputGroup.Append>
                     <InputGroup.Text
                       style={{
-                        ...(formik?.errors?.amount
+                        ...(formik.touched.amount && !!formik.errors.amount
                           ? { borderColor: 'red' }
                           : {}),
                       }}
@@ -202,7 +211,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   </InputGroup.Append>
                 </InputGroup>
 
-                {formik?.errors?.amount && (
+                {formik.touched.amount && !!formik.errors.amount && (
                   <Form.Text className="text-danger">
                     {formik?.errors?.amount}
                   </Form.Text>
