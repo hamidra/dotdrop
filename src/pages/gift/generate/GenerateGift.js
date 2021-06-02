@@ -222,7 +222,11 @@ export default function GenerateGift({ account, generateGiftHandler }) {
         </Row>
         <div className="d-flex flex-grow-1" />
         <div className="d-flex justify-content-center">
-          <Button onClick={() => formik.submitForm()}>Generate Gift</Button>
+          <Button
+            onClick={() => formik.submitForm()}
+            disabled={!formik.isValid}>
+            Generate Gift
+          </Button>
         </div>
       </Card.Body>
     </>
