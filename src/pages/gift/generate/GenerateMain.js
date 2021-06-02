@@ -144,7 +144,7 @@ export default function GenerateMain() {
       setGift({
         secret: seed,
         name: giftInfo.name || '',
-        email: giftInfo.email || '',
+        email: giftInfo.recipientEmail || '',
         amount: giftInfo.amount,
       });
 
