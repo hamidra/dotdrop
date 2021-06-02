@@ -30,9 +30,9 @@ export default function Header ({ selectedAccount }) {
     <>
       <Navbar
         className="px-4 py-3"
-        style={{ display: 'grid', gridTemplateColumns: '120px 1fr 120px' }}
+        style={{ display: 'grid', gridTemplateColumns: '60px 1fr 60px' }}
         variant="dark"
-        expand="sm"
+        /* expand="sm" */
       >
         <Navbar.Brand>
           <a
@@ -74,8 +74,8 @@ export default function Header ({ selectedAccount }) {
         <div className='d-flex justify-content-end'>
           {selectedAccount && (
             <>
-              <div className="w-100 d-sm-none" />
-              <Nav className="flex-grow-0 justify-content-end p-1 mr-2 shadow-sm">
+              <div className="d-none d-sm-block w-100 d-sm-none" />
+              <Nav className="d-none d-sm-block flex-grow-0 justify-content-end p-1 mr-2 shadow-sm">
                 <div
                   style={{ minWidth: '5rem', fontWeight: '400' }}
                   className="py-1 px-3 bg-white rounded text-center">
