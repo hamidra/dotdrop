@@ -20,7 +20,7 @@ export default function ProcessExplainerCard() {
         <div className="col">
           <Gift className="mb-4" size={94} />
           <h3 className="mb-3">Create Gift</h3>
-          <div>Enter a gift amount and generate a unique gift secret.</div>
+          <div>Enter your gift amount and generate a unique gift secret.</div>
         </div>
         <div className="col">
           <div className="mb-4">
@@ -33,7 +33,7 @@ export default function ProcessExplainerCard() {
           <Smiley className="mb-4" size={94} />
           <h3 className="mb-3">Claim Gift</h3>
           <div>
-            The recipient creates a new Polkadot account and claims their gift.
+            The recipient uses a new or existing Polkadot account to claim their gift.
           </div>
         </div>
       </div>
