@@ -30,6 +30,7 @@ export default function Header ({ selectedAccount }) {
     <>
       <Navbar
         className="px-4 py-3"
+        style={{ display: 'grid', gridTemplateColumns: '120px 1fr 120px' }}
         variant="dark"
         expand="sm"
       >
@@ -70,41 +71,43 @@ export default function Header ({ selectedAccount }) {
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
-        {selectedAccount && (
-          <>
-            <div className="w-100 d-sm-none" />
-            <Nav className="flex-grow-0 justify-content-end p-1 mr-2 shadow-sm">
-              <div
-                style={{ minWidth: '5rem', fontWeight: '400' }}
-                className="py-1 px-3 bg-white rounded text-center">
-                <AccountInfoBox accountAddress={selectedAccount} />
-              </div>
-            </Nav>
-          </>
-        )}
-        <Dropdown
-          id="dropdown-item-button"
-        >
-          <Dropdown.Toggle
-            className='p-1 rounded shadow-sm'
-            type="button"
-            data-toggle="dropdown"
-            id="dropdownMenuButton"
+        <div className='d-flex justify-content-end'>
+          {selectedAccount && (
+            <>
+              <div className="w-100 d-sm-none" />
+              <Nav className="flex-grow-0 justify-content-end p-1 mr-2 shadow-sm">
+                <div
+                  style={{ minWidth: '5rem', fontWeight: '400' }}
+                  className="py-1 px-3 bg-white rounded text-center">
+                  <AccountInfoBox accountAddress={selectedAccount} />
+                </div>
+              </Nav>
+            </>
+          )}
+          <Dropdown
+            id="dropdown-item-button"
           >
-          <DotsThree size={30} weight="bold" />
-          </Dropdown.Toggle>
-          <Dropdown.Menu
-            aria-labelledby="dropdownMenuButton"
-            className='dropdown-menu-right mt-2 shadow'
-          >
-            <Dropdown.Item
-              className='px-3'
-              onClick={() => history.push('/about')}
+            <Dropdown.Toggle
+              className='p-1 rounded shadow-sm'
+              type="button"
+              data-toggle="dropdown"
+              id="dropdownMenuButton"
             >
-              <Gift className='mr-1' size={18} />About Gifts
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+            <DotsThree size={30} weight="bold" />
+            </Dropdown.Toggle>
+            <Dropdown.Menu
+              aria-labelledby="dropdownMenuButton"
+              className='dropdown-menu-right mt-2 shadow'
+            >
+              <Dropdown.Item
+                className='px-3'
+                onClick={() => history.push('/about')}
+              >
+                <Gift className='mr-1' size={18} />About Gifts
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
       </Navbar>
     </>
   );
