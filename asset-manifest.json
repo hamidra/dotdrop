@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/dotdrop2/static/css/main.025388d0.chunk.css",
-    "main.js": "/dotdrop2/static/js/main.84b4c151.chunk.js",
-    "main.js.map": "/dotdrop2/static/js/main.84b4c151.chunk.js.map",
-    "runtime-main.js": "/dotdrop2/static/js/runtime-main.a68d6999.js",
-    "runtime-main.js.map": "/dotdrop2/static/js/runtime-main.a68d6999.js.map",
-    "static/js/2.f0043131.chunk.js": "/dotdrop2/static/js/2.f0043131.chunk.js",
-    "static/js/2.f0043131.chunk.js.map": "/dotdrop2/static/js/2.f0043131.chunk.js.map",
-    "index.html": "/dotdrop2/index.html",
-    "static/css/main.025388d0.chunk.css.map": "/dotdrop2/static/css/main.025388d0.chunk.css.map",
-    "static/js/2.f0043131.chunk.js.LICENSE.txt": "/dotdrop2/static/js/2.f0043131.chunk.js.LICENSE.txt",
-    "static/media/extension-add.7ee829d8.png": "/dotdrop2/static/media/extension-add.7ee829d8.png",
-    "static/media/extension-ledger.8cd0dd3b.png": "/dotdrop2/static/media/extension-ledger.8cd0dd3b.png",
-    "static/media/ledger-install.e27f49a0.png": "/dotdrop2/static/media/ledger-install.e27f49a0.png"
+    "main.css": "/dotdropB/static/css/main.025388d0.chunk.css",
+    "main.js": "/dotdropB/static/js/main.55dee29c.chunk.js",
+    "main.js.map": "/dotdropB/static/js/main.55dee29c.chunk.js.map",
+    "runtime-main.js": "/dotdropB/static/js/runtime-main.a53225e9.js",
+    "runtime-main.js.map": "/dotdropB/static/js/runtime-main.a53225e9.js.map",
+    "static/js/2.aaa8b07d.chunk.js": "/dotdropB/static/js/2.aaa8b07d.chunk.js",
+    "static/js/2.aaa8b07d.chunk.js.map": "/dotdropB/static/js/2.aaa8b07d.chunk.js.map",
+    "index.html": "/dotdropB/index.html",
+    "static/css/main.025388d0.chunk.css.map": "/dotdropB/static/css/main.025388d0.chunk.css.map",
+    "static/js/2.aaa8b07d.chunk.js.LICENSE.txt": "/dotdropB/static/js/2.aaa8b07d.chunk.js.LICENSE.txt",
+    "static/media/extension-add.7ee829d8.png": "/dotdropB/static/media/extension-add.7ee829d8.png",
+    "static/media/extension-ledger.8cd0dd3b.png": "/dotdropB/static/media/extension-ledger.8cd0dd3b.png",
+    "static/media/ledger-install.e27f49a0.png": "/dotdropB/static/media/ledger-install.e27f49a0.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.a68d6999.js",
-    "static/js/2.f0043131.chunk.js",
+    "static/js/runtime-main.a53225e9.js",
+    "static/js/2.aaa8b07d.chunk.js",
     "static/css/main.025388d0.chunk.css",
-    "static/js/main.84b4c151.chunk.js"
+    "static/js/main.55dee29c.chunk.js"
   ]
 }
