@@ -1,0 +1,63 @@
+.footer .logo {
+  max-height: 30px;
+  max-width: none;
+}
+
+footer a {
+  font-weight: 400;
+}
+
+.footer-legal ul {
+  margin-bottom: 0;
+}
+
+footer.bg-dark a.text-white {
+  color: $secondary-lighter !important;
+}
+
+footer.bg-dark a.text-white:hover {
+  color: $white !important;
+}
+
+footer .list-social-links i {
+  font-size: 1.2rem;
+}
+
+footer .list-social-links a {
+  padding: 0.25rem 0.9rem;
+}
+
+footer [class^="socicon-"] {
+  line-height: 2;
+}
+
+footer {
+  .list-social-links {
+    margin-left: 0rem;
+
+    a {
+      background: $secondary-darker !important;
+      border: 1px solid $white;
+    }
+  }
+}
+
+#mc_embed_signup_scroll {
+  .input-group-prepend {
+    height: 58px;
+
+    span {
+      height: 58px;
+    }
+  }
+}
+
+footer {
+  #mce-EMAIL {
+    @extend .font-family-monospace;
+
+    height: 3rem;
+    background: black;
+    border: solid 1px black;
+  }
+}

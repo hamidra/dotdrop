@@ -1,0 +1,22 @@
+.nav-secondary {
+  li:last-child {
+    margin-right: auto !important;
+  }
+}
+
+.nav-secondary-link {
+  color: $secondary-lighter;
+  transition: color 0.2s ease-in-out;
+
+  &:visited {
+    color: $secondary-lighter;
+  }
+
+  &:hover {
+    color: $black;
+  }
+}
+
+.nav-current .nav-secondary-link {
+  color: $black;
+}

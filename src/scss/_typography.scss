@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:400,500,700,900&display=swap");
+
+$font-body: "Work Sans", sans-serif !important;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+body {
+  font-family: $font-body;
+  letter-spacing: -0.02rem;
+}
+
+.font-family-monospace {
+  font-family: var(--font-family-monospace);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color: $black;
+  font-weight: $font-weight-regular;
+  letter-spacing: -0.04em;
+}
+
+h1.text-dark,
+h2.text-dark,
+h3.text-dark,
+h4.text-dark,
+h5.text-dark,
+h6.text-dark,
+.h1.text-dark,
+.h2.text-dark,
+.h3.text-dark,
+.h4.text-dark,
+.h5.text-dark,
+.h6.text-dark {
+  color: $black !important;
+}
+
+.display-1,
+.display-2,
+.display-3,
+.display-4 {
+  letter-spacing: -0.05em;
+  font-weight: $font-weight-regular;
+}
+
+h1,
+.h1,
+.display-3 {
+  line-height: 1.2;
+}
+
+h4,
+.h4 {
+  font-size: 2rem;
+}
+
+h6,
+.h6 {
+  font-size: 1.2rem;
+}
+
+.text-dark {
+  color: $black !important;
+}
+
+.text-primary {
+  color: $primary !important;
+}
+
+.text-white {
+  color: $white !important;
+}
+
+b,
+strong {
+  font-weight: $font-weight-bold;
+}
+
+.text-bold,
+.font-weight-bold {
+  font-weight: $font-weight-bold !important;
+}
+
+.text-bolder,
+.font-weight-bolder {
+  font-weight: $font-weight-black !important;
+}
+
+a {
+  color: $primary;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+a.text-underline {
+  color: inherit;
+  display: inline-block;
+
+  &:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    display: block;
+    transition: transform 150ms ease-in-out;
+    will-change: transform;
+    background: $primary;
+  }
+
+  &:hover {
+    &:after {
+      transform: translate(0, 2px);
+    }
+  }
+
+  &:focus {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .text-white &,
+  &.text-white {
+    &:after {
+      background: $white;
+    }
+  }
+}
+
+a.link-arrow:after {
+  font-size: 21px;
+  position: relative;
+  top: 5px;
+  font-family: "Material Icons";
+  content: "keyboard_arrow_right";
+  padding-left: 2px;
+}
+
+.page-link {
+  color: $primary;
+}
+
+.page-link:hover {
+  color: $primary;
+  background-color: #ffe5ff;
+  border-color: #ffe5ff;
+}
+
+.page-item.active .page-link {
+  background-color: $primary;
+  border-color: $primary;
+}

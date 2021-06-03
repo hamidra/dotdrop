@@ -1,0 +1,47 @@
+// // Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) { ... }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { ... }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { ... }
+
+.mt-minus-3 {
+  margin-top: -1.5rem;
+}
+
+@media (min-width: 576px) {
+  .mt-sm-minus-3 {
+    margin-top: -1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mt-md-minus-3 {
+    margin-top: -1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .mt-lg-minus-3 {
+    margin-top: -1.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mt-xl-minus-3 {
+    margin-top: -1.5rem;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

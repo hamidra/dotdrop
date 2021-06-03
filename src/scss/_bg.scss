@@ -1,0 +1,162 @@
+.bg-primary {
+  background: none;
+  background-color: transparent !important;
+
+  &--solid {
+    background: $primary !important;
+  }
+}
+
+
+body::before {
+  background: linear-gradient(128deg, #e73c7e, #c40061, #5d27cb, #e73c7e);
+  background-size: 400% 400%;
+  animation: gradient 42s ease infinite;
+  content: '';
+  z-index: -1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 1;
+}
+
+.bg-gradient {
+  $color1: $primary-darker;
+  $color2: $primary;
+  $color3: #6745d2;
+
+  background-image: linear-gradient(
+      217deg,
+      rgba($color1, 0.8),
+      rgba($color1, 0) 70%
+    ),
+    linear-gradient(127deg, rgba($color2, 0.8), rgba($color2, 0) 70%),
+    linear-gradient(336deg, rgba($color3, 0.7), rgba($color3, 0) 70%);
+
+  background-color: $primary;
+}
+
+.bg-primary-solid {
+  background: $primary !important;
+}
+
+.bg-secondary {
+  background: $secondary-darker !important;
+}
+
+.bg-dark {
+  background: $secondary-darker !important;
+}
+
+.bg-black {
+  background: $black !important;
+}
+
+.bg-gray {
+  background: $gray !important;
+}
+
+a.bg-primary:hover,
+a.bg-primary:focus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+  background-color: #cd0061 !important;
+}
+
+.bg-dark .text-white {
+  color: #fff !important;
+}
+
+.bg-dark .footer-legal .text-white {
+  color: #b5aeae !important;
+}
+
+.bg-white p,
+.bg-white p.lead {
+  color: $black;
+}
+
+.bg-dark p,
+.bg-dark p.lead {
+  color: $white;
+}
+
+.bg-dark-alt {
+  background: radial-gradient(circle, #545454 0, #424242);
+  background-image: radial-gradient(
+    circle,
+    rgb(84, 84, 84) 0px,
+    rgb(66, 66, 66)
+  );
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+}
+
+.bg-dark hr {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.bg-image-align-top {
+  object-position: 0 0;
+}
+
+.bg-dark .form-control {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+}
+
+.bg-dark .form-control::placeholder {
+  color: #ffffff;
+}
+
+.bg-primary-alt {
+  background-color: #fffaff !important;
+}
+
+.bg-img {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+}
+
+.bg-md-img {
+  @media (max-width: 991px) {
+    background: none !important;
+  }
+  @media (min-width: 992px) {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+  }
+}
+
+.bg-img-right {
+  background-position: right;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
