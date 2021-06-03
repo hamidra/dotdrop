@@ -1,14 +1,13 @@
 import { useContext } from 'react';
 import { ClaimContext } from '../ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
-import LinkButton from '../../../../components/LinkButton';
 import CardButton from '../../../../components/CardButton';
 import CardHeader from '../../../../components/CardHeader';
 import Divider from '../../../../components/Divider';
 
 const ConnectExistingAccount = ({
   setExistingAccountSourceHandler,
-  prevStepHandler,
+  prevStepHandler
 }) => {
   return (
     <Card.Body className="d-flex flex-column">
@@ -36,11 +35,11 @@ const ConnectExistingAccount = ({
         </Row>
         <Divider text="Or" />
         <Row className="justify-content-center pb-4">
-          <LinkButton
-            className="tertiary-button"
+          <button
+            className="btn btn-link"
             onClick={() => setExistingAccountSourceHandler('ENTER')}>
             Enter Address Manually
-          </LinkButton>
+          </button>
         </Row>
       </Col>
     </Card.Body>

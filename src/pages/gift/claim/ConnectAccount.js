@@ -1,5 +1,4 @@
 import { Card, Row, Col } from 'react-bootstrap';
-import LinkButton from '../../../components/LinkButton';
 import CardHeader from '../../../components/CardHeader';
 import Divider from '../../../components/Divider';
 
@@ -21,11 +20,11 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
           </Row>
           <Divider text="Or" />
           <Row className="d-flex flex-column justify-content-center align-items-center">
-            <LinkButton
-              variant="link"
+            <button
+              className="btn btn-link"
               onClick={() => setAccountSourceHandler('EXISTING')}>
               Connect Existing Account
-            </LinkButton>
+            </button>
           </Row>
         </Col>
       </Card.Body>
