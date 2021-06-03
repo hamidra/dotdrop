@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { Row, Col, Card, Form } from 'react-bootstrap';
-import Button from '../../../../components/CustomButton';
 import CardHeader from '../../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../../substrate-lib';
 
-export default function EnterAccountAddress({
+export default function EnterAccountAddress ({
   setAddressHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const { chainInfo } = useSubstrate();
 
@@ -62,7 +61,7 @@ export default function EnterAccountAddress({
         <div className="flex-grow-1" />
         <Row>
           <Col className="d-flex justify-content-center">
-            <Button onClick={() => _setAddressHandler()}>Claim Gift</Button>
+            <button onClick={() => _setAddressHandler()}>Claim Gift</button>
           </Col>
         </Row>
       </Card.Body>

@@ -1,5 +1,4 @@
 import { Card, Row, Col, Form } from 'react-bootstrap';
-import Button from '../../../../components/CustomButton';
 import CardHeader from '../../../../components/CardHeader';
 import { useState } from 'react';
 
@@ -10,10 +9,10 @@ const randomIdx = (length) => {
   return [random1, random2].sort((a, b) => a - b);
 };
 
-export default function VerifyAccountPhrase({
+export default function VerifyAccountPhrase ({
   mnemonicWords,
   nextStepHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const [check1, setCheck1] = useState('');
   const [check2, setCheck2] = useState('');
@@ -88,11 +87,11 @@ export default function VerifyAccountPhrase({
       </div>
       <div className="flex-grow-1" />
       <Col className="d-flex pt-4 justify-content-center align-items-center">
-        <Button
-          variant="outline-primary"
+        <button
+          className="btn btn-primary"
           onClick={() => validate() && nextStepHandler()}>
           Verify Phrase
-        </Button>
+        </button>
       </Col>
     </Card.Body>
   );

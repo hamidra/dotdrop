@@ -1,9 +1,8 @@
 import { useContext, useState } from 'react';
 import { Row, Col, Card, Form } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
 import { ClaimContext } from './ClaimMain';
 import CardHeader from '../../../components/CardHeader';
-export default function VerifySecret({ claimGiftHandler }) {
+export default function VerifySecret ({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
   const [redeemSecret, setRedeemSecret] = useState('');
   const redeemHandler = () => {
@@ -42,7 +41,7 @@ export default function VerifySecret({ claimGiftHandler }) {
         <div className="d-flex flex-grow-1" />
         <Row className=" pt-5 justify-content-center align-items-center">
           <Col className="d-flex justify-content-center">
-            <Button onClick={() => redeemHandler()}>Claim Gift</Button>
+            <button className="btn btn-primary" onClick={() => redeemHandler()}>Claim Gift</button>
           </Col>
         </Row>
       </Card.Body>

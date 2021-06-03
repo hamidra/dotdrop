@@ -1,0 +1,25 @@
+.ecosystem-item {
+  .card {
+    width: 100%;
+  }
+}
+
+.ecosystem-item-img-link {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  width: 100%;
+  padding-top: 50%;
+  background: $secondary-darker;
+  border-top-left-radius: calc(0.375rem - 0px);
+  border-top-right-radius: calc(0.375rem - 0px);
+
+  .card-img-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 0 !important;
+  }
+}

@@ -1,4 +1,3 @@
-import Button from '../../../components/CustomButton';
 import { useContext } from 'react';
 import { GenerateContext } from './GenerateMain';
 import { Card, Row, Col } from 'react-bootstrap';
@@ -16,9 +15,9 @@ export default function Landing () {
         <Row className="justify-content-center align-items-center">
           <Col className="d-flex flex-column justify-content-around align-items-center">
             <div className="pt-5">
-              <Button variant="outline-primary" onClick={() => nextStep()}>
+              <button className='btn btn-primary btn-lg' onClick={() => nextStep()}>
                 Send a New Gift
-              </Button>
+              </button>
             </div>
             <a className="pt-3" href="#/About" target="_blank">
               {'How do gifts work'}

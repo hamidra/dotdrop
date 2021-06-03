@@ -1,0 +1,42 @@
+.dropdown-lng-choice {
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    border-radius: 1.5rem;
+    min-width: 11rem;
+    top: 70%;
+
+    @media (min-width: 992px) {
+      top: 130%;
+    }
+
+    a {
+      color: $black;
+      font-weight: $font-weight-bold;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  &.show {
+    .dropdown-menu {
+      animation: fade-up 0.2s linear forwards;
+    }
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

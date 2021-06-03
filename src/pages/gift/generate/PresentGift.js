@@ -1,9 +1,8 @@
 import { Row, Col, Card } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
 import LinkButton from '../../../components/LinkButton';
 import CardHeader from '../../../components/CardHeader';
 import { Link } from 'react-router-dom';
-export default function PresentGift({ gift, removeGiftHandler }) {
+export default function PresentGift ({ gift, removeGiftHandler }) {
   const { email, amount, secret } = gift;
   const mailSubject = 'Sending you some DOTs';
   const mailBody = `
@@ -57,7 +56,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
                       padding: '5px',
                       marginTop: '20px',
                       marginBottom: '20px',
-                      borderRadius: '5px',
+                      borderRadius: '5px'
                     }}>
                     {secret}
                   </strong>
@@ -79,9 +78,9 @@ export default function PresentGift({ gift, removeGiftHandler }) {
             <LinkButton className="ml-3" onClick={() => printHandler()}>
               Print
             </LinkButton>
-            <Button className="ml-3" onClick={() => mailToHandler()}>
+            <button className="btn btn-primary ml-3" onClick={() => mailToHandler()}>
               Email
-            </Button>
+            </button>
           </Col>
         </Row>
       </Card.Body>

@@ -1,14 +1,13 @@
 import CardHeader from '../../../../components/CardHeader';
 import { Row, Col, Card, Image } from 'react-bootstrap';
-import Button from '../../../../components/CustomButton';
 import { isWeb3Injected } from '@polkadot/extension-dapp';
 import ledgerInstall from '../../../../images/ledger-install.png';
 import extensionAdd from '../../../../images/extension-add.png';
 import extensionLedger from '../../../../images/extension-ledger.png';
 
-export default function LedgerInstructions({
+export default function LedgerInstructions ({
   prevStepHandler,
-  nextStepHandler,
+  nextStepHandler
 }) {
   const title = 'Import Ledger Account';
   const extensionLink = 'https://polkadot.js.org/extension/';
@@ -73,7 +72,7 @@ export default function LedgerInstructions({
         </Row>
         <Row>
           <Col className="pt-4 d-flex justify-content-center">
-            <Button onClick={() => nextStepHandler()}>Connect</Button>
+            <button className="btn btn-primary" onClick={() => nextStepHandler()}>Connect</button>
           </Col>
         </Row>
       </Card.Body>

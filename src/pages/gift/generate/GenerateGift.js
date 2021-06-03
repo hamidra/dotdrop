@@ -1,12 +1,11 @@
 import { useContext, useState, useEffect } from 'react';
 import { Row, Col, Form, Card, InputGroup } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-export default function GenerateGift({ account, generateGiftHandler }) {
+export default function GenerateGift ({ account, generateGiftHandler }) {
   const { api, apiState, chainInfo } = useSubstrate();
 
   const { prevStep } = useContext(GenerateContext);
@@ -87,7 +86,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
     const pattern = /^([0-9]+\.?[0-9]{0,5})?$/i;
     formik.setValues({
       ...formik.values,
-      amount: pattern.test(value) ? value : formik.values.amount,
+      amount: pattern.test(value) ? value : formik.values.amount
     });
   };
 
@@ -95,12 +94,12 @@ export default function GenerateGift({ account, generateGiftHandler }) {
     initialValues: {
       amount: '',
       recipientEmail: '',
-      confirmEmail: '',
+      confirmEmail: ''
     },
     validate,
     onSubmit: ({ recipientEmail, amount }) => {
       generateGiftHandler({ recipientEmail, amount });
-    },
+    }
   });
 
   return (
@@ -142,7 +141,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                       <Form.Text className="text-danger">
                         {formik.errors.recipientEmail}
                       </Form.Text>
-                    )}
+                  )}
                 </Col>
                 <Col md="6" className="mt-2 mt-md-0">
                   <Form.Label htmlFor="confirmEmail">
@@ -167,7 +166,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                       <Form.Text className="text-danger">
                         {formik.errors.confirmEmail}
                       </Form.Text>
-                    )}
+                  )}
                 </Col>
               </Form.Group>
 
@@ -197,7 +196,7 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                       style={{
                         ...(formik.touched.amount && !!formik.errors.amount
                           ? { borderColor: 'red' }
-                          : {}),
+                          : {})
                       }}
                       className="bg-transparent border-left-0 balance-text">
                       {balance?.free
@@ -222,11 +221,12 @@ export default function GenerateGift({ account, generateGiftHandler }) {
         </Row>
         <div className="d-flex flex-grow-1" />
         <div className="d-flex justify-content-center">
-          <Button
+          <button
+            className="btn btn-primary"
             onClick={() => formik.submitForm()}
             disabled={!formik.isValid}>
             Generate Gift
-          </Button>
+          </button>
         </div>
       </Card.Body>
     </>

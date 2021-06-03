@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import AccountSelector from '../../../components/account/AccountSelector';
 import CardHeader from '../../../components/CardHeader';
 
-export default function ExtensionAccount({
+export default function ExtensionAccount ({
   setAccountHandler,
   setAddressHandler,
   title,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const { keyring, balances, chainInfo } = useSubstrate();
   const [selectedAccount, setSelectedAccount] = useState(null);
@@ -53,7 +52,7 @@ export default function ExtensionAccount({
         <div className="d-flex flex-grow-1" />
         <Row>
           <Col className="pt-4 d-flex justify-content-center">
-            <Button onClick={() => _setAccountHandler()}>Connect</Button>
+            <button className='btn btn-primary' onClick={() => _setAccountHandler()}>Connect</button>
           </Col>
         </Row>
       </Card.Body>

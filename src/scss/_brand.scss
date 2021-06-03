@@ -1,0 +1,18 @@
+.brand-rounded {
+  border-radius: 1rem;
+}
+
+.brand-font {
+  font-size: 11vw;
+  letter-spacing: -0.6vw;
+
+  @media (min-width: 992px) {
+    font-size: 8vw;
+    letter-spacing: -0.4vw;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 100px;
+    letter-spacing: -4px;
+  }
+}

@@ -1,0 +1,27 @@
+.form-round {
+  border-radius: 1.5rem;
+  height: calc(2.125rem + 9px);
+}
+
+.form-control,
+.input-group-text {
+  color: #393838;
+}
+
+.input-group-lg > .input-group-prepend > .input-group-text {
+  border-radius: 2rem;
+}
+
+.input-group > .input-group-prepend > span.input-group-text {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group-lg > .form-control {
+  border-radius: 2rem;
+}
+
+.input-group-lg > .form-control.form-end {
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
