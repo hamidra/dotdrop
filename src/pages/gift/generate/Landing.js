@@ -19,8 +19,8 @@ export default function Landing () {
                 Send a New Gift
               </button>
             </div>
-            <a className="pt-3" href="#/About" target="_blank">
-              {'How do gifts work'}
+            <a className="pt-5 small text-underline" href="#/About" target="_blank">
+              {'How do gifts work?'}
             </a>
           </Col>
         </Row>
