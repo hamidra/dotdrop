@@ -74,10 +74,14 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
               onClick={() => removeGiftHandler(secret)}>
               Delete
             </button>
-            <button className="btn btn-link ml-3" onClick={() => printHandler()}>
+            <button
+              className="btn btn-link ml-3"
+              onClick={() => printHandler()}>
               Print
             </button>
-            <button className="btn btn-primary ml-3" onClick={() => mailToHandler()}>
+            <button
+              className="btn btn-primary ml-3"
+              onClick={() => mailToHandler()}>
               Email
             </button>
           </Col>

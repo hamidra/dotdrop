@@ -22,7 +22,7 @@ export default function Claimed ({ amount, accountAddress }) {
         </Row>
         <div className='flex-grow-1'/>
         <Col className="pt-5 d-flex justify-content-center align-items-center">
-          <button onClick={() => history.push(`/account/${accountAddress}`)}>
+          <button className='btn btn-primary' onClick={() => history.push(`/account/${accountAddress}`)}>
             See Account
           </button>
         </Col>

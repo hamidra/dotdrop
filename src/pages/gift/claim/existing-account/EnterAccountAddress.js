@@ -61,7 +61,7 @@ export default function EnterAccountAddress ({
         <div className="flex-grow-1" />
         <Row>
           <Col className="d-flex justify-content-center">
-            <button onClick={() => _setAddressHandler()}>Claim Gift</button>
+            <button className="btn btn-primary" onClick={() => _setAddressHandler()}>Claim Gift</button>
           </Col>
         </Row>
       </Card.Body>
