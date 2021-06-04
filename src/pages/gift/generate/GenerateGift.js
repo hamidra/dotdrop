@@ -4,33 +4,15 @@ import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
-import { stringHelpers } from '../../../utils';
-export default function GenerateGift({ account, generateGiftHandler }) {
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+export default function GenerateGift ({ account, generateGiftHandler }) {
   const { api, apiState, chainInfo } = useSubstrate();
 
   const { prevStep } = useContext(GenerateContext);
 
-  const [formValues, setFormValues] = useState({
-    amount: '',
-    email: '',
-    confirmEmail: '',
-  });
-  const [formErrors, setFormErrors] = useState({
-    amount: '',
-    email: '',
-    confirmEmail: '',
-  });
-
   const [balance, setBalance] = useState(null);
   const balanceDecimalPoints = 2;
-
-  const _setAmount = (value) => {
-    const pattern = /^([0-9]+.?[0-9]{0,5})?$/i;
-    setFormValues({
-      ...formValues,
-      amount: pattern.test(value) ? value : formValues?.amount,
-    });
-  };
 
   useEffect(() => {
     let unsub;
@@ -55,22 +37,20 @@ export default function GenerateGift({ account, generateGiftHandler }) {
     return () => unsub && unsub();
   }, [api, apiState, account, chainInfo]);
 
-  const validate = () => {
+  const validate = ({ recipientEmail, confirmEmail, amount }) => {
     const errors = {};
-    let isValid = true;
-    const { email, confirmEmail, amount } = formValues;
     const chainAmount = utils.toChainUnit(amount, chainInfo.decimals);
 
-    if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      isValid = false;
-      errors.email = 'Please enter a valid email.';
-    } else if (email != confirmEmail) {
-      isValid = false;
+    if (
+      !recipientEmail ||
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(recipientEmail)
+    ) {
+      errors.recipientEmail = 'Please enter a valid email.';
+    } else if (recipientEmail !== confirmEmail) {
       errors.confirmEmail = "The email addresses did'nt match.";
     }
 
     if (!amount) {
-      isValid = false;
       errors.amount = 'Please enter the gift amount';
     }
 
@@ -84,7 +64,6 @@ export default function GenerateGift({ account, generateGiftHandler }) {
         chainInfo.existentialDeposit,
         chainInfo.decimals
       );
-      isValid = false;
       errors.amount = `The amount is below ${minDeposit} ${chainInfo.token}, the existential deposit for a Polkadot account.`;
     }
 
@@ -94,7 +73,6 @@ export default function GenerateGift({ account, generateGiftHandler }) {
       chainAmount &&
       !utils.gteChainUnits(balance?.free, chainAmount)
     ) {
-      isValid = false;
       const freeBalance = utils.fromChainUnit(
         balance?.free,
         chainInfo.decimals,
@@ -102,15 +80,28 @@ export default function GenerateGift({ account, generateGiftHandler }) {
       );
       errors.amount = `The account balance of ${freeBalance} ${chainInfo.token} is not anough to pay the gift amount of ${amount} ${chainInfo.token}`;
     }
-
-    setFormErrors({ ...formErrors, ...errors });
-    return isValid;
+    return errors;
   };
 
-  const _generateGiftHandler = () => {
-    const { email, amount } = formValues;
-    validate() && generateGiftHandler({ email, amount });
+  const _setAmount = (value) => {
+    const pattern = /^([0-9]+\.?[0-9]{0,5})?$/i;
+    formik.setValues({
+      ...formik.values,
+      amount: pattern.test(value) ? value : formik.values.amount
+    });
   };
+
+  const formik = useFormik({
+    initialValues: {
+      amount: '',
+      recipientEmail: '',
+      confirmEmail: ''
+    },
+    validate,
+    onSubmit: ({ recipientEmail, amount }) => {
+      generateGiftHandler({ recipientEmail, amount });
+    }
+  });
 
   return (
     <>
@@ -123,67 +114,90 @@ export default function GenerateGift({ account, generateGiftHandler }) {
         />
         <Row className="flex-column align-items-center">
           <Col className="d-flex justify-content-center align-items-center pt-4">
-            <Form autoComplete="off" className="w-100">
-              <Form.Group className="row" controlId="formGroupEmail">
+            <Form
+              autoComplete="off"
+              className="w-100"
+              onSubmit={formik.handleSubmit}>
+              <Form.Group className="row">
                 <Col md="6">
-                  <Form.Label>Recipient Email</Form.Label>
+                  <Form.Label htmlFor="recipientEmail">
+                    Recipient Email
+                  </Form.Label>
                   <Form.Control
+                    id="recipientEmail"
+                    name="recipientEmail"
                     type="email"
                     autoComplete="off"
                     placeholder=""
-                    value={formValues?.email}
-                    isInvalid={!!formErrors?.email}
-                    onChange={(e) => {
-                      setFormErrors({ ...formErrors, email: '' });
-                      setFormValues({ ...formValues, email: e.target.value });
-                    }}
+                    value={formik.values.recipientEmail}
+                    isInvalid={
+                      formik.touched.recipientEmail &&
+                      !!formik.errors.recipientEmail
+                    }
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.recipientEmail &&
+                    !!formik.errors.recipientEmail && (
+                      <Form.Text className="text-danger">
+                        {formik.errors.recipientEmail}
+                      </Form.Text>
+                  )}
                 </Col>
                 <Col md="6" className="mt-2 mt-md-0">
-                  <Form.Label>Confirm Recipient Email</Form.Label>
+                  <Form.Label htmlFor="confirmEmail">
+                    Confirm Recipient Email
+                  </Form.Label>
                   <Form.Control
+                    id="confirmEmail"
+                    name="confirmEmail"
                     type="email"
                     autoComplete="nope"
                     placeholder=""
-                    value={formValues?.confirmEmail}
-                    isInvalid={!!formErrors?.confirmEmail}
-                    onChange={(e) => {
-                      setFormErrors({ ...formErrors, confirmEmail: '' });
-                      setFormValues({
-                        ...formValues,
-                        confirmEmail: e.target.value,
-                      });
-                    }}
+                    value={formik.values.confirmEmail}
+                    isInvalid={
+                      formik.touched.confirmEmail &&
+                      !!formik.errors.confirmEmail
+                    }
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
-                </Col>
-                <div className="w-100" />
-                <Col>
-                  {(formErrors?.email || formErrors?.confirmEmail) && (
-                    <Form.Text className="text-danger">
-                      {formErrors?.email || formErrors?.confirmEmail}
-                    </Form.Text>
+                  {formik.touched.confirmEmail &&
+                    !!formik.errors.confirmEmail && (
+                      <Form.Text className="text-danger">
+                        {formik.errors.confirmEmail}
+                      </Form.Text>
                   )}
                 </Col>
               </Form.Group>
 
-              <Form.Group controlId="formGroupEmail">
-                <Form.Label>Amount</Form.Label>
+              <Form.Group>
+                <Form.Label htmlFor="amount">Amount</Form.Label>
                 <InputGroup>
                   <Form.Control
+                    id="amount"
+                    name="amount"
                     type="text"
                     autoComplete="nope"
-                    style={formErrors?.amount ? { borderColor: 'red' } : {}}
+                    placeholder=""
+                    style={
+                      formik.touched.amount && !!formik.errors.amount
+                        ? { borderColor: 'red' }
+                        : {}
+                    }
                     className="border-right-0"
-                    value={formValues?.amount}
+                    value={formik.values.amount}
                     onChange={(e) => {
-                      setFormErrors({ ...formErrors, amount: '' });
-                      _setAmount(e?.target?.value);
+                      _setAmount(e.target.value);
                     }}
+                    onBlur={formik.handleBlur}
                   />
                   <InputGroup.Append>
                     <InputGroup.Text
                       style={{
-                        ...(formErrors?.amount ? { borderColor: 'red' } : {}),
+                        ...(formik.touched.amount && !!formik.errors.amount
+                          ? { borderColor: 'red' }
+                          : {})
                       }}
                       className="bg-transparent border-left-0 balance-text">
                       {balance?.free
@@ -197,9 +211,9 @@ export default function GenerateGift({ account, generateGiftHandler }) {
                   </InputGroup.Append>
                 </InputGroup>
 
-                {formErrors?.amount && (
+                {formik.touched.amount && !!formik.errors.amount && (
                   <Form.Text className="text-danger">
-                    {formErrors?.amount}
+                    {formik?.errors?.amount}
                   </Form.Text>
                 )}
               </Form.Group>
@@ -208,7 +222,11 @@ export default function GenerateGift({ account, generateGiftHandler }) {
         </Row>
         <div className="d-flex flex-grow-1" />
         <div className="d-flex justify-content-center">
-          <Button onClick={() => _generateGiftHandler()}>Generate Gift</Button>
+          <Button
+            onClick={() => formik.submitForm()}
+            disabled={!formik.isValid}>
+            Generate Gift
+          </Button>
         </div>
       </Card.Body>
     </>

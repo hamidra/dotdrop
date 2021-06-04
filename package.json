@@ -29,6 +29,7 @@
     "@polkadot/util-crypto": "^5.6.3",
     "bn.js": "^5.2.0",
     "bootstrap": "^4.6.0",
+    "formik": "^2.2.8",
     "node-sass": "^5.0.0",
     "phosphor-react": "^1.2.1",
     "prop-types": "^15.7.2",
@@ -42,7 +43,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.2",
     "react-use": "^17.2.4",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
@@ -88,7 +90,6 @@
   },
   "keywords": [
     "substrate",
-    "substrate-ui",
     "polkadot-js"
   ]
 }
