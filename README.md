@@ -1,10 +1,10 @@
 # Dotdrop(a.k.a Dot Gifts)
 
-Dotdrop is a dapp (decentralized app) built on top of substrate compaitble networks to let the users of any substrate based network send tokens to anyone no matter if the recepient has any accounts in the network or not. The sender of a gift can simply wrap their DOTs as a gift in a unique secret hash that functions as a vouvher and then share the secret with the recipient (through email, message or just simply write it on a paper), while the recipient of the gift can go to the app and reveal the recieved voucher (gift secret hash) to redeem their gifted DOTs to their account. If the recipient has no accounts in the network to redeem their gift, the app will walk them through account creation steps to let them create an account before redeeming their gift.
+Dotdrop is a dapp (decentralized app) built on top of substrate compatible networks to let the users of any substrate based network send tokens to anyone no matter if the recepient has any accounts in the network or not. The sender of a gift can simply wrap their DOTs as a gift in a unique secret hash that functions as a voucher and then share the secret with the recipient (through email, message or just simply write it on a paper), while the recipient of the gift can go to the app and reveal the recieved voucher (gift secret hash) to redeem their gifted DOTs to their account. If the recipient has no accounts in the network to redeem their gift, the app will walk them through account creation steps to let them create an account before redeeming their gift.
 
 ## Running the Dotdrop dapp
 
-### Requirments
+### Requirements
 
 - [node.js version >=14](https://nodejs.org/en/download/)
 - [yarn](https://yarnpkg.com/)
