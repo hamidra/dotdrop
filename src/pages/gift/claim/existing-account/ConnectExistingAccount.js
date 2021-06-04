@@ -17,7 +17,7 @@ const ConnectExistingAccount = ({
         backClickHandler={prevStepHandler}
       />
       <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
-        <Row>
+        <Row className="w-100">
           <Col className="mb-3">
             <CardButton
               logo="extension"
