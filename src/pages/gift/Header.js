@@ -88,12 +88,12 @@ export default function Header ({ selectedAccount }) {
             id="dropdown-item-button"
           >
             <Dropdown.Toggle
-              className='p-1 rounded shadow-sm'
+              className="btn-dropdown p-1 rounded shadow-sm"
               type="button"
               data-toggle="dropdown"
               id="dropdownMenuButton"
             >
-            <DotsThree size={30} weight="bold" />
+              <DotsThree size={30} weight="bold" />
             </Dropdown.Toggle>
             <Dropdown.Menu
               aria-labelledby="dropdownMenuButton"

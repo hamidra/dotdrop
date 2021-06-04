@@ -138,10 +138,15 @@ $h5-font-size: 1rem;
     background-color: #FFF !important;
     border: none;
     color: $gray-600;
+    transition: none;
+    transform: none;
 
-    :hover {
+    &:before, &:hover {
       background-color: $gray-100;
       color: $gray-900;
+      border: none;
+      transition: none;
+      transform: none;
     }
   }
 
