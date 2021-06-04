@@ -9,8 +9,8 @@ export default function ConnectAccount({ setAccountSourceHandler }) {
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title="Dot Account"
-          cardText="Create a new Polkadot account to transfer your gift to."
+          title="Claim Your Gift"
+          cardText="Create a new Polkadot account, or connect an existing account to transfer your gift to."
         />
         <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
           <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
