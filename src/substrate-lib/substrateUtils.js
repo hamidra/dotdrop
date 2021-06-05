@@ -15,6 +15,17 @@ const trimEnd = (str, char) => {
 };
 
 const utils = {
+  getAccountAddress: (account) => {
+    const { pairOrAddress } = account;
+    if (typeof pairOrAddress === 'string' || pairOrAddress instanceof String) {
+      // the stored value is an address
+      return pairOrAddress;
+    } else {
+      // the stored value is an account
+      return pairOrAddress?.address;
+    }
+  },
+
   validateAddress: (address, ss58Format) => {
     try {
       const decodedAddress = decodeAddress(address, ss58Format);
@@ -24,6 +35,7 @@ const utils = {
       return false;
     }
   },
+
   formatBalance: (balance, decimalPoints) => {
     if (!balance) {
       return balance;
@@ -37,6 +49,7 @@ const utils = {
     }
     return result;
   },
+
   fromChainUnit: (value, chainDecimal, decimalPoints) => {
     if (!value || !chainDecimal) {
       return value;

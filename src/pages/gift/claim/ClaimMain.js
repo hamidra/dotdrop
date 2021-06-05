@@ -1,5 +1,5 @@
 import { createContext, useState, createElement } from 'react';
-import { utils, giftPallet, useSubstrate } from '../../../substrate-lib';
+import { utils, giftProvider, useSubstrate } from '../../../substrate-lib';
 import Claimed from './Claimed';
 import VerifySecret from './VerifySecret';
 import ErrorModal from '../../../components/Error';
@@ -17,7 +17,7 @@ const ClaimContext = createContext();
 export { ClaimContext };
 export default function ClaimMain() {
   const { keyring, apiState, api, chainInfo } = useSubstrate();
-  const { claimGift } = giftPallet;
+  const { claimGift } = giftProvider;
 
   const [step, setStep] = useState(0);
   const [address, setAddress] = useState(null);
@@ -59,10 +59,8 @@ export default function ClaimMain() {
       const giftClaimedEvent = events.filter(({ event }) =>
         api?.events?.gift?.GiftClaimed?.is(event)
       );
-      const {
-        event: { data },
-      } = giftClaimedEvent[0];
-      let claimedAmount = data && data[1].toString();
+
+      let claimedAmount = giftClaimedEvent[0]?.event?.data[1]?.toString();
       claimedAmount = utils.fromChainUnit(claimedAmount, chainInfo.decimals);
       setClaimedAmount(claimedAmount);
       nextStep();
@@ -83,21 +81,21 @@ export default function ClaimMain() {
     } else {
       // retrive gift account from secret
       const mnemonic = secret;
-      const giftAccount = keyring.createFromUri(
+      const giftAccountPair = keyring.createFromUri(
         mnemonic,
         { name: 'interim_gift' },
         'sr25519'
       );
 
       // set the gift account as signing account
-      const signingAccount = { pairOrAddress: giftAccount };
+      const interimAccount = { pairOrAddress: giftAccountPair };
 
       // claim gift by the selected account
-      const claim = {
-        by: address,
+      const recipientAccount = {
+        pairOrAddress: address,
       };
 
-      claimGift(api, signingAccount, claim, claimGiftCallback);
+      claimGift(api, interimAccount, recipientAccount, claimGiftCallback);
 
       setProcessingMsg('Transferring your gift to your account...');
       setProcessing(true);

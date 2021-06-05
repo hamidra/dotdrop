@@ -1,5 +1,5 @@
 import { SubstrateContextProvider, useSubstrate } from './SubstrateContext';
 import utils from './substrateUtils';
-import giftPallet from './giftPalletProvider';
+import { giftProvider } from './Providers/ServiceProvider';
 
-export { useSubstrate, SubstrateContextProvider, utils, giftPallet };
+export { useSubstrate, SubstrateContextProvider, utils, giftProvider };

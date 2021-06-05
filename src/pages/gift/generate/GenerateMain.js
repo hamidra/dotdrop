@@ -6,7 +6,7 @@ import LedgerMain from '../accounts/LedgerWallet/LedgerMain';
 import ConnectSigner from '../accounts/ConnectSigner';
 import Processing from '../../../components/Processing';
 import ErrorModal from '../../../components/Error';
-import { useSubstrate, giftPallet } from '../../../substrate-lib';
+import { useSubstrate, giftProvider } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { randomAsHex } from '@polkadot/util-crypto';
 import ParityQRSigner from '../ParityQRSigner';
@@ -21,7 +21,7 @@ export { GenerateContext };
 
 export default function GenerateMain() {
   const { apiState, api, keyring } = useSubstrate();
-  const { removeGift, createGift } = giftPallet;
+  const { removeGift, createGift } = giftProvider;
 
   const [step, setStep] = useState(0);
   const [account, setAccount] = useState(null);
@@ -129,17 +129,20 @@ export default function GenerateMain() {
       );
     } else {
       // load signing account
-      const signingAccount = await getSigningAccount(account);
+      const senderAccount = await getSigningAccount(account);
 
       // generate mnemonic and interim recipiant account
 
-      const { seed, account: recipiantAccount } = generateGiftAccount();
+      const { seed, account: giftAccountPair } = generateGiftAccount();
       const gift = {
-        to: recipiantAccount,
         amount: giftInfo.amount,
       };
 
-      createGift(api, signingAccount, gift, createGiftCallback);
+      const interimAccount = {
+        pairOrAddress: giftAccountPair,
+      };
+
+      createGift(api, interimAccount, senderAccount, gift, createGiftCallback);
 
       setGift({
         secret: seed,
@@ -171,21 +174,21 @@ export default function GenerateMain() {
       );
     } else {
       // load signing account
-      const signingAccount = await getSigningAccount(account);
+      const senderAccount = await getSigningAccount(account);
 
       // retrive gift account from secret
       const mnemonic = secret;
-      const giftAccount = keyring.createFromUri(
+      const giftAccountPair = keyring.createFromUri(
         mnemonic,
         { name: 'interim_gift' },
         'sr25519'
       );
 
-      const gift = {
-        to: giftAccount,
+      const interimAccount = {
+        pairOrAddress: giftAccountPair,
       };
 
-      removeGift(api, signingAccount, gift, removeGiftCallback);
+      removeGift(api, interimAccount, senderAccount, removeGiftCallback);
 
       if (account?.meta?.isExternal) {
         setShowSigner(true);
