@@ -1,10 +1,9 @@
 import { Row, Col, Card, Image } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
 import CardHeader from '../../../components/CardHeader';
 import confetti from '../../../images/confetti.png';
 import { useHistory } from 'react-router-dom';
 
-export default function Claimed({ amount, accountAddress }) {
+export default function Claimed ({ amount, accountAddress }) {
   const history = useHistory();
   return (
     <>
@@ -23,9 +22,9 @@ export default function Claimed({ amount, accountAddress }) {
         </Row>
         <div className='flex-grow-1'/>
         <Col className="pt-5 d-flex justify-content-center align-items-center">
-          <Button onClick={() => history.push(`/account/${accountAddress}`)}>
+          <button className='btn btn-primary' onClick={() => history.push(`/account/${accountAddress}`)}>
             See Account
-          </Button>
+          </button>
         </Col>
       </Card.Body>
     </>

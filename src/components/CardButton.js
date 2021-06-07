@@ -1,4 +1,4 @@
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { MdChevronRight } from 'react-icons/md';
 
 import signerLogo from '../images/signer_logo_128.png';
@@ -17,8 +17,8 @@ const CardButton = ({ children, logo, onClick, smallFont }) => {
   }
 
   return (
-        <Button
-            className='card-button'
+        <button
+            className='btn-card'
             onClick={onClick}
             style={smallFont ? { fontSize: '14px' } : { fontSize: '16px' }}
         >
@@ -36,7 +36,7 @@ const CardButton = ({ children, logo, onClick, smallFont }) => {
             {children}
             <div className='flex-grow-1'></div>
             <MdChevronRight style={{ flexShrink: '0', fontSize: '24px', color: '#6C757D' }} />
-        </Button>
+        </button>
   );
 };
 

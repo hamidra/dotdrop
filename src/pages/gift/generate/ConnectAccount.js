@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
 import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';

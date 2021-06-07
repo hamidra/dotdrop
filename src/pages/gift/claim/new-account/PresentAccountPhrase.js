@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
-import Button from '../../../../components/CustomButton';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { FaCopy } from 'react-icons/fa';
 
-export default function PresentAccountPhrase({
+export default function PresentAccountPhrase ({
   mnemonicWords,
   nextStepHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const label = 'I have stored my seed phrase in a safe place.';
   const [blurred, setBlurred] = useState(true);
@@ -53,7 +52,7 @@ export default function PresentAccountPhrase({
                 flexShrink: '0',
                 fontSize: '24px',
                 marginBottom: 5,
-                marginRight: 5,
+                marginRight: 5
               }}
             />
             <span>{'Hide secret words'}</span>
@@ -69,7 +68,7 @@ export default function PresentAccountPhrase({
                   <FaCopy
                     style={{
                       flexShrink: '0',
-                      fontSize: '24px',
+                      fontSize: '24px'
                     }}
                   />
                   <span>{copied ? ' copied!' : ''}</span>
@@ -120,12 +119,13 @@ export default function PresentAccountPhrase({
           </Col>
         </Row>
         <div className="pt-4 d-flex justify-content-center">
-          <Button
+          <button
+            className='btn btn-primary'
             onClick={() =>
               checked ? nextStepHandler() : setCheckedError(checkedErrorMessage)
             }>
             Next
-          </Button>
+          </button>
         </div>
       </Card.Body>
     </>

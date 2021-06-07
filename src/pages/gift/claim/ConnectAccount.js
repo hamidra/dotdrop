@@ -1,10 +1,8 @@
 import { Card, Row, Col } from 'react-bootstrap';
-import Button from '../../../components/CustomButton';
-import LinkButton from '../../../components/LinkButton';
 import CardHeader from '../../../components/CardHeader';
 import Divider from '../../../components/Divider';
 
-export default function ConnectAccount({ setAccountSourceHandler }) {
+export default function ConnectAccount ({ setAccountSourceHandler }) {
   return (
     <>
       <Card.Body className="d-flex flex-column">
@@ -14,19 +12,19 @@ export default function ConnectAccount({ setAccountSourceHandler }) {
         />
         <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
           <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
-            <Button
-              variant="outline-primary"
+            <button
+              className='btn btn-primary btn-lg'
               onClick={() => setAccountSourceHandler('NEW')}>
               Create Polkadot Account
-            </Button>
+            </button>
           </Row>
           <Divider text="Or" />
           <Row className="d-flex flex-column justify-content-center align-items-center">
-            <LinkButton
-              variant="link"
+            <button
+              className="btn btn-link"
               onClick={() => setAccountSourceHandler('EXISTING')}>
               Connect Existing Account
-            </LinkButton>
+            </button>
           </Row>
         </Col>
       </Card.Body>
