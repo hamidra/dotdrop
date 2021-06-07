@@ -13,7 +13,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
         <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
           <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
             <button
-              className='btn btn-primary'
+              className='btn btn-primary btn-lg'
               onClick={() => setAccountSourceHandler('NEW')}>
               Create Polkadot Account
             </button>
