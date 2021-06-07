@@ -4,7 +4,7 @@ import Button from '../../../components/CustomButton';
 import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
-export default function ConnectAccount () {
+export default function ConnectAccount() {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
   const optionSelectHandler = (accountSource) => {
@@ -49,7 +49,7 @@ export default function ConnectAccount () {
       </Card.Body>
       <Card.Footer>
         <span>
-          By connecting an account, I accept the
+          By connecting an account, I accept the&nbsp;
           <a href="policy" target="_blank">
             terms and conditions
           </a>
