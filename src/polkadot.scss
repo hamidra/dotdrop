@@ -164,6 +164,9 @@ $h5-font-size: 1rem;
   }
 }
 
+.nav-pills {
+  background-color: #FFF;
+}
 $nav-pills-border-radius: 1.5rem !important;
 $nav-pills-link-active-color: $gray-900 !important;
 $nav-pills-link-active-bg: $gray-200 !important;
@@ -219,4 +222,5 @@ $border-radius: 0.5rem;
 // import should be at the end
 @import '~bootstrap/scss/bootstrap';
 @import 'scss/variables';
+@import 'scss/bg';
 @import 'scss/button';

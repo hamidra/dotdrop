@@ -45,8 +45,13 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                 <p>
                   I'm sending you{' '}
                   {amount > 1 ? `${amount} DOTs` : `${amount} DOT`} as a gift!
-                  You can follow this link and type in the following secret
-                  message to claim your DOTs.
+                  You can follow this{' '}
+                  <a
+                    href="https://hamidra.github.io/dotdrop/#/claim"
+                    target="_blank">
+                    link
+                  </a>{' '}
+                  and type in the following secret message to claim your DOTs.
                   <strong
                     style={{
                       backgroundColor: '#EDF1F5',
