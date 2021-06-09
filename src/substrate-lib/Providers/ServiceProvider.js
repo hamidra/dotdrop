@@ -10,37 +10,41 @@ const palletTypes = {
 };
 
 const balancePalletProvider = {
-  createGift: (api, interimAccount, senderAccount, gift, cb) => {
+  createGift: (api, interimAccount, senderAccount, gift) => {
     const interimAddress = utils.getAccountAddress(interimAccount);
-    balancePallet.transfer(
+    return balancePallet.transfer(
       api,
       senderAccount,
       interimAddress,
-      gift?.amount,
-      cb
+      gift?.amount
     );
   },
-  claimGift: (api, interimAccount, recipientAccount, cb) => {
+  claimGift: (api, interimAccount, recipientAccount) => {
     const recepientAddress = utils.getAccountAddress(recipientAccount);
-    balancePallet.transferAll(api, interimAccount, recepientAddress, cb);
+    return balancePallet.transferAll(api, interimAccount, recepientAddress);
   },
-  removeGift: (api, interimAccount, senderAccount, cb) => {
+  removeGift: (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);
-    balancePallet.transferAll(api, interimAccount, senderAddress, cb);
+    return balancePallet.transferAll(api, interimAccount, senderAddress);
   },
 };
 const giftPalletProvider = {
-  createGift: (api, interimAccount, senderAccount, gift, cb) => {
+  createGift: (api, interimAccount, senderAccount, gift) => {
     const interimAddress = utils.getAccountAddress(interimAccount);
-    giftPallet.createGift(api, senderAccount, interimAddress, gift?.amount, cb);
+    return giftPallet.createGift(
+      api,
+      senderAccount,
+      interimAddress,
+      gift?.amount
+    );
   },
-  claimGift: (api, interimAccount, recipientAccount, cb) => {
+  claimGift: (api, interimAccount, recipientAccount) => {
     const recipientAddress = utils.getAccountAddress(recipientAccount);
-    giftPallet.claimGift(api, interimAccount, recipientAddress, cb);
+    return giftPallet.claimGift(api, interimAccount, recipientAddress);
   },
-  removeGift: (api, interimAccount, senderAccount, cb) => {
+  removeGift: (api, interimAccount, senderAccount) => {
     const interimAddress = utils.getAccountAddress(interimAccount);
-    giftPallet.removeGift(api, senderAccount, interimAddress, cb);
+    return giftPallet.removeGift(api, senderAccount, interimAddress);
   },
 };
 

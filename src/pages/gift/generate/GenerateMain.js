@@ -79,22 +79,6 @@ export default function GenerateMain() {
     setProcessingError(error.message);
   };
 
-  const createGiftCallback = ({ error, result }) => {
-    if (error) {
-      handleError(error);
-    } else {
-      nextStep();
-    }
-  };
-
-  const removeGiftCallback = ({ error, result }) => {
-    if (error) {
-      handleError(error);
-    } else {
-      jumpToStep(2);
-    }
-  };
-
   const generateGiftAccount = () => {
     const seed = randomAsHex(10);
     const account = keyring.createFromUri(seed, null, 'sr25519');
@@ -142,7 +126,9 @@ export default function GenerateMain() {
         pairOrAddress: giftAccountPair,
       };
 
-      createGift(api, interimAccount, senderAccount, gift, createGiftCallback);
+      createGift(api, interimAccount, senderAccount, gift)
+        .then(() => nextStep())
+        .catch((error) => handleError(error));
 
       setGift({
         secret: seed,
@@ -188,7 +174,9 @@ export default function GenerateMain() {
         pairOrAddress: giftAccountPair,
       };
 
-      removeGift(api, interimAccount, senderAccount, removeGiftCallback);
+      removeGift(api, interimAccount, senderAccount)
+        .then(() => jumpToStep(2))
+        .catch((error) => handleError(error));
 
       if (account?.meta?.isExternal) {
         setShowSigner(true);

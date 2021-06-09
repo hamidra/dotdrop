@@ -51,22 +51,6 @@ export default function ClaimMain() {
     setProcessingError(error.message);
   };
 
-  const claimGiftCallback = ({ error, result }) => {
-    if (error) {
-      handleError(error);
-    } else {
-      const { events } = result;
-      const giftClaimedEvent = events.filter(({ event }) =>
-        api?.events?.gift?.GiftClaimed?.is(event)
-      );
-
-      let claimedAmount = giftClaimedEvent[0]?.event?.data[1]?.toString();
-      claimedAmount = utils.fromChainUnit(claimedAmount, chainInfo.decimals);
-      setClaimedAmount(claimedAmount);
-      nextStep();
-    }
-  };
-
   const claimGiftHandler = async (secret) => {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
@@ -95,7 +79,18 @@ export default function ClaimMain() {
         pairOrAddress: address,
       };
 
-      claimGift(api, interimAccount, recipientAccount, claimGiftCallback);
+      claimGift(api, interimAccount, recipientAccount)
+        .then((claimedAmount) => {
+          claimedAmount = utils.fromChainUnit(
+            claimedAmount,
+            chainInfo.decimals
+          );
+          setClaimedAmount(claimedAmount);
+          nextStep();
+        })
+        .catch((error) => {
+          handleError(error);
+        });
 
       setProcessingMsg('Transferring your gift to your account...');
       setProcessing(true);
