@@ -52,12 +52,11 @@ const utils = {
 
   fromChainUnit: (value, chainDecimal, decimalPoints) => {
     if (!value || !chainDecimal) {
-      return value;
+      return null;
     }
     chainDecimal = parseInt(chainDecimal);
     const B10 = new BN(10);
-    const BChainDecimal = new BN(chainDecimal);
-    const BChainUnit = B10.pow(BChainDecimal);
+    const BChainUnit = B10.pow(new BN(chainDecimal));
     const dm = new BN(value).divmod(BChainUnit);
     const wholeStr = dm.div.toString();
     const decimalStr = trimEnd(
@@ -73,7 +72,7 @@ const utils = {
 
   toChainUnit: (value, chainDecimal) => {
     if (!value || !chainDecimal) {
-      return value;
+      return null;
     }
     chainDecimal = parseInt(chainDecimal);
     const B10 = new BN(10);
@@ -87,7 +86,7 @@ const utils = {
     const BChainDecimalVal = BDecimalVal.mul(
       B10.pow(new BN(chainDecimal - decimalValLen))
     );
-    return BChainWholeVal.add(BChainDecimalVal).toString();
+    return BChainWholeVal.add(BChainDecimalVal);
   },
 
   gteChainUnits: (units1, units2) => {

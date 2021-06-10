@@ -5,25 +5,31 @@ import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-export default function GenerateGift ({ account, generateGiftHandler }) {
+import BN from 'bn.js';
+export default function GenerateGift({
+  account,
+  generateGiftHandler,
+  giftFeeMultiplier,
+}) {
   const { api, apiState, chainInfo } = useSubstrate();
 
   const { prevStep } = useContext(GenerateContext);
 
   const [balance, setBalance] = useState(null);
-  const balanceDecimalPoints = 2;
+  const [txFee, setTxFee] = useState(null);
+  const balanceDecimalPoints = 5;
 
   useEffect(() => {
     let unsub;
     setBalance(null);
     account?.address &&
-      utils.validateAddress(account.address, chainInfo?.ss58Format) &&
       api?.query?.system &&
       api.query.system
-        .account(account.address, ({ nonce, data: balance }) => {
+        .account(account.address, (accountInfo) => {
+          const balance = accountInfo?.data;
           setBalance(balance);
           console.log(
-            `free balance is ${balance.free} with ${balance.reserved} reserved and a nonce of ${nonce}`
+            `free balance is ${balance?.free} with ${balance?.reserved} reserved and a nonce of ${accountInfo?.nonce}`
           );
         })
         .then((result) => {
@@ -36,10 +42,76 @@ export default function GenerateGift ({ account, generateGiftHandler }) {
     return () => unsub && unsub();
   }, [api, apiState, account, chainInfo]);
 
+  useEffect(() => {
+    // since the txFees does not differ much for different amounts,
+    // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
+    async function fetchTxFee() {
+      const address = account?.address;
+      if (address && balance) {
+        const info = await api.tx.balances
+          .transfer(address, balance?.free || 0)
+          .paymentInfo(address);
+        // set the transaction fee equal to 1.5x of partial fee to cover any other unpredicyable fees.
+        if (info) {
+          const estimatedFee = info.partialFee
+            ? info?.partialFee.muln(150).divn(100)
+            : 0;
+          setTxFee(estimatedFee);
+        }
+      }
+    }
+    fetchTxFee();
+  }, [api, apiState, account, chainInfo, balance]);
+
+  const getGiftChainAmount = (amount) => {
+    const chainAmount = utils.toChainUnit(amount, chainInfo.decimals);
+    return chainAmount?.add(
+      new BN(txFee || 0, 10).muln(giftFeeMultiplier || 0)
+    );
+  };
+
+  const validateGiftAmount = (amount) => {
+    const actualChainAmount = getGiftChainAmount(amount);
+    // validate gift amount
+    if (!amount) {
+      return 'Please enter the gift amount';
+    }
+    if (actualChainAmount) {
+      // check if the gift amount is above existential deposit
+      const minChainGiftAmount = chainInfo?.existentialDeposit;
+      if (actualChainAmount.lt(minChainGiftAmount)) {
+        const minGiftAmount = utils.fromChainUnit(
+          minChainGiftAmount,
+          chainInfo.decimals
+        );
+        const minGiftAmountError = `The amount is below ${minGiftAmount} ${chainInfo.token}, the existential deposit for the polkadot network.`;
+        return minGiftAmountError;
+      }
+    }
+    if (actualChainAmount && balance) {
+      // check if the account has enough funds to pay the gift amount and fees
+      const minAvailableBalance = actualChainAmount.add(
+        new BN(txFee || 0).muln(giftFeeMultiplier || 0)
+      );
+      if (balance?.free?.lt(minAvailableBalance)) {
+        const freeBalance = utils.fromChainUnit(
+          balance?.free,
+          chainInfo.decimals,
+          balanceDecimalPoints
+        );
+        const fees = utils.fromChainUnit(
+          new BN(txFee || 0).muln((giftFeeMultiplier || 0) * 2),
+          chainInfo.decimals,
+          balanceDecimalPoints
+        );
+        const minAvailableBalanceError = `The account balance of ${freeBalance} ${chainInfo.token} is not enough to pay the gift amount of ${amount} ${chainInfo.token} plus fees of (${fees} ${chainInfo.token})`;
+        return minAvailableBalanceError;
+      }
+    }
+  };
+
   const validate = ({ recipientEmail, confirmEmail, amount }) => {
     const errors = {};
-    const chainAmount = utils.toChainUnit(amount, chainInfo.decimals);
-
     if (
       !recipientEmail ||
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(recipientEmail)
@@ -48,36 +120,9 @@ export default function GenerateGift ({ account, generateGiftHandler }) {
     } else if (recipientEmail !== confirmEmail) {
       errors.confirmEmail = "The email addresses did'nt match.";
     }
-
-    if (!amount) {
-      errors.amount = 'Please enter the gift amount';
-    }
-
-    // check if the gift amount is above existential deposit
-    if (
-      chainAmount &&
-      chainInfo?.existentialDeposit &&
-      !utils.gteChainUnits(chainAmount, chainInfo.existentialDeposit)
-    ) {
-      const minDeposit = utils.fromChainUnit(
-        chainInfo.existentialDeposit,
-        chainInfo.decimals
-      );
-      errors.amount = `The amount is below ${minDeposit} ${chainInfo.token}, the existential deposit for a Polkadot account.`;
-    }
-
-    // check if the account has enough funds to pay the gift amount
-    if (
-      balance?.free &&
-      chainAmount &&
-      !utils.gteChainUnits(balance?.free, chainAmount)
-    ) {
-      const freeBalance = utils.fromChainUnit(
-        balance?.free,
-        chainInfo.decimals,
-        balanceDecimalPoints
-      );
-      errors.amount = `The account balance of ${freeBalance} ${chainInfo.token} is not anough to pay the gift amount of ${amount} ${chainInfo.token}`;
+    const amountError = validateGiftAmount(amount);
+    if (amountError) {
+      errors.amount = amountError;
     }
     return errors;
   };
@@ -86,7 +131,7 @@ export default function GenerateGift ({ account, generateGiftHandler }) {
     const pattern = /^([0-9]+\.?[0-9]{0,5})?$/i;
     formik.setValues({
       ...formik.values,
-      amount: pattern.test(value) ? value : formik.values.amount
+      amount: pattern.test(value) ? value : formik.values.amount,
     });
   };
 
@@ -94,12 +139,15 @@ export default function GenerateGift ({ account, generateGiftHandler }) {
     initialValues: {
       amount: '',
       recipientEmail: '',
-      confirmEmail: ''
+      confirmEmail: '',
     },
     validate,
     onSubmit: ({ recipientEmail, amount }) => {
-      generateGiftHandler({ recipientEmail, amount });
-    }
+      generateGiftHandler({
+        recipientEmail,
+        amount,
+      });
+    },
   });
 
   return (
@@ -141,7 +189,7 @@ export default function GenerateGift ({ account, generateGiftHandler }) {
                       <Form.Text className="text-danger">
                         {formik.errors.recipientEmail}
                       </Form.Text>
-                  )}
+                    )}
                 </Col>
                 <Col md="6" className="mt-2 mt-md-0">
                   <Form.Label htmlFor="confirmEmail">
@@ -166,7 +214,7 @@ export default function GenerateGift ({ account, generateGiftHandler }) {
                       <Form.Text className="text-danger">
                         {formik.errors.confirmEmail}
                       </Form.Text>
-                  )}
+                    )}
                 </Col>
               </Form.Group>
 
@@ -196,7 +244,7 @@ export default function GenerateGift ({ account, generateGiftHandler }) {
                       style={{
                         ...(formik.touched.amount && !!formik.errors.amount
                           ? { borderColor: 'red' }
-                          : {})
+                          : {}),
                       }}
                       className="bg-transparent border-left-0 balance-text">
                       {balance?.free

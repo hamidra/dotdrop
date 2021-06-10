@@ -2,13 +2,11 @@ import React, { useReducer, useContext } from 'react';
 import PropTypes from 'prop-types';
 import jsonrpc from '@polkadot/types/interfaces/jsonrpc';
 import queryString from 'query-string';
-
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
-
 import keyring from '@polkadot/ui-keyring';
-
 import config from '../config';
+import BN from 'bn.js';
 
 const parsedQuery = queryString.parse(window.location.search);
 const connectedSocket = parsedQuery.rpc || config.PROVIDER_SOCKET;
@@ -50,11 +48,12 @@ const reducer = (state, action) => {
         token: api.registry?.chainTokens[0] || 'DOT',
         genesisHash: api.genesisHash,
         ss58Format: api.registry?.chainSS58 || 42,
-        existentialDeposit: api.consts?.balances?.existentialDeposit || 0,
+        existentialDeposit:
+          api.consts?.balances?.existentialDeposit || new BN(0, 10),
       };
 
       // ToDo: remove this when the pallet is deployed on polkadot
-      // default substrate token to Dot for demo pupose
+      // default substrate token to Dot for demo purpose
       if (chainInfo?.token === 'Unit') {
         chainInfo.token = 'Dot';
       }

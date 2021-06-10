@@ -21,7 +21,7 @@ export { GenerateContext };
 
 export default function GenerateMain() {
   const { apiState, api, keyring } = useSubstrate();
-  const { removeGift, createGift } = giftProvider;
+  const { removeGift, createGift, getGiftFeeMultiplier } = giftProvider;
 
   const [step, setStep] = useState(0);
   const [account, setAccount] = useState(null);
@@ -228,7 +228,11 @@ export default function GenerateMain() {
 
   // Step-3
   steps.push(
-    <GenerateGift account={account} generateGiftHandler={generateGiftHandler} />
+    <GenerateGift
+      account={account}
+      generateGiftHandler={generateGiftHandler}
+      giftFeeMultiplier={getGiftFeeMultiplier ? getGiftFeeMultiplier() : 0}
+    />
   );
 
   // Step-4

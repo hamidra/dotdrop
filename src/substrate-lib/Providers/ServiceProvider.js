@@ -12,11 +12,12 @@ const palletTypes = {
 const balancePalletProvider = {
   createGift: (api, interimAccount, senderAccount, gift) => {
     const interimAddress = utils.getAccountAddress(interimAccount);
-    return balancePallet.transfer(
+    return balancePallet.transferBalanceAndFees(
       api,
       senderAccount,
       interimAddress,
-      gift?.amount
+      gift?.amount,
+      1 // fee multiplier of 1x
     );
   },
   claimGift: (api, interimAccount, recipientAccount) => {
@@ -26,6 +27,10 @@ const balancePalletProvider = {
   removeGift: (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);
     return balancePallet.transferAll(api, interimAccount, senderAddress);
+  },
+  getGiftFeeMultiplier: () => {
+    // gift creation fees are equal to 1x (for final tranaction from the gift interim account to the recipient account)
+    return 1;
   },
 };
 const giftPalletProvider = {
@@ -45,6 +50,10 @@ const giftPalletProvider = {
   removeGift: (api, interimAccount, senderAccount) => {
     const interimAddress = utils.getAccountAddress(interimAccount);
     return giftPallet.removeGift(api, senderAccount, interimAddress);
+  },
+  getGiftFeeMultiplier: () => {
+    // gift creation fees are free on gift pallet
+    return 0;
   },
 };
 

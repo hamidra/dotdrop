@@ -1,9 +1,24 @@
 import utils from '../substrateUtils';
 import { signAndSendTx } from './txHandler';
 import BN from 'bn.js';
-const transfer = async (api, fromAccount, toAddress, balance, cb) => {
+const transferBalanceAndFees = async (
+  api,
+  fromAccount,
+  toAddress,
+  balance,
+  feeMultiplier,
+  cb
+) => {
   const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
-  const tx = api.tx.balances.transfer(toAddress, chainAmount);
+  const fromAddress = utils.getAccountAddress(fromAccount);
+  const info = await api.tx.balances
+    .transfer(toAddress, chainAmount)
+    .paymentInfo(fromAddress);
+  const feeAdjustment = new BN(info?.partialFee || 0).muln(150).divn(100);
+  const chainAmountAndFees = chainAmount.add(
+    feeAdjustment.mul(new BN(feeMultiplier || 0))
+  );
+  const tx = api.tx.balances.transfer(toAddress, chainAmountAndFees);
   return new Promise((resolve, reject) =>
     signAndSendTx(tx, fromAccount, ({ result, error }) => {
       if (error) {
@@ -26,7 +41,7 @@ const transferAll = async (api, fromAccount, toAddress) => {
   const info = await api.tx.balances
     .transfer(toAddress, balance.free)
     .paymentInfo(fromAddress);
-  const netBalance = balance?.free?.sub(new BN(info?.partialFee));
+  const netBalance = balance?.free?.sub(new BN(info?.partialFee || 0));
   const tx = api.tx.balances.transfer(toAddress, netBalance);
   return new Promise((resolve, reject) =>
     signAndSendTx(tx, fromAccount, ({ result, error }) => {
@@ -44,5 +59,5 @@ const transferAll = async (api, fromAccount, toAddress) => {
   );
 };
 
-const balancePallet = { transfer, transferAll };
+const balancePallet = { transferBalanceAndFees, transferAll };
 export default balancePallet;
