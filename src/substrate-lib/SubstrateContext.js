@@ -72,9 +72,10 @@ const reducer = (state, action) => {
     case 'KEYRING_ERROR':
       return { ...state, keyring: null, keyringState: 'ERROR' };
 
-    case 'BALANCE_UPDATE':
+    case 'BALANCE_UPDATE': {
       const { address, balance } = action.payload;
       return { ...state, balances: { ...state?.balances, [address]: balance } };
+    }
     default:
       throw new Error(`Unknown type: ${action.type}`);
   }

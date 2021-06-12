@@ -1,12 +1,41 @@
 import giftPallet from './giftPalletProvider';
 import balancePallet from './balancePalletProvider';
+import uniquesPallet from './uniquesPalletProvider';
 import utils from '../substrateUtils';
 const palletTypes = {
   balance: 'balance',
   gift: 'gift',
+  bundle: 'bundle',
   // ToDo: add other pallets
   // asset: 'asset',
   // unique: 'unique',
+};
+const bundlePalletProvider = {
+  createGift: (api, interimAccount, senderAccount, gift) => {
+    const interimAddress = utils.getAccountAddress(interimAccount);
+    return balancePallet.transferBalanceAndFees(
+      api,
+      senderAccount,
+      interimAddress,
+      gift?.amount,
+      1 // fee multiplier of 1x
+    );
+  },
+  claimGift: (api, interimAccount, recipientAccount) => {
+    const recepientAddress = utils.getAccountAddress(recipientAccount);
+    return Promise.all([
+      balancePallet.transferAll(api, interimAccount, recepientAddress),
+      uniquesPallet.transferAllAssets(api, 2, interimAccount, recepientAddress),
+    ]);
+  },
+  removeGift: (api, interimAccount, senderAccount) => {
+    const senderAddress = utils.getAccountAddress(senderAccount);
+    return balancePallet.transferAll(api, interimAccount, senderAddress);
+  },
+  getGiftFeeMultiplier: () => {
+    // gift creation fees are equal to 1x (for final tranaction from the gift interim account to the recipient account)
+    return 1;
+  },
 };
 
 const balancePalletProvider = {
@@ -66,10 +95,13 @@ const giftFactory = (palletType) => {
     case palletTypes.gift:
       giftProvider = giftPalletProvider;
       break;
+    case palletTypes.bundle:
+      giftProvider = bundlePalletProvider;
+      break;
     default:
       giftProvider = giftPalletProvider;
   }
   return giftProvider;
 };
-const giftProvider = giftFactory(palletTypes.balance);
+const giftProvider = giftFactory(palletTypes.bundle);
 export { giftProvider };
