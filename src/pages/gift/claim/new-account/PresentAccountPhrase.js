@@ -42,21 +42,6 @@ export default function PresentAccountPhrase ({
           onClick={() => {
             revealSecret();
           }}>
-          <div
-            className={`text-button text-center ${
-              !blurred ? 'visible' : 'invisible'
-            }`}
-            onClick={() => hideSecret()}>
-            <BsFillEyeSlashFill
-              style={{
-                flexShrink: '0',
-                fontSize: '24px',
-                marginBottom: 5,
-                marginRight: 5
-              }}
-            />
-            <span>{'Hide secret words'}</span>
-          </div>
           <Row className="align-self-end">
             <Col className={`text-button ${copied ? 'color-danger' : ''}`}>
               <CopyToClipboard
@@ -77,21 +62,35 @@ export default function PresentAccountPhrase ({
             </Col>
           </Row>
           <Row
-            style={{ fontSize: '1.25rem' }}
-            className={`justify-content-center align-items-center ${
+            className={`seedphrase justify-content-center align-items-center ${
               blurred ? 'blurred' : ''
             }`}>
             {mnemonicWords.map((word, index) => (
               <Col md={4} key={index}>
-                <div className=" d-flex flex-row border-bottom border-primary">
-                  <div className="text-secondary"> {`${index + 1}.`}</div>
-                  <div className="text-center m-auto">{`${word}`}</div>
+                <div className="seedphrase-item d-flex flex-row">
+                  <div className="seedphrase-item-nr text-secondary"> {`${index + 1}.`}</div>
+                  <div>{`${word}`}</div>
                 </div>
               </Col>
             ))}
           </Row>
           <div
-            className={`text-center pt-4 overlay-center ${
+            className={`phrase-toggle text-button ${
+              !blurred ? 'visible' : 'invisible'
+            }`}
+            onClick={() => hideSecret()}>
+            <BsFillEyeSlashFill
+              style={{
+                flexShrink: '0',
+                fontSize: '24px',
+                marginBottom: 5,
+                marginRight: 5
+              }}
+            />
+            <span>{'Hide secret words'}</span>
+          </div>
+          <div
+            className={`phrase-toggle text-center pt-4 overlay-center ${
               blurred ? 'd-block' : 'd-none'
             }`}>
             <BsFillEyeFill
