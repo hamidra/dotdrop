@@ -1,0 +1,35 @@
+.btn {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: $font-weight-light;
+    border-radius: 0;
+    font-size: 16px;
+    padding: 0.5rem 1.5rem;
+    border-width: 2px;
+
+    &:before {
+        width: 42px;
+        left: -42px;
+        border-radius: 1.5rem;
+    }
+}
+
+.btn-primary {
+    color: $primary;
+    background-color: transparent;
+    border-color: $primary;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: none;
+        color: $cyan;
+        border-color: $cyan;
+    }
+
+    &:not(:disabled):not(.disabled):active {
+        background: none;
+        color: $cyan;
+        border-color: $cyan;
+        box-shadow: none !important;
+    }
+}
