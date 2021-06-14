@@ -1,4 +1,13 @@
 .card {
     background-color: $gray-900;
-    border: 1px solid $gray-800;
+    border: 3px solid $gray-800;
+    border-radius: 0;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.card-footer {
+    padding: 1.5rem 2rem;
 }
