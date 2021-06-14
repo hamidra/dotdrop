@@ -33,3 +33,17 @@
         box-shadow: none !important;
     }
 }
+
+.btn-link {
+    color: $primary;
+    background-color: transparent;
+    position: relative;
+  
+    &:hover,
+    &:focus,
+    &:active {
+      background: none;
+      text-decoration: none;
+      color: $cyan;
+    }
+  }
