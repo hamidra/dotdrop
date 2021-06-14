@@ -1,0 +1,17 @@
+.form-control {
+    background-color: transparent;
+    border-color: $gray-800;
+    border-radius: 0;
+    color: $secondary;
+
+    &:focus {
+        background-color: transparent;
+        box-shadow: none;
+        border-color: $secondary-darker;
+        color: $secondary;
+    }
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
