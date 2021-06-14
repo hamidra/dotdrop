@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Space+Mono&display=swap');
+
+$font-body: 'Space Mono', sans-serif !important;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+body {
+    font-family: $font-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color: $black;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.04em;
+}
+
+.card-header-title {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: $font-weight-bold;
+    font-size: 2.5rem;
+}
