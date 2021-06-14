@@ -1,7 +1,7 @@
 import utils from '../substrateUtils';
 import { signAndSendTx } from './txHandler';
 
-const createGift = async (api, senderAccount, interimAddress, amount, cb) => {
+const createGift = async (api, senderAccount, interimAddress, amount) => {
   if (!interimAddress) {
     throw new Error('No address was specified to redeem the gift to');
   }
@@ -18,7 +18,7 @@ const createGift = async (api, senderAccount, interimAddress, amount, cb) => {
   );
 };
 
-const claimGift = async (api, interimAccount, recipientAddress, cb) => {
+const claimGift = async (api, interimAccount, recipientAddress) => {
   if (!recipientAddress) {
     throw new Error('No address was specified to redeem the gift to');
   }
@@ -39,7 +39,7 @@ const claimGift = async (api, interimAccount, recipientAddress, cb) => {
   );
 };
 
-const removeGift = async (api, senderAccount, interimAddress, cb) => {
+const removeGift = async (api, senderAccount, interimAddress) => {
   const tx = api.tx.gift.remove(interimAddress);
   return new Promise((resolve, reject) =>
     signAndSendTx(tx, senderAccount, ({ result, error }) => {
@@ -50,5 +50,24 @@ const removeGift = async (api, senderAccount, interimAddress, cb) => {
     }).catch((error) => reject(error))
   );
 };
-const giftPallet = { createGift, claimGift, removeGift };
-export default giftPallet;
+
+const giftPalletGiftProvider = {
+  createGift: (api, interimAccount, senderAccount, gift) => {
+    const interimAddress = utils.getAccountAddress(interimAccount);
+    return createGift(api, senderAccount, interimAddress, gift?.amount);
+  },
+  claimGift: (api, interimAccount, recipientAccount) => {
+    const recipientAddress = utils.getAccountAddress(recipientAccount);
+    return claimGift(api, interimAccount, recipientAddress);
+  },
+  removeGift: (api, interimAccount, senderAccount) => {
+    const interimAddress = utils.getAccountAddress(interimAccount);
+    return removeGift(api, senderAccount, interimAddress);
+  },
+  getGiftFeeMultiplier: () => {
+    // gift creation fees are free on gift pallet
+    return 0;
+  },
+};
+
+export default giftPalletGiftProvider;

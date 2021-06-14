@@ -88,11 +88,8 @@ const utils = {
     );
     return BChainWholeVal.add(BChainDecimalVal);
   },
-
-  gteChainUnits: (units1, units2) => {
-    const BUnits1 = new BN(units1, 10);
-    const BUnits2 = new BN(units2, 10);
-    return BUnits1.gte(BUnits2);
+  calcFeeAdjustments: (fee) => {
+    return new BN(fee || 0).muln(150).divn(100);
   },
 };
 

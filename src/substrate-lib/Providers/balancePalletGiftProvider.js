@@ -1,20 +1,21 @@
 import utils from '../substrateUtils';
 import { signAndSendTx } from './txHandler';
 import BN from 'bn.js';
+
+const feeMultiplierValue = 1;
 const transferBalanceAndFees = async (
   api,
   fromAccount,
   toAddress,
   balance,
-  feeMultiplier,
-  cb
+  feeMultiplier
 ) => {
   const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
   const fromAddress = utils.getAccountAddress(fromAccount);
   const info = await api.tx.balances
     .transfer(toAddress, chainAmount)
     .paymentInfo(fromAddress);
-  const feeAdjustment = new BN(info?.partialFee || 0).muln(150).divn(100);
+  const feeAdjustment = utils.calcFeeAdjustments(info?.partialFee);
   const chainAmountAndFees = chainAmount.add(
     feeAdjustment.mul(new BN(feeMultiplier || 0))
   );
@@ -59,5 +60,29 @@ const transferAll = async (api, fromAccount, toAddress) => {
   );
 };
 
-const balancePallet = { transferBalanceAndFees, transferAll };
-export default balancePallet;
+const balancePalletGiftProvider = {
+  createGift: (api, interimAccount, senderAccount, gift) => {
+    const interimAddress = utils.getAccountAddress(interimAccount);
+    return transferBalanceAndFees(
+      api,
+      senderAccount,
+      interimAddress,
+      gift?.amount,
+      feeMultiplierValue // fee multiplier of 1x
+    );
+  },
+  claimGift: (api, interimAccount, recipientAccount) => {
+    const recepientAddress = utils.getAccountAddress(recipientAccount);
+    return transferAll(api, interimAccount, recepientAddress);
+  },
+  removeGift: (api, interimAccount, senderAccount) => {
+    const senderAddress = utils.getAccountAddress(senderAccount);
+    return transferAll(api, interimAccount, senderAddress);
+  },
+  getGiftFeeMultiplier: () => {
+    // gift creation fees are equal to 1x (for final tranaction from the gift interim account to the recipient account)
+    return feeMultiplierValue;
+  },
+};
+
+export default balancePalletGiftProvider;
