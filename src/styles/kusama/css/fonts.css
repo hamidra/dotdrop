@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "SpaceMono-Regular";
+  src: url("../fonts/SpaceMono-Regular.eot");
+  src: url("../fonts/SpaceMono-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/SpaceMono-Regular.woff") format("woff"),
+    url("../fonts/SpaceMono-Regular.ttf") format("truetype"),
+    url("../fonts/SpaceMono-Regular.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Visuelt-Regular";
+  src: url("../fonts/Visuelt-Regular.eot");
+  src: url("../fonts/Visuelt-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Visuelt-Regular.woff") format("woff"),
+    url("../fonts/Visuelt-Regular.ttf") format("truetype"),
+    url("../fonts/Visuelt-Regular.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Visuelt-Light";
+  src: url("../fonts/Visuelt-Light.eot");
+  src: url("../fonts/Visuelt-Light.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Visuelt-Light.woff") format("woff"),
+    url("../fonts/Visuelt-Light.ttf") format("truetype"),
+    url("../fonts/Visuelt-Light.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Visuelt-Medium";
+  src: url("../fonts/Visuelt-Medium.eot");
+  src: url("../fonts/Visuelt-Medium.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Visuelt-Medium.woff") format("woff"),
+    url("../fonts/Visuelt-Medium.ttf") format("truetype"),
+    url("../fonts/Visuelt-Medium.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Visuelt-Bold";
+  src: url("../fonts/Visuelt-Bold.eot");
+  src: url("../fonts/Visuelt-Bold.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Visuelt-Bold.woff") format("woff"),
+    url("../fonts/Visuelt-Bold.ttf") format("truetype"),
+    url("../fonts/Visuelt-Bold.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "SpaceMono-Regular", "Helvetica", "Arial", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
+  font-family: "Visuelt-Bold", "Helvetica", "Arial", sans-serif;
+}
+
+h4,
+h5,
+h6,
+.h4,
+.h5,
+.h6 {
+  font-family: "Visuelt-Medium", "Helvetica", "Arial", sans-serif;
+}
+
+h1,
+h2,
+.h1,
+.h2,
+h3,
+h4,
+.h3,
+.h4,
+h5,
+h6,
+.h5,
+.h6 {
+  font-weight: 400;
+}
+
+.lead {
+  font-family: "SpaceMono-Regular", "Helvetica", "Arial", sans-serif;
+}
+
+.menu > li {
+  font-family: "SpaceMono-Regular", "Helvetica", "Arial", sans-serif;
+}
+
+a.nav-link {
+  font-family: "SpaceMono-Regular", "Helvetica", "Arial", sans-serif;
+}
+
+.btn,
+.btn__text,
+button {
+  font-family: "Visuelt-Light", "Helvetica", "Arial", sans-serif;
+}

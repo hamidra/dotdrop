@@ -1,0 +1,466 @@
+/*
+/*
+/*  custom.css
+/*
+/*  If not using Gulp and Sass, add your custom CSS below then include it
+/*  in your page by adding a reference to assets/css/custom.css in the head of each page.
+/*
+*/
+.navbar[data-sticky="top"].scrolled.navbar-dark {
+  background: #000000;
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+nav[data-overlay].navbar-toggled-show.navbar-dark {
+  background: #000000;
+}
+
+.navbar-dark {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 767px) {
+  .navbar-dark {
+    background-color: #000000 !important;
+  }
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+img.logo {
+  height: 1.75rem;
+}
+
+.nav-link .icon {
+  height: 1.25rem;
+}
+
+.nav-link svg.icon * {
+  fill: #ffffff;
+  opacity: 0.5;
+}
+
+.nav-link svg.icon *:hover {
+  fill: #ffffff;
+  opacity: 0.75;
+}
+
+.bg-primary {
+  background-color: #e6007a !important;
+}
+
+.bg-dark {
+  background-color: #000000 !important;
+}
+
+.text-primary {
+  color: #e6007a !important;
+}
+
+.text-highlight {
+  color: #00ffe1 !important;
+}
+
+a {
+  color: #e6007a;
+}
+
+a:hover {
+  color: #cd0061;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #e6007a;
+  border-color: #e6007a;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #e6007a;
+  border-color: #e6007a;
+}
+
+.btn-outline-primary {
+  color: #e6007a;
+  border-color: #e6007a;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #e6007a;
+  border-color: #e6007a;
+}
+
+.btn-cta.btn-outline-primary {
+  background-color: #000000;
+}
+
+.btn-cta.btn-outline-primary:hover {
+  background-color: #000000;
+  border-color: #b30047;
+}
+
+.btn-cta.btn-outline-white {
+  background-color: #000000;
+}
+
+.btn-cta.btn-outline-white:hover {
+  background-color: #000000;
+  border-color: #92969a;
+}
+
+.btn-white {
+  color: #e6007a;
+}
+
+.btn-white:hover {
+  color: #cd0061;
+}
+
+.btn,
+.btn-lg,
+.btn-group-lg > .btn {
+  border-radius: 2rem;
+}
+
+.btn-round {
+  border-radius: 50%;
+}
+
+.nav-link.btn.active {
+  background: #e6007a;
+  color: #fff;
+}
+
+.badge-primary {
+  color: #fff;
+  background-color: #e6007a;
+}
+
+.list-group-item.row:hover h5 {
+  color: #212529;
+}
+
+.list-group-item.row:hover span {
+  color: #495057;
+}
+
+.list-group-item.row:hover span.h6 {
+  color: #212529;
+}
+
+svg.bg-primary * {
+  fill: #e6007a;
+}
+
+.form-control {
+  border-radius: 2rem;
+}
+
+.accordion-panel-title[aria-expanded="true"] > *,
+.accordion-panel-title:hover > * {
+  color: #e6007a;
+}
+
+.accordion-panel-title[aria-expanded="true"] > * path,
+.accordion-panel-title:hover > * path {
+  fill: #e6007a;
+}
+
+svg.icon * {
+  fill: #e6007a;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+a.text-underline:hover {
+  text-decoration: underline;
+}
+
+.btn-lang > span {
+  font-family: "SpaceMono-Regular", "Helvetica", "Arial", sans-serif;
+}
+
+.btn-lang {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-lang:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.form-control {
+  border: 1px solid #212529;
+}
+
+img.bg-gif {
+  width: 700px;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -350px;
+  margin-top: -200px;
+}
+
+@media (max-width: 420px) {
+  img.bg-gif {
+    width: 280px;
+    margin-left: -140px;
+    margin-top: -50px;
+  }
+}
+
+@media (min-width: 421px) and (max-width: 576px) {
+  img.bg-gif {
+    width: 400px;
+    margin-left: -200px;
+    margin-top: -100px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 767px) {
+  img.bg-gif {
+    width: 600px;
+    margin-left: -300px;
+    margin-top: -150px;
+  }
+}
+
+@media (max-width: 576px) {
+  span.h2.typed-text {
+    font-size: 1.6rem;
+  }
+}
+
+.article ul + h4 {
+  margin-top: 3rem;
+}
+
+.icon.icon-lg {
+  height: auto;
+  max-width: 45px;
+}
+
+.modal {
+  z-index: 9999;
+}
+
+/* Klaro */
+
+.cm-toggle-all {
+  display: none !important;
+}
+
+/*  Styling for Telemetry card */
+
+.card-telemetry {
+  opacity: 0;
+  transition: opacity 0.7s ease-out;
+}
+html.telemetry-loaded .card-telemetry {
+  opacity: 1;
+}
+
+.card.card-telemetry.card-body {
+  padding: 1rem 1.5rem;
+}
+
+.card.card-telemetry.border {
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+a:hover > p.text-muted {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+body > div.loader {
+  background-color: black;
+}
+
+a.btn,
+button.btn {
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 0;
+  border-width: 2px;
+  background-color: transparent;
+}
+
+.btn.btn-primary,
+.btn.btn-outline-primary {
+  color: #e6007a;
+  background-color: transparent;
+}
+.btn.btn-outline-white {
+  color: white;
+}
+
+.btn.btn-outline-primary:hover,
+.btn.btn-primary:hover,
+.btn.btn-outline-white:hover {
+  color: #00ffe1;
+  border-color: #00ffe1;
+  background-color: transparent;
+}
+
+.modal-content {
+  color: black;
+}
+
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+}
+
+.navbar-container a.btn {
+  font-size: 0.8rem;
+}
+
+/* privacy-policy */
+privacy-policy {
+  --color-link: #e6007a;
+}
+
+/* default html elements */
+privacy-policy a {
+  word-break: break-word;
+  color: var(--color-link);
+}
+
+privacy-policy ul,
+privacy-policy ol {
+  padding-left: 1rem;
+}
+
+privacy-policy li {
+  margin-bottom: 0.5rem;
+}
+
+privacy-policy p {
+  margin-top: 0;
+}
+
+privacy-policy u {
+  text-decoration: underline;
+}
+
+/* header of the policy */
+privacy-policy-header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  border-bottom: none;
+  padding-bottom: 1rem;
+}
+/* title of the policy */
+privacy-policy-header-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem !important;
+  margin-top: 0.75rem !important;
+  font-family: "Visuelt-Bold", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+}
+
+@media (min-width: 40rem) {
+  privacy-policy-header-title {
+    font-size: 2.5rem;
+  }
+}
+/* updated date of the policy */
+privacy-policy-updated-date {
+  display: flex;
+  color: #adb5bd !important;
+}
+
+/* vertical display */
+privacy-policy,
+privacy-policy-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* lists of sections */
+privacy-policy-list {
+  padding-top: 1rem;
+}
+
+/* lists, grand-children of lists */
+privacy-policy-list privacy-policy-list {
+  padding-left: 1rem;
+}
+@media (min-width: 40rem) {
+  privacy-policy-list privacy-policy-list {
+    border-left: 0.1rem solid var(--color-theme-2);
+    padding-left: 2.7rem;
+  }
+}
+
+/* a content section, with: a number, a letter, nothing */
+privacy-policy-section {
+  padding-bottom: 2rem;
+}
+
+/* section title */
+privacy-policy-section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+@media (min-width: 40rem) {
+  privacy-policy-section-title {
+    font-size: 2rem;
+    padding-left: 0.8rem;
+    border-left: 0.2rem solid var(--color-text);
+  }
+}
+
+privacy-policy-template
+  > privacy-policy-list
+  > privacy-policy-section
+  > privacy-policy-section-number {
+  display: inline-block;
+}
+privacy-policy-template
+  > privacy-policy-list
+  > privacy-policy-section
+  > privacy-policy-section-number
+  + privacy-policy-section-title {
+  display: inline-block;
+}
+
+/* a section number */
+privacy-policy-section-number {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: bold;
+  /* padding: 0.5rem 0.5rem; */
+  margin-bottom: 0.5rem;
+  background-color: var(--color-theme-2);
+}
