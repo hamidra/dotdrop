@@ -11,3 +11,11 @@
 .card-footer {
     padding: 1.5rem 2rem;
 }
+
+.divider {
+    color: $secondary;
+
+    .border-top {
+        border-top-color: $gray-800 !important;
+    }
+}
