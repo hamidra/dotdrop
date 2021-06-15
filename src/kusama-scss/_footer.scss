@@ -1,0 +1,16 @@
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $secondary-darker;
+    font-size: 0.75rem;
+
+    a {
+        color: $secondary-darker;
+    }
+}
+
+footer.bg-dark {
+    background: transparent;
+}
