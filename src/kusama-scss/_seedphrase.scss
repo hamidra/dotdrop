@@ -3,16 +3,20 @@
     padding: 8px;
 }
 
-.seedphrase-item {
-    /* background-color: #202020; */
-    /* padding: 4px 8px; */
-    /* margin-bottom: 0.5rem; */
-}
-
 .seedphrase-item-nr {
     width: 32px;
 }
 
-.phrase-toggle {
+.blurred {
+    filter: blur(0.3rem);
+}
+
+.copy, .phrase-toggle {
     font-size: 0.75rem;
+
+    &:hover {
+        /* background-color: $gray-800; */
+        color: $cyan;
+        cursor: pointer;
+    }
 }

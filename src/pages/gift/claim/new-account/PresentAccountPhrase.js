@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
-import { FaCopy } from 'react-icons/fa';
+import { Copy, Eye, EyeSlash } from 'phosphor-react';
 
 export default function PresentAccountPhrase ({
   mnemonicWords,
@@ -38,11 +37,11 @@ export default function PresentAccountPhrase ({
         />
         <div
           style={{ position: 'relative' }}
-          className="container px-4 pb-4 d-flex justify-content-center align-items-center flex-column"
+          className="container d-flex justify-content-center align-items-center flex-column"
           onClick={() => {
             revealSecret();
           }}>
-          <Row className="align-self-end">
+          {/* <Row className="align-self-end">
             <Col className={`text-button ${copied ? 'color-danger' : ''}`}>
               <CopyToClipboard
                 text={mnemonicWords.join(' ')}
@@ -60,7 +59,7 @@ export default function PresentAccountPhrase ({
                 </div>
               </CopyToClipboard>
             </Col>
-          </Row>
+          </Row> */}
           <Row
             className={`seedphrase justify-content-center align-items-center ${
               blurred ? 'blurred' : ''
@@ -74,30 +73,38 @@ export default function PresentAccountPhrase ({
               </Col>
             ))}
           </Row>
-          <div
-            className={`phrase-toggle text-button ${
-              !blurred ? 'visible' : 'invisible'
-            }`}
-            onClick={() => hideSecret()}>
-            <BsFillEyeSlashFill
-              style={{
-                flexShrink: '0',
-                fontSize: '24px',
-                marginBottom: 5,
-                marginRight: 5
-              }}
-            />
-            <span>{'Hide secret words'}</span>
-          </div>
-          <div
-            className={`phrase-toggle text-center pt-4 overlay-center ${
-              blurred ? 'd-block' : 'd-none'
-            }`}>
-            <BsFillEyeFill
-              style={{ flexShrink: '0', fontSize: '24px', marginBottom: 5 }}
-            />
-            <p>{'Click here to reveal your secret words'}</p>
-          </div>
+          <Row className="justify-content-start w-100 pt-2">
+            <CopyToClipboard
+                  text={mnemonicWords.join(' ')}
+                  onCopy={(result) => {
+                    setCopied(result);
+                  }}>
+                  <div className="p-2 mr-2 copy" onClick={(e) => e.stopPropagation()}>
+                  <Copy className='mr-1' size={18} />
+                    <span className='copy'>{copied ? 'Copied' : 'Copy'}</span>
+                  </div>
+              </CopyToClipboard>
+            <div
+              className="phrase-toggle text-button p-2"
+              style={!blurred ? { display: 'flex' } : { display: 'none' }}
+              onClick={() => hideSecret()}>
+              <EyeSlash
+                className="mr-1"
+                size="18"
+              />
+              <span>{'Hide secret words'}</span>
+            </div>
+            <div
+              className={`phrase-toggle text-center overlay-center p-2 ${
+                blurred ? 'd-flex' : 'd-none'
+              }`}>
+              <Eye
+                className="mr-1"
+                size="18"
+              />
+              <p>{'Reveal seedphrase'}</p>
+            </div>
+          </Row>
         </div>
         <div className="d-flex flex-grow-1" />
         <Row className="flex-column justify-content-center align-items-center">
