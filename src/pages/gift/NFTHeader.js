@@ -1,8 +1,8 @@
 import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
-import { DotsThree, Gift } from 'phosphor-react';
+import { DotsThree, ImageSquare } from 'phosphor-react';
 import KusamaLogo from '../../images/kusama_logo.png';
 
 const AccountInfoBox = ({ accountAddress }) => {
@@ -24,15 +24,13 @@ const AccountInfoBox = ({ accountAddress }) => {
 };
 export default function Header ({ selectedAccount }) {
   const history = useHistory();
-  const location = useLocation();
 
   return (
     <>
       <Navbar
         className="px-4 py-3"
-        style={{ display: 'grid', gridTemplateColumns: '60px 1fr 60px' }}
+        style={{ display: 'grid', gridTemplateColumns: '0px 1fr 0px' }}
         variant="dark"
-        /* expand="sm" */
       >
         <Navbar.Brand>
           <a
@@ -80,7 +78,7 @@ export default function Header ({ selectedAccount }) {
                 className='px-3'
                 onClick={() => history.push('/about')}
               >
-                <Gift className='mr-1' size={18} />About Gifts
+                <ImageSquare className='mr-1' size={18} />About NFTs
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
