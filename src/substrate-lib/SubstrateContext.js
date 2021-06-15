@@ -32,8 +32,6 @@ const INIT_STATE = {
 // Reducer function for `useReducer`
 
 const reducer = (state, action) => {
-  let api;
-  let chainInfo;
   switch (action.type) {
     case 'CONNECT_INIT':
       return { ...state, apiState: 'CONNECT_INIT' };
@@ -41,24 +39,10 @@ const reducer = (state, action) => {
     case 'CONNECT':
       return { ...state, api: action.payload, apiState: 'CONNECTING' };
 
-    case 'CONNECT_SUCCESS':
-      api = action.payload;
-      chainInfo = {
-        decimals: api.registry?.chainDecimals[0] || 12,
-        token: api.registry?.chainTokens[0] || 'DOT',
-        genesisHash: api.genesisHash,
-        ss58Format: api.registry?.chainSS58 || 42,
-        existentialDeposit:
-          api.consts?.balances?.existentialDeposit || new BN(0, 10),
-      };
-
-      // ToDo: remove this when the pallet is deployed on polkadot
-      // default substrate token to Dot for demo purpose
-      if (chainInfo?.token === 'Unit') {
-        chainInfo.token = 'Dot';
-      }
-      console.log(chainInfo);
+    case 'CONNECT_SUCCESS': {
+      const chainInfo = action.payload;
       return { ...state, apiState: 'READY', chainInfo: chainInfo };
+    }
 
     case 'CONNECT_ERROR':
       return { ...state, apiState: 'ERROR', apiError: action.payload };
@@ -82,7 +66,6 @@ const reducer = (state, action) => {
 
 ///
 // Connecting to the Substrate node
-
 const connect = (state, dispatch) => {
   try {
     const { apiState, socket, jsonrpc, types } = state;
@@ -97,13 +80,9 @@ const connect = (state, dispatch) => {
     _api.on('connected', () => {
       dispatch({ type: 'CONNECT', payload: _api });
       // `ready` event is not emitted upon reconnection and is checked explicitly here.
-      _api.isReady.then((_api) =>
-        dispatch({ type: 'CONNECT_SUCCESS', payload: _api })
-      );
+      _api.isReady.then((_api) => queryChainInfo(_api, state, dispatch));
     });
-    _api.on('ready', () =>
-      dispatch({ type: 'CONNECT_SUCCESS', payload: _api })
-    );
+    _api.on('ready', () => queryChainInfo(_api, state, dispatch));
     _api.on('error', (err) =>
       dispatch({ type: 'CONNECT_ERROR', payload: err })
     );
@@ -111,6 +90,26 @@ const connect = (state, dispatch) => {
     console.error(err);
     dispatch({ type: 'CONNECT_ERROR', payload: err });
   }
+};
+
+const queryChainInfo = async (api, state, dispatch) => {
+  const chainInfo = {
+    decimals: api.registry?.chainDecimals[0] || 12,
+    token: api.registry?.chainTokens[0] || 'DOT',
+    genesisHash: api.genesisHash,
+    ss58Format: api.registry?.chainSS58 || 42,
+    existentialDeposit:
+      api.consts?.balances?.existentialDeposit || new BN(0, 10),
+    chainName: await api.rpc.system.chain(),
+  };
+
+  // ToDo: remove this when the pallet is deployed on polkadot
+  // default substrate token to Dot for demo purpose
+  if (chainInfo?.token === 'Unit') {
+    chainInfo.token = 'Dot';
+  }
+  console.log(chainInfo);
+  dispatch({ type: 'CONNECT_SUCCESS', payload: chainInfo });
 };
 
 ///
