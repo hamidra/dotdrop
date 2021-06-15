@@ -33,3 +33,12 @@ h6,
     font-size: 2.5rem;
     color: $secondary-lighter;
 }
+
+a {
+  color: $primary;
+
+  &:hover {
+    color: $cyan;
+    text-decoration: none;
+  }
+}
