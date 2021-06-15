@@ -74,16 +74,6 @@ export default function PresentAccountPhrase ({
             ))}
           </Row>
           <Row className="justify-content-start w-100 pt-2">
-            <CopyToClipboard
-                  text={mnemonicWords.join(' ')}
-                  onCopy={(result) => {
-                    setCopied(result);
-                  }}>
-                  <div className="p-2 mr-2 copy" onClick={(e) => e.stopPropagation()}>
-                  <Copy className='mr-1' size={18} />
-                    <span className='copy'>{copied ? 'Copied' : 'Copy'}</span>
-                  </div>
-              </CopyToClipboard>
             <div
               className="phrase-toggle text-button p-2"
               style={!blurred ? { display: 'flex' } : { display: 'none' }}
@@ -104,10 +94,19 @@ export default function PresentAccountPhrase ({
               />
               <p>{'Reveal seedphrase'}</p>
             </div>
+            <CopyToClipboard
+                  text={mnemonicWords.join(' ')}
+                  onCopy={(result) => {
+                    setCopied(result);
+                  }}>
+                  <div className="p-2 mr-2 copy" onClick={(e) => e.stopPropagation()}>
+                  <Copy className='mr-1' size={18} />
+                    <span className='copy'>{copied ? 'Copied' : 'Copy'}</span>
+                  </div>
+              </CopyToClipboard>
           </Row>
         </div>
-        <div className="d-flex flex-grow-1" />
-        <Row className="flex-column justify-content-center align-items-center">
+        <Row className="flex-column justify-content-center align-items-center pt-2">
           <Col className="ml-2">
             <Form.Check
               type="checkbox"
