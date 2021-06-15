@@ -41,25 +41,6 @@ export default function PresentAccountPhrase ({
           onClick={() => {
             revealSecret();
           }}>
-          {/* <Row className="align-self-end">
-            <Col className={`text-button ${copied ? 'color-danger' : ''}`}>
-              <CopyToClipboard
-                text={mnemonicWords.join(' ')}
-                onCopy={(result) => {
-                  setCopied(result);
-                }}>
-                <div onClick={(e) => e.stopPropagation()}>
-                  <FaCopy
-                    style={{
-                      flexShrink: '0',
-                      fontSize: '24px'
-                    }}
-                  />
-                  <span>{copied ? ' copied!' : ''}</span>
-                </div>
-              </CopyToClipboard>
-            </Col>
-          </Row> */}
           <Row
             className={`seedphrase justify-content-center align-items-center ${
               blurred ? 'blurred' : ''
@@ -73,7 +54,7 @@ export default function PresentAccountPhrase ({
               </Col>
             ))}
           </Row>
-          <Row className="justify-content-start w-100 pt-2">
+          <Row className="justify-content-start w-100 pt-2" style={{ marginLeft: '-40px' }}>
             <div
               className="phrase-toggle text-button p-2"
               style={!blurred ? { display: 'flex' } : { display: 'none' }}
@@ -106,8 +87,7 @@ export default function PresentAccountPhrase ({
               </CopyToClipboard>
           </Row>
         </div>
-        <Row className="flex-column justify-content-center align-items-center pt-2">
-          <Col className="ml-2">
+        <div className="flex-row justify-content-start align-items-center px-2 pt-2">
             <Form.Check
               type="checkbox"
               value={checked}
@@ -121,8 +101,8 @@ export default function PresentAccountPhrase ({
             {checkedError && (
               <Form.Text className="text-danger">{checkedError}</Form.Text>
             )}
-          </Col>
-        </Row>
+        </div>
+        <div className="d-flex flex-grow-1" />
         <div className="pt-4 d-flex justify-content-center">
           <button
             className='btn btn-primary'
