@@ -1,3 +1,13 @@
+#dropdownMenuButton {
+    border-color: $gray-800;
+    border-radius: 0 !important;
+    color: $secondary;
+
+    &:hover {
+        border-color: $secondary; 
+    }
+}
+
 .dropdown-toggle::after {
     display: none; // hide default bootstrap dropdown caret
 }
@@ -10,7 +20,7 @@
     color: $secondary;
 
     &:hover {
-        background-color: $gray-800;
-        color: $cyan;
+        background-color: $gray-700;
+        color: $secondary;
     }
 }
