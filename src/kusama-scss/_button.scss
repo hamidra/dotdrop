@@ -26,12 +26,20 @@
         border-color: $cyan;
     }
 
-    &:not(:disabled):not(.disabled):active {
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
         background: none;
         color: $cyan;
         border-color: $cyan;
         box-shadow: none !important;
     }
+}
+
+.show > .btn-primary.dropdown-toggle {
+    background: none;
+    color: $cyan;
+    border-color: $cyan;
+    box-shadow: none !important;
 }
 
 .btn-link {
