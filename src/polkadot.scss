@@ -221,6 +221,6 @@ $border-radius: 0.5rem;
 
 // import should be at the end
 @import '~bootstrap/scss/bootstrap';
-@import 'scss/variables';
-@import 'scss/bg';
-@import 'scss/button';
+@import 'polkadot-scss/variables';
+@import 'polkadot-scss/bg';
+@import 'polkadot-scss/button';
