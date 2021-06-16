@@ -9,9 +9,7 @@ const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
   return (
     <Media className="d-flex align-items-center">
-      <div className='mr-1'>
-        <Identicon value={accountAddress} size={20} theme="kusama" />
-      </div>
+      <Identicon className='mr-1' value={accountAddress} size={20} theme="kusama" />
       <Media.Body>
         <Row>
           <Col>
@@ -46,14 +44,14 @@ export default function Header ({ selectedAccount }) {
           />
           </a>
         </Navbar.Brand>
-        <div className='d-flex justify-content-end'>
+        <div className='d-flex align-items-center justify-content-end'>
           {selectedAccount && (
             <>
               <div className="d-none d-sm-block w-100 d-sm-none" />
               <Nav className="d-none d-sm-block flex-grow-0 justify-content-end p-1 mr-2 shadow-sm">
                 <div
                   style={{ minWidth: '5rem', fontWeight: '400' }}
-                  className="py-1 px-3 bg-white rounded text-center">
+                  className="account-box align-items-center text-center">
                   <AccountInfoBox accountAddress={selectedAccount} />
                 </div>
               </Nav>
