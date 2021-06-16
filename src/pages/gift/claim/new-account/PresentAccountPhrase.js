@@ -37,7 +37,7 @@ export default function PresentAccountPhrase ({
         />
         <div
           style={{ position: 'relative' }}
-          className="container d-flex justify-content-center align-items-center flex-column"
+          className="container d-flex justify-content-start align-items-center flex-column"
           onClick={() => {
             revealSecret();
           }}>
@@ -54,7 +54,7 @@ export default function PresentAccountPhrase ({
               </Col>
             ))}
           </Row>
-          <Row className="justify-content-start w-100 pt-2" style={{ marginLeft: '-40px' }}>
+          <Row className="justify-content-start w-100 pt-2" style={{ margin: 0 }}>
             <div
               className="phrase-toggle text-button p-2 rounded"
               style={!blurred ? { display: 'flex' } : { display: 'none' }}
@@ -86,8 +86,7 @@ export default function PresentAccountPhrase ({
                   </div>
               </CopyToClipboard>
           </Row>
-        </div>
-        <div className="flex-row justify-content-start align-items-center px-2 pt-2">
+          <div className="flex-row justify-content-start align-items-center w-100 px-2 pt-3">
             <Form.Check
               type="checkbox"
               value={checked}
@@ -101,6 +100,7 @@ export default function PresentAccountPhrase ({
             {checkedError && (
               <Form.Text className="text-danger">{checkedError}</Form.Text>
             )}
+          </div>
         </div>
         <div className="d-flex flex-grow-1" />
         <div className="pt-4 d-flex justify-content-center">
