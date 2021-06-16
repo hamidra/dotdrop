@@ -207,10 +207,6 @@ $border-radius: 0.5rem;
   transform: scale(1.25);
 }
 
-.blurred {
-  filter: blur(0.3rem);
-}
-
 .overlay-center {
   position: absolute;
   top: 50%;
@@ -224,3 +220,4 @@ $border-radius: 0.5rem;
 @import 'polkadot-scss/variables';
 @import 'polkadot-scss/bg';
 @import 'polkadot-scss/button';
+@import 'polkadot-scss/seedphrase';
