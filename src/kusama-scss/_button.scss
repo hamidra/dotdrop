@@ -54,4 +54,28 @@
       text-decoration: none;
       color: $cyan;
     }
-  }
+}
+
+.btn-card {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: left;
+    background-color: transparent;
+    color: $secondary;
+    border: 2px solid $gray-800;
+    border-radius: 0;
+  
+    &:hover {
+        border: 2px solid $secondary;
+
+        svg {
+            color: $secondary !important;
+        }
+    }
+
+    svg {
+        color: $secondary-darker !important;
+    }
+}
