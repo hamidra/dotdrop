@@ -4,6 +4,41 @@ import utils from '../substrateUtils';
 import { signAndSendTx } from './txHandler';
 
 const classId = 2;
+
+// the balance that will be tranferred to the gift account
+// in order to cover the cost of final tx from gift account to recepient account.
+const feeMultiplierValue = 1;
+const transferBalanceAndFees = async (
+  api,
+  fromAccount,
+  toAddress,
+  balance,
+  feeMultiplier
+) => {
+  const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
+  const fromAddress = utils.getAccountAddress(fromAccount);
+  const info = await api.tx.balances
+    .transfer(toAddress, chainAmount)
+    .paymentInfo(fromAddress);
+  const feeAdjustment = utils.calcFeeAdjustments(info?.partialFee);
+  const chainAmountAndFees = chainAmount.add(
+    feeAdjustment.mul(new BN(feeMultiplier || 0))
+  );
+  const tx = api.tx.balances.transfer(toAddress, chainAmountAndFees);
+  return new Promise((resolve, reject) =>
+    signAndSendTx(api, tx, fromAccount, ({ success, events, errors }) => {
+      if (!success) {
+        reject(errors);
+      }
+      const transferEvent = events.filter((event) =>
+        api?.events?.balances?.Transfer?.is(event)
+      );
+
+      const value = transferEvent[0]?.event?.data[2]?.toString();
+      resolve(value);
+    }).catch((error) => reject(error))
+  );
+};
 const transferAllAssets = async (api, classId, fromAccount, toAddress) => {
   const fromAddress = utils.getAccountAddress(fromAccount);
 
@@ -48,18 +83,26 @@ const transferAllAssets = async (api, classId, fromAccount, toAddress) => {
   const batchTx = api.tx.utility.batch(txs);
 
   return new Promise((resolve, reject) =>
-    signAndSendTx(batchTx, fromAccount, ({ result, error }) => {
-      if (error) {
-        reject(error);
+    signAndSendTx(api, batchTx, fromAccount, ({ success, events, errors }) => {
+      if (!success) {
+        reject(errors);
       }
-      resolve(result);
+      resolve(events);
     }).catch((error) => reject(error))
   );
 };
 
 const uniquesPalletGiftProvider = {
   createGift: (api, interimAccount, senderAccount, gift) => {
-    return Promise.reject(new Error('not implemented.'));
+    // currently create only supports balances
+    const interimAddress = utils.getAccountAddress(interimAccount);
+    return transferBalanceAndFees(
+      api,
+      senderAccount,
+      interimAddress,
+      gift?.amount,
+      feeMultiplierValue // fee multiplier of 1x
+    );
   },
   claimGift: (api, interimAccount, recipientAccount) => {
     const recepientAddress = utils.getAccountAddress(recipientAccount);
@@ -71,7 +114,7 @@ const uniquesPalletGiftProvider = {
   },
   getGiftFeeMultiplier: () => {
     // ToDO: calculate gift creation Fee for the gift
-    return 0;
+    return feeMultiplierValue;
   },
 };
 

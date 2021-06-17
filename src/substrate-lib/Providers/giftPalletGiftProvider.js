@@ -9,7 +9,7 @@ const createGift = async (api, senderAccount, interimAddress, amount) => {
   const tx = api.tx.gift.gift(chainAmount, interimAddress);
 
   return new Promise((resolve, reject) =>
-    signAndSendTx(tx, senderAccount, ({ result, error }) => {
+    signAndSendTx(api, tx, senderAccount, ({ result, error }) => {
       if (error) {
         reject(error);
       }
@@ -24,7 +24,7 @@ const claimGift = async (api, interimAccount, recipientAddress) => {
   }
   const tx = api.tx.gift.claim(recipientAddress);
   return new Promise((resolve, reject) =>
-    signAndSendTx(tx, interimAccount, ({ result, error }) => {
+    signAndSendTx(api, tx, interimAccount, ({ result, error }) => {
       if (error) {
         reject(error);
       }
@@ -42,7 +42,7 @@ const claimGift = async (api, interimAccount, recipientAddress) => {
 const removeGift = async (api, senderAccount, interimAddress) => {
   const tx = api.tx.gift.remove(interimAddress);
   return new Promise((resolve, reject) =>
-    signAndSendTx(tx, senderAccount, ({ result, error }) => {
+    signAndSendTx(api, tx, senderAccount, ({ result, error }) => {
       if (error) {
         reject(error);
       }
