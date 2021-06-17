@@ -18,6 +18,15 @@ export default function GenerateGift({
   const [balance, setBalance] = useState(null);
   const [txFee, setTxFee] = useState(null);
   const balanceDecimalPoints = 5;
+  const balanceVal = balance?.free
+    ? utils.fromChainUnit(
+        balance.free,
+        chainInfo?.decimals,
+        balanceDecimalPoints
+      )
+    : null;
+  const balanceStr =
+    balanceVal && utils.formatBalance(balanceVal, chainInfo?.token);
 
   useEffect(() => {
     let unsub;
@@ -247,12 +256,8 @@ export default function GenerateGift({
                           : {}),
                       }}
                       className="bg-transparent border-left-0 balance-text">
-                      {balance?.free
-                        ? `${utils.fromChainUnit(
-                            balance.free,
-                            chainInfo?.decimals,
-                            balanceDecimalPoints
-                          )} ${chainInfo?.token} available`
+                      {balanceStr
+                        ? `${balanceStr} available`
                         : `${chainInfo?.token}`}
                     </InputGroup.Text>
                   </InputGroup.Append>
