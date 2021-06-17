@@ -10,6 +10,7 @@ import BN from 'bn.js';
 
 const parsedQuery = queryString.parse(window.location.search);
 const connectedSocket = parsedQuery.rpc || config.PROVIDER_SOCKET;
+const theme = parsedQuery.theme || config.THEME;
 console.log(`Connected socket: ${connectedSocket}`);
 
 ///
@@ -26,6 +27,7 @@ const INIT_STATE = {
   apiError: null,
   apiState: null,
   chainInfo: null,
+  theme: theme?.toLowerCase(),
 };
 
 ///
@@ -96,7 +98,7 @@ const connect = (state, dispatch) => {
 const queryChainInfo = async (api, state, dispatch) => {
   const chainInfo = {
     decimals: api.registry?.chainDecimals[0] || 12,
-    token: api.registry?.chainTokens[0] || 'DOT',
+    token: (api.registry?.chainTokens[0] || 'DOT')?.toUpperCase(),
     genesisHash: api.genesisHash,
     ss58Format: api.registry?.chainSS58 || 42,
     existentialDeposit:
@@ -106,8 +108,8 @@ const queryChainInfo = async (api, state, dispatch) => {
 
   // ToDo: remove this when the pallet is deployed on polkadot
   // default substrate token to Dot for demo purpose
-  if (chainInfo?.token === 'Unit') {
-    chainInfo.token = 'Dot';
+  if (chainInfo?.token === 'UNIT') {
+    chainInfo.token = 'DOT';
   }
   console.log(chainInfo);
   dispatch({ type: 'CONNECT_SUCCESS', payload: chainInfo });
