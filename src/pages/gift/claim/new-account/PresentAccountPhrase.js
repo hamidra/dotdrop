@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
-import { FaCopy } from 'react-icons/fa';
+import { Copy, Eye, EyeSlash } from 'phosphor-react';
 
 export default function PresentAccountPhrase ({
   mnemonicWords,
@@ -38,71 +37,56 @@ export default function PresentAccountPhrase ({
         />
         <div
           style={{ position: 'relative' }}
-          className="container px-4 pb-4 d-flex justify-content-center align-items-center flex-column"
+          className="container d-flex justify-content-start align-items-center flex-column"
           onClick={() => {
             revealSecret();
           }}>
-          <div
-            className={`text-button text-center ${
-              !blurred ? 'visible' : 'invisible'
-            }`}
-            onClick={() => hideSecret()}>
-            <BsFillEyeSlashFill
-              style={{
-                flexShrink: '0',
-                fontSize: '24px',
-                marginBottom: 5,
-                marginRight: 5
-              }}
-            />
-            <span>{'Hide secret words'}</span>
-          </div>
-          <Row className="align-self-end">
-            <Col className={`text-button ${copied ? 'color-danger' : ''}`}>
-              <CopyToClipboard
-                text={mnemonicWords.join(' ')}
-                onCopy={(result) => {
-                  setCopied(result);
-                }}>
-                <div onClick={(e) => e.stopPropagation()}>
-                  <FaCopy
-                    style={{
-                      flexShrink: '0',
-                      fontSize: '24px'
-                    }}
-                  />
-                  <span>{copied ? ' copied!' : ''}</span>
-                </div>
-              </CopyToClipboard>
-            </Col>
-          </Row>
           <Row
-            style={{ fontSize: '1.25rem' }}
-            className={`justify-content-center align-items-center ${
+            className={`seedphrase justify-content-center align-items-center rounded ${
               blurred ? 'blurred' : ''
             }`}>
             {mnemonicWords.map((word, index) => (
               <Col md={4} key={index}>
-                <div className=" d-flex flex-row border-bottom border-primary">
-                  <div className="text-secondary"> {`${index + 1}.`}</div>
-                  <div className="text-center m-auto">{`${word}`}</div>
+                <div className="seedphrase-item d-flex flex-row">
+                  <div className="seedphrase-item-nr text-secondary"> {`${index + 1}.`}</div>
+                  <div>{`${word}`}</div>
                 </div>
               </Col>
             ))}
           </Row>
-          <div
-            className={`text-center pt-4 overlay-center ${
-              blurred ? 'd-block' : 'd-none'
-            }`}>
-            <BsFillEyeFill
-              style={{ flexShrink: '0', fontSize: '24px', marginBottom: 5 }}
-            />
-            <p>{'Click here to reveal your secret words'}</p>
-          </div>
-        </div>
-        <div className="d-flex flex-grow-1" />
-        <Row className="flex-column justify-content-center align-items-center">
-          <Col className="ml-2">
+          <Row className="justify-content-start w-100 pt-2" style={{ margin: 0 }}>
+            <div
+              className="phrase-toggle text-button p-2 rounded"
+              style={!blurred ? { display: 'flex' } : { display: 'none' }}
+              onClick={() => hideSecret()}>
+              <EyeSlash
+                className="mr-1"
+                size="18"
+              />
+              <span>{'Hide secret words'}</span>
+            </div>
+            <div
+              className={`phrase-toggle text-center p-2 rounded ${
+                blurred ? 'd-flex' : 'd-none'
+              }`}>
+              <Eye
+                className="mr-1"
+                size="18"
+              />
+              <p>{'Reveal seedphrase'}</p>
+            </div>
+            <CopyToClipboard
+                  text={mnemonicWords.join(' ')}
+                  onCopy={(result) => {
+                    setCopied(result);
+                  }}>
+                  <div className="p-2 mr-2 copy rounded" onClick={(e) => e.stopPropagation()}>
+                  <Copy className='mr-1' size={18} />
+                    <span>{copied ? 'Copied' : 'Copy'}</span>
+                  </div>
+              </CopyToClipboard>
+          </Row>
+          <div className="flex-row justify-content-start align-items-center w-100 px-2 pt-3">
             <Form.Check
               type="checkbox"
               value={checked}
@@ -116,8 +100,9 @@ export default function PresentAccountPhrase ({
             {checkedError && (
               <Form.Text className="text-danger">{checkedError}</Form.Text>
             )}
-          </Col>
-        </Row>
+          </div>
+        </div>
+        <div className="d-flex flex-grow-1" />
         <div className="pt-4 d-flex justify-content-center">
           <button
             className='btn btn-primary'
