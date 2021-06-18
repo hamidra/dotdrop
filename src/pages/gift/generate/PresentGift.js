@@ -6,7 +6,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
   const { email, amount, secret } = gift;
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
-  const mailSubject = 'Sending you some DOTs';
+  const mailSubject = `Someone has sent you ${giftTheme?.content}`;
   const mailBody = `
   Hey! \n 
   I'm sending you ${amountStr} as a gift! You can go to \n
