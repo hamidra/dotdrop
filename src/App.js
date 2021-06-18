@@ -1,5 +1,6 @@
 import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
+import ThemeProvider from './theme/ThemeProvider';
 import Processing from './components/Processing';
 import AccountOverview from './pages/gift/accounts/AccountOverview';
 import Footer from './pages/gift/Footer';
@@ -48,11 +49,13 @@ function Body() {
 export default function App() {
   return (
     <SubstrateContextProvider>
-      <Router>
-        <Body />
-      </Router>
-      <Footer />
-      <DeveloperConsole />
+      <ThemeProvider>
+        <Router>
+          <Body />
+        </Router>
+        <Footer />
+        <DeveloperConsole />
+      </ThemeProvider>
     </SubstrateContextProvider>
   );
 }
