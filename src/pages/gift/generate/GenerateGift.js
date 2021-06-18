@@ -11,7 +11,7 @@ export default function GenerateGift({
   generateGiftHandler,
   giftFeeMultiplier,
 }) {
-  const { api, apiState, chainInfo } = useSubstrate();
+  const { api, apiState, chainInfo, giftTheme } = useSubstrate();
 
   const { prevStep } = useContext(GenerateContext);
 
@@ -93,7 +93,7 @@ export default function GenerateGift({
           minChainGiftAmount,
           chainInfo.decimals
         );
-        const minGiftAmountError = `The amount is below ${minGiftAmount} ${chainInfo.token}, the existential deposit for the polkadot network.`;
+        const minGiftAmountError = `The amount is below ${minGiftAmount} ${chainInfo?.token}, the existential deposit for the ${chainInfo?.chainName} network.`;
         return minGiftAmountError;
       }
     }
@@ -163,9 +163,9 @@ export default function GenerateGift({
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={'Gift Dots'}
-          cardText="Send DOTs to your friends and familiy, and have them join the
-            Polkadot Network today."
+          title={`Gift ${giftTheme?.content}`}
+          cardText={`Send ${giftTheme?.content} to your friends and familiy, and have them join the
+          ${giftTheme?.network} Network today.`}
           backClickHandler={() => prevStep()}
         />
         <Row className="flex-column align-items-center">

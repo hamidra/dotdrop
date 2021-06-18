@@ -10,7 +10,7 @@ export default function ExtensionAccount({
   title,
   prevStepHandler,
 }) {
-  const { keyring, balances, chainInfo } = useSubstrate();
+  const { keyring, balances, chainInfo, giftTheme } = useSubstrate();
   const [selectedAccount, setSelectedAccount] = useState(null);
   const accounts = keyring.getPairs();
   const accountsBalances = {};
@@ -35,7 +35,7 @@ export default function ExtensionAccount({
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={title || 'Select Account'}
-          cardText={'Select your polkadot account below:'}
+          cardText={`Select your ${giftTheme?.network} account below:`}
           backClickHandler={prevStepHandler}
         />
         <Row className="p-md-5 justify-content-center">

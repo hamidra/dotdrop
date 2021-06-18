@@ -27,7 +27,8 @@ const INIT_STATE = {
   apiError: null,
   apiState: null,
   chainInfo: null,
-  theme: theme?.toLowerCase(),
+  theme: theme,
+  giftTheme: null,
 };
 
 ///
@@ -43,7 +44,13 @@ const reducer = (state, action) => {
 
     case 'CONNECT_SUCCESS': {
       const chainInfo = action.payload;
-      return { ...state, apiState: 'READY', chainInfo: chainInfo };
+      const giftTheme = getGiftTheme(theme, chainInfo);
+      return {
+        ...state,
+        apiState: 'READY',
+        chainInfo: chainInfo,
+        giftTheme: giftTheme,
+      };
     }
 
     case 'CONNECT_ERROR':
@@ -66,6 +73,31 @@ const reducer = (state, action) => {
   }
 };
 
+const getGiftTheme = (theme, chainInfo) => {
+  theme = theme?.toLowerCase();
+
+  // default values
+  const giftTheme = {
+    content: `${chainInfo?.token}s`,
+    network: `${chainInfo?.chainName}`,
+  };
+  switch (theme) {
+    case 'polkadot':
+      giftTheme.content = 'DOTs';
+      giftTheme.network = 'polkadot';
+      break;
+    case 'kusama':
+      giftTheme.content = 'KSMs';
+      giftTheme.network = 'Kusama';
+      break;
+    case 'kusamanft':
+      giftTheme.content = 'NFT';
+      giftTheme.network = 'Kusama';
+      break;
+    default:
+  }
+  return giftTheme;
+};
 ///
 // Connecting to the Substrate node
 const connect = (state, dispatch) => {
