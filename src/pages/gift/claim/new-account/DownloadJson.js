@@ -115,7 +115,7 @@ export default function DownloadJson({ downloadJsonHandler, prevStepHandler }) {
               <button
                 className="btn btn-primary"
                 onClick={() => !props.isSubmitting && props.submitForm()}>
-                DownloadJson
+                Download Json
               </button>
             </Col>
           </>
