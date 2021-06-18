@@ -4,16 +4,18 @@ import { Card, Row, Col } from 'react-bootstrap';
 import CardButton from '../../../../components/CardButton';
 import CardHeader from '../../../../components/CardHeader';
 import Divider from '../../../../components/Divider';
+import { useSubstrate } from '../../../../substrate-lib';
 
 const ConnectExistingAccount = ({
   setExistingAccountSourceHandler,
-  prevStepHandler
+  prevStepHandler,
 }) => {
+  const { giftTheme } = useSubstrate();
   return (
     <Card.Body className="d-flex flex-column">
       <CardHeader
         title="Connect Account"
-        cardText="Connect an existing Polkadot account."
+        cardText={`Connect an existing ${giftTheme?.network} account.`}
         backClickHandler={prevStepHandler}
       />
       <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">

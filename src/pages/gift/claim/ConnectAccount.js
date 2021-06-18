@@ -1,21 +1,23 @@
 import { Card, Row, Col } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import Divider from '../../../components/Divider';
+import { useSubstrate } from '../../../substrate-lib';
 
-export default function ConnectAccount ({ setAccountSourceHandler }) {
+export default function ConnectAccount({ setAccountSourceHandler }) {
+  const { giftTheme } = useSubstrate();
   return (
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title="Claim Your Gift"
-          cardText="Create a new Polkadot account, or connect an existing account to transfer your gift to."
+          cardText={`To claim your ${giftTheme?.content}, create a new ${giftTheme?.network} account or connect an existing account.`}
         />
         <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
           <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
             <button
-              className='btn btn-primary btn-lg'
+              className="btn btn-primary btn-lg"
               onClick={() => setAccountSourceHandler('NEW')}>
-              Create Polkadot Account
+              {`Create ${giftTheme?.network} Account`}
             </button>
           </Row>
           <Divider text="Or" />
