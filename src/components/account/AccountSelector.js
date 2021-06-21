@@ -111,7 +111,7 @@ const AccountDropdownItem = React.forwardRef(
     return (
       <>
         <Media
-          className="d-flex align-items-center p-2 border-top"
+          className="account-item d-flex align-items-center p-2 border-top"
           active={active}
           onClick={(e) => {
             e.preventDefault();
