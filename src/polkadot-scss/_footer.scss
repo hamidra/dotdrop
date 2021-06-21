@@ -4,9 +4,16 @@
     width: 100%;
     padding: 24px 48px;
     color: #FFF;
-    font-size: 0.75rem;
+
+    @media (min-width: 0px) {
+        font-size: 0.875rem;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 0.75rem; 
+    }
 
     a {
         color: #FFF;
     }
-  }
+}
