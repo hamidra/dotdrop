@@ -4,7 +4,6 @@ import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import BN from 'bn.js';
 export default function GenerateGift({
   account,
