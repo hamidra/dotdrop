@@ -1,5 +1,6 @@
 {
   "APP_NAME": "dotdrop",
   "DEVELOPMENT_KEYRING": true,
-  "RPC": {}
+  "RPC": {},
+  "THEME": "polkadot"
 }

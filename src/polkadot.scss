@@ -112,13 +112,6 @@ $input-border-color: $gray-300;
 $input--color: $gray-900;
 $input-height: 2.5rem;
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 24px 48px;
-}
-
 // headings
 $headings-font-weight: bold;
 $h2-font-size: 2.5rem;
@@ -207,10 +200,6 @@ $border-radius: 0.5rem;
   transform: scale(1.25);
 }
 
-.blurred {
-  filter: blur(0.3rem);
-}
-
 .overlay-center {
   position: absolute;
   top: 50%;
@@ -221,6 +210,8 @@ $border-radius: 0.5rem;
 
 // import should be at the end
 @import '~bootstrap/scss/bootstrap';
-@import 'scss/variables';
-@import 'scss/bg';
-@import 'scss/button';
+@import 'polkadot-scss/variables';
+@import 'polkadot-scss/bg';
+@import 'polkadot-scss/button';
+@import 'polkadot-scss/footer';
+@import 'polkadot-scss/seedphrase';

@@ -4,13 +4,13 @@ import { useSubstrate, utils } from '../../../substrate-lib';
 import AccountSelector from '../../../components/account/AccountSelector';
 import CardHeader from '../../../components/CardHeader';
 
-export default function ExtensionAccount ({
+export default function ExtensionAccount({
   setAccountHandler,
   setAddressHandler,
   title,
-  prevStepHandler
+  prevStepHandler,
 }) {
-  const { keyring, balances, chainInfo } = useSubstrate();
+  const { keyring, balances, chainInfo, giftTheme } = useSubstrate();
   const [selectedAccount, setSelectedAccount] = useState(null);
   const accounts = keyring.getPairs();
   const accountsBalances = {};
@@ -35,7 +35,7 @@ export default function ExtensionAccount ({
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={title || 'Select Account'}
-          cardText={'Select your polkadot account below:'}
+          cardText={`Select your ${giftTheme?.network} account below:`}
           backClickHandler={prevStepHandler}
         />
         <Row className="p-md-5 justify-content-center">
@@ -43,6 +43,7 @@ export default function ExtensionAccount ({
             <AccountSelector
               accounts={accounts}
               balances={accountsBalances}
+              token={chainInfo?.token}
               selectedAccount={selectedAccount}
               setSelectedAccount={setSelectedAccount}
               maxStrlength={15}
@@ -52,7 +53,11 @@ export default function ExtensionAccount ({
         <div className="d-flex flex-grow-1" />
         <Row>
           <Col className="pt-4 d-flex justify-content-center">
-            <button className='btn btn-primary' onClick={() => _setAccountHandler()}>Connect</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => _setAccountHandler()}>
+              Connect
+            </button>
           </Col>
         </Row>
       </Card.Body>
