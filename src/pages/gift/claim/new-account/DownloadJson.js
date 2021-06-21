@@ -29,8 +29,9 @@ export default function DownloadJson({ downloadJsonHandler, prevStepHandler }) {
           confirmPassword: '',
         }}
         validate={validate}
-        onSubmit={({ accountName, password }) => {
+        onSubmit={({ accountName, password }, actions) => {
           downloadJsonHandler(accountName, password);
+          actions.setSubmitting(false);
         }}>
         {(props) => (
           <>

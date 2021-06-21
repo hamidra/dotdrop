@@ -36,7 +36,10 @@ export default function VerifySecret({ claimGiftHandler }) {
             redeemSecret: '',
           }}
           validate={validate}
-          onSubmit={({ redeemSecret }) => redeemHandler(redeemSecret)}>
+          onSubmit={(values, actions) => {
+            redeemHandler(values.redeemSecret);
+            actions.setSubmitting(false);
+          }}>
           {(props) => (
             <>
               <Row className="pt-4 justify-content-center align-items-center">
