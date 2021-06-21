@@ -1,57 +1,29 @@
-import { Container } from 'react-bootstrap';
-
-import PolkadotLogo from '../../images/polkadot_logo_footer.png';
-
-export default function Footer({ selectedAccount }) {
+export default function Footer ({ selectedAccount }) {
   return (
     <footer
-      className="footer"
-      variant="light"
+      className="footer d-flex flex-column flex-md-row px-4 py-3"
       expand="md"
-      style={{ backgroundColor: '#F9FAFB' }}>
-      <Container className="d-flex flex-column flex-sm-row">
-        <div style={{ margin: '8px' }}>
-          <a
-            href="https://polkadot.network"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              width={154}
-              className="mr-5"
-              src={PolkadotLogo}
-              alt={'Polkadot'}
-            />
-          </a>
-        </div>
-        <div
-          style={{
-            fontSize: '12px',
-            margin: '8px',
-            maxWidth: 300,
-          }}>
-          <strong>Polkadot Gifts</strong> lets you send DOT gifts to friends and
-          family members.
-        </div>
-        <div className="footer-grow flex-grow-1" />
-        <div
-          style={{
-            fontSize: '12px',
-            margin: '8px',
-            maxWidth: 300,
-          }}>
-          <strong>Never</strong> share your account seed or private key directly
-          with this or any other site.
-        </div>
-        <div className="footer-grow flex-grow-1" />
-        <div style={{ color: '#6C757D', fontSize: '12px', margin: '8px' }}>
-          <div>© {new Date().getFullYear()} All rights reserved.</div>
-          <div className="d-flex flex-row">
-            <div>Terms &amp; Conditions</div>
-            &nbsp;·&nbsp;
-            <div>Privacy Policy</div>
+    >
+        <div className="d-flex flex-column flex-sm-row">
+          <div className="my-2 my-md-0">© {new Date().getFullYear()} All rights reserved.<span className='d-none d-sm-inline'>&nbsp;&nbsp;·&nbsp;&nbsp;</span></div>
+          <div className="my-2 my-md-0">
+            <span>
+              <a href="policy" target="_blank">
+                Terms &amp; Conditions
+              </a>
+            </span>
+            &nbsp;&nbsp;·&nbsp;&nbsp;
+            <span>
+              <a href="policy" target="_blank">
+                Privacy Policy
+              </a>
+            </span>
           </div>
         </div>
-      </Container>
+        <div className="footer-grow flex-grow-1" />
+        <div className="my-2 my-md-0">
+          <strong>Questions?</strong> <a href='mailto:support@polkadot.network?subject=Gifts'>support@polkadot.network</a>
+        </div>
     </footer>
   );
 }
