@@ -13,6 +13,32 @@ const connectedSocket = parsedQuery.rpc || config.PROVIDER_SOCKET;
 const theme = parsedQuery.theme || config.THEME;
 console.log(`Connected socket: ${connectedSocket}`);
 
+const getGiftTheme = (theme) => {
+  theme = theme?.toLowerCase();
+
+  // default values
+  const giftTheme = {
+    content: 'DOT',
+    network: 'Polkadot',
+  };
+  switch (theme) {
+    case 'polkadot':
+      giftTheme.content = 'DOT';
+      giftTheme.network = 'Polkadot';
+      break;
+    case 'kusama':
+      giftTheme.content = 'KSM';
+      giftTheme.network = 'Kusama';
+      break;
+    case 'kusamanft':
+      giftTheme.content = 'NFT';
+      giftTheme.network = 'Kusama';
+      break;
+    default:
+  }
+  return giftTheme;
+};
+
 ///
 // Initial state for `useReducer`
 
@@ -28,7 +54,7 @@ const INIT_STATE = {
   apiState: null,
   chainInfo: null,
   theme: theme,
-  giftTheme: null,
+  giftTheme: getGiftTheme(theme),
 };
 
 ///
@@ -44,12 +70,10 @@ const reducer = (state, action) => {
 
     case 'CONNECT_SUCCESS': {
       const chainInfo = action.payload;
-      const giftTheme = getGiftTheme(theme, chainInfo);
       return {
         ...state,
         apiState: 'READY',
         chainInfo: chainInfo,
-        giftTheme: giftTheme,
       };
     }
 
@@ -72,32 +96,6 @@ const reducer = (state, action) => {
     default:
       throw new Error(`Unknown type: ${action.type}`);
   }
-};
-
-const getGiftTheme = (theme, chainInfo) => {
-  theme = theme?.toLowerCase();
-
-  // default values
-  const giftTheme = {
-    content: `${chainInfo?.token}s`,
-    network: `${chainInfo?.chainName}`,
-  };
-  switch (theme) {
-    case 'polkadot':
-      giftTheme.content = 'DOTs';
-      giftTheme.network = 'polkadot';
-      break;
-    case 'kusama':
-      giftTheme.content = 'KSMs';
-      giftTheme.network = 'Kusama';
-      break;
-    case 'kusamanft':
-      giftTheme.content = 'NFT';
-      giftTheme.network = 'Kusama';
-      break;
-    default:
-  }
-  return giftTheme;
 };
 ///
 // Connecting to the Substrate node
