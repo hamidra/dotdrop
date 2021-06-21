@@ -1,0 +1,33 @@
+.account-dropdown-toggle {
+    border-color: $secondary-darker !important;
+}
+
+.account-toggle-item {
+    border-color: $secondary-darker !important;
+
+    svg {
+        color: $secondary-darker !important;
+    }
+
+    &:hover {
+        cursor: pointer;
+        border-color: $secondary !important;
+    }
+}
+
+.dropdown-menu {
+    background-color: #000;
+    color: $secondary-darker;
+    max-height: 320px;
+    overflow-y: scroll;
+    border: 1px solid $gray-900;
+
+    .border-top {
+        border-top-color: $gray-900 !important;
+    }
+
+    ul div:hover {
+        cursor: pointer;
+        background-color: $gray-900;
+    }
+}
