@@ -1,22 +1,21 @@
 import { Row, Col, Card } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
-import { useSubstrate, utils } from '../../../substrate-lib';
-
-export default function PresentGift({ gift, removeGiftHandler }) {
+import { Link } from 'react-router-dom';
+export default function PresentGift ({ gift, removeGiftHandler }) {
   const { email, amount, secret } = gift;
-  const { giftTheme, chainInfo } = useSubstrate();
-  const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
-  const mailSubject = `Someone has sent you ${giftTheme?.content}`;
+  const mailSubject = 'Sending you some DOTs';
   const mailBody = `
   Hey! \n 
-  I'm sending you ${amountStr} as a gift! You can go to \n
+  I'm sending you ${
+    amount > 1 ? `${amount} DOTs` : `${amount} DOT`
+  } as a gift! You can go to \n
   https://hamidra.github.io/dotdrop/#/claim \n
-  and type in the following secret message to claim your ${giftTheme?.content}. 
+  and type in the following secret message to claim your DOTs. 
   \n \n 
   ${secret} 
   \n \n 
   The website will walk you through to create your own secure
-  ${giftTheme.network} account. \n 
+  Polkadot account. \n 
   Enjoy!`;
   const mailToLink = `${email}?subject=${mailSubject}&body=${encodeURIComponent(
     mailBody
@@ -35,8 +34,8 @@ export default function PresentGift({ gift, removeGiftHandler }) {
       <Card.Body>
         <CardHeader
           title={'Send Message'}
-          cardText={`Send ${giftTheme.content} to your friends and familiy, and have them join the
-          ${giftTheme.network} Network today.`}
+          cardText="Send DOTs to your friends and familiy, and have them join the
+          Polkadot Network today."
         />
         <Row className="justify-content-center align-items-center my-4 mx-2">
           <Col>
@@ -44,15 +43,15 @@ export default function PresentGift({ gift, removeGiftHandler }) {
               <Card.Body className="p-4">
                 <p>Hey!</p>
                 <p>
-                  I'm sending you {`${amountStr}`} as a gift! You can follow
-                  this{' '}
+                  I'm sending you{' '}
+                  {amount > 1 ? `${amount} DOTs` : `${amount} DOT`} as a gift!
+                  You can follow this{' '}
                   <a
                     href="https://hamidra.github.io/dotdrop/#/claim"
                     target="_blank">
                     link
                   </a>{' '}
-                  and type in the following secret message to claim your{' '}
-                  {`${giftTheme.content}`}.
+                  and type in the following secret message to claim your DOTs.
                   <strong
                     style={{
                       backgroundColor: '#EDF1F5',
@@ -61,12 +60,12 @@ export default function PresentGift({ gift, removeGiftHandler }) {
                       padding: '5px',
                       marginTop: '20px',
                       marginBottom: '20px',
-                      borderRadius: '5px',
+                      borderRadius: '5px'
                     }}>
                     {secret}
                   </strong>
-                  The website will walk you through to create your own secure{' '}
-                  {`${giftTheme.network}`} account.
+                  The website will walk you through to create your own secure
+                  Polkadot account.
                 </p>
                 <p>Enjoy!</p>
               </Card.Body>

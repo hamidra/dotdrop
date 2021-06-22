@@ -36,18 +36,16 @@ const utils = {
     }
   },
 
-  formatBalance: (balance, token) => {
+  formatBalance: (balance, decimalPoints) => {
     if (!balance) {
       return balance;
     }
+    decimalPoints =
+      decimalPoints === undefined ? balancePrecision : decimalPoints;
     const [wholeVal, decimalVal] = balance.split('.');
     let result = wholeVal;
     if (decimalVal) {
-      result += `.${trimEnd(decimalVal, '0')}`;
-    }
-    if (token) {
-      result =
-        parseInt(wholeVal) > 1 ? `${result} ${token}s` : `${result} ${token}`;
+      result += `.${trimEnd(decimalVal?.substr(0, decimalPoints), '0')}`;
     }
     return result;
   },
@@ -61,15 +59,13 @@ const utils = {
     const BChainUnit = B10.pow(new BN(chainDecimal));
     const dm = new BN(value).divmod(BChainUnit);
     const wholeStr = dm.div.toString();
-    let decimalStr = dm.mod.toString().padStart(chainDecimal, '0');
-    if (decimalPoints) {
-      decimalStr = decimalStr?.substr(0, decimalPoints);
-    }
-    decimalStr = trimEnd(decimalStr, '0');
+    const decimalStr = trimEnd(
+      dm.mod.toString().padStart(chainDecimal, '0'),
+      '0'
+    );
     let result = wholeStr;
-
     if (decimalStr) {
-      result += `.${decimalStr}`;
+      result += `.${decimalStr.substr(0, decimalPoints)}`;
     }
     return result;
   },
@@ -92,8 +88,11 @@ const utils = {
     );
     return BChainWholeVal.add(BChainDecimalVal);
   },
-  calcFeeAdjustments: (fee) => {
-    return new BN(fee || 0).muln(150).divn(100);
+
+  gteChainUnits: (units1, units2) => {
+    const BUnits1 = new BN(units1, 10);
+    const BUnits2 = new BN(units2, 10);
+    return BUnits1.gte(BUnits2);
   },
 };
 

@@ -3,12 +3,11 @@ import { Dropdown, Media, Form, Row, Col } from 'react-bootstrap';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { CaretDown } from 'phosphor-react';
-import utils from '../../substrate-lib/substrateUtils';
 
 const namePaddingLen = 10;
 const addressPaddingLen = 5;
 
-const AccountToggleItem = ({ account, balance, token }) => {
+const AccountToggleItem = ({ account, balance }) => {
   const nameStr = stringHelpers.truncateMiddle(
     account?.meta?.name,
     namePaddingLen
@@ -17,8 +16,8 @@ const AccountToggleItem = ({ account, balance, token }) => {
     account?.address,
     addressPaddingLen
   );
-  const balanceStr = utils.formatBalance(balance, token);
-  const caretSize = 24;
+  const balanceStr = `${balance}`;
+  const caretSize = 18;
   const caretMargin = 5;
   let ContentElement;
   if (account) {
@@ -34,7 +33,7 @@ const AccountToggleItem = ({ account, balance, token }) => {
               <div className="text-left">{addressStr}</div>
             </Col>
             <Col>
-              <div className="text-left text-md-right balance-text">{`${balanceStr}`}</div>
+              <div className="text-left text-md-right balance-text">{`${balanceStr} DOTs`}</div>
             </Col>
           </Row>
         </Media.Body>
@@ -99,7 +98,7 @@ const AccountDropdownMenu = React.forwardRef(
 );
 
 const AccountDropdownItem = React.forwardRef(
-  ({ account, balance, token, onClick, active }, ref) => {
+  ({ account, balance, onClick, active }, ref) => {
     const nameStr = stringHelpers.truncateMiddle(
       account?.meta?.name,
       namePaddingLen
@@ -108,7 +107,7 @@ const AccountDropdownItem = React.forwardRef(
       account?.address,
       addressPaddingLen
     );
-    const balanceStr = utils.formatBalance(balance, token);
+    const balanceStr = `${balance}`;
     return (
       <>
         <Media
@@ -128,7 +127,7 @@ const AccountDropdownItem = React.forwardRef(
                 <div>{addressStr}</div>
               </Col>
               <Col>
-                <div className="text-md-right balance-text">{`${balanceStr}`}</div>
+                <div className="text-md-right balance-text">{`${balanceStr} DOTs`}</div>
               </Col>
             </Row>
           </Media.Body>
@@ -140,7 +139,6 @@ const AccountDropdownItem = React.forwardRef(
 export default function AccounSelector ({
   accounts,
   balances,
-  token,
   selectedAccount,
   setSelectedAccount
 }) {
@@ -160,7 +158,6 @@ export default function AccounSelector ({
           <AccountToggleItem
             account={selectedAccount}
             balance={balances && balances[selectedAccount?.address]}
-            token={token}
           />
         </Dropdown.Toggle>
         <Dropdown.Menu style={{ minWidth: '100%' }} as={AccountDropdownMenu}>
@@ -172,7 +169,6 @@ export default function AccounSelector ({
                 active={account.address === selectedAccount?.address}
                 account={account}
                 balance={balances && balances[account?.address]}
-                token={token}
                 as={AccountDropdownItem}
               />
             );

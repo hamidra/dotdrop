@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { useSubstrate } from '../../../../substrate-lib';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
-import FileSaver from 'file-saver';
 import PresentAccountPhrase from './PresentAccountPhrase';
 import VerifyAccountPhrase from './VerifyAccountPhrase';
-import DownloadJsonOption from './DownloadJsonOption';
-import DownloadJson from './DownloadJson';
 
 export default function NewAccountMain({ setAddressHandler, prevStepHandler }) {
   const { keyring } = useSubstrate();
@@ -36,7 +33,7 @@ export default function NewAccountMain({ setAddressHandler, prevStepHandler }) {
   const createNewAccount = () => {
     // ToDO: Add error handling since mnemonicGenerate can fail
     const mnemonic = mnemonicGenerate();
-    const account = keyring.createFromUri(mnemonic, {}, 'sr25519');
+    const account = keyring.createFromUri(mnemonic, null, 'sr25519');
     return { mnemonic, account };
   };
 
@@ -44,19 +41,6 @@ export default function NewAccountMain({ setAddressHandler, prevStepHandler }) {
 
   const _setAddressHandler = async () => {
     setAddressHandler(newAccount.account.address);
-  };
-
-  const _downloadJsonHandler = async (accountName, password) => {
-    newAccount.account.setMeta({
-      ...newAccount?.account?.meta,
-      name: accountName,
-    });
-    const json = newAccount.account.toJson(password);
-    const blob = new Blob([JSON.stringify(json)], {
-      type: 'application/json; charset=utf-8',
-    });
-    FileSaver.saveAs(blob, `${newAccount.account.address}.json`);
-    _setAddressHandler();
   };
 
   const mnemonicWords = newAccount?.mnemonic
@@ -77,26 +61,8 @@ export default function NewAccountMain({ setAddressHandler, prevStepHandler }) {
   steps.push(
     <VerifyAccountPhrase
       mnemonicWords={mnemonicWords}
-      nextStepHandler={nextStep}
+      nextStepHandler={() => _setAddressHandler()}
       prevStepHandler={prevStep}
-    />
-  );
-
-  // add Step-2
-  steps.push(
-    <DownloadJsonOption
-      prevStepHandler={prevStep}
-      handleDownloadOption={(isDownload) =>
-        isDownload ? nextStep() : _setAddressHandler()
-      }
-    />
-  );
-
-  // add Step-3
-  steps.push(
-    <DownloadJson
-      prevStepHandler={prevStep}
-      downloadJsonHandler={_downloadJsonHandler}
     />
   );
 

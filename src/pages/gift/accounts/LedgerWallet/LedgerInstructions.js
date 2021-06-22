@@ -4,15 +4,13 @@ import { isWeb3Injected } from '@polkadot/extension-dapp';
 import ledgerInstall from '../../../../images/ledger-install.png';
 import extensionAdd from '../../../../images/extension-add.png';
 import extensionLedger from '../../../../images/extension-ledger.png';
-import { useSubstrate } from '../../../../substrate-lib';
 
-export default function LedgerInstructions({
+export default function LedgerInstructions ({
   prevStepHandler,
-  nextStepHandler,
+  nextStepHandler
 }) {
   const title = 'Import Ledger Account';
   const extensionLink = 'https://polkadot.js.org/extension/';
-  const { giftTheme } = useSubstrate();
   return (
     <>
       <Card.Body>
@@ -28,8 +26,8 @@ export default function LedgerInstructions({
                 <li className="mb-5">
                   <div className="mb-3">
                     <span className="step-text">
-                      {`Install ${giftTheme?.network} App and create a ${giftTheme?.network} account on your
-                      Ledger device. `}
+                      Install polkadot App and create a polkadot account on your
+                      Ledger device.&nbsp;
                     </span>
                     <a
                       href="https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT-"
@@ -74,11 +72,7 @@ export default function LedgerInstructions({
         </Row>
         <Row>
           <Col className="pt-4 d-flex justify-content-center">
-            <button
-              className="btn btn-primary"
-              onClick={() => nextStepHandler()}>
-              Connect
-            </button>
+            <button className="btn btn-primary" onClick={() => nextStepHandler()}>Connect</button>
           </Col>
         </Row>
       </Card.Body>

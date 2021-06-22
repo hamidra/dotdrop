@@ -4,28 +4,20 @@ import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import BN from 'bn.js';
 export default function GenerateGift({
   account,
   generateGiftHandler,
   giftFeeMultiplier,
 }) {
-  const { api, apiState, chainInfo, giftTheme } = useSubstrate();
+  const { api, apiState, chainInfo } = useSubstrate();
 
   const { prevStep } = useContext(GenerateContext);
 
   const [balance, setBalance] = useState(null);
   const [txFee, setTxFee] = useState(null);
   const balanceDecimalPoints = 5;
-  const balanceVal = balance?.free
-    ? utils.fromChainUnit(
-        balance.free,
-        chainInfo?.decimals,
-        balanceDecimalPoints
-      )
-    : null;
-  const balanceStr =
-    balanceVal && utils.formatBalance(balanceVal, chainInfo?.token);
 
   useEffect(() => {
     let unsub;
@@ -92,7 +84,7 @@ export default function GenerateGift({
           minChainGiftAmount,
           chainInfo.decimals
         );
-        const minGiftAmountError = `The amount is below ${minGiftAmount} ${chainInfo?.token}, the existential deposit for the ${chainInfo?.chainName} network.`;
+        const minGiftAmountError = `The amount is below ${minGiftAmount} ${chainInfo.token}, the existential deposit for the polkadot network.`;
         return minGiftAmountError;
       }
     }
@@ -162,9 +154,9 @@ export default function GenerateGift({
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={`Gift ${giftTheme?.content}`}
-          cardText={`Send ${giftTheme?.content} to your friends and familiy, and have them join the
-          ${giftTheme?.network} Network today.`}
+          title={'Gift Dots'}
+          cardText="Send DOTs to your friends and familiy, and have them join the
+            Polkadot Network today."
           backClickHandler={() => prevStep()}
         />
         <Row className="flex-column align-items-center">
@@ -255,8 +247,12 @@ export default function GenerateGift({
                           : {}),
                       }}
                       className="bg-transparent border-left-0 balance-text">
-                      {balanceStr
-                        ? `${balanceStr} available`
+                      {balance?.free
+                        ? `${utils.fromChainUnit(
+                            balance.free,
+                            chainInfo?.decimals,
+                            balanceDecimalPoints
+                          )} ${chainInfo?.token} available`
                         : `${chainInfo?.token}`}
                     </InputGroup.Text>
                   </InputGroup.Append>

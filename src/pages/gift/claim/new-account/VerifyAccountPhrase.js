@@ -3,16 +3,16 @@ import CardHeader from '../../../../components/CardHeader';
 import { useState } from 'react';
 
 const randomIdx = (length) => {
-  const random1 = Math.floor(Math.random() * length) + 1;
-  let random2 = Math.floor(Math.random() * length) + 1;
+  const random1 = Math.floor(Math.random() * length);
+  let random2 = Math.floor(Math.random() * length);
   random2 = random2 === random1 ? (random2 * 2) % length : random2;
   return [random1, random2].sort((a, b) => a - b);
 };
 
-export default function VerifyAccountPhrase({
+export default function VerifyAccountPhrase ({
   mnemonicWords,
   nextStepHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const [check1, setCheck1] = useState('');
   const [check2, setCheck2] = useState('');
@@ -23,13 +23,11 @@ export default function VerifyAccountPhrase({
   const validate = () => {
     let isValid = true;
     const phraseErrors = {};
-    if (check1?.toLowerCase() !== mnemonicWords[randIdx[0] - 1].toLowerCase()) {
+    if (check1?.toLowerCase() !== mnemonicWords[randIdx[0]].toLowerCase()) {
       isValid = false;
       phraseErrors.check1 = 'Please enter the correct phrase';
     }
-    if (
-      check2?.toLowerCase() !== mnemonicWords[randIdx[1] - 1]?.toLowerCase()
-    ) {
+    if (check2?.toLowerCase() !== mnemonicWords[randIdx[1]]?.toLowerCase()) {
       isValid = false;
       phraseErrors.check2 = 'Please enter the correct phrase';
     }
@@ -49,10 +47,10 @@ export default function VerifyAccountPhrase({
           <Col>
             <Form autoComplete="off" className="w-100">
               <Form.Group controlId="formGroupWord1">
-                <Form.Label>{`Word #${randIdx[0]}`}</Form.Label>
+                <Form.Label>{`Word #${randIdx[0] + 1}`}</Form.Label>
                 <Form.Control
                   type="input"
-                  placeholder={`Word #${randIdx[0]}`}
+                  placeholder={`Word #${randIdx[0] + 1}`}
                   value={check1}
                   onChange={(e) => {
                     setErrors({ ...errors, check1: '' });
@@ -67,10 +65,10 @@ export default function VerifyAccountPhrase({
               </Form.Group>
 
               <Form.Group controlId="formGroupWord1">
-                <Form.Label>{`Word #${randIdx[1]}`}</Form.Label>
+                <Form.Label>{`Word #${randIdx[1] + 1}`}</Form.Label>
                 <Form.Control
                   type="input"
-                  placeholder={`Word #${randIdx[1]}`}
+                  placeholder={`Word #${randIdx[1] + 1}`}
                   value={check2}
                   onChange={(e) => {
                     setErrors({ ...errors, check2: '' });
