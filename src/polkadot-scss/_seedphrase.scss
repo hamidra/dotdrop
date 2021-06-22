@@ -1,0 +1,29 @@
+.seedphrase {
+    background-color: $gray-100;
+    padding: 8px;
+}
+
+.seedphrase-item-nr {
+    width: 28px;
+    font-weight: 400;
+}
+
+.seedphrase-item {
+    padding: 2px;
+    font-weight: 700;
+}
+
+.blurred {
+    filter: blur(0.5rem);
+}
+
+.copy, .phrase-toggle {
+    font-size: 0.75rem;
+    color: $secondary;
+
+    &:hover {
+        background-color: $gray-100;
+        color: $secondary-darker !important;
+        cursor: pointer;
+    }
+}

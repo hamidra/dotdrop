@@ -1,75 +1,37 @@
-import giftPallet from './giftPalletProvider';
-import balancePallet from './balancePalletProvider';
-import utils from '../substrateUtils';
+import giftPalletGiftProvider from './giftPalletGiftProvider';
+import balancePalletGiftProvider from './balancePalletGiftProvider';
+import uniquesPalletGiftProvider from './uniquesPalletGiftProvider';
+import bundleGiftProvider from './bundleGiftProvider';
+
 const palletTypes = {
   balance: 'balance',
   gift: 'gift',
+  bundle: 'bundle',
+  uniques: 'uniques',
   // ToDo: add other pallets
   // asset: 'asset',
   // unique: 'unique',
-};
-
-const balancePalletProvider = {
-  createGift: (api, interimAccount, senderAccount, gift) => {
-    const interimAddress = utils.getAccountAddress(interimAccount);
-    return balancePallet.transferBalanceAndFees(
-      api,
-      senderAccount,
-      interimAddress,
-      gift?.amount,
-      1 // fee multiplier of 1x
-    );
-  },
-  claimGift: (api, interimAccount, recipientAccount) => {
-    const recepientAddress = utils.getAccountAddress(recipientAccount);
-    return balancePallet.transferAll(api, interimAccount, recepientAddress);
-  },
-  removeGift: (api, interimAccount, senderAccount) => {
-    const senderAddress = utils.getAccountAddress(senderAccount);
-    return balancePallet.transferAll(api, interimAccount, senderAddress);
-  },
-  getGiftFeeMultiplier: () => {
-    // gift creation fees are equal to 1x (for final tranaction from the gift interim account to the recipient account)
-    return 1;
-  },
-};
-const giftPalletProvider = {
-  createGift: (api, interimAccount, senderAccount, gift) => {
-    const interimAddress = utils.getAccountAddress(interimAccount);
-    return giftPallet.createGift(
-      api,
-      senderAccount,
-      interimAddress,
-      gift?.amount
-    );
-  },
-  claimGift: (api, interimAccount, recipientAccount) => {
-    const recipientAddress = utils.getAccountAddress(recipientAccount);
-    return giftPallet.claimGift(api, interimAccount, recipientAddress);
-  },
-  removeGift: (api, interimAccount, senderAccount) => {
-    const interimAddress = utils.getAccountAddress(interimAccount);
-    return giftPallet.removeGift(api, senderAccount, interimAddress);
-  },
-  getGiftFeeMultiplier: () => {
-    // gift creation fees are free on gift pallet
-    return 0;
-  },
 };
 
 const giftFactory = (palletType) => {
   let giftProvider;
   switch (palletType) {
     case palletTypes.balance:
-      giftProvider = balancePalletProvider;
+      giftProvider = balancePalletGiftProvider;
       break;
     case palletTypes.gift:
-      giftProvider = giftPalletProvider;
+      giftProvider = giftPalletGiftProvider;
+      break;
+    case palletTypes.uniques:
+      giftProvider = uniquesPalletGiftProvider;
+      break;
+    case palletTypes.bundle:
+      giftProvider = bundleGiftProvider;
       break;
     default:
-      giftProvider = giftPalletProvider;
+      giftProvider = giftPalletGiftProvider;
   }
   return giftProvider;
 };
-const giftProvider = giftFactory(palletTypes.balance);
+const giftProvider = giftFactory(palletTypes.bundle);
 export { giftProvider };
