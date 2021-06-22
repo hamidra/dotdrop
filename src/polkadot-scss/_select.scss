@@ -13,8 +13,21 @@
 }
 
 .dropdown-menu {
-    max-height: 320px;
+    max-height: 280px;
     overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        background-color: white;          
+        width: 12px;
+        border-radius: 0.5rem;         
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: grey;
+        border-radius: 6px;  
+        border: 2px solid white;
+    }
 
     .account-item:hover {
         background-color: $gray-100;
