@@ -29,6 +29,7 @@
     "@polkadot/util-crypto": "^6.7.1",
     "bn.js": "^5.2.0",
     "bootstrap": "^4.6.0",
+    "file-saver": "^2.0.5",
     "formik": "^2.2.8",
     "node-sass": "^5.0.0",
     "phosphor-react": "^1.2.1",

@@ -10,7 +10,34 @@ import BN from 'bn.js';
 
 const parsedQuery = queryString.parse(window.location.search);
 const connectedSocket = parsedQuery.rpc || config.PROVIDER_SOCKET;
+const theme = parsedQuery.theme || config.THEME;
 console.log(`Connected socket: ${connectedSocket}`);
+
+const getGiftTheme = (theme) => {
+  theme = theme?.toLowerCase();
+
+  // default values
+  const giftTheme = {
+    content: 'DOT',
+    network: 'Polkadot',
+  };
+  switch (theme) {
+    case 'polkadot':
+      giftTheme.content = 'DOT';
+      giftTheme.network = 'Polkadot';
+      break;
+    case 'kusama':
+      giftTheme.content = 'KSM';
+      giftTheme.network = 'Kusama';
+      break;
+    case 'kusamanft':
+      giftTheme.content = 'NFT';
+      giftTheme.network = 'Kusama';
+      break;
+    default:
+  }
+  return giftTheme;
+};
 
 ///
 // Initial state for `useReducer`
@@ -26,14 +53,14 @@ const INIT_STATE = {
   apiError: null,
   apiState: null,
   chainInfo: null,
+  theme: theme,
+  giftTheme: getGiftTheme(theme),
 };
 
 ///
 // Reducer function for `useReducer`
 
 const reducer = (state, action) => {
-  let api;
-  let chainInfo;
   switch (action.type) {
     case 'CONNECT_INIT':
       return { ...state, apiState: 'CONNECT_INIT' };
@@ -41,24 +68,14 @@ const reducer = (state, action) => {
     case 'CONNECT':
       return { ...state, api: action.payload, apiState: 'CONNECTING' };
 
-    case 'CONNECT_SUCCESS':
-      api = action.payload;
-      chainInfo = {
-        decimals: api.registry?.chainDecimals[0] || 12,
-        token: api.registry?.chainTokens[0] || 'DOT',
-        genesisHash: api.genesisHash,
-        ss58Format: api.registry?.chainSS58 || 42,
-        existentialDeposit:
-          api.consts?.balances?.existentialDeposit || new BN(0, 10),
+    case 'CONNECT_SUCCESS': {
+      const chainInfo = action.payload;
+      return {
+        ...state,
+        apiState: 'READY',
+        chainInfo: chainInfo,
       };
-
-      // ToDo: remove this when the pallet is deployed on polkadot
-      // default substrate token to Dot for demo purpose
-      if (chainInfo?.token === 'Unit') {
-        chainInfo.token = 'Dot';
-      }
-      console.log(chainInfo);
-      return { ...state, apiState: 'READY', chainInfo: chainInfo };
+    }
 
     case 'CONNECT_ERROR':
       return { ...state, apiState: 'ERROR', apiError: action.payload };
@@ -72,17 +89,16 @@ const reducer = (state, action) => {
     case 'KEYRING_ERROR':
       return { ...state, keyring: null, keyringState: 'ERROR' };
 
-    case 'BALANCE_UPDATE':
+    case 'BALANCE_UPDATE': {
       const { address, balance } = action.payload;
       return { ...state, balances: { ...state?.balances, [address]: balance } };
+    }
     default:
       throw new Error(`Unknown type: ${action.type}`);
   }
 };
-
 ///
 // Connecting to the Substrate node
-
 const connect = (state, dispatch) => {
   try {
     const { apiState, socket, jsonrpc, types } = state;
@@ -97,13 +113,9 @@ const connect = (state, dispatch) => {
     _api.on('connected', () => {
       dispatch({ type: 'CONNECT', payload: _api });
       // `ready` event is not emitted upon reconnection and is checked explicitly here.
-      _api.isReady.then((_api) =>
-        dispatch({ type: 'CONNECT_SUCCESS', payload: _api })
-      );
+      _api.isReady.then((_api) => queryChainInfo(_api, state, dispatch));
     });
-    _api.on('ready', () =>
-      dispatch({ type: 'CONNECT_SUCCESS', payload: _api })
-    );
+    _api.on('ready', () => queryChainInfo(_api, state, dispatch));
     _api.on('error', (err) =>
       dispatch({ type: 'CONNECT_ERROR', payload: err })
     );
@@ -111,6 +123,26 @@ const connect = (state, dispatch) => {
     console.error(err);
     dispatch({ type: 'CONNECT_ERROR', payload: err });
   }
+};
+
+const queryChainInfo = async (api, state, dispatch) => {
+  const chainInfo = {
+    decimals: api.registry?.chainDecimals[0] || 12,
+    token: (api.registry?.chainTokens[0] || 'DOT')?.toUpperCase(),
+    genesisHash: api.genesisHash,
+    ss58Format: api.registry?.chainSS58 || 42,
+    existentialDeposit:
+      api.consts?.balances?.existentialDeposit || new BN(0, 10),
+    chainName: await api.rpc.system.chain(),
+  };
+
+  // ToDo: remove this when the pallet is deployed on polkadot
+  // default substrate token to Dot for demo purpose
+  if (chainInfo?.token === 'UNIT') {
+    chainInfo.token = 'DOT';
+  }
+  console.log(chainInfo);
+  dispatch({ type: 'CONNECT_SUCCESS', payload: chainInfo });
 };
 
 ///
