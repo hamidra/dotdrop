@@ -171,23 +171,6 @@ $navbar-dark-hover-color: $gray-900;
 // Radii
 $border-radius: 0.5rem;
 
-// account dropdown
-.account-dropdown-toggle.dropdown-toggle::after {
-  display: none; // hide default bootstrap dropdown caret
-}
-.account-toggle-item {
-  background-color: #fff !important;
-}
-.account-toggle-item:hover {
-  background-color: #f9fafb !important;
-  box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
-}
-// Balance Text
-.balance-text {
-  font-size: 0.85rem !important;
-  color: #757575 !important;
-}
-
 .image-box {
   max-height: 3rem;
   height: auto;
@@ -215,3 +198,4 @@ $border-radius: 0.5rem;
 @import 'polkadot-scss/button';
 @import 'polkadot-scss/footer';
 @import 'polkadot-scss/seedphrase';
+@import 'polkadot-scss/select';
