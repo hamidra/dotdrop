@@ -6,9 +6,9 @@ import extensionAdd from '../../../../images/extension-add.png';
 import extensionLedger from '../../../../images/extension-ledger.png';
 import { useSubstrate } from '../../../../substrate-lib';
 
-export default function LedgerInstructions({
+export default function LedgerInstructions ({
   prevStepHandler,
-  nextStepHandler,
+  nextStepHandler
 }) {
   const title = 'Import Ledger Account';
   const extensionLink = 'https://polkadot.js.org/extension/';
@@ -21,7 +21,7 @@ export default function LedgerInstructions({
           backClickHandler={prevStepHandler}
           cardText="Follow below instructions to import your Ledger account into Polkadot extension."
         />
-        <Row className="py-5 justify-content-center">
+        <Row className="justify-content-center">
           <Col className="d-flex flex-column justify-content-center align-items-center">
             <div>
               <ul>
@@ -35,13 +35,13 @@ export default function LedgerInstructions({
                       href="https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT-"
                       rel="noreferrer"
                       target="_blank">
-                      learn more
+                      → Learn more
                     </a>
                   </div>
                   <div className="d-flex flex-column">
                     <Image
                       src={ledgerInstall}
-                      className="rounded align-self-end image-box"
+                      className="rounded align-self-center image-box"
                     />
                   </div>
                 </li>
@@ -54,17 +54,17 @@ export default function LedgerInstructions({
                       href={`${extensionLink}`}
                       rel="noreferrer"
                       target="_blank">
-                      learn more
+                      → Learn more
                     </a>
                   </div>
                   <div className="d-flex flex-column">
                     <Image
                       src={extensionAdd}
-                      className="rounded align-self-end image-box mb-2"
+                      className="rounded align-self-center image-box mb-2"
                     />
                     <Image
                       src={extensionLedger}
-                      className="rounded align-self-start image-box"
+                      className="rounded align-self-center image-box"
                     />
                   </div>
                 </li>
