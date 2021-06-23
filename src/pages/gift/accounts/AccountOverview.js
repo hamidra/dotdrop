@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card, Row, Col, Spinner, Media, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Footer from '../Footer';
-import Header from '../Header';
+import NFTHeader from '../NFTHeader';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { stringHelpers } from '../../../utils';
 import extensionLogo from '../../../images/extension_logo_128.png';
@@ -81,7 +81,7 @@ export default function AccountOverview() {
   }, [api, apiState, accountAddress, chainInfo]);
   return (
     <>
-      <Header />
+      <NFTHeader />
       <Container>
         <Row className="p-3 p-sm-5 my-5">
           <Col className="d-flex justify-content-center justify-content-sm-end  mb-5  m-sm-5">

@@ -37,12 +37,12 @@ export default function PresentAccountPhrase ({
         />
         <div
           style={{ position: 'relative' }}
-          className="container d-flex justify-content-start align-items-center flex-column"
+          className="container d-flex justify-content-center align-items-center flex-column"
           onClick={() => {
             revealSecret();
           }}>
           <Row
-            className={`seedphrase justify-content-center align-items-center rounded ${
+            className={`seedphrase justify-content-center align-items-center ${
               blurred ? 'blurred' : ''
             }`}>
             {mnemonicWords.map((word, index) => (
@@ -54,9 +54,9 @@ export default function PresentAccountPhrase ({
               </Col>
             ))}
           </Row>
-          <Row className="justify-content-start w-100 pt-2" style={{ margin: 0 }}>
+          <Row className="justify-content-start w-100 pt-2" style={{ marginLeft: '-40px' }}>
             <div
-              className="phrase-toggle text-button p-2 rounded"
+              className="phrase-toggle text-button p-2"
               style={!blurred ? { display: 'flex' } : { display: 'none' }}
               onClick={() => hideSecret()}>
               <EyeSlash
@@ -66,7 +66,7 @@ export default function PresentAccountPhrase ({
               <span>{'Hide secret words'}</span>
             </div>
             <div
-              className={`phrase-toggle text-center p-2 rounded ${
+              className={`phrase-toggle text-center overlay-center p-2 ${
                 blurred ? 'd-flex' : 'd-none'
               }`}>
               <Eye
@@ -80,13 +80,14 @@ export default function PresentAccountPhrase ({
                   onCopy={(result) => {
                     setCopied(result);
                   }}>
-                  <div className="p-2 mr-2 copy rounded" onClick={(e) => e.stopPropagation()}>
+                  <div className="p-2 mr-2 copy" onClick={(e) => e.stopPropagation()}>
                   <Copy className='mr-1' size={18} />
-                    <span>{copied ? 'Copied' : 'Copy'}</span>
+                    <span className='copy'>{copied ? 'Copied' : 'Copy'}</span>
                   </div>
               </CopyToClipboard>
           </Row>
-          <div className="flex-row justify-content-start align-items-center w-100 px-2 pt-3">
+        </div>
+        <div className="flex-row justify-content-start align-items-center px-2 pt-2">
             <Form.Check
               type="checkbox"
               value={checked}
@@ -100,7 +101,6 @@ export default function PresentAccountPhrase ({
             {checkedError && (
               <Form.Text className="text-danger">{checkedError}</Form.Text>
             )}
-          </div>
         </div>
         <div className="d-flex flex-grow-1" />
         <div className="pt-4 d-flex justify-content-center">

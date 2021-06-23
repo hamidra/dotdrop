@@ -1,0 +1,11 @@
+.back-arrow {
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    color: $secondary-lighter;
+    cursor: pointer;
+
+    &:hover {
+        color: $secondary;
+    }
+}
