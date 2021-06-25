@@ -74,7 +74,10 @@ export default function Header ({ selectedAccount }) {
             >
               <Dropdown.Item
                 className='px-3'
-                onClick={() => history.push('/about')}
+                href="https://kusama.network/parachains/#claim-nft"
+                target="_blank"
+                rel="noopener noreferrer"
+                role="link"
               >
                 <ImageSquare className='mr-1' size={18} />About NFTs
               </Dropdown.Item>
