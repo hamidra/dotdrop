@@ -159,17 +159,6 @@ const loadAccounts = (state, dispatch) => {
   const asyncLoadAccounts = async () => {
     dispatch({ type: 'LOAD_KEYRING' });
     try {
-      const injectedExt = await web3Enable(config.APP_NAME);
-      console.log(injectedExt);
-      let allAccounts = await web3Accounts();
-
-      // filter the accounts that are enabled for the network
-      allAccounts = allAccounts.map(({ address, meta }) => ({
-        address,
-        meta: { ...meta, name: `${meta.name}` },
-      }));
-
-      // toDO: subscribe to extension account updates
       keyring.loadAll({
         genesisHash: state.chainInfo.genesisHash,
         isDevelopment: config.DEVELOPMENT_KEYRING,

@@ -1,6 +1,16 @@
 import config from '../config';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
 
+const loadBalance = (api, state, dispatch, { address }) => {
+  // balances should only be loaded once, and then updates are happened through subscription
+  // check if not already subscribed for that address
+  if (!(address in state.balances)) {
+    state.api.query.system.account(address, ({ data: balance }) => {
+      dispatch({ type: 'BALANCE_UPDATE', payload: { address, balance } });
+    });
+  }
+};
+
 export const loadExtension = async (state, dispatch, chainInfo) => {
   const { api, keyring } = state;
   if (
@@ -12,13 +22,8 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
       dispatch({ type: 'LOAD_EXTENSION' });
       const injectedExt = await web3Enable(config.APP_NAME);
       console.log(injectedExt);
-      let extAccounts = await web3Accounts();
+      const extAccounts = await web3Accounts();
 
-      // filter the accounts that are enabled for the network
-      extAccounts = extAccounts.map(({ address, meta }) => ({
-        address,
-        meta: { ...meta, name: `${meta.name}` },
-      }));
       console.log(extAccounts);
       // toDO: subscribe to extension account updates
       const loadedAddresses = keyring
@@ -48,6 +53,8 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
           injectedAcct.type
         );
         keyring.addPair(pair);
+        // load the balance for the new pair
+        loadBalance(api, state, dispatch, pair);
       }
       dispatch({ type: 'SET_EXTENSION' });
     } catch (e) {
