@@ -33,6 +33,13 @@
         border-color: $cyan;
         box-shadow: none !important;
     }
+
+    &.disabled, &:disabled {
+        color: $primary;
+        background-color: transparent;
+        border-color: $primary;
+        opacity: 0.5;
+    }
 }
 
 .show > .btn-primary.dropdown-toggle {
