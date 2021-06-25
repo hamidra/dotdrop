@@ -1,4 +1,3 @@
-import { promisify } from '@polkadot/util';
 import BN from 'bn.js';
 import utils from '../substrateUtils';
 import { signAndSendTx } from './txHandler';

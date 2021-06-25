@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import jsonrpc from '@polkadot/types/interfaces/jsonrpc';
 import queryString from 'query-string';
@@ -48,6 +48,7 @@ const INIT_STATE = {
   types: config.types,
   keyring: null,
   keyringState: null,
+  extensionState: null,
   balances: null,
   api: null,
   apiError: null,
@@ -88,7 +89,12 @@ const reducer = (state, action) => {
 
     case 'KEYRING_ERROR':
       return { ...state, keyring: null, keyringState: 'ERROR' };
-
+    case 'LOAD_EXTENSION':
+      return { ...state, extensionState: 'LOADING' };
+    case 'EXTENSION_ERROR':
+      return { ...state, extensionState: 'ERROR' };
+    case 'SET_EXTENSION':
+      return { ...state, extensionState: 'READY' };
     case 'BALANCE_UPDATE': {
       const { address, balance } = action.payload;
       return { ...state, balances: { ...state?.balances, [address]: balance } };
@@ -164,14 +170,11 @@ const loadAccounts = (state, dispatch) => {
       }));
 
       // toDO: subscribe to extension account updates
-      keyring.loadAll(
-        {
-          genesisHash: state.chainInfo.genesisHash,
-          isDevelopment: config.DEVELOPMENT_KEYRING,
-          ss58Format: state.chainInfo.ss58Format,
-        },
-        allAccounts
-      );
+      keyring.loadAll({
+        genesisHash: state.chainInfo.genesisHash,
+        isDevelopment: config.DEVELOPMENT_KEYRING,
+        ss58Format: state.chainInfo.ss58Format,
+      });
 
       dispatch({ type: 'SET_KEYRING', payload: keyring });
     } catch (e) {
@@ -227,8 +230,12 @@ const SubstrateContextProvider = (props) => {
     loadBalances(state, dispatch);
   }
   console.log(state);
+  const contextValue = useMemo(
+    () => ({ ...state, dispatch }),
+    [state, dispatch]
+  );
   return (
-    <SubstrateContext.Provider value={state}>
+    <SubstrateContext.Provider value={contextValue}>
       {props.children}
     </SubstrateContext.Provider>
   );

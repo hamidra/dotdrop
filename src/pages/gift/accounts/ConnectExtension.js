@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import AccountSelector from '../../../components/account/AccountSelector';
 import CardHeader from '../../../components/CardHeader';
+import { loadExtension } from '../../../substrate-lib/extension';
 
 export default function ExtensionAccount({
   setAccountHandler,
@@ -10,7 +11,8 @@ export default function ExtensionAccount({
   title,
   prevStepHandler,
 }) {
-  const { keyring, balances, chainInfo, giftTheme } = useSubstrate();
+  const { dispatch, ...state } = useSubstrate();
+  const { keyring, balances, chainInfo, giftTheme } = state;
   const [selectedAccount, setSelectedAccount] = useState(null);
   const accounts = keyring.getPairs();
   const accountsBalances = {};
@@ -25,7 +27,9 @@ export default function ExtensionAccount({
         );
       }
     });
-
+  useEffect(() => {
+    loadExtension(state, dispatch);
+  }, [dispatch, state]);
   const _setAccountHandler = () => {
     setAccountHandler && setAccountHandler(selectedAccount);
     setAddressHandler && setAddressHandler(selectedAccount?.address);
