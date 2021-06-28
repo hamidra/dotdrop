@@ -13,6 +13,7 @@ const loadBalance = (api, state, dispatch, { address }) => {
 
 export const loadExtension = async (state, dispatch, chainInfo) => {
   const { api, keyring } = state;
+  // load extension only once, when api and keyring-ui are ready
   if (
     state.apiState === 'READY' &&
     state.keyringState === 'READY' &&
@@ -30,6 +31,10 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
         .getAccounts()
         .map((account) => account.address);
       const loadedSet = new Set(loadedAddresses);
+
+      // filter the extension accounts that are not already loaded,
+      // and either don't have geneisHash(open for all chains)
+      // or their genesisHash matches with the current network
       const newAccounts = extAccounts.filter(
         (account) =>
           !loadedSet.has(account.address) &&

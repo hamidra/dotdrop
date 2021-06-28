@@ -7,15 +7,19 @@ import { loadExtension } from '../../../substrate-lib/extension';
 
 const Connecting = () => {
   return (
-    <div
-      style={{ height: '100px' }}
-      className="d-flex flex-column justify-content-around align-items-center">
-      <div>
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Processing...</span>
-        </Spinner>
-      </div>
-    </div>
+    <Row className="p-md-5 justify-content-center">
+      <Col className="d-flex flex-column justify-content-center align-items-center text-center">
+        <div
+          style={{ height: '100px' }}
+          className="d-flex flex-column justify-content-around align-items-center">
+          <div>
+            <Spinner animation="border" role="status">
+              <span className="sr-only">Processing...</span>
+            </Spinner>
+          </div>
+        </div>
+      </Col>
+    </Row>
   );
 };
 
@@ -90,13 +94,7 @@ export default function ExtensionAccount({
             </Row>
           </>
         ) : (
-          <>
-            <Row className="p-md-5 justify-content-center">
-              <Col className="d-flex flex-column justify-content-center align-items-center text-center">
-                <Connecting />
-              </Col>
-            </Row>
-          </>
+          <Connecting />
         )}
       </Card.Body>
     </>
