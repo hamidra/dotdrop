@@ -30,7 +30,7 @@ export default function ConnectAccount({ setAccountSourceHandler }) {
           </Row>
         </Col>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="d-flex justify-content-center">
         <span>
           By connecting an account, I accept the&nbsp;
           <a href="policy" target="_blank">

@@ -3,7 +3,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
-export default function ConnectAccount() {
+export default function ConnectAccount () {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
   const optionSelectHandler = (accountSource) => {
@@ -46,7 +46,7 @@ export default function ConnectAccount() {
           </Col>
         </Row>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="d-flex justify-content-center">
         <span>
           By connecting an account, I accept the&nbsp;
           <a href="policy" target="_blank">

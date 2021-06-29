@@ -2,18 +2,18 @@ import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';
 import AccountOverview from './pages/gift/accounts/AccountOverview';
-import Footer from './pages/gift/Footer';
+import KusamaFooter from './pages/gift/KusamaFooter';
 import {
   HashRouter as Router,
   Switch,
   Route,
-  Redirect,
+  Redirect
 } from 'react-router-dom';
 import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
 
-function Body() {
+function Body () {
   const { apiState } = useSubstrate();
   return (
     <>
@@ -45,13 +45,13 @@ function Body() {
   );
 }
 
-export default function App() {
+export default function App () {
   return (
     <SubstrateContextProvider>
       <Router>
         <Body />
       </Router>
-      <Footer />
+      <KusamaFooter />
       <DeveloperConsole />
     </SubstrateContextProvider>
   );
