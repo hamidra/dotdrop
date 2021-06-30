@@ -7,7 +7,7 @@
     margin: auto;
 
     @media screen and (max-width: 768px) {
-        margin: 0 1.5rem;
+        margin: 0 1rem;
     }
 }
 
@@ -39,7 +39,11 @@ privacy-policy-header-title {
 privacy-policy-updated-date {
     display: flex;
     color: $secondary;
-    font-size: 1.125rem;
+    font-size: 0.875rem;
+
+    @media (min-width: 40rem) {
+        font-size: 1.125rem;
+    }
 }
 
 /* vertical display */
@@ -67,27 +71,36 @@ privacy-policy-list privacy-policy-list {
 /* a content section, with: a number, a letter, nothing */
 privacy-policy-section {
     padding-bottom: 2rem;
+    font-size: 0.875rem;
+
+    @media (min-width: 40rem) {
+        font-size: 1rem;
+    }
 }
 
 /* section title */
 privacy-policy-section-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
+    padding-left: 1rem;
 }
 @media (min-width: 40rem) {
     privacy-policy-section-title {
-    font-size: 2rem;
-    padding-left: 1rem;
+        font-size: 2rem;
     }
 }
 
 /* a section number */
 privacy-policy-section-number {
     display: block;
-    font-size: 2rem;
+    font-size: 1.75rem;
     line-height: 1.3;
     font-weight: bold;
     margin-bottom: 0.5rem;
+
+    @media (min-width: 40rem) {
+        font-size: 2rem;   
+    }
 }
 
 privacy-policy > privacy-policy-list > privacy-policy-section > privacy-policy-section-number {
