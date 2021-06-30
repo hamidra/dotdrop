@@ -11,6 +11,7 @@ import {
 import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
+import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
 
 function Body () {
   const { apiState } = useSubstrate();
@@ -30,8 +31,10 @@ function Body () {
           <AccountOverview />
         </Route>
         <Route exact path={'/'}>
-          <GenerateMain />
+          <ClaimMain />
         </Route>
+        <Route path={'/privacy-policy'}>
+          <PrivacyPolicy />
         </Route>
         <Route path={'/'}>
           <Redirect to={'/'} />
@@ -51,7 +54,6 @@ export default function App () {
       <Router>
         <Body />
       </Router>
-      <KusamaFooter />
       <DeveloperConsole />
     </SubstrateContextProvider>
   );
