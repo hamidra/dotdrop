@@ -10,7 +10,6 @@ const palletTypes = {
   uniques: 'uniques',
   // ToDo: add other pallets
   // asset: 'asset',
-  // unique: 'unique',
 };
 
 const giftFactory = (palletType) => {
