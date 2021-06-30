@@ -811,7 +811,7 @@ const PrivacyPolicy = () => {
                 <PrivacyPolicyList />
             </privacy-policy>
         </div>
-        <Footer />
+        <Footer variant="dark" />
     </div>
   );
 };

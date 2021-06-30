@@ -1,11 +1,11 @@
 import { Link, useHistory } from 'react-router-dom';
 
-export default function Footer ({ selectedAccount }) {
+export default function Footer ({ variant, selectedAccount }) {
   const history = useHistory();
 
   return (
     <footer
-      className="footer d-flex flex-column flex-md-row px-4 py-3"
+      className={`${variant} footer d-flex flex-column flex-md-row px-4 py-3`}
       expand="md"
     >
         <div className="d-flex flex-column flex-sm-row">

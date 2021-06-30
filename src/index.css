@@ -7,13 +7,6 @@ body {
 #root {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 250px;
-}
-
-@media (min-width: 576px) {
-  #root {
-    padding-bottom: 110px;
-  }
 }
 
 p:last-child {
