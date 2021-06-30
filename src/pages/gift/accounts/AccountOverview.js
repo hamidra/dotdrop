@@ -161,6 +161,7 @@ export default function AccountOverview() {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 }

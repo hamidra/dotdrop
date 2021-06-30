@@ -25,6 +25,7 @@ export default function AboutMain () {
         <ProcessExplainerCard />
         <FAQ />
       </Container>
+      <Footer />
     </>
   );
 }
