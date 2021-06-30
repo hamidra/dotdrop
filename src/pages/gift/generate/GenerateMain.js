@@ -15,6 +15,7 @@ import Landing from './Landing';
 import { Row, Col, Card, Container } from 'react-bootstrap';
 import ConnectAccount from './ConnectAccount';
 import NFTHeader from '../NFTHeader';
+import KusamaFooter from '../KusamaFooter';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -284,6 +285,7 @@ export default function GenerateMain() {
           message={processingMsg}
         />
       </Container>
+      <KusamaFooter />
     </GenerateContext.Provider>
   );
 }

@@ -2,7 +2,6 @@ import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';
 import AccountOverview from './pages/gift/accounts/AccountOverview';
-import KusamaFooter from './pages/gift/KusamaFooter';
 import {
   HashRouter as Router,
   Switch,
@@ -32,6 +31,7 @@ function Body () {
         </Route>
         <Route exact path={'/'}>
           <GenerateMain />
+        </Route>
         </Route>
         <Route path={'/'}>
           <Redirect to={'/'} />
