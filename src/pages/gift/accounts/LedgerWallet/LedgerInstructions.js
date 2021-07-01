@@ -12,15 +12,15 @@ const CardLink = ({ title, subtitle, hRef }) => {
       rel="noreferrer"
       target="_blank">
         {title === 'Step 1'
-          ? <DownloadSimple className="p-2 rounded icon" size={48} />
-          : <Plus className="p-2 rounded icon" size={48} />
+          ? <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={48} />
+          : <Plus className="flex-shrink-0 p-2 rounded icon" size={48} />
       }
       <div>
         <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
         <div className="subtitle">{subtitle}</div>
       </div>
       <div className="d-flex flex-grow-1"/>
-      <CaretRight className="caret" size={14} weight="bold" />
+      <CaretRight className="caret flex-shrink-0" size={14} weight="bold" />
     </a>
   );
 };
