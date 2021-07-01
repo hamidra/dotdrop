@@ -1,15 +1,17 @@
 import { Container } from 'react-bootstrap';
 import Footer from '../Footer';
-import Header from '../Header';
+import NFTHeader from '../NFTHeader';
 
 import FAQ from './FAQ';
 import ProcessExplainerCard from './ProcessExplainerCard';
 
-export default function AboutMain () {
+export default function AboutMain() {
   return (
     <>
-      <Header />
-      <Container className="d-flex flex-column align-items-center py-5" style={{ color: '#FFF' }}>
+      <NFTHeader />
+      <Container
+        className="d-flex flex-column align-items-center"
+        style={{ color: '#FFF' }}>
         <div style={{ paddingBottom: '4rem' }}>
           <h1 className="py-5 text-center" style={{ fontSize: '3.5rem' }}>
             There's No Better Gift than DOTs

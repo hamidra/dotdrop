@@ -80,7 +80,7 @@ $theme-colors: (
 );
 
 $gray-100: #f9fafb;
-$gray-200: #F0F2F5;
+$gray-200: #f0f2f5;
 $gray-300: #d5dbe0;
 $gray-600: #6c757d;
 $gray-900: #1e1e1e;
@@ -125,16 +125,19 @@ $h5-font-size: 1rem;
 }
 
 .navbar {
-  .dropdown-toggle::after { content: none };
+  .dropdown-toggle::after {
+    content: none;
+  }
 
   #dropdownMenuButton {
-    background-color: #FFF !important;
+    background-color: #fff !important;
     border: none;
     color: $gray-600;
     transition: none;
     transform: none;
 
-    &:before, &:hover {
+    &:before,
+    &:hover {
       background-color: $gray-100;
       color: $gray-900;
       border: none;
@@ -150,7 +153,8 @@ $h5-font-size: 1rem;
       color: $gray-600;
     }
 
-    .dropdown-item:hover, .dropdown-item:hover {
+    .dropdown-item:hover,
+    .dropdown-item:hover {
       background-color: $gray-100;
       color: $gray-900 !important;
     }
@@ -158,7 +162,7 @@ $h5-font-size: 1rem;
 }
 
 .nav-pills {
-  background-color: #FFF;
+  background-color: #fff;
 }
 $nav-pills-border-radius: 1.5rem !important;
 $nav-pills-link-active-color: $gray-900 !important;
@@ -196,6 +200,7 @@ $border-radius: 0.5rem;
 @import 'polkadot-scss/variables';
 @import 'polkadot-scss/bg';
 @import 'polkadot-scss/button';
+@import 'polkadot-scss/card';
 @import 'polkadot-scss/footer';
 @import 'polkadot-scss/seedphrase';
 @import 'polkadot-scss/select';
