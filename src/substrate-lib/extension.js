@@ -4,7 +4,7 @@ import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
 const loadBalance = (api, state, dispatch, { address }) => {
   // balances should only be loaded once, and then updates are happened through subscription
   // check if not already subscribed for that address
-  if (!(address in state.balances)) {
+  if (!state.balances || !(address in state.balances)) {
     state.api.query.system.account(address, ({ data: balance }) => {
       dispatch({ type: 'BALANCE_UPDATE', payload: { address, balance } });
     });
