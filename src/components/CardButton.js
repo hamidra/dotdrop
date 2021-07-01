@@ -1,5 +1,5 @@
 import { Image } from 'react-bootstrap';
-import { MdChevronRight } from 'react-icons/md';
+import { CaretRight } from 'phosphor-react';
 
 import signerLogo from '../images/signer_logo_128.png';
 import extensionLogo from '../images/extension_logo_128.png';
@@ -35,7 +35,7 @@ const CardButton = ({ children, logo, onClick, smallFont }) => {
             </Image>
             {children}
             <div className='flex-grow-1'></div>
-            <MdChevronRight style={{ flexShrink: '0', fontSize: '24px', color: '#6C757D' }} />
+            <CaretRight style={{ flexShrink: '0', color: '#6C757D' }} size={14} weight="bold" />
         </button>
   );
 };
