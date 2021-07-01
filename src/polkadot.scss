@@ -187,14 +187,6 @@ $border-radius: 0.5rem;
   transform: scale(1.25);
 }
 
-.overlay-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
-
 // import should be at the end
 @import '~bootstrap/scss/bootstrap';
 @import 'polkadot-scss/variables';
