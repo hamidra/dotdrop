@@ -188,7 +188,7 @@ const loadBalances = (state, dispatch) => {
   if (!isLoadingBalances) {
     isLoadingBalances = true;
     // get the balance for all addresses in keyring:
-    state.keyring.getAccounts().forEach(({ address }) => {
+    state.keyring?.getAccounts().forEach(({ address }) => {
       state.api.query.system.account(address, ({ data: balance }) => {
         dispatch({ type: 'BALANCE_UPDATE', payload: { address, balance } });
       });
