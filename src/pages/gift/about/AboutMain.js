@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
-import Footer from '../Footer';
-import NFTHeader from '../NFTHeader';
+import Footer from '../footer/Footer';
+import Header from '../header/Header';
 
 import FAQ from './FAQ';
 import ProcessExplainerCard from './ProcessExplainerCard';
@@ -8,7 +8,7 @@ import ProcessExplainerCard from './ProcessExplainerCard';
 export default function AboutMain() {
   return (
     <>
-      <NFTHeader />
+      <Header />
       <Container
         className="d-flex flex-column align-items-center"
         style={{ color: '#FFF' }}>
