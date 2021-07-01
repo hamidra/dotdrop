@@ -1,41 +1,42 @@
 .account-dropdown-toggle.dropdown-toggle::after {
-    display: none; // hide default bootstrap dropdown caret
+  display: none; // hide default bootstrap dropdown caret
 }
 
 .account-toggle-item {
-    background-color: #fff !important;
-    
-    &:hover {
-        cursor: pointer;
-        background-color: $gray-100 !important;
-        box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
-    }
+  border-color: $primary !important;
+  border-radius: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $gray-100 !important;
+    box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
+  }
 }
 
 .dropdown-menu {
-    max-height: 280px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+  max-height: 280px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
-    &::-webkit-scrollbar {
-        background-color: white;          
-        width: 12px;
-        border-radius: 8px;         
-    }
+  &::-webkit-scrollbar {
+    background-color: white;
+    width: 12px;
+    border-radius: 8px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-        background-color: grey;
-        border-radius: 6px;  
-        border: 2px solid white;
-    }
+  &::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 6px;
+    border: 2px solid white;
+  }
 
-    .account-item:hover {
-        background-color: $gray-100;
-        cursor: pointer;
-    }
-} 
+  .account-item:hover {
+    background-color: $gray-100;
+    cursor: pointer;
+  }
+}
 
 .balance-text {
-    font-size: 0.85rem !important;
-    color: $secondary;
+  font-size: 0.85rem !important;
+  color: $secondary;
 }

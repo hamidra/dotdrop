@@ -42,16 +42,16 @@ const AccountToggleItem = ({ account, balance, token }) => {
     );
   } else {
     ContentElement = (
-      <div style={{ marginLeft: caretSize + caretMargin, fontSize: '1.25rem' }}>
+      <div style={{ marginLeft: caretSize + caretMargin }}>
         Select Account
       </div>
     );
   }
   return (
     <>
-      <div className="account-toggle-item rounded border border-primary d-flex flex-row align-items-center p-2">
+      <div className="account-toggle-item border d-flex flex-row align-items-center p-2">
         <div className="w-100">{ContentElement}</div>
-        <div style={{ marginLeft: caretMargin }}>
+        <div className="d-flex" style={{ marginLeft: caretMargin }}>
           <CaretDown size={caretSize} />
         </div>
       </div>
@@ -137,12 +137,12 @@ const AccountDropdownItem = React.forwardRef(
     );
   }
 );
-export default function AccounSelector({
+export default function AccounSelector ({
   accounts,
   balances,
   token,
   selectedAccount,
-  setSelectedAccount,
+  setSelectedAccount
 }) {
   const selectAccountHandler = (idx) => {
     setSelectedAccount(accounts[idx]);

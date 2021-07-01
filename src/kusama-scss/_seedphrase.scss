@@ -1,0 +1,22 @@
+.seedphrase {
+    background-color: #202020;
+    padding: 8px;
+}
+
+.seedphrase-item-nr {
+    width: 32px;
+}
+
+.blurred {
+    filter: blur(0.4rem);
+}
+
+.copy, .phrase-toggle {
+    font-size: 0.75rem;
+
+    &:hover {
+        /* background-color: $gray-800; */
+        color: $cyan;
+        cursor: pointer;
+    }
+}

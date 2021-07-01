@@ -1,29 +1,31 @@
 .seedphrase {
-    background-color: $gray-100;
-    padding: 8px;
+  background-color: $gray-100;
+  padding: 8px;
 }
 
 .seedphrase-item-nr {
-    width: 28px;
-    font-weight: 400;
+  width: 28px;
+  font-weight: 400;
 }
 
 .seedphrase-item {
-    padding: 2px;
-    font-weight: 700;
+  padding: 2px;
+  font-weight: 700;
 }
 
 .blurred {
-    filter: blur(0.5rem);
+  filter: blur(0.5rem);
 }
 
-.copy, .phrase-toggle {
-    font-size: 0.75rem;
-    color: $secondary;
+.copy,
+.phrase-toggle {
+  font-size: 0.75rem;
+  color: $secondary;
+  border-radius: 0.5rem;
 
-    &:hover {
-        background-color: $gray-100;
-        color: $secondary-darker !important;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: $gray-100;
+    color: $secondary-darker !important;
+    cursor: pointer;
+  }
 }

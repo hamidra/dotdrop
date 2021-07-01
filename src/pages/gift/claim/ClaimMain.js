@@ -6,12 +6,12 @@ import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
 
 import ConnectAccount from './ConnectAccount';
-import Header from '../Header';
-import Footer from '../Footer';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
-import Confetti from 'react-confetti';
+/* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
 
@@ -158,7 +158,7 @@ export default function ClaimMain() {
         jumpToStep,
       }}>
       <Header selectedAccount={address} />
-      {step === 3 && <Confetti />}
+      {/* {step === 3 && <Confetti />} */}
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">

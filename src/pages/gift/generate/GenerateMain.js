@@ -14,8 +14,8 @@ import { web3FromSource } from '@polkadot/extension-dapp';
 import Landing from './Landing';
 import { Row, Col, Card, Container } from 'react-bootstrap';
 import ConnectAccount from './ConnectAccount';
-import Header from '../Header';
-import Footer from '../Footer';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 
 const GenerateContext = createContext();
 export { GenerateContext };
