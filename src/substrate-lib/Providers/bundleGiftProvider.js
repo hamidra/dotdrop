@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 import utils from '../substrateUtils';
-import { signAndSendTx } from './txHandler';
+import { signAndSendTx, getClaimedAssets } from './txHandler';
 
 const classIds = [1, 2];
 
@@ -74,7 +74,7 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
 };
 
 const uniquesPalletGiftProvider = {
-  createGift: (api, interimAccount, senderAccount, gift) => {
+  createGift: async (api, interimAccount, senderAccount, gift) => {
     // currently create only supports balances
     const interimAddress = utils.getAccountAddress(interimAccount);
     return transferBalanceAndFees(
@@ -85,9 +85,16 @@ const uniquesPalletGiftProvider = {
       feeMultiplierValue // fee multiplier of 1x
     );
   },
-  claimGift: (api, interimAccount, recipientAccount) => {
+  claimGift: async (api, interimAccount, recipientAccount) => {
     const recepientAddress = utils.getAccountAddress(recipientAccount);
-    return transferAllAssets(api, classIds, interimAccount, recepientAddress);
+    const events = await transferAllAssets(
+      api,
+      classIds,
+      interimAccount,
+      recepientAddress
+    );
+    const claimed = getClaimedAssets(events);
+    return claimed;
   },
   removeGift: (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);

@@ -81,12 +81,13 @@ export default function ClaimMain() {
       };
 
       claimGift(api, interimAccount, recipientAccount)
-        .then((claimedAmount) => {
+        .then((claimedGift) => {
           /* claimedAmount = utils.fromChainUnit(
             claimedAmount,
             chainInfo.decimals
           );
           setClaimedAmount(claimedAmount); */
+          console.log(claimedGift);
           nextStep();
         })
         .catch((error) => {
