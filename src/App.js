@@ -2,7 +2,6 @@ import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';
 import AccountOverview from './pages/gift/accounts/AccountOverview';
-import Footer from './pages/gift/Footer';
 import {
   HashRouter as Router,
   Switch,
@@ -12,6 +11,7 @@ import {
 import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
+import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
 
 function Body() {
   const { apiState } = useSubstrate();
@@ -29,6 +29,9 @@ function Body() {
         </Route>
         <Route path={'/account/:accountAddress'}>
           <AccountOverview />
+        </Route>
+        <Route path={'/privacy-policy'}>
+          <PrivacyPolicy />
         </Route>
         <Route exact path={'/'}>
           <GenerateMain />
@@ -51,7 +54,6 @@ export default function App() {
       <Router>
         <Body />
       </Router>
-      <Footer />
       <DeveloperConsole />
     </SubstrateContextProvider>
   );

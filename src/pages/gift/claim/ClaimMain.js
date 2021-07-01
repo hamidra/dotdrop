@@ -7,6 +7,7 @@ import Processing from '../../../components/Processing';
 
 import ConnectAccount from './ConnectAccount';
 import Header from '../Header';
+import Footer from '../Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
@@ -177,6 +178,7 @@ export default function ClaimMain() {
         show={!processingError && processing}
         message={processingMsg}
       />
+      <Footer />
     </ClaimContext.Provider>
   );
 }

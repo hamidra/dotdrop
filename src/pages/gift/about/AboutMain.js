@@ -9,7 +9,7 @@ export default function AboutMain () {
   return (
     <>
       <Header />
-      <Container className="d-flex flex-column align-items-center" style={{ color: '#FFF' }}>
+      <Container className="d-flex flex-column align-items-center py-5" style={{ color: '#FFF' }}>
         <div style={{ paddingBottom: '4rem' }}>
           <h1 className="py-5 text-center" style={{ fontSize: '3.5rem' }}>
             There's No Better Gift than DOTs
@@ -25,6 +25,7 @@ export default function AboutMain () {
         <ProcessExplainerCard />
         <FAQ />
       </Container>
+      <Footer />
     </>
   );
 }
