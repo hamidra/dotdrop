@@ -63,7 +63,7 @@
     }
 }
 
-.btn-card {
+.btn-card, .card-link {
     display: inline-flex;
     align-items: center;
     width: 100%;
@@ -76,6 +76,7 @@
   
     &:hover {
         border: 2px solid $secondary;
+        color: $secondary !important;
 
         svg {
             color: $secondary !important;
@@ -84,5 +85,15 @@
 
     svg {
         color: $secondary-darker !important;
+    }
+}
+
+.card-link {
+    h5 {
+        font-size: 1rem;
+    }
+    .subtitle {
+        font-size: 0.875rem;
+        line-height: 1.2;
     }
 }

@@ -1,10 +1,29 @@
 import CardHeader from '../../../../components/CardHeader';
-import { Row, Col, Card, Image } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
+import { CaretRight, DownloadSimple, Plus } from 'phosphor-react';
 import { isWeb3Injected } from '@polkadot/extension-dapp';
-import ledgerInstall from '../../../../images/ledger-install.png';
-import extensionAdd from '../../../../images/extension-add.png';
-import extensionLedger from '../../../../images/extension-ledger.png';
 import { useSubstrate } from '../../../../substrate-lib';
+
+const CardLink = ({ title, subtitle, hRef }) => {
+  return (
+    <a
+      className="card-link d-flex flex-row"
+      href={hRef}
+      rel="noreferrer"
+      target="_blank">
+        {title === 'Step 1'
+          ? <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={48} />
+          : <Plus className="flex-shrink-0 p-2 rounded icon" size={48} />
+      }
+      <div>
+        <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
+        <div className="subtitle">{subtitle}</div>
+      </div>
+      <div className="d-flex flex-grow-1"/>
+      <CaretRight className="caret flex-shrink-0" size={14} weight="bold" />
+    </a>
+  );
+};
 
 export default function LedgerInstructions ({
   prevStepHandler,
@@ -15,63 +34,31 @@ export default function LedgerInstructions ({
   const { giftTheme } = useSubstrate();
   return (
     <>
-      <Card.Body>
+      <Card.Body className="d-flex flex-column">
         <CardHeader
           title={title}
           backClickHandler={prevStepHandler}
           cardText="Follow below instructions to import your Ledger account into Polkadot extension."
         />
         <Row className="justify-content-center">
-          <Col className="d-flex flex-column justify-content-center align-items-center">
-            <div>
-              <ul>
-                <li className="mb-5">
-                  <div className="mb-3">
-                    <span className="step-text">
-                      {`Install ${giftTheme?.network} App and create a ${giftTheme?.network} account on your
-                      Ledger device. `}
-                    </span>
-                    <a
-                      href="https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT-"
-                      rel="noreferrer"
-                      target="_blank">
-                      → Learn more
-                    </a>
-                  </div>
-                  <div className="d-flex flex-column">
-                    <Image
-                      src={ledgerInstall}
-                      className="rounded align-self-center image-box"
-                    />
-                  </div>
-                </li>
-                <li className="step-item">
-                  <div className="mb-3">
-                    <span className="step-text">
-                      Add your Ledger account to Polkadot extension.&nbsp;
-                    </span>
-                    <a
-                      href={`${extensionLink}`}
-                      rel="noreferrer"
-                      target="_blank">
-                      → Learn more
-                    </a>
-                  </div>
-                  <div className="d-flex flex-column">
-                    <Image
-                      src={extensionAdd}
-                      className="rounded align-self-center image-box mb-2"
-                    />
-                    <Image
-                      src={extensionLedger}
-                      className="rounded align-self-center image-box"
-                    />
-                  </div>
-                </li>
-              </ul>
-            </div>
+          <Col sm="11">
+            <CardLink
+              hRef="https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT"
+              title="Step 1"
+              subtitle={`Install the ${giftTheme?.network} on your Ledger device`}
+            />
           </Col>
         </Row>
+        <Row className="justify-content-center py-3">
+          <Col sm="11">
+            <CardLink
+              hRef={extensionLink}
+              title="Step 2"
+              subtitle="Add your Ledger to the Polkadot Extension"
+            />
+          </Col>
+        </Row>
+        <div className="d-flex flex-grow-1" />
         <Row>
           <Col className="pt-4 d-flex justify-content-center">
             <button
