@@ -23,7 +23,7 @@ const decodeResult = (api, result) => {
   return { success, events, error };
 };
 
-exports.getClaimedAssets = (events) => {
+export const getClaimedAssets = (events) => {
   const claimed = { uniques: [], balances: [], assets: [] };
   events.forEach(({ event }) => {
     if (api.events.balances.Transfer.is(event)) {
@@ -42,7 +42,7 @@ exports.getClaimedAssets = (events) => {
   return claimed;
 };
 
-exports.signAndSendTx = async (api, tx, signingAccount) => {
+export const signAndSendTx = async (api, tx, signingAccount) => {
   const { pairOrAddress, signer } = signingAccount;
   return new Promise((resolve, reject) => {
     const cb = ({ success, events, error }) => {
