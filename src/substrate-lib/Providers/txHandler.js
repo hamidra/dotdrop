@@ -1,39 +1,86 @@
 const decodeResult = (api, result) => {
-  const { dispatchInfo, dispatchError, events = [] } = result;
+  let { dispatchInfo, dispatchError, events = [] } = result;
   const success = !dispatchError;
-  const txEvents = events
-    .filter(({ event }) => !api?.events.system.ExtrinsicFailed.is(event))
-    .map(({ event }) => event);
-  const txErrors = events
-    .filter(({ event }) => api?.events.system.ExtrinsicFailed.is(event))
-    .map(({ event }) => event?.data?.error);
-  console.log({ success, events: txEvents, errors: txErrors });
-  return { success, events: txEvents, errors: txErrors };
+  let error;
+  if (dispatchError) {
+    if (dispatchError.isModule) {
+      // for module errors, we have the section indexed, lookup
+      const decoded = api.registry.findMetaError(dispatchError.asModule);
+      const { documentation, name, section } = decoded;
+
+      error = `${section}.${name}: ${documentation.join(' ')}`;
+    } else {
+      // Other, CannotLookup, BadOrigin, no extra info
+      error = dispatchError.toString();
+    }
+  }
+  events = events.filter(
+    ({ event }) => !api?.events.system.ExtrinsicFailed.is(event)
+  );
+  events.forEach(({ phase, event: { data, method, section } }) => {
+    console.log(`\t' ${phase}: ${section}.${method}:: ${data}`);
+  });
+  return { success, events, error };
 };
 
-export const signAndSendTx = async (api, tx, signingAccount, cb) => {
-  const { pairOrAddress, signer } = signingAccount;
-  await tx.signAsync(pairOrAddress, { signer });
-  const unsub = await tx.send(({ status, ...result }) => {
-    if (status.isInBlock) {
-      const dispatchResult = decodeResult(api, result);
-      console.log(
-        `Transaction ${
-          tx.meta.name
-        }(${tx.args.toString()}) included at blockHash ${
-          status.asInBlock
-        } [success = ${dispatchResult.success}]`
-      );
-      console.log(result);
-      cb && cb({ ...dispatchResult });
-    } else if (status.isBroadcast) {
-      console.log('Transaction broadcasted.');
-    } else if (status.isFinalized) {
-      unsub();
-    } else if (status.isReady) {
-      console.log('Transaction isReady.');
-    } else {
-      console.log(`Other status ${status}`);
+export const getClaimedAssets = (events) => {
+  const claimed = { uniques: [], balances: [], assets: [] };
+  events.forEach(({ event }) => {
+    if (api.events.balances.Transfer.is(event)) {
+      // parse claimed balances
+      const claimedBalance = event?.data[2]?.toString();
+      claimedBalance && claimed.balances.push(claimedBalance);
+    } else if (api.events.uniques.Transferred.is(event)) {
+      // parse claimed uniques
+      const claimedAsset = {
+        classId: event?.data[0]?.toString(),
+        instanceId: event?.data[1]?.toString(),
+      };
+      claimedAsset && claimed.uniques.push(claimedAsset);
     }
+  });
+  return claimed;
+};
+
+export const signAndSendTx = async (api, tx, signingAccount) => {
+  const { pairOrAddress, signer } = signingAccount;
+  return new Promise((resolve, reject) => {
+    const cb = ({ success, events, error }) => {
+      if (!success) {
+        reject(error);
+      }
+      resolve(events);
+    };
+    const signAndSendAsync = async () => {
+      try {
+        await tx.signAsync(pairOrAddress, { signer });
+        const unsub = await tx.send((callResult) => {
+          const { status, ...result } = callResult;
+          if (status.isInBlock) {
+            const dispatchResult = decodeResult(api, result);
+            console.log(
+              `Transaction ${
+                tx.meta.name
+              }(${tx.args.toString()}) included at blockHash ${
+                status.asInBlock
+              } [success = ${dispatchResult.success}]`
+            );
+            cb && cb({ ...dispatchResult });
+          } else if (status.isBroadcast) {
+            console.log('Transaction broadcasted.');
+          } else if (status.isFinalized) {
+            unsub();
+          } else if (status.isReady) {
+            console.log('Transaction isReady.');
+          } else {
+            console.log(`Other status ${status}`);
+          }
+        });
+      } catch (err) {
+        // the call has failed off chain with an error
+        cb({ success: false, events: [], error: err });
+      }
+    };
+    return signAndSendAsync();
   });
 };

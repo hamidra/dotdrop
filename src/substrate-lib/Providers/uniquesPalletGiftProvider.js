@@ -19,14 +19,7 @@ const transferAllAssets = async (api, classId, fromAccount, toAddress) => {
 
   // send a batch request to transfer the ownership of the assets to the des address
   const tx = api.tx.utility.batch(txs);
-  return new Promise((resolve, reject) =>
-    signAndSendTx(api, tx, fromAccount, ({ result, error }) => {
-      if (error) {
-        reject(error);
-      }
-      resolve(result);
-    }).catch((error) => reject(error))
-  );
+  return signAndSendTx(api, tx, fromAccount);
 };
 
 const uniquesPalletGiftProvider = {
