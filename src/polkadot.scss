@@ -125,6 +125,11 @@ $h5-font-size: 1rem;
 }
 
 .navbar {
+
+  img {
+    background-color: #fff;
+  }
+
   .dropdown-toggle::after {
     content: none;
   }

@@ -192,18 +192,42 @@
   }
 }
 
-.btn-card {
+.btn-card, .card-link {
   display: inline-flex;
   align-items: center;
   width: 100%;
   padding: 0.75rem;
   text-align: left;
   background-color: #FFF;
-  border: 1px solid #ddd;
+  border: 1px solid $gray-300;
   border-radius: 0.5rem;
 
   &:hover {
     box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
+  }
+}
+
+.card-link {
+  color: $black;
+
+  &:hover {
+    color: $black;
+    cursor: pointer;
+  }
+
+  .icon {
+    background-color: $gray-200;
+    color: $secondary;
+    margin-right: 0.5rem;
+  }
+
+  .caret {
+    color: $gray-600;
+  }
+
+  .subtitle {
+    color: $secondary;
+    line-height: 1.2;
   }
 }
 
