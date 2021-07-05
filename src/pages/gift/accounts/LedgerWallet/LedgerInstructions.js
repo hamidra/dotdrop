@@ -54,7 +54,7 @@ export default function LedgerInstructions ({
             <CardLink
               hRef={extensionLink}
               title="Step 2"
-              subtitle="Add your Ledger to the Polkadot Extension"
+              subtitle="Add your Ledger account to the Polkadot Extension"
             />
           </Col>
         </Row>
