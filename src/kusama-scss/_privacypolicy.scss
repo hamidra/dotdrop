@@ -1,0 +1,93 @@
+#policy-page {
+    background-color: #000;
+}
+
+#policy-container {
+    max-width: 600px;
+    margin: auto;
+
+    @media screen and (max-width: 768px) {
+        margin: 0 1.5rem;
+    }
+}
+
+privacy-policy {
+    a {
+        word-break: break-word;
+    }
+}
+
+/* header of the policy */
+privacy-policy-header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+/* title of the policy */
+privacy-policy-header-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+@media (min-width: 40rem) {
+    privacy-policy-header-title {
+        font-size: 2.4rem;
+    }
+}
+/* updated date of the policy */
+privacy-policy-updated-date {
+    display: flex;
+    color: $secondary-darker;
+}
+
+/* vertical display */
+privacy-policy,
+privacy-policy-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* lists of sections */
+privacy-policy-list {
+    padding-top: 1rem;
+}
+
+/* lists, grand-children of lists */
+privacy-policy-list privacy-policy-list {
+    padding-left: 1rem;
+}
+@media (min-width: 40rem) {
+    privacy-policy-list privacy-policy-list {
+        padding-left: 2.2rem;
+    }
+}
+
+/* a content section, with: a number, a letter, nothing */
+privacy-policy-section {
+    padding-bottom: 2rem;
+}
+
+/* section title */
+privacy-policy-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+@media (min-width: 40rem) {
+    privacy-policy-section-title {
+    font-size: 2rem;
+    padding-left: 1rem;
+    }
+}
+
+/* a section number */
+privacy-policy-section-number {
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+privacy-policy > privacy-policy-list > privacy-policy-section > privacy-policy-section-number {
+    display: inline-block;
+} 
