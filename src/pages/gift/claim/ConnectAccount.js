@@ -9,7 +9,9 @@ export default function ConnectAccount({ setAccountSourceHandler }) {
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title="Claim Your Gift"
+          title={giftTheme?.content === 'NFT'
+            ? 'Claim Your NFT'
+            : 'Claim Your Gift'}
           cardText={`To claim your ${giftTheme?.content}, create a new ${giftTheme?.network} account or connect an existing account.`}
         />
         <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
