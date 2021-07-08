@@ -106,6 +106,7 @@ export default function PresentAccountPhrase({
         <div className="pt-4 d-flex justify-content-center">
           <button
             className="btn btn-primary"
+            disabled={!checked}
             onClick={() =>
               checked ? nextStepHandler() : setCheckedError(checkedErrorMessage)
             }>

@@ -77,6 +77,7 @@ export default function VerifySecret({ claimGiftHandler }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
+                    disabled={props.values.redeemSecret.length < 22}
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>

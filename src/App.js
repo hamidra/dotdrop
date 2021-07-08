@@ -34,7 +34,7 @@ function Body() {
           <PrivacyPolicy />
         </Route>
         <Route exact path={'/'}>
-          <GenerateMain />
+          <ClaimMain />
         </Route>
         <Route path={'/'}>
           <Redirect to={'/'} />

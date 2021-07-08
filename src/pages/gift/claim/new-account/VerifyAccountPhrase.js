@@ -91,6 +91,7 @@ export default function VerifyAccountPhrase({
       <Col className="d-flex pt-4 justify-content-center align-items-center">
         <button
           className="btn btn-primary"
+          disabled={check1 === '' || check2 === ''}
           onClick={() => validate() && nextStepHandler()}>
           Verify Phrase
         </button>
