@@ -8,14 +8,7 @@ const createGift = async (api, senderAccount, interimAddress, amount) => {
   const chainAmount = utils.toChainUnit(amount, api.registry.chainDecimals);
   const tx = api.tx.gift.gift(chainAmount, interimAddress);
 
-  return new Promise((resolve, reject) =>
-    signAndSendTx(api, tx, senderAccount, ({ result, error }) => {
-      if (error) {
-        reject(error);
-      }
-      resolve(result);
-    }).catch((error) => reject(error))
-  );
+  return signAndSendTx(api, tx, senderAccount);
 };
 
 const claimGift = async (api, interimAccount, recipientAddress) => {
@@ -23,32 +16,12 @@ const claimGift = async (api, interimAccount, recipientAddress) => {
     throw new Error('No address was specified to redeem the gift to');
   }
   const tx = api.tx.gift.claim(recipientAddress);
-  return new Promise((resolve, reject) =>
-    signAndSendTx(api, tx, interimAccount, ({ result, error }) => {
-      if (error) {
-        reject(error);
-      }
-      const { events } = result;
-      const giftClaimedEvent = events.filter(({ event }) =>
-        api?.events?.gift?.GiftClaimed?.is(event)
-      );
-
-      const value = giftClaimedEvent[0]?.event?.data[1]?.toString();
-      resolve(value);
-    }).catch((error) => reject(error))
-  );
+  return signAndSendTx(api, tx, interimAccount);
 };
 
 const removeGift = async (api, senderAccount, interimAddress) => {
   const tx = api.tx.gift.remove(interimAddress);
-  return new Promise((resolve, reject) =>
-    signAndSendTx(api, tx, senderAccount, ({ result, error }) => {
-      if (error) {
-        reject(error);
-      }
-      resolve(result);
-    }).catch((error) => reject(error))
-  );
+  return signAndSendTx(api, tx, senderAccount);
 };
 
 const giftPalletGiftProvider = {

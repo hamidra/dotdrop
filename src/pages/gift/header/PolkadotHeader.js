@@ -1,15 +1,15 @@
 import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
-import { stringHelpers } from '../../utils';
+import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { DotsThree, Gift } from 'phosphor-react';
-import PolkadotCircle from '../../images/polkadot-circle.png';
+import PolkadotCircle from '../../../images/polkadot-circle.png';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
   return (
     <Media className="d-flex align-items-center">
-      <div className='mr-1'>
+      <div className="mr-1">
         <Identicon value={accountAddress} size={20} theme="polkadot" />
       </div>
       <Media.Body>
@@ -22,7 +22,7 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header ({ selectedAccount }) {
+export default function Header({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
 
@@ -36,42 +36,39 @@ export default function Header ({ selectedAccount }) {
       >
         <Navbar.Brand>
           <a
-            href='https://polkadot.network'
+            href="https://polkadot.network"
             target="_blank"
-            rel="noopener noreferrer"
-          >
-          <img
-            width={40}
-            className='p-1 shadow-sm rounded-circle'
-            src={PolkadotCircle}
-            alt={'Polkadot'}
-          />
+            rel="noopener noreferrer">
+            <img
+              width={40}
+              className="p-1 shadow-sm rounded-circle"
+              src={PolkadotCircle}
+              alt={'Polkadot'}
+            />
           </a>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse
           id="basic-navbar-nav"
           className="justify-content-center">
-          <Nav className='nav-pills shadow-sm p-1'>
+          <Nav className="nav-pills shadow-sm p-1">
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
-                onClick={() => history.push('/claim')}
-              >
+                onClick={() => history.push('/claim')}>
                 Claim Gift
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/generate' && 'active'}
-                onClick={() => history.push('/generate')}
-              >
+                onClick={() => history.push('/generate')}>
                 New Gift
               </Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
-        <div className='d-flex justify-content-end'>
+        <div className="d-flex justify-content-end">
           {selectedAccount && (
             <>
               <div className="d-none d-sm-block w-100 d-sm-none" />
@@ -84,26 +81,22 @@ export default function Header ({ selectedAccount }) {
               </Nav>
             </>
           )}
-          <Dropdown
-            id="dropdown-item-button"
-          >
+          <Dropdown id="dropdown-item-button">
             <Dropdown.Toggle
               className="btn-dropdown p-1 rounded shadow-sm"
               type="button"
               data-toggle="dropdown"
-              id="dropdownMenuButton"
-            >
+              id="dropdownMenuButton">
               <DotsThree size={30} weight="bold" />
             </Dropdown.Toggle>
             <Dropdown.Menu
               aria-labelledby="dropdownMenuButton"
-              className='dropdown-menu-right mt-2 shadow'
-            >
+              className="dropdown-menu-right mt-2 shadow">
               <Dropdown.Item
-                className='px-3'
-                onClick={() => history.push('/about')}
-              >
-                <Gift className='mr-1' size={18} />About Gifts
+                className="px-3"
+                onClick={() => history.push('/about')}>
+                <Gift className="mr-1" size={18} />
+                About Gifts
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

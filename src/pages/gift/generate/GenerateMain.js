@@ -14,8 +14,8 @@ import { web3FromSource } from '@polkadot/extension-dapp';
 import Landing from './Landing';
 import { Row, Col, Card, Container } from 'react-bootstrap';
 import ConnectAccount from './ConnectAccount';
-import NFTHeader from '../NFTHeader';
-import KusamaFooter from '../KusamaFooter';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -124,7 +124,7 @@ export default function GenerateMain() {
       };
 
       const interimAccount = {
-        pairOrAddress: giftAccountPair
+        pairOrAddress: giftAccountPair,
       };
 
       createGift(api, interimAccount, senderAccount, gift)
@@ -264,7 +264,7 @@ export default function GenerateMain() {
         jumpToStep,
         setAccountSource,
       }}>
-      <NFTHeader selectedAccount={account?.address} />
+      <Header selectedAccount={account?.address} />
       <Container className="justify-content-center align-items-center">
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
@@ -285,7 +285,7 @@ export default function GenerateMain() {
           message={processingMsg}
         />
       </Container>
-      <KusamaFooter />
+      <Footer />
     </GenerateContext.Provider>
   );
 }

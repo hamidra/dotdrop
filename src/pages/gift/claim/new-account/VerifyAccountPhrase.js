@@ -5,7 +5,7 @@ import { useState } from 'react';
 const randomIdx = (length) => {
   const random1 = Math.floor(Math.random() * length) + 1;
   let random2 = Math.floor(Math.random() * length) + 1;
-  random2 = random2 === random1 ? (random2 * 2) % length : random2;
+  random2 = random2 === random1 ? ((random2 * 2) % length) + 1 : random2;
   return [random1, random2].sort((a, b) => a - b);
 };
 

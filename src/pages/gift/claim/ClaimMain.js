@@ -6,8 +6,8 @@ import ErrorModal from '../../../components/Error';
 import Processing from '../../../components/Processing';
 
 import ConnectAccount from './ConnectAccount';
-import NFTHeader from '../NFTHeader';
-import KusamaFooter from '../KusamaFooter';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
@@ -81,12 +81,13 @@ export default function ClaimMain() {
       };
 
       claimGift(api, interimAccount, recipientAccount)
-        .then((claimedAmount) => {
+        .then((claimedGift) => {
           /* claimedAmount = utils.fromChainUnit(
             claimedAmount,
             chainInfo.decimals
           );
           setClaimedAmount(claimedAmount); */
+          console.log(claimedGift);
           nextStep();
         })
         .catch((error) => {
@@ -156,7 +157,7 @@ export default function ClaimMain() {
         prevStep,
         jumpToStep,
       }}>
-      <NFTHeader selectedAccount={address} />
+      <Header selectedAccount={address} />
       {/* {step === 3 && <Confetti />} */}
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
@@ -178,7 +179,7 @@ export default function ClaimMain() {
         show={!processingError && processing}
         message={processingMsg}
       />
-      <KusamaFooter />
+      <Footer />
     </ClaimContext.Provider>
   );
 }
