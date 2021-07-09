@@ -17,8 +17,10 @@ import nft2 from '../../../images/ksm-nft2.jpg';
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
-
 export { ClaimContext };
+
+// NFT artists
+const artists = { 0: 'Andreas Preis', 1: 'Awer', 2: 'Vadim' };
 export default function ClaimMain() {
   const { keyring, apiState, api, chainInfo } = useSubstrate();
   const { claimGift } = giftProvider;
@@ -64,7 +66,7 @@ export default function ClaimMain() {
     } else if (!address) {
       console.log('no account is selected');
       window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
+        'You need to sign in with your account to be able to claim your gift. 🔑🔓'
       );
     } else {
       // retrive gift account from secret
@@ -88,19 +90,19 @@ export default function ClaimMain() {
           const classId = claimedGift?.uniques?.[0]?.classId;
           console.log(claimedGift);
           console.log(`claimed nft class = ${classId}`);
-          if (![0, 1, 2].includes(classId)) {
+          if (classId == null) {
             throw new Error('The gift secret does not hold any NFTs');
           }
           let nft;
           switch (classId) {
-            case 1:
-              nft = nft1;
+            case '1':
+              nft = { art: nft1, artist: artists[1] };
               break;
-            case 2:
-              nft = nft2;
+            case '2':
+              nft = { art: nft2, artist: artists[2] };
               break;
             default:
-              nft = nft0;
+              nft = { art: nft0, artist: artists[0] };
           }
           setClaimedNft(nft);
 
