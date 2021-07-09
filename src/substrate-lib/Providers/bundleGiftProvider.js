@@ -2,7 +2,7 @@ import BN from 'bn.js';
 import utils from '../substrateUtils';
 import { signAndSendTx, getClaimedAssets } from './txHandler';
 
-const classIds = [1, 2];
+const classIds = [0, 1, 2];
 
 // the balance that will be tranferred to the gift account
 // in order to cover the cost of final tx from gift account to recepient account.
