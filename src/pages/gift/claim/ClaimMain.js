@@ -11,6 +11,9 @@ import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
+import nft0 from '../../../images/ksm-nft0.jpg';
+import nft1 from '../../../images/ksm-nft1.jpg';
+import nft2 from '../../../images/ksm-nft2.jpg';
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
@@ -26,7 +29,7 @@ export default function ClaimMain() {
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
-  const [claimedAmount, setClaimedAmount] = useState('');
+  const [claimedNft, setClaimedNft] = useState(null);
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -82,12 +85,25 @@ export default function ClaimMain() {
 
       claimGift(api, interimAccount, recipientAccount)
         .then((claimedGift) => {
-          /* claimedAmount = utils.fromChainUnit(
-            claimedAmount,
-            chainInfo.decimals
-          );
-          setClaimedAmount(claimedAmount); */
+          const classId = claimedGift?.uniques?.[0]?.classId;
           console.log(claimedGift);
+          console.log(`claimed nft class = ${classId}`);
+          if (![0, 1, 2].includes(classId)) {
+            throw new Error('The gift secret does not hold any NFTs');
+          }
+          let nft;
+          switch (classId) {
+            case 1:
+              nft = nft1;
+              break;
+            case 2:
+              nft = nft2;
+              break;
+            default:
+              nft = nft0;
+          }
+          setClaimedNft(nft);
+
           nextStep();
         })
         .catch((error) => {
@@ -146,7 +162,7 @@ export default function ClaimMain() {
   steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
 
   // Step-3
-  steps.push(<Claimed accountAddress={address} amount={claimedAmount} />);
+  steps.push(<Claimed accountAddress={address} nft={claimedNft} />);
 
   const currentStepComponent = steps[step];
 
