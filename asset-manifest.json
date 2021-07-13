@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/dotdrop/static/css/main.4ae12a53.chunk.css",
-    "main.js": "/dotdrop/static/js/main.f612bd8d.chunk.js",
-    "main.js.map": "/dotdrop/static/js/main.f612bd8d.chunk.js.map",
+    "main.css": "/dotdrop/static/css/main.3e5be45d.chunk.css",
+    "main.js": "/dotdrop/static/js/main.da7c6534.chunk.js",
+    "main.js.map": "/dotdrop/static/js/main.da7c6534.chunk.js.map",
     "runtime-main.js": "/dotdrop/static/js/runtime-main.4056a458.js",
     "runtime-main.js.map": "/dotdrop/static/js/runtime-main.4056a458.js.map",
     "static/js/2.58303f2b.chunk.js": "/dotdrop/static/js/2.58303f2b.chunk.js",
     "static/js/2.58303f2b.chunk.js.map": "/dotdrop/static/js/2.58303f2b.chunk.js.map",
     "index.html": "/dotdrop/index.html",
-    "static/css/main.4ae12a53.chunk.css.map": "/dotdrop/static/css/main.4ae12a53.chunk.css.map",
+    "static/css/main.3e5be45d.chunk.css.map": "/dotdrop/static/css/main.3e5be45d.chunk.css.map",
     "static/js/2.58303f2b.chunk.js.LICENSE.txt": "/dotdrop/static/js/2.58303f2b.chunk.js.LICENSE.txt",
     "static/media/kusama.scss": "/dotdrop/static/media/nft_bg.42ea60a4.jpg",
     "static/media/ksm-nft0.85e3f309.jpg": "/dotdrop/static/media/ksm-nft0.85e3f309.jpg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.4056a458.js",
     "static/js/2.58303f2b.chunk.js",
-    "static/css/main.4ae12a53.chunk.css",
-    "static/js/main.f612bd8d.chunk.js"
+    "static/css/main.3e5be45d.chunk.css",
+    "static/js/main.da7c6534.chunk.js"
   ]
 }
