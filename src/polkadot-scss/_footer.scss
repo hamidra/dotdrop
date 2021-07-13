@@ -1,27 +1,35 @@
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 24px 48px;
-    color: #FFF;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 24px 48px;
+  color: #fff;
 
-    @media (min-width: 0px) {
-        font-size: 0.875rem;
-    }
+  @media (min-width: 0px) {
+    font-size: 0.875rem;
+  }
 
-    @media (min-width: 768px) {
-        font-size: 0.75rem; 
-    }
+  @media (min-width: 768px) {
+    font-size: 0.75rem;
+  }
 
-    a {
-        color: #FFF;
-    }
+  a {
+    color: #fff;
+  }
 }
 
 .footer.dark {
-    color: $black;
+  color: $black;
 
-    a {
-        color: $black;
-    }
+  a {
+    color: $black;
+  }
+}
+
+#root {
+  // bottom paddind is needed to prevent the overlap with the card.
+  padding-bottom: 6rem;
+  @media (min-width: 768px) {
+    padding-bottom: 3rem;
+  }
 }
