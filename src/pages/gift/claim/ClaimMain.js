@@ -20,7 +20,7 @@ const ClaimContext = createContext();
 export { ClaimContext };
 
 // NFT artists
-const artists = { 0: 'Andreas Preis', 1: 'Awer', 2: 'Vadim' };
+const artists = { 0: 'Awer', 1: 'Vadim', 2: 'Andreas Preis' };
 export default function ClaimMain() {
   const { keyring, apiState, api, chainInfo } = useSubstrate();
   const { claimGift } = giftProvider;
