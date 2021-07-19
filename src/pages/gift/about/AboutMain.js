@@ -5,7 +5,7 @@ import Header from '../header/Header';
 import FAQ from './FAQ';
 import ProcessExplainerCard from './ProcessExplainerCard';
 
-export default function AboutMain() {
+export default function AboutMain () {
   return (
     <>
       <Header />

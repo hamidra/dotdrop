@@ -1,6 +1,6 @@
 import { Gift, PaperPlaneTilt, Smiley } from 'phosphor-react';
 
-export default function ProcessExplainerCard() {
+export default function ProcessExplainerCard () {
   return (
     <div
       className="d-flex flex-column align-items-center w-100 mb-5"
@@ -9,7 +9,7 @@ export default function ProcessExplainerCard() {
           'linear-gradient(74.98deg, #E6007C 0%, #E6007A 36.28%, #7300E6 100%)',
         borderRadius: '1.5rem',
         color: '#FFF',
-        padding: '5rem',
+        padding: '5rem'
       }}>
       <h2
         className="text-center"

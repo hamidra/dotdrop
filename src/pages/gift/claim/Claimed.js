@@ -4,7 +4,7 @@ import confetti from '../../../images/confetti.png';
 import { useHistory } from 'react-router-dom';
 import { useSubstrate, utils } from '../../../substrate-lib';
 
-export default function Claimed({ amount, accountAddress }) {
+export default function Claimed ({ amount, accountAddress }) {
   const history = useHistory();
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = utils.formatBalance(amount, chainInfo?.token);

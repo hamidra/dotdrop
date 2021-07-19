@@ -1,5 +1,5 @@
 import { Modal, Spinner, Row, Col } from 'react-bootstrap';
-export default function Processing({ show, message }) {
+export default function Processing ({ show, message }) {
   return (
     <>
       <Modal show={show} centered>

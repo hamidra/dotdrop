@@ -3,9 +3,9 @@ import { Row, Col, Card, Form } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../../substrate-lib';
 
-export default function EnterAccountAddress({
+export default function EnterAccountAddress ({
   setAddressHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const { chainInfo, giftTheme } = useSubstrate();
 

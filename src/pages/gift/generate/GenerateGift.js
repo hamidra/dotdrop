@@ -5,10 +5,10 @@ import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { useFormik } from 'formik';
 import BN from 'bn.js';
-export default function GenerateGift({
+export default function GenerateGift ({
   account,
   generateGiftHandler,
-  giftFeeMultiplier,
+  giftFeeMultiplier
 }) {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
 
@@ -19,10 +19,10 @@ export default function GenerateGift({
   const balanceDecimalPoints = 5;
   const balanceVal = balance?.free
     ? utils.fromChainUnit(
-        balance.free,
-        chainInfo?.decimals,
-        balanceDecimalPoints
-      )
+      balance.free,
+      chainInfo?.decimals,
+      balanceDecimalPoints
+    )
     : null;
   const balanceStr =
     balanceVal && utils.formatBalance(balanceVal, chainInfo?.token);
@@ -53,7 +53,7 @@ export default function GenerateGift({
   useEffect(() => {
     // since the txFees does not differ much for different amounts,
     // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
-    async function fetchTxFee() {
+    async function fetchTxFee () {
       const address = account?.address;
       if (address && balance) {
         const info = await api.tx.balances
@@ -139,7 +139,7 @@ export default function GenerateGift({
     const pattern = /^([0-9]+\.?[0-9]{0,5})?$/i;
     formik.setValues({
       ...formik.values,
-      amount: pattern.test(value) ? value : formik.values.amount,
+      amount: pattern.test(value) ? value : formik.values.amount
     });
   };
 
@@ -147,15 +147,15 @@ export default function GenerateGift({
     initialValues: {
       amount: '',
       recipientEmail: '',
-      confirmEmail: '',
+      confirmEmail: ''
     },
     validate,
     onSubmit: ({ recipientEmail, amount }) => {
       generateGiftHandler({
         recipientEmail,
-        amount,
+        amount
       });
-    },
+    }
   });
 
   return (
@@ -197,7 +197,7 @@ export default function GenerateGift({
                       <Form.Text className="text-danger">
                         {formik.errors.recipientEmail}
                       </Form.Text>
-                    )}
+                  )}
                 </Col>
                 <Col md="6" className="mt-2 mt-md-0">
                   <Form.Label htmlFor="confirmEmail">
@@ -222,7 +222,7 @@ export default function GenerateGift({
                       <Form.Text className="text-danger">
                         {formik.errors.confirmEmail}
                       </Form.Text>
-                    )}
+                  )}
                 </Col>
               </Form.Group>
 
@@ -252,7 +252,7 @@ export default function GenerateGift({
                       style={{
                         ...(formik.touched.amount && !!formik.errors.amount
                           ? { borderColor: 'red' }
-                          : {}),
+                          : {})
                       }}
                       className="bg-transparent border-left-0 balance-text">
                       {balanceStr

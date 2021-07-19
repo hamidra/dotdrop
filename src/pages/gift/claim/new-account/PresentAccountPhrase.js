@@ -4,10 +4,10 @@ import CardHeader from '../../../../components/CardHeader';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Copy, Eye, EyeSlash } from 'phosphor-react';
 
-export default function PresentAccountPhrase({
+export default function PresentAccountPhrase ({
   mnemonicWords,
   nextStepHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const label = 'I have stored my seed phrase in a safe place.';
   const [blurred, setBlurred] = useState(true);

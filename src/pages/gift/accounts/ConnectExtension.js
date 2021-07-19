@@ -23,11 +23,11 @@ const Connecting = () => {
   );
 };
 
-export default function ExtensionAccount({
+export default function ExtensionAccount ({
   setAccountHandler,
   setAddressHandler,
   title,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const { dispatch, ...state } = useSubstrate();
   const { keyring, balances, chainInfo, giftTheme, extensionState } = state;
@@ -68,7 +68,8 @@ export default function ExtensionAccount({
           cardText={cardMessage}
           backClickHandler={prevStepHandler}
         />
-        {extensionState === 'READY' ? (
+        {extensionState === 'READY'
+          ? (
           <>
             <Row className="p-md-5 justify-content-center">
               <Col className="d-flex flex-column justify-content-center align-items-center text-center">
@@ -93,9 +94,10 @@ export default function ExtensionAccount({
               </Col>
             </Row>
           </>
-        ) : (
+            )
+          : (
           <Connecting />
-        )}
+            )}
       </Card.Body>
     </>
   );

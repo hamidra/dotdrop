@@ -7,7 +7,7 @@ const palletTypes = {
   balance: 'balance',
   gift: 'gift',
   bundle: 'bundle',
-  uniques: 'uniques',
+  uniques: 'uniques'
   // ToDo: add other pallets
   // asset: 'asset',
 };

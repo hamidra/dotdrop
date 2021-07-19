@@ -52,7 +52,7 @@ const WalletInfoField = ({ title, subtitle, ...props }) => {
     </Media>
   );
 };
-export default function AccountOverview() {
+export default function AccountOverview () {
   const { api, apiState, chainInfo } = useSubstrate();
   const [balance, setBalance] = useState(null);
 

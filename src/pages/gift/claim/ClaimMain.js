@@ -16,7 +16,7 @@ import ExistingAccountMain from './existing-account/ExistingAccountMain';
 const ClaimContext = createContext();
 
 export { ClaimContext };
-export default function ClaimMain() {
+export default function ClaimMain () {
   const { keyring, apiState, api, chainInfo } = useSubstrate();
   const { claimGift } = giftProvider;
 
@@ -77,7 +77,7 @@ export default function ClaimMain() {
 
       // claim gift by the selected account
       const recipientAccount = {
-        pairOrAddress: address,
+        pairOrAddress: address
       };
 
       claimGift(api, interimAccount, recipientAccount)
@@ -117,7 +117,7 @@ export default function ClaimMain() {
 
   const accountOption = {
     NEW: NewAccountMain,
-    EXISTING: ExistingAccountMain,
+    EXISTING: ExistingAccountMain
   };
 
   if (step < 1 && address) {
@@ -130,16 +130,18 @@ export default function ClaimMain() {
   );
 
   // Step-1
-  const AccountOptionElement = accountOption[accountSource] ? (
-    createElement(accountOption[accountSource], {
-      setAddressHandler: setAddressHandler,
-      prevStepHandler: () => {
-        prevStep();
-      },
-    })
-  ) : (
+  const AccountOptionElement = accountOption[accountSource]
+    ? (
+        createElement(accountOption[accountSource], {
+          setAddressHandler: setAddressHandler,
+          prevStepHandler: () => {
+            prevStep();
+          }
+        })
+      )
+    : (
     <div>No account type is selected</div>
-  );
+      );
   steps.push(AccountOptionElement);
 
   // Step-2
@@ -155,7 +157,7 @@ export default function ClaimMain() {
       value={{
         nextStep,
         prevStep,
-        jumpToStep,
+        jumpToStep
       }}>
       <Header selectedAccount={address} />
       {/* {step === 3 && <Confetti />} */}

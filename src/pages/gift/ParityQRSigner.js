@@ -8,13 +8,13 @@ import CardHeader from '../../components/CardHeader';
 const CMD_HASH = 1;
 const CMD_MORTAL = 2;
 
-function ParityQRSigner({
+function ParityQRSigner ({
   address,
   genesisHash,
   isHashed,
   onSignature,
   payload,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const [sigError, setSigError] = useState(null);
 

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Instructions from './LedgerInstructions';
 import ConnectExtension from '../ConnectExtension';
 
-export default function LedgerMain({
+export default function LedgerMain ({
   setAccountHandler,
   setAddressHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);

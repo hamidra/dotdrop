@@ -19,7 +19,7 @@ const getGiftTheme = (theme) => {
   // default values
   const giftTheme = {
     content: 'DOT',
-    network: 'Polkadot',
+    network: 'Polkadot'
   };
   switch (theme) {
     case 'polkadot':
@@ -55,7 +55,7 @@ const INIT_STATE = {
   apiState: null,
   chainInfo: null,
   theme: theme,
-  giftTheme: getGiftTheme(theme),
+  giftTheme: getGiftTheme(theme)
 };
 
 ///
@@ -74,7 +74,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         apiState: 'READY',
-        chainInfo: chainInfo,
+        chainInfo: chainInfo
       };
     }
 
@@ -139,7 +139,7 @@ const queryChainInfo = async (api, state, dispatch) => {
     ss58Format: api.registry?.chainSS58 || 42,
     existentialDeposit:
       api.consts?.balances?.existentialDeposit || new BN(0, 10),
-    chainName: await api.rpc.system.chain(),
+    chainName: await api.rpc.system.chain()
   };
 
   // ToDo: remove this when the pallet is deployed on polkadot
@@ -162,7 +162,7 @@ const loadAccounts = (state, dispatch) => {
       keyring.loadAll({
         genesisHash: state.chainInfo.genesisHash,
         isDevelopment: config.DEVELOPMENT_KEYRING,
-        ss58Format: state.chainInfo.ss58Format,
+        ss58Format: state.chainInfo.ss58Format
       });
 
       dispatch({ type: 'SET_KEYRING', payload: keyring });
@@ -233,7 +233,7 @@ const SubstrateContextProvider = (props) => {
 // prop typechecking
 SubstrateContextProvider.propTypes = {
   socket: PropTypes.string,
-  types: PropTypes.object,
+  types: PropTypes.object
 };
 
 const useSubstrate = () => ({ ...useContext(SubstrateContext) });

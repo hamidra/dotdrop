@@ -1,5 +1,5 @@
 import { Modal } from 'react-bootstrap';
-export default function Error({ show, message, handleClose }) {
+export default function Error ({ show, message, handleClose }) {
   return (
     <>
       <Modal show={show} onHide={handleClose}>

@@ -47,9 +47,9 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
           address: account.address,
           meta: {
             ...account.meta,
-            isInjected: true,
+            isInjected: true
           },
-          type: account.type,
+          type: account.type
         };
         const pair = keyring.keyring.addFromAddress(
           injectedAcct.address,

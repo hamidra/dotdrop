@@ -8,7 +8,7 @@ import { useSubstrate } from '../../../../substrate-lib';
 
 const ConnectExistingAccount = ({
   setExistingAccountSourceHandler,
-  prevStepHandler,
+  prevStepHandler
 }) => {
   const { giftTheme } = useSubstrate();
   return (

@@ -34,7 +34,7 @@ export const getClaimedAssets = (events) => {
       // parse claimed uniques
       const claimedAsset = {
         classId: event?.data[0]?.toString(),
-        instanceId: event?.data[1]?.toString(),
+        instanceId: event?.data[1]?.toString()
       };
       claimedAsset && claimed.uniques.push(claimedAsset);
     }
