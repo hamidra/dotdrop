@@ -2,7 +2,7 @@ import BN from 'bn.js';
 import utils from '../substrateUtils';
 import { signAndSendTx, getClaimedAssets } from './txHandler';
 
-const classIds = [1, 2];
+const classIds = [0, 1, 2];
 
 // the balance that will be tranferred to the gift account
 // in order to cover the cost of final tx from gift account to recepient account.
@@ -61,7 +61,7 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
 
   // assuming all fees are deducted from account balance.
   if (txFee.gt(balance?.free)) {
-    throw new Error('the total fees are greater than the balance.');
+    throw new Error('the total fees are greater than the account balance.');
   }
   const netBalance = balance?.free?.sub(txFee);
   const balanceTxs = netBalance
