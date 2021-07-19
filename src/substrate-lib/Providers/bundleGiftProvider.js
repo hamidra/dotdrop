@@ -61,7 +61,7 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
 
   // assuming all fees are deducted from account balance.
   if (txFee.gt(balance?.free)) {
-    throw new Error('the total fees are greater than the balance.');
+    throw new Error('the total fees are greater than the account balance.');
   }
   const netBalance = balance?.free?.sub(txFee);
   const balanceTxs = netBalance
@@ -93,7 +93,7 @@ const uniquesPalletGiftProvider = {
       interimAccount,
       recepientAddress
     );
-    const claimed = getClaimedAssets(events);
+    const claimed = getClaimedAssets(api, events);
     return claimed;
   },
   removeGift: (api, interimAccount, senderAccount) => {
@@ -103,7 +103,7 @@ const uniquesPalletGiftProvider = {
   getGiftFeeMultiplier: () => {
     // ToDO: calculate gift creation Fee for the gift
     return feeMultiplierValue;
-  },
+  }
 };
 
 export default uniquesPalletGiftProvider;

@@ -2,7 +2,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../substrate-lib';
 
-export default function PresentGift({ gift, removeGiftHandler }) {
+export default function PresentGift ({ gift, removeGiftHandler }) {
   const { email, amount, secret } = gift;
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
@@ -48,7 +48,8 @@ export default function PresentGift({ gift, removeGiftHandler }) {
                   this{' '}
                   <a
                     href="https://hamidra.github.io/dotdrop/#/claim"
-                    target="_blank">
+                    target="_blank"
+                    rel="noreferrer">
                     link
                   </a>{' '}
                   and type in the following secret message to claim your{' '}
@@ -61,7 +62,7 @@ export default function PresentGift({ gift, removeGiftHandler }) {
                       padding: '5px',
                       marginTop: '20px',
                       marginBottom: '20px',
-                      borderRadius: '5px',
+                      borderRadius: '5px'
                     }}>
                     {secret}
                   </strong>

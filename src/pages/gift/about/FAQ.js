@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
-export default function FAQ() {
+export default function FAQ () {
   const q1 = 'What is Polkadot? What is DOT?';
   const q2 = 'How do gifts work?';
   const q3 = 'How secure is sending a gift?';

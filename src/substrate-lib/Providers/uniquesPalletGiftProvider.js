@@ -37,7 +37,7 @@ const uniquesPalletGiftProvider = {
   getGiftFeeMultiplier: () => {
     // ToDO: find gift creation fees for uniques
     return 0;
-  },
+  }
 };
 
 export default uniquesPalletGiftProvider;

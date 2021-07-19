@@ -61,6 +61,10 @@
     "semistandard": "^16.0.0"
   },
   "eslintConfig": {
+    "rules": {
+      "no-unused-vars": "off",
+      "react-hooks/exhaustive-deps":"off"
+    },
     "extends": [
       "react-app",
       "semistandard"

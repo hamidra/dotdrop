@@ -2,9 +2,9 @@ import { Card, Row, Col } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import Divider from '../../../../components/Divider';
 
-export default function ConnectAccount({
+export default function ConnectAccount ({
   handleDownloadOption,
-  prevStepHandler,
+  prevStepHandler
 }) {
   return (
     <>

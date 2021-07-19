@@ -9,10 +9,10 @@ const randomIdx = (length) => {
   return [random1, random2].sort((a, b) => a - b);
 };
 
-export default function VerifyAccountPhrase({
+export default function VerifyAccountPhrase ({
   mnemonicWords,
   nextStepHandler,
-  prevStepHandler,
+  prevStepHandler
 }) {
   const [check1, setCheck1] = useState('');
   const [check2, setCheck2] = useState('');

@@ -1,3 +1,4 @@
+/* eslint-disable node/no-callback-literal */
 const decodeResult = (api, result) => {
   let { dispatchInfo, dispatchError, events = [] } = result;
   const success = !dispatchError;
@@ -8,10 +9,10 @@ const decodeResult = (api, result) => {
       const decoded = api.registry.findMetaError(dispatchError.asModule);
       const { documentation, name, section } = decoded;
 
-      error = `${section}.${name}: ${documentation.join(' ')}`;
+      error = new Error(`${section}.${name}: ${documentation.join(' ')}`);
     } else {
       // Other, CannotLookup, BadOrigin, no extra info
-      error = dispatchError.toString();
+      error = new Error(dispatchError.toString());
     }
   }
   events = events.filter(
@@ -23,7 +24,7 @@ const decodeResult = (api, result) => {
   return { success, events, error };
 };
 
-export const getClaimedAssets = (events) => {
+export const getClaimedAssets = (api, events) => {
   const claimed = { uniques: [], balances: [], assets: [] };
   events.forEach(({ event }) => {
     if (api.events.balances.Transfer.is(event)) {
@@ -34,7 +35,7 @@ export const getClaimedAssets = (events) => {
       // parse claimed uniques
       const claimedAsset = {
         classId: event?.data[0]?.toString(),
-        instanceId: event?.data[1]?.toString(),
+        instanceId: event?.data[1]?.toString()
       };
       claimedAsset && claimed.uniques.push(claimedAsset);
     }

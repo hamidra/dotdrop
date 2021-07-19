@@ -999,8 +999,8 @@ const PrivacyPolicyList = () => {
                   Additional data collected in the Thousand Validators
                   Programme: In addition to the types of data collected as set
                   out in Section II above, the Thousand Validators Programme
-                  under the Website{' '}
-                  <a href="https://www.google.com/url?q=https://docs.google.com/forms/d/e/1FAIpQLSewhltQOcmkIlE7Wftn0NTVuyEs6Wk8Qpx6ssCAo2BO4oQH0w/viewform&sa=D&ust=1593180898905000"></a>{' '}
+                  under the {' '}
+                  <a href="https://www.google.com/url?q=https://docs.google.com/forms/d/e/1FAIpQLSewhltQOcmkIlE7Wftn0NTVuyEs6Wk8Qpx6ssCAo2BO4oQH0w/viewform&sa=D&ust=1593180898905000">Website</a>{' '}
                   collects the following information:
                 </p>
                 <ul>

@@ -4,17 +4,17 @@
 import { blake2AsU8a } from '@polkadot/util-crypto';
 
 export default class QrSigner {
-  constructor(registry, setState) {
+  constructor (registry, setState) {
     this.registry = registry;
     this.setState = setState;
   }
 
-  async signPayload(payload) {
+  async signPayload (payload) {
     return new Promise((resolve, reject) => {
       // limit size of the transaction
       const isQrHashed = payload.method.length > 5000;
       const wrapper = this.registry.createType('ExtrinsicPayload', payload, {
-        version: payload.version,
+        version: payload.version
       });
       const qrPayload = isQrHashed
         ? blake2AsU8a(wrapper.toU8a(true))
@@ -25,7 +25,7 @@ export default class QrSigner {
         qrAddress: payload.address,
         qrPayload,
         qrReject: reject,
-        qrResolve: resolve,
+        qrResolve: resolve
       });
     });
   }

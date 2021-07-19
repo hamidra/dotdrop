@@ -1,7 +1,6 @@
 import CardHeader from '../../../../components/CardHeader';
 import { Row, Col, Card } from 'react-bootstrap';
 import { CaretRight, DownloadSimple, Plus } from 'phosphor-react';
-import { isWeb3Injected } from '@polkadot/extension-dapp';
 import { useSubstrate } from '../../../../substrate-lib';
 
 const CardLink = ({ title, subtitle, hRef }) => {
@@ -11,11 +10,13 @@ const CardLink = ({ title, subtitle, hRef }) => {
       href={hRef}
       rel="noreferrer"
       target="_blank">
-      {title === 'Step 1' ? (
+      {title === 'Step 1'
+        ? (
         <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={48} />
-      ) : (
+          )
+        : (
         <Plus className="flex-shrink-0 p-2 rounded icon" size={48} />
-      )}
+          )}
       <div>
         <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
         <div className="subtitle">{subtitle}</div>
@@ -26,9 +27,9 @@ const CardLink = ({ title, subtitle, hRef }) => {
   );
 };
 
-export default function LedgerInstructions({
+export default function LedgerInstructions ({
   prevStepHandler,
-  nextStepHandler,
+  nextStepHandler
 }) {
   const title = 'Import Ledger Account';
   const extensionLink = 'https://polkadot.js.org/extension/';

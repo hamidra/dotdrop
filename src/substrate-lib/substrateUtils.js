@@ -1,8 +1,7 @@
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { hexToU8a, isHex, u8aToHex } from '@polkadot/util';
 import BN from 'bn.js';
 
-const balancePrecision = 5;
+const feeAdjustMultiplier = 130; // the adjustment will be in percent (fee*feeAdjustMultiplier/100)
 const trimEnd = (str, char) => {
   if (!str) {
     return str;
@@ -93,8 +92,8 @@ const utils = {
     return BChainWholeVal.add(BChainDecimalVal);
   },
   calcFeeAdjustments: (fee) => {
-    return new BN(fee || 0).muln(150).divn(100);
-  },
+    return new BN(fee || 0).muln(feeAdjustMultiplier).divn(100);
+  }
 };
 
 export default utils;

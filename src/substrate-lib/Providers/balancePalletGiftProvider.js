@@ -66,7 +66,7 @@ const balancePalletGiftProvider = {
   getGiftFeeMultiplier: () => {
     // gift creation fees are equal to 1x (for final tranaction from the gift interim account to the recipient account)
     return feeMultiplierValue;
-  },
+  }
 };
 
 export default balancePalletGiftProvider;

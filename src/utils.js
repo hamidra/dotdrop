@@ -7,5 +7,5 @@ export const stringHelpers = {
       )}`;
     }
     return truncated;
-  },
+  }
 };

@@ -1,7 +1,7 @@
 import { Row, Col, Card, Image } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 
-export default function Claimed({ accountAddress, nft }) {
+export default function Claimed ({ accountAddress, nft }) {
   return (
     <>
       <Card.Body className="d-flex flex-column">

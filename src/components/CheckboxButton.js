@@ -15,7 +15,7 @@ const CheckboxButton = ({ children, className, onClick }) => {
           height: '48px',
           flexShrink: '0',
           borderRadius: '8px',
-          marginRight: '8px',
+          marginRight: '8px'
         }}>
         {checked ? <GrCheckbox size="xlarge" /> : <GrCheckboxSelected />}
       </div>

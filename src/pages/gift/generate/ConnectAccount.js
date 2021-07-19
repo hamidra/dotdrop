@@ -3,7 +3,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
-export default function ConnectAccount() {
+export default function ConnectAccount () {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
   const optionSelectHandler = (accountSource) => {

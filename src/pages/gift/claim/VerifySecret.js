@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Row, Col, Card, Form } from 'react-bootstrap';
 import { ClaimContext } from './ClaimMain';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate } from '../../../substrate-lib';
 import { Formik } from 'formik';
 
-export default function VerifySecret({ claimGiftHandler }) {
+export default function VerifySecret ({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
@@ -37,7 +37,7 @@ export default function VerifySecret({ claimGiftHandler }) {
         />
         <Formik
           initialValues={{
-            redeemSecret: '',
+            redeemSecret: ''
           }}
           validate={validate}
           onSubmit={(values, actions) => {
@@ -71,7 +71,7 @@ export default function VerifySecret({ claimGiftHandler }) {
                           <Form.Text style={{ color: 'red' }}>
                             {props.errors.redeemSecret}
                           </Form.Text>
-                        )}
+                      )}
                     </Form.Group>
                   </Form>
                 </Col>

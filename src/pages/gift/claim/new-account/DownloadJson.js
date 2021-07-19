@@ -2,7 +2,7 @@ import { Card, Row, Col, Form } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import { Formik } from 'formik';
 
-export default function DownloadJson({ downloadJsonHandler, prevStepHandler }) {
+export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) {
   const validate = ({ accountName, password, confirmPassword }) => {
     const errors = {};
     if (!accountName) {
@@ -26,7 +26,7 @@ export default function DownloadJson({ downloadJsonHandler, prevStepHandler }) {
         initialValues={{
           accountName: '',
           password: '',
-          confirmPassword: '',
+          confirmPassword: ''
         }}
         validate={validate}
         onSubmit={({ accountName, password }, actions) => {
@@ -61,7 +61,7 @@ export default function DownloadJson({ downloadJsonHandler, prevStepHandler }) {
                           <Form.Text style={{ color: 'red' }}>
                             {props.errors.accountName}
                           </Form.Text>
-                        )}
+                      )}
                     </Form.Group>
                     <Form.Group>
                       <Form.Label htmlFor="password">Password</Form.Label>
@@ -105,7 +105,7 @@ export default function DownloadJson({ downloadJsonHandler, prevStepHandler }) {
                           <Form.Text style={{ color: 'red' }}>
                             {props.errors.confirmPassword}
                           </Form.Text>
-                        )}
+                      )}
                     </Form.Group>
                   </Form>
                 </Col>

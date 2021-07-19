@@ -40,7 +40,7 @@ const giftPalletGiftProvider = {
   getGiftFeeMultiplier: () => {
     // gift creation fees are free on gift pallet
     return 0;
-  },
+  }
 };
 
 export default giftPalletGiftProvider;
