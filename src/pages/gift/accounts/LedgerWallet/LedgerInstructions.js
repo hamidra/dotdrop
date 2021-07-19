@@ -1,7 +1,6 @@
 import CardHeader from '../../../../components/CardHeader';
 import { Row, Col, Card } from 'react-bootstrap';
 import { CaretRight, DownloadSimple, Plus } from 'phosphor-react';
-import { isWeb3Injected } from '@polkadot/extension-dapp';
 import { useSubstrate } from '../../../../substrate-lib';
 
 const CardLink = ({ title, subtitle, hRef }) => {

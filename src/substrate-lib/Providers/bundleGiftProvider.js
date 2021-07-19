@@ -93,7 +93,7 @@ const uniquesPalletGiftProvider = {
       interimAccount,
       recepientAddress
     );
-    const claimed = getClaimedAssets(events);
+    const claimed = getClaimedAssets(api, events);
     return claimed;
   },
   removeGift: (api, interimAccount, senderAccount) => {

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Row, Col, Card, Form } from 'react-bootstrap';
 import { ClaimContext } from './ClaimMain';
 import CardHeader from '../../../components/CardHeader';

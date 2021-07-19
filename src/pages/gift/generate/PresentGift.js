@@ -48,7 +48,8 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                   this{' '}
                   <a
                     href="https://hamidra.github.io/dotdrop/#/claim"
-                    target="_blank">
+                    target="_blank"
+                    rel="noreferrer">
                     link
                   </a>{' '}
                   and type in the following secret message to claim your{' '}

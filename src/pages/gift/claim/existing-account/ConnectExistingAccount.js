@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { ClaimContext } from '../ClaimMain';
 import { Card, Row, Col } from 'react-bootstrap';
 import CardButton from '../../../../components/CardButton';
 import CardHeader from '../../../../components/CardHeader';

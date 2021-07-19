@@ -1,4 +1,4 @@
-import { Modal, Spinner, Row, Col } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 export default function Processing ({ show, message }) {
   return (
     <>

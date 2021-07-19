@@ -132,7 +132,7 @@ export default function AccountOverview () {
                 </Row>
               </Card.Body>
               <Card.Footer className="bg-transparent border-0">
-                <a href="https://polkascan.io/polkadot" target="_blank">
+                <a href="https://polkascan.io/polkadot" target="_blank" rel="noreferrer">
                   {'→ See account on Polkascan'}
                 </a>
               </Card.Footer>
