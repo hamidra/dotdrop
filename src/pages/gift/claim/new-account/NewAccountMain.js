@@ -8,7 +8,7 @@ import DownloadJsonOption from './DownloadJsonOption';
 import DownloadJson from './DownloadJson';
 
 export default function NewAccountMain ({ setAddressHandler, prevStepHandler }) {
-  const { keyring } = useSubstrate();
+  const { keyring, giftTheme } = useSubstrate();
   const [step, setStep] = useState(0);
 
   const [processing, setProcessing] = useState(false);
@@ -77,7 +77,7 @@ export default function NewAccountMain ({ setAddressHandler, prevStepHandler }) 
   steps.push(
     <VerifyAccountPhrase
       mnemonicWords={mnemonicWords}
-      nextStepHandler={nextStep}
+      nextStepHandler={giftTheme?.content === 'NFT' ? _setAddressHandler : nextStep}
       prevStepHandler={prevStep}
     />
   );
