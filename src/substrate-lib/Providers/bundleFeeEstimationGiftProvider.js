@@ -26,7 +26,6 @@ const transferBalanceAndFees = async (
   const tx = api.tx.balances.transfer(toAddress, chainAmountAndFees);
   return signAndSendTx(api, tx, fromAccount);
 };
-
 const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
   const fromAddress = utils.getAccountAddress(fromAccount);
 
@@ -49,8 +48,29 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
   if ((uniquesTxs?.length || 0) === 0) {
     throw new Error('The entered gift secret does not hold any NFTs. Make sure you are entering the correct secret to claim your NFT.');
   }
-  // create Tx for balance transferAll to reap account and tranfer all balance.
-  const balanceTxs = [api.tx.balances.transferAll(toAddress, true)];
+  // create Tx for balance transfer
+  // calculate the fee for batch transaction to get netBalance as netBalance=balance - txFee
+  const balance = (await api.query.system.account(fromAddress))?.data;
+  const dummyBalanceTx = await api.tx.balances.transfer(
+    toAddress,
+    balance?.free || 0
+  );
+
+  const dummyTxs = [...uniquesTxs, dummyBalanceTx];
+
+  let txFee =
+    (await api.tx.utility.batch(dummyTxs).paymentInfo(fromAddress))
+      ?.partialFee || new BN(0, 10);
+  txFee = utils.calcFeeAdjustments(txFee);
+
+  // assuming all fees are deducted from account balance.
+  if (txFee.gt(balance?.free)) {
+    throw new Error('the total fees are greater than the account balance.');
+  }
+  const netBalance = balance?.free?.sub(txFee);
+  const balanceTxs = netBalance
+    ? [api.tx.balances.transfer(toAddress, netBalance)]
+    : [];
   const txs = [...uniquesTxs, ...balanceTxs];
   const batchTx = api.tx.utility.batchAll(txs);
 
