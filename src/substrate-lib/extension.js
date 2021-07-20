@@ -23,6 +23,12 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
       dispatch({ type: 'LOAD_EXTENSION' });
       const injectedExt = await web3Enable(config.APP_NAME);
       console.log(injectedExt);
+      if (injectedExt.length === 0) {
+        // no extension installed, or the user did not accept the authorization
+        // in this case we should inform the use and give a link to the extension
+        dispatch({ type: 'NO_EXTENSION' });
+        return;
+      }
       const extAccounts = await web3Accounts();
 
       console.log(extAccounts);

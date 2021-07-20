@@ -91,6 +91,8 @@ const reducer = (state, action) => {
       return { ...state, keyring: null, keyringState: 'ERROR' };
     case 'LOAD_EXTENSION':
       return { ...state, extensionState: 'LOADING' };
+    case 'NO_EXTENSION':
+      return { ...state, extensionState: 'NOT_AVAILABLE' };
     case 'EXTENSION_ERROR':
       return { ...state, extensionState: 'ERROR' };
     case 'SET_EXTENSION':
