@@ -50,7 +50,7 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
     throw new Error('The entered gift secret does not hold any NFTs. Make sure you are entering the correct secret to claim your NFT.');
   }
   // create Tx for balance transferAll to reap account and tranfer all balance.
-  const balanceTxs = [api.tx.balances.transferAll(toAddress, true)];
+  const balanceTxs = [api.tx.balances.transferAll(toAddress, false)];
   const txs = [...uniquesTxs, ...balanceTxs];
   const batchTx = api.tx.utility.batchAll(txs);
 
