@@ -18,7 +18,7 @@ export default function Footer ({ variant, selectedAccount }) {
       </div>
       <div className="footer-grow flex-grow-1" />
       <div>
-        <strong>Questions?</strong>
+        <strong>Questions?</strong>&nbsp;
         <a href="mailto:support@kusama.network?subject=NFTs">
           support@kusama.network
         </a>
