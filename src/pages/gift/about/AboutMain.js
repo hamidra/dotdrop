@@ -9,7 +9,7 @@ export default function AboutMain () {
   return (
     <div id="about-page">
       <Header />
-      <Container className="d-flex flex-column align-items-center">
+      <Container className="d-flex flex-column align-items-center pb-5">
         <div style={{ paddingBottom: '4rem' }}>
           <h1 className="py-5 text-center" style={{ fontSize: '3.5rem' }}>
             There's No Better Gift than DOTs
