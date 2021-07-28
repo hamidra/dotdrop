@@ -1,13 +1,13 @@
 import { Gift, PaperPlaneTilt, Smiley } from 'phosphor-react';
 
-export default function ProcessExplainerCard () {
+export default function ProcessExplainerCard({ giftTheme }) {
   return (
     <div
       className="explainer-card bg-animated d-flex flex-column align-items-center w-100 mb-5">
       <h2
         className="text-center"
         style={{ fontSize: '3.3rem', marginBottom: '6rem' }}>
-        How to Gift DOT
+        How to Gift {giftTheme.content}
       </h2>
       <div className="row flex-grow-1 text-center">
         <div className="col">
@@ -26,7 +26,7 @@ export default function ProcessExplainerCard () {
           <Smiley className="mb-4" size={94} />
           <h3 className="mb-3">Claim Gift</h3>
           <div>
-            The recipient uses a new or existing Polkadot account to claim their gift.
+            The recipient uses a new or existing {giftTheme.network} account to claim their gift.
           </div>
         </div>
       </div>
