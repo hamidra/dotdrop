@@ -3,12 +3,7 @@ import { Gift, PaperPlaneTilt, Smiley } from 'phosphor-react';
 export default function ProcessExplainerCard () {
   return (
     <div
-      className="bg-animated d-flex flex-column align-items-center w-100 mb-5"
-      style={{
-        borderRadius: '1.5rem',
-        color: '#FFF',
-        padding: '5rem'
-      }}>
+      className="explainer-card bg-animated d-flex flex-column align-items-center w-100 mb-5">
       <h2
         className="text-center"
         style={{ fontSize: '3.3rem', marginBottom: '6rem' }}>
