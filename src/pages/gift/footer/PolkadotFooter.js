@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-export default function Footer ({ variant, selectedAccount }) {
+export default function Footer({ className, selectedAccount }) {
   return (
     <footer
-      className={`${variant} footer d-flex flex-column flex-md-row px-4`}
+      className={`${className} footer d-flex flex-column flex-md-row px-4`}
       expand="md">
       <div className="d-flex flex-column flex-sm-row">
         <div>

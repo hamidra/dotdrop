@@ -25,7 +25,7 @@ export default function AboutMain () {
         <ProcessExplainerCard />
         <FAQ />
       </Container>
-      <Footer />
+      <Footer className="bg-solid" />
     </div>
   );
 }
