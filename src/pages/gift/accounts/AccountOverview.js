@@ -67,7 +67,7 @@ const WalletInfoField = ({ title, subtitle, ...props }) => {
   );
 };
 export default function AccountOverview() {
-  const { api, apiState, chainInfo } = useSubstrate();
+  const { api, apiState, chainInfo, giftTheme } = useSubstrate();
   const [balance, setBalance] = useState(null);
 
   const { accountAddress } = useParams();
@@ -151,11 +151,11 @@ export default function AccountOverview() {
                   </Col>
                   <div
                     className="mx-2"
-                    style={{ backgroundColor: '#D5DBE0', width: '1px' }}
+                    style={giftTheme.network === 'Polkadot' ? { backgroundColor: '#D5DBE0', width: '1px' } : { backgroundColor: '#333', width: '1px' }}
                   />
                   <Col className="d-flex flex-column mx-2 align-items-start justify-content-center">
                     <div>
-                      <h4>DOT Wallets</h4>
+                      <h4>{giftTheme.content} Wallets</h4>
                       <p class="text-secondary">Import your account to one of the following wallets:</p>
                     </div>
                     <div className="w-100 py-2">
