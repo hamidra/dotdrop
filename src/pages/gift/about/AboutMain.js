@@ -9,7 +9,6 @@ import { useSubstrate } from '../../../substrate-lib';
 export default function AboutMain() {
   const { giftTheme } = useSubstrate();
 
-export default function AboutMain () {
   return (
     <div id="about-page">
       <Header />
