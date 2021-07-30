@@ -97,11 +97,11 @@ export default function AccountOverview() {
     <>
       <Header />
       <Container>
-        <Row className="p-3 p-sm-5">
-          <Col className="d-flex justify-content-center justify-content-sm-end  mb-5  m-sm-5">
+        <Row className="p-3 py-sm-5">
+          <Col className="d-flex justify-content-center">
             <Card
               style={{ width: 920, maxWidth: '100%', minHeight: 450 }}
-              className="shadow">
+              className="shadow mb-5 m-sm-0">
               <Card.Header
                 className="bg-transparent border-0"
                 style={{ padding: '2rem 2rem 0 2rem' }}>
@@ -111,7 +111,7 @@ export default function AccountOverview() {
               </Card.Header>
               <Card.Body>
                 <Row className="pb-2">
-                  <Col className="mx-2">
+                  <Col className="mx-2 mb-5 mb-md-0">
                     <AccountField
                       title="Account Address"
                       value={`${accountAddress &&
@@ -150,7 +150,7 @@ export default function AccountOverview() {
                     </div>
                   </Col>
                   <div
-                    className="mx-2"
+                    className="mx-2 d-none d-sm-flex"
                     style={giftTheme.network === 'Polkadot' ? { backgroundColor: '#D5DBE0', width: '1px' } : { backgroundColor: '#333', width: '1px' }}
                   />
                   <Col className="d-flex flex-column mx-2 align-items-start justify-content-center">
