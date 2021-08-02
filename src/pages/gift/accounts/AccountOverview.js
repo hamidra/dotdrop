@@ -8,12 +8,13 @@ import { stringHelpers } from '../../../utils';
 import extensionLogo from '../../../images/extension_logo_128.png';
 import ledgerLogo from '../../../images/ledger_logo_128.png';
 import signerLogo from '../../../images/signer_logo_128.png';
+import { CaretRight } from 'phosphor-react';
 
 const AccountField = ({ title, value }) => {
   return (
-    <Col className="mt-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center">
-      <div style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>{title}</div>
-      <div>
+    <div className="mt-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center">
+      <div style={{ fontSize: '1rem', fontWeight: 'bold' }}>{title}</div>
+      <div class="text-secondary">
         {value || (
           <Spinner
             variant="primary"
@@ -23,37 +24,50 @@ const AccountField = ({ title, value }) => {
           />
         )}
       </div>
-    </Col>
+    </div>
   );
 };
 const WalletInfoField = ({ title, subtitle, ...props }) => {
   let logo = '';
+  let href = '';
   if (title === 'Polkadot Extension') {
     logo = extensionLogo;
+    href = 'https://polkadot.js.org/extension/';
   } else if (title === 'Parity Signer') {
     logo = signerLogo;
+    href = 'https://www.parity.io/technologies/signer/';
   } else if (title === 'Hardware Wallet') {
     logo = ledgerLogo;
+    href = 'https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT';
   }
 
   return (
-    <Media className="d-flex" style={{ alignItems: 'center' }} {...props}>
-      <img
-        width={64}
-        height={64}
-        className="mr-3 rounded"
-        src={logo}
-        alt={title}
-      />
-      <Media.Body>
-        <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
-        <div>{subtitle}</div>
-      </Media.Body>
-    </Media>
+    <a
+      className="card-link d-flex flex-row w-100"
+      href={href}
+      target="blank"
+      rel="noopener noreferrer"
+    >
+      <Media style={{ alignItems: 'center' }} {...props}>
+        <img
+          width={48}
+          height={48}
+          className="mr-3 rounded"
+          src={logo}
+          alt={title}
+        />
+        <Media.Body className="flex-shrink-0">
+          <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
+          <div class="text-secondary">{subtitle}</div>
+        </Media.Body>
+      </Media>
+      <div className="d-flex flex-grow-1" />
+      <CaretRight className="caret flex-shrink-0" size={14} weight="bold" />
+    </a>
   );
 };
-export default function AccountOverview () {
-  const { api, apiState, chainInfo } = useSubstrate();
+export default function AccountOverview() {
+  const { api, apiState, chainInfo, giftTheme } = useSubstrate();
   const [balance, setBalance] = useState(null);
 
   const { accountAddress } = useParams();
@@ -83,11 +97,11 @@ export default function AccountOverview () {
     <>
       <Header />
       <Container>
-        <Row className="p-3 p-sm-5 my-5">
-          <Col className="d-flex justify-content-center justify-content-sm-end  mb-5  m-sm-5">
+        <Row className="p-3 py-sm-5">
+          <Col className="d-flex justify-content-center">
             <Card
-              style={{ width: 450, maxWidth: '100%', minHeight: 450 }}
-              className="shadow">
+              style={{ width: 920, maxWidth: '100%', minHeight: 450 }}
+              className="shadow mb-5 m-sm-0">
               <Card.Header
                 className="bg-transparent border-0"
                 style={{ padding: '2rem 2rem 0 2rem' }}>
@@ -96,68 +110,76 @@ export default function AccountOverview () {
                 </h3>
               </Card.Header>
               <Card.Body>
-                <Row className="flex-column">
-                  <AccountField
-                    title="Account Address"
-                    value={`${
-                      accountAddress &&
-                      utils.validateAddress(
-                        accountAddress,
-                        chainInfo?.ss58Format
-                      )
+                <Row className="pb-2">
+                  <Col className="mx-2 mb-5 mb-md-0">
+                    <AccountField
+                      title="Account Address"
+                      value={`${accountAddress &&
+                        utils.validateAddress(
+                          accountAddress,
+                          chainInfo?.ss58Format
+                        )
                         ? stringHelpers.truncateMiddle(accountAddress, 5)
                         : 'Not a valid Account'
-                    }`}
+                        }`}
+                    />
+                    <AccountField
+                      title="Balance (Free)"
+                      value={
+                        balance?.free &&
+                        `${utils.fromChainUnit(
+                          balance.free,
+                          chainInfo?.decimals
+                        )} ${chainInfo?.token}`
+                      }
+                    />
+                    <AccountField
+                      title="Balance (Reserved)"
+                      value={
+                        balance?.reserved &&
+                        `${utils.fromChainUnit(
+                          balance.reserved,
+                          chainInfo?.decimals
+                        )} ${chainInfo?.token}`
+                      }
+                    />
+                    <div className="mt-4">
+                      <a href="https://polkascan.io/polkadot" target="_blank" rel="noreferrer">
+                        {'→ See account on Polkascan'}
+                      </a>
+                    </div>
+                  </Col>
+                  <div
+                    className="mx-2 d-none d-sm-flex"
+                    style={giftTheme.network === 'Polkadot' ? { backgroundColor: '#D5DBE0', width: '1px' } : { backgroundColor: '#333', width: '1px' }}
                   />
-                  <AccountField
-                    title="Balance (Free)"
-                    value={
-                      balance?.free &&
-                      `${utils.fromChainUnit(
-                        balance.free,
-                        chainInfo?.decimals
-                      )} ${chainInfo?.token}`
-                    }
-                  />
-                  <AccountField
-                    title="Balance (Reserved)"
-                    value={
-                      balance?.reserved &&
-                      `${utils.fromChainUnit(
-                        balance.reserved,
-                        chainInfo?.decimals
-                      )} ${chainInfo?.token}`
-                    }
-                  />
+                  <Col className="d-flex flex-column mx-2 align-items-start justify-content-center">
+                    <div>
+                      <h4>{giftTheme.content} Wallets</h4>
+                      <p class="text-secondary">Import your account to one of the following wallets:</p>
+                    </div>
+                    <div className="w-100 py-2">
+                      <WalletInfoField
+                        title="Polkadot Extension"
+                        subtitle="Easy-to-use browser wallet"
+                      />
+                    </div>
+                    <div className="w-100 py-2">
+                      <WalletInfoField
+                        title="Parity Signer"
+                        subtitle="Secure offline wallet"
+                      />
+                    </div>
+                    <div className="w-100 py-2">
+                      <WalletInfoField
+                        title="Hardware Wallet"
+                        subtitle="Secure offline wallet"
+                      />
+                    </div>
+                  </Col>
                 </Row>
               </Card.Body>
-              <Card.Footer className="bg-transparent border-0">
-                <a href="https://polkascan.io/polkadot" target="_blank" rel="noreferrer">
-                  {'→ See account on Polkascan'}
-                </a>
-              </Card.Footer>
             </Card>
-          </Col>
-          <Col className="d-flex flex-column align-items-start justify-content-center">
-            <div>
-              <h4>DOT Wallets</h4>
-              <p>Import your account to one of the following wallets:</p>
-            </div>
-            <WalletInfoField
-              className="mt-4"
-              title="Polkadot Extension"
-              subtitle="Easy-to-use browser wallet"
-            />
-            <WalletInfoField
-              className="mt-4"
-              title="Parity Signer"
-              subtitle="Secure offline wallet"
-            />
-            <WalletInfoField
-              className="mt-4"
-              title="Hardware Wallet"
-              subtitle="Secure offline wallet"
-            />
           </Col>
         </Row>
       </Container>
