@@ -38,6 +38,12 @@ body::before {
   background-color: $primary;
 }
 
+.bg-animated {
+  background: linear-gradient(128deg, #e73c7e, #c40061, #5d27cb, #e73c7e);
+  animation: gradient 42s ease infinite;
+  background-size: 400% 400%;
+}
+
 .bg-primary-solid {
   background: $primary !important;
 }

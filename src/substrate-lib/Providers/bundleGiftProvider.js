@@ -33,16 +33,11 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
   // Create Txs for uniques NFTs
   // 1- get the list of all uniques instanceIds owned by this source Account
   const uniquesTxs = [];
-  const ownedAssets = [];
   for (const cid of classIds) {
-    const assets = await api.query.uniques.asset.entries(cid);
-    assets.forEach(([key, value]) => {
-      if (value?.toJSON()?.owner === fromAddress) {
-        const [classId, instanceId] = key.args;
-        ownedAssets.push({ classId, instanceId });
-        const tx = api.tx.uniques.transfer(classId, instanceId, toAddress);
-        uniquesTxs.push(tx);
-      }
+    const assetKeys = await api.query.uniques.account.keys(fromAddress, cid);
+    assetKeys.forEach(({ args: [_, classId, instanceId] }) => {
+      const tx = api.tx.uniques.transfer(classId, instanceId, toAddress);
+      uniquesTxs.push(tx);
     });
   }
   // NFT-Campaign only:  if there is no NFTs to claim throw an error

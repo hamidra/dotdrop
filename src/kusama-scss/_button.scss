@@ -1,99 +1,101 @@
 .btn {
-    font-family: 'Space Grotesk', sans-serif !important;
-    font-weight: $font-weight-light;
-    border-radius: 0;
-    font-size: 16px;
-    padding: 0.5rem 1.5rem;
-    border-width: 2px;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: $font-weight-light;
+  border-radius: 0;
+  font-size: 16px;
+  padding: 0.5rem 1.5rem;
+  border-width: 2px;
 
-    &:before {
-        width: 42px;
-        left: -42px;
-        border-radius: 1.5rem;
-    }
+  &:before {
+    width: 42px;
+    left: -42px;
+    border-radius: 1.5rem;
+  }
 }
 
 .btn-primary {
-    color: $primary;
-    background-color: transparent;
-    border-color: $primary;
+  color: $primary;
+  background-color: transparent;
+  border-color: $primary;
 
-    &:hover,
-    &:focus,
-    &:active {
-        background: none;
-        color: $cyan;
-        border-color: $cyan;
-    }
+  &:hover,
+  &:focus,
+  &:active {
+    background: none;
+    color: $cyan;
+    border-color: $cyan;
+  }
 
-    &:not(:disabled):not(.disabled):active,
-    &:not(:disabled):not(.disabled).active {
-        background: none;
-        color: $cyan;
-        border-color: $cyan;
-        box-shadow: none !important;
-    }
-
-    &.disabled, &:disabled {
-        color: $primary;
-        background-color: transparent;
-        border-color: $primary;
-        opacity: 0.5;
-    }
-}
-
-.show > .btn-primary.dropdown-toggle {
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
     background: none;
     color: $cyan;
     border-color: $cyan;
     box-shadow: none !important;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $primary;
+    background-color: transparent;
+    border-color: $primary;
+    opacity: 0.5;
+  }
+}
+
+.show > .btn-primary.dropdown-toggle {
+  background: none;
+  color: $cyan;
+  border-color: $cyan;
+  box-shadow: none !important;
 }
 
 .btn-link {
-    color: $primary;
-    background-color: transparent;
-    position: relative;
-  
-    &:hover,
-    &:focus,
-    &:active {
-      background: none;
-      text-decoration: none;
-      color: $cyan;
-    }
+  color: $primary;
+  background-color: transparent;
+  position: relative;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: none;
+    text-decoration: none;
+    color: $cyan;
+  }
 }
 
-.btn-card, .card-link {
-    display: inline-flex;
-    align-items: center;
-    width: 100%;
-    padding: 0.75rem;
-    text-align: left;
-    background-color: transparent;
-    color: $secondary;
-    border: 2px solid $gray-800;
-    border-radius: 0;
-  
-    &:hover {
-        border: 2px solid $secondary;
-        color: $secondary !important;
+.btn-card,
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem;
+  text-align: left;
+  background-color: transparent;
+  color: $secondary;
+  border: 2px solid $gray-800;
+  border-radius: 0;
 
-        svg {
-            color: $secondary !important;
-        }
-    }
+  &:hover {
+    border: 2px solid $secondary;
+    color: $secondary !important;
 
     svg {
-        color: $secondary-darker !important;
+      color: $secondary !important;
     }
+  }
+
+  svg {
+    color: $secondary-darker !important;
+  }
 }
 
 .card-link {
-    h5 {
-        font-size: 1rem;
-    }
-    .subtitle {
-        font-size: 0.875rem;
-        line-height: 1.2;
-    }
+  h5 {
+    font-size: 1rem;
+  }
+  .subtitle {
+    font-size: 0.875rem;
+    line-height: 1.2;
+  }
 }

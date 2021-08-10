@@ -47,7 +47,7 @@ export default function LedgerInstructions ({
             <CardLink
               hRef="https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT"
               title="Step 1"
-              subtitle={`Install the ${giftTheme?.network} on your Ledger device`}
+              subtitle={`Install the ${giftTheme?.network} app on your Ledger device`}
             />
           </Col>
         </Row>
