@@ -34,7 +34,7 @@ function Body () {
           <PrivacyPolicy />
         </Route>
         <Route exact path={'/'}>
-          <GenerateMain />
+          <ClaimMain />
         </Route>
         <Route path={'/'}>
           <Redirect to={'/'} />
@@ -42,7 +42,7 @@ function Body () {
       </Switch>
       <Processing
         show={apiState !== 'READY'}
-        message="Connecting to the blockchain network..."
+        message="Connecting to Kusama"
       />
     </>
   );
