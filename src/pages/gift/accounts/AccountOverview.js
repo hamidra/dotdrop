@@ -66,7 +66,7 @@ const WalletInfoField = ({ title, subtitle, ...props }) => {
     </a>
   );
 };
-export default function AccountOverview() {
+export default function AccountOverview () {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
   const [balance, setBalance] = useState(null);
 
