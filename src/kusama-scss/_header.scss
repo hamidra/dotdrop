@@ -1,33 +1,33 @@
 #dropdownMenuButton {
-    background-color: $gray-900;
-    border-color: $gray-800;
-    border-radius: 0 !important;
-    color: $secondary;
+  background-color: $gray-900;
+  border-color: $gray-800;
+  border-radius: 0 !important;
+  color: $secondary;
 
-    &:hover {
-        border-color: $secondary; 
-    }
+  &:hover {
+    border-color: $secondary;
+  }
 }
 
 .dropdown-toggle::after {
-    display: none; // hide default bootstrap dropdown caret
+  display: none; // hide default bootstrap dropdown caret
 }
 
 .dropdown-menu {
-    background-color: $gray-800;
+  background-color: $gray-800;
 }
 
 .dropdown-item {
-    color: $secondary;
+  color: $secondary;
 
-    &:hover {
-        background-color: $gray-700;
-        color: $secondary;
-    }
+  &:hover {
+    background-color: $gray-700;
+    color: $secondary;
+  }
 }
 
 .account-box {
-    background-color: $gray-900;
-    padding: 7px 12px;
-    border: 2px solid $gray-800;
+  background-color: $gray-900;
+  padding: 7px 12px;
+  border: 2px solid $gray-800;
 }

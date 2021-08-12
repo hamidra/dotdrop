@@ -1,5 +1,5 @@
 import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { DotsThree, ImageSquare } from 'phosphor-react';
@@ -27,7 +27,7 @@ const AccountInfoBox = ({ accountAddress }) => {
 };
 export default function Header ({ selectedAccount }) {
   const history = useHistory();
-
+  const location = useLocation();
   return (
     <>
       <Navbar
@@ -42,6 +42,27 @@ export default function Header ({ selectedAccount }) {
             <img width={120} className="p-1" src={KusamaLogo} alt={'Kusama'} />
           </a>
         </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse
+          id="basic-navbar-nav"
+          className="justify-content-center">
+          <Nav className="nav-pills shadow-sm p-1">
+            <Nav.Item>
+              <Nav.Link
+                className={location.pathname === '/claim' && 'active'}
+                onClick={() => history.push('/claim')}>
+                Claim Gift
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                className={location.pathname === '/generate' && 'active'}
+                onClick={() => history.push('/generate')}>
+                New Gift
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
         <div className="d-flex align-items-center justify-content-end">
           {selectedAccount && (
             <>
