@@ -8,7 +8,7 @@ import BN from 'bn.js';
 export default function GenerateGift ({
   account,
   generateGiftHandler,
-  giftFeeMultiplier
+  giftFeeMultiplier // this can be 0 or 1 and specifies if a gift provider charges fees or the gifts are free.
 }) {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
 
@@ -55,39 +55,33 @@ export default function GenerateGift ({
     // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
     async function fetchTxFee () {
       const address = account?.address;
-      if (address && balance) {
+      if (address) {
         const info = await api.tx.balances
           .transfer(address, balance?.free || 0)
           .paymentInfo(address);
-        // set the transaction fee equal to 1.5x of partial fee to cover any other unpredicyable fees.
-        if (info) {
-          const estimatedFee = info.partialFee
-            ? info?.partialFee.muln(150).divn(100)
-            : 0;
-          setTxFee(estimatedFee);
-        }
+
+        const estimatedFee = utils.calcFeeAdjustments(info.partialFee);
+        setTxFee(estimatedFee);
       }
     }
     fetchTxFee();
   }, [api, apiState, account, chainInfo, balance]);
 
-  const getGiftChainAmount = (amount) => {
-    const chainAmount = utils.toChainUnit(amount, chainInfo.decimals);
-    return chainAmount?.add(
-      new BN(txFee || 0, 10).muln(giftFeeMultiplier || 0)
-    );
-  };
-
   const validateGiftAmount = (amount) => {
-    const actualChainAmount = getGiftChainAmount(amount);
+    const giftChainAmount = utils.toChainUnit(amount, chainInfo.decimals);
+    // if the fees are applied the sender needs to pay 2 transaction fees.
+    // one txfee for tx sender_account->gift_account and one txfee for tx from gift_account->recipient_account
+    const totalTxFees = new BN(txFee || 0, 10).muln(giftFeeMultiplier).muln(2);
+    // this is the amount that will be deducted from sender account
+    const totalChainAmount = giftChainAmount?.add(totalTxFees);
     // validate gift amount
     if (!amount) {
       return 'Please enter the gift amount';
     }
-    if (actualChainAmount) {
+    if (giftChainAmount) {
       // check if the gift amount is above existential deposit
       const minChainGiftAmount = chainInfo?.existentialDeposit;
-      if (actualChainAmount.lt(minChainGiftAmount)) {
+      if (giftChainAmount.lt(minChainGiftAmount)) {
         const minGiftAmount = utils.fromChainUnit(
           minChainGiftAmount,
           chainInfo.decimals
@@ -96,19 +90,17 @@ export default function GenerateGift ({
         return minGiftAmountError;
       }
     }
-    if (actualChainAmount && balance) {
+    if (totalChainAmount && balance) {
       // check if the account has enough funds to pay the gift amount and fees
-      const minAvailableBalance = actualChainAmount.add(
-        new BN(txFee || 0).muln(giftFeeMultiplier || 0)
-      );
-      if (balance?.free?.lt(minAvailableBalance)) {
+      const minRequiredBalance = totalChainAmount;
+      if (balance?.free?.lt(minRequiredBalance)) {
         const freeBalance = utils.fromChainUnit(
           balance?.free,
           chainInfo.decimals,
           balanceDecimalPoints
         );
         const fees = utils.fromChainUnit(
-          new BN(txFee || 0).muln((giftFeeMultiplier || 0) * 2),
+          totalTxFees,
           chainInfo.decimals,
           balanceDecimalPoints
         );
@@ -275,8 +267,7 @@ export default function GenerateGift ({
         <div className="d-flex justify-content-center">
           <button
             className="btn btn-primary"
-            onClick={() => formik.submitForm()}
-            disabled={!formik.isValid}>
+            onClick={() => formik.submitForm()}>
             Generate Gift
           </button>
         </div>
