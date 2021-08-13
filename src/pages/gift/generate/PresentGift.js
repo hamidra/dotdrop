@@ -48,14 +48,21 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                 <p>
                   I'm sending you {`${amountStr}`} as a gift! You can go to</p>
                   <p>
-                  <em>{`${claimUrl}`}</em>
+                  <em
+                    style={{
+                      display: 'block',
+                      textAlign: 'center',
+                      padding: '5px',
+                      marginTop: '20px',
+                      marginBottom: '20px',
+                      borderRadius: '5px'
+                    }}>{`${claimUrl}`}</em>
                   </p>
                   <p>
                     and type in the following secret message to claim your{' '}
                   {`${giftTheme.content}`}.
                   <strong
                     style={{
-                      backgroundColor: '#EDF1F5',
                       display: 'block',
                       textAlign: 'center',
                       padding: '5px',
