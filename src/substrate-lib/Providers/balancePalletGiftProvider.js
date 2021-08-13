@@ -42,12 +42,26 @@ const balancePalletGiftProvider = {
   },
   claimGift: async (api, interimAccount, recipientAccount) => {
     const recepientAddress = utils.getAccountAddress(recipientAccount);
+    // verify the gift account holds any balances (gifts) before starting to transfer them:
+    const fromAddress = utils.getAccountAddress(interimAccount);
+    const balance = (await api.query.system.account(fromAddress))?.data;
+    console.log(balance?.free.toHuman());
+    if (!balance?.free || balance?.free?.eqn(0)) {
+      throw new Error('The gift secret does not hold any gifts. You might be entering the wrong secret or the gift might have been already claimed.');
+    }
     const events = await transferAll(api, interimAccount, recepientAddress);
     const claimed = getClaimedAssets(api, events);
     return claimed;
   },
-  removeGift: (api, interimAccount, senderAccount) => {
+  removeGift: async (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);
+    // verify the gift account holds any balances (gifts) before starting to transfer them:
+    const fromAddress = utils.getAccountAddress(interimAccount);
+    const balance = (await api.query.system.account(fromAddress))?.data;
+    console.log(balance?.free.toHuman());
+    if (!balance?.free || balance?.free?.eqn(0)) {
+      throw new Error('The gift secret does not hold any gifts. The gift might have been already claimed or removed.');
+    }
     return transferAll(api, interimAccount, senderAddress);
   },
   getGiftFeeMultiplier: () => {
