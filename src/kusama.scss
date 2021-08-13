@@ -12,6 +12,7 @@ $gray-900: #1e1e1e;
   font-weight: 500;
 }
 .nav-pills {
+  z-index: 10;
   background-color: #fff;
 }
 $nav-pills-border-radius: 1.5rem !important;

@@ -246,7 +246,7 @@ export default function GenerateGift ({
                           ? { borderColor: 'red' }
                           : {})
                       }}
-                      className="bg-transparent border-left-0 balance-text">
+                      className="bg-transparent border-left-0 balance-text text-wrap">
                       {balanceStr
                         ? `${balanceStr} available`
                         : `${chainInfo?.token}`}

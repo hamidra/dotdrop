@@ -1,60 +1,65 @@
 .form-control {
-    background-color: transparent;
-    border-color: $gray-800;
-    border-radius: 0;
-    color: $secondary;
+  background-color: transparent;
+  border-color: $gray-800;
+  border-radius: 0;
+  color: $secondary;
 
-    &:focus {
-        background-color: transparent;
-        box-shadow: none;
-        border-color: $secondary-darker;
-        color: $secondary;
-    }
+  &:focus {
+    background-color: transparent;
+    box-shadow: none;
+    border-color: $secondary-darker;
+    color: $secondary;
+  }
+}
+
+form .balance-text {
+  border-color: $gray-800;
+  border-radius: 0;
 }
 
 .form-group {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .form-check-label {
-    font-size: 0.75rem;
-    color: $secondary;
+  font-size: 0.75rem;
+  color: $secondary;
 }
 
-input[type=checkbox] + label {
-    display: flex;
-    margin-left: -22px;
+input[type='checkbox'] + label {
+  display: flex;
+  margin-left: -22px;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
     cursor: pointer;
-    padding: 0;
-
-    &:hover {
-        cursor: pointer;
-    }
   }
-  
-input[type=checkbox] {
-    opacity: 0;
-    width: 1rem;
-    height: 1rem;
 }
 
-input[type=checkbox] + label:before {
-    background-color: $gray-800;
-    border-radius: 0;
-    content: '';
-    display: inline-flex;
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.5rem;
-    color: transparent;
-
-    &:hover {
-        cursor: pointer;
-    }
+input[type='checkbox'] {
+  opacity: 0;
+  width: 1rem;
+  height: 1rem;
 }
 
-input[type=checkbox]:checked + label:before {
-    content: url(../images/check_icon.svg);
-    background-color: $gray-700;
-    color: #fff;
+input[type='checkbox'] + label:before {
+  background-color: $gray-800;
+  border-radius: 0;
+  content: '';
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input[type='checkbox']:checked + label:before {
+  content: url(../images/check_icon.svg);
+  background-color: $gray-700;
+  color: #fff;
 }
