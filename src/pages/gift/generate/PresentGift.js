@@ -1,16 +1,18 @@
 import { Row, Col, Card } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../substrate-lib';
+import config from '../../../config';
 
 export default function PresentGift ({ gift, removeGiftHandler }) {
   const { email, amount, secret } = gift;
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
   const mailSubject = `Someone has sent you ${giftTheme?.content}`;
+  const claimUrl = config.CLAIM_URL;
   const mailBody = `
   Hey! \n 
   I'm sending you ${amountStr} as a gift! You can go to \n
-  https://hamidra.github.io/dotdrop/#/claim \n
+  ${claimUrl} \n
   and type in the following secret message to claim your ${giftTheme?.content}. 
   \n \n 
   ${secret} 
@@ -44,15 +46,12 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
               <Card.Body className="p-4">
                 <p>Hey!</p>
                 <p>
-                  I'm sending you {`${amountStr}`} as a gift! You can follow
-                  this{' '}
-                  <a
-                    href="https://hamidra.github.io/dotdrop/#/claim"
-                    target="_blank"
-                    rel="noreferrer">
-                    link
-                  </a>{' '}
-                  and type in the following secret message to claim your{' '}
+                  I'm sending you {`${amountStr}`} as a gift! You can go to</p>
+                  <p>
+                  <em>{`${claimUrl}`}</em>
+                  </p>
+                  <p>
+                    and type in the following secret message to claim your{' '}
                   {`${giftTheme.content}`}.
                   <strong
                     style={{

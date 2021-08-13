@@ -2,5 +2,6 @@
   "APP_NAME": "dotdrop",
   "DEVELOPMENT_KEYRING": true,
   "RPC": {},
-  "THEME": "polkadot"
+  "THEME": "polkadot",
+  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim"
 }
