@@ -1,24 +1,21 @@
 {
   "files": {
-    "main.css": "/dotdrop/static/css/main.3e5be45d.chunk.css",
-    "main.js": "/dotdrop/static/js/main.7ad5b928.chunk.js",
-    "main.js.map": "/dotdrop/static/js/main.7ad5b928.chunk.js.map",
-    "runtime-main.js": "/dotdrop/static/js/runtime-main.4056a458.js",
-    "runtime-main.js.map": "/dotdrop/static/js/runtime-main.4056a458.js.map",
-    "static/js/2.ff751d40.chunk.js": "/dotdrop/static/js/2.ff751d40.chunk.js",
-    "static/js/2.ff751d40.chunk.js.map": "/dotdrop/static/js/2.ff751d40.chunk.js.map",
-    "index.html": "/dotdrop/index.html",
-    "static/css/main.3e5be45d.chunk.css.map": "/dotdrop/static/css/main.3e5be45d.chunk.css.map",
-    "static/js/2.ff751d40.chunk.js.LICENSE.txt": "/dotdrop/static/js/2.ff751d40.chunk.js.LICENSE.txt",
-    "static/media/kusama.scss": "/dotdrop/static/media/nft_bg.42ea60a4.jpg",
-    "static/media/ksm-nft0.b668a607.jpg": "/dotdrop/static/media/ksm-nft0.b668a607.jpg",
-    "static/media/ksm-nft1.fba26052.jpg": "/dotdrop/static/media/ksm-nft1.fba26052.jpg",
-    "static/media/ksm-nft2.85e3f309.jpg": "/dotdrop/static/media/ksm-nft2.85e3f309.jpg"
+    "main.css": "/hamidra/ksmdrop/static/css/main.cff80c60.chunk.css",
+    "main.js": "/hamidra/ksmdrop/static/js/main.430e86f3.chunk.js",
+    "main.js.map": "/hamidra/ksmdrop/static/js/main.430e86f3.chunk.js.map",
+    "runtime-main.js": "/hamidra/ksmdrop/static/js/runtime-main.d53ef341.js",
+    "runtime-main.js.map": "/hamidra/ksmdrop/static/js/runtime-main.d53ef341.js.map",
+    "static/js/2.9433caa4.chunk.js": "/hamidra/ksmdrop/static/js/2.9433caa4.chunk.js",
+    "static/js/2.9433caa4.chunk.js.map": "/hamidra/ksmdrop/static/js/2.9433caa4.chunk.js.map",
+    "index.html": "/hamidra/ksmdrop/index.html",
+    "static/css/main.cff80c60.chunk.css.map": "/hamidra/ksmdrop/static/css/main.cff80c60.chunk.css.map",
+    "static/js/2.9433caa4.chunk.js.LICENSE.txt": "/hamidra/ksmdrop/static/js/2.9433caa4.chunk.js.LICENSE.txt",
+    "static/media/kusama.scss": "/hamidra/ksmdrop/static/media/nft_bg.42ea60a4.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4056a458.js",
-    "static/js/2.ff751d40.chunk.js",
-    "static/css/main.3e5be45d.chunk.css",
-    "static/js/main.7ad5b928.chunk.js"
+    "static/js/runtime-main.d53ef341.js",
+    "static/js/2.9433caa4.chunk.js",
+    "static/css/main.cff80c60.chunk.css",
+    "static/js/main.430e86f3.chunk.js"
   ]
 }
