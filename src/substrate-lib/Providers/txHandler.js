@@ -27,11 +27,11 @@ const decodeResult = (api, result) => {
 export const getClaimedAssets = (api, events) => {
   const claimed = { uniques: [], balances: [], assets: [] };
   events.forEach(({ event }) => {
-    if (api.events.balances.Transfer.is(event)) {
+    if (api.events.balances && api.events.balances.Transfer.is(event)) {
       // parse claimed balances
       const claimedBalance = event?.data[2]?.toString();
       claimedBalance && claimed.balances.push(claimedBalance);
-    } else if (api.events.uniques.Transferred.is(event)) {
+    } else if (api.events.uniques && api.events.uniques.Transferred.is(event)) {
       // parse claimed uniques
       const claimedAsset = {
         classId: event?.data[0]?.toString(),
