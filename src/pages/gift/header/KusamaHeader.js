@@ -91,7 +91,7 @@ export default function Header ({ selectedAccount }) {
                 className="px-3"
                 onClick={() => history.push('/about')}>
                 <ImageSquare className="mr-1" size={18} />
-                About NFTs
+                About Gifts
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
