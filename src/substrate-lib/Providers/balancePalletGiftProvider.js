@@ -47,7 +47,7 @@ const balancePalletGiftProvider = {
     const balance = (await api.query.system.account(fromAddress))?.data;
     console.log(balance?.free.toHuman());
     if (!balance?.free || balance?.free?.eqn(0)) {
-      throw new Error('The gift secret does not hold any gifts. You might be entering the wrong secret or the gift might have been already claimed.');
+      throw new Error('The gift secret does not hold any gifts. You might have entered the wrong secret or the gift might have been already claimed.');
     }
     const events = await transferAll(api, interimAccount, recepientAddress);
     const claimed = getClaimedAssets(api, events);
