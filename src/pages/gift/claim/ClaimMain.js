@@ -14,6 +14,7 @@ import ExistingAccountMain from './existing-account/ExistingAccountMain';
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
+const balanceDecimalPoints = 5;
 
 export { ClaimContext };
 export default function ClaimMain () {
@@ -82,12 +83,16 @@ export default function ClaimMain () {
 
       claimGift(api, interimAccount, recipientAccount)
         .then((claimedGift) => {
-          /* claimedAmount = utils.fromChainUnit(
-            claimedAmount,
-            chainInfo.decimals
-          );
-          setClaimedAmount(claimedAmount); */
           console.log(claimedGift);
+          // currently only show the balance amount in the claimed page. When we support NFTs and Assets we can change to show them too.
+          let claimedAmount = claimedGift?.balances?.[0];
+          claimedAmount = claimedAmount && utils.fromChainUnit(
+            claimedAmount,
+            chainInfo?.decimals,
+            balanceDecimalPoints
+          );
+          setClaimedAmount(claimedAmount);
+          console.log(`claimed amount: ${claimedAmount}`);
           nextStep();
         })
         .catch((error) => {

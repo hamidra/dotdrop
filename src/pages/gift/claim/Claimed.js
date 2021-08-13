@@ -18,7 +18,7 @@ export default function Claimed ({ amount, accountAddress }) {
           </Col>
           <Col className="pt-5">
             <p className="text-center">
-              {`Your ${giftTheme?.network} account has been funded and your gift of ${amountStr} has been successfully transferred.`}
+              {`Your ${giftTheme?.network} account has been funded and your gift ${amountStr ? `of ${amountStr}` : ''} has been successfully transferred.`}
             </p>
           </Col>
         </Row>
