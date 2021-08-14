@@ -17,6 +17,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
   };
   const { giftTheme } = useSubstrate();
   const validate = ({ redeemSecret }) => {
+    redeemSecret = redeemSecret.trim();
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
