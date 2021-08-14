@@ -10,6 +10,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
     // and is indeed a valid mnemonic phrase
+    redeemSecret = redeemSecret.trim();
     if (redeemSecret) {
       claimGiftHandler(redeemSecret);
     }
