@@ -66,7 +66,7 @@ export default function ExtensionAccount ({
       }
     });
   useEffect(() => {
-    loadExtension(state, dispatch);
+    loadExtension(state, dispatch, chainInfo);
   }, [dispatch, state]);
   const _setAccountHandler = () => {
     setAccountHandler && setAccountHandler(selectedAccount);
