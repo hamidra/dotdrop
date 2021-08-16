@@ -11,7 +11,7 @@ export default function Landing () {
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={`Gift ${giftTheme?.content}`}
-          cardText={`Send  ${giftTheme?.content} to your friends and familiy, and have them join the
+          cardText={`Send  ${giftTheme?.content} to your friends and family, and have them join the
           ${giftTheme?.network} Network today.`}
         />
         <Row className="justify-content-center align-items-center">

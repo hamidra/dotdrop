@@ -37,7 +37,7 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
       <Card.Body>
         <CardHeader
           title={'Send Message'}
-          cardText={`Send ${giftTheme.content} to your friends and familiy, and have them join the
+          cardText={`Send ${giftTheme.content} to your friends and family, and have them join the
           ${giftTheme.network} Network today.`}
         />
         <Row className="justify-content-center align-items-center my-4 mx-2">
