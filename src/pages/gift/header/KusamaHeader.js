@@ -46,7 +46,7 @@ export default function Header ({ selectedAccount }) {
         <Navbar.Collapse
           id="basic-navbar-nav"
           className="justify-content-center">
-          <Nav className="nav-pills shadow-sm p-1">
+          <Nav className="nav-pills shadow-sm">
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
