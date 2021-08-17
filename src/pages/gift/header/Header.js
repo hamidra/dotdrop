@@ -1,5 +1,6 @@
 import PolkadotHeader from './PolkadotHeader';
 import KusamaHeader from './KusamaHeader';
+import KusamaNFTHeader from './KusamaNFTHeader';
 import { useSubstrate } from '../../../substrate-lib';
 export default function Header (props) {
   const { theme } = useSubstrate();
@@ -7,7 +8,7 @@ export default function Header (props) {
     case 'kusama':
       return <KusamaHeader {...props} />;
     case 'kusamanft':
-      return <KusamaHeader {...props} />;
+      return <KusamaNFTHeader {...props} />;
     default:
       return <PolkadotHeader {...props} />;
   }
