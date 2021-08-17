@@ -1,5 +1,5 @@
 #dropdownMenuButton {
-  background-color: $gray-900;
+  background-color: #000;
   border-color: $gray-800;
   border-radius: 0 !important;
   color: $secondary;
@@ -36,6 +36,7 @@
 .navbar-nav {
   font-size: 13px;
   font-weight: 500;
+  line-height: 18px;
   padding: 2px !important;
   border: 2px solid #333;
 }

@@ -4,6 +4,7 @@ import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { DotsThree, ImageSquare } from 'phosphor-react';
 import KusamaLogo from '../../../images/kusama_logo.png';
+import KusamaIcon from '../../../images/kusama_icon.png';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
@@ -31,7 +32,7 @@ export default function Header ({ selectedAccount }) {
   return (
     <>
       <Navbar
-        className="px-4 py-3"
+        className="px-3 px-sm-4 py-3"
         style={{ display: 'grid', gridTemplateColumns: '0px 1fr 0px' }}
         variant="dark">
         <Navbar.Brand>
@@ -39,7 +40,8 @@ export default function Header ({ selectedAccount }) {
             href="https://kusama.network"
             target="_blank"
             rel="noopener noreferrer">
-            <img width={120} className="p-1" src={KusamaLogo} alt={'Kusama'} />
+            <img width={120} className="p-1 d-none d-sm-inline-block" src={KusamaLogo} alt={'Kusama'} />
+            <img width={42} className="p-1 d-sm-none" src={KusamaIcon} alt={'Kusama'} />
           </a>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
