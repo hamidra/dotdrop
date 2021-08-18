@@ -26,7 +26,7 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header ({ selectedAccount }) {
+export default function Header({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   return (
@@ -44,27 +44,6 @@ export default function Header ({ selectedAccount }) {
             <img width={42} className="p-1 d-sm-none" src={KusamaIcon} alt={'Kusama'} />
           </a>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          className="justify-content-center">
-          <Nav className="nav-pills shadow-sm">
-            <Nav.Item>
-              <Nav.Link
-                className={location.pathname === '/claim' && 'active'}
-                onClick={() => history.push('/claim')}>
-                Claim Gift
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                className={location.pathname === '/generate' && 'active'}
-                onClick={() => history.push('/generate')}>
-                New Gift
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Navbar.Collapse>
         <div className="d-flex align-items-center justify-content-end">
           {selectedAccount && (
             <>
@@ -91,9 +70,12 @@ export default function Header ({ selectedAccount }) {
               className="dropdown-menu-right mt-2 shadow">
               <Dropdown.Item
                 className="px-3"
-                onClick={() => history.push('/about')}>
+                href="https://kusama.network/parachains/#claim-nft"
+                target="_blank"
+                rel="noopener noreferrer"
+                role="link">
                 <ImageSquare className="mr-1" size={18} />
-                About Gifts
+                About NFTs
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
