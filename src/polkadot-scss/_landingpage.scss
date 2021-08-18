@@ -1,0 +1,26 @@
+.landingpage {
+    width: 580px;
+
+    .card-header-title {
+        color: #fff;
+        font-size: 3.5rem;
+    }
+
+    .text-card {
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #fff;
+        border: solid 1px #fff;
+
+        &:hover {
+            background-color: transparent;
+            border: solid 1px transparent;
+        }
+    }
+
+    a {
+        color: #fff;
+    }
+}

@@ -270,11 +270,16 @@ export default function GenerateMain () {
       <Container className="justify-content-center align-items-center">
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
-            <Card
-              style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
-              className="shadow">
-              {currentComponent}
-            </Card>
+            {step === 0 &&
+              <div className="landingpage">{currentComponent}</div>
+            }
+            {step > 0 &&
+              <Card
+                style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
+                className="shadow">
+                {currentComponent}
+              </Card>
+            }
           </Col>
         </Row>
         <ErrorModal
