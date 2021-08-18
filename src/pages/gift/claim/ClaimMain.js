@@ -169,11 +169,16 @@ export default function ClaimMain () {
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
-            <Card
-              style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
-              className="shadow">
-              {currentStepComponent}
-            </Card>
+            {step === 0 &&
+              <div className="landingpage">{currentStepComponent}</div>
+            }
+            {step > 0 &&
+              <Card
+                style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
+                className="shadow">
+                {currentStepComponent}
+              </Card>
+            }
           </Col>
         </Row>
       </Container>

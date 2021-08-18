@@ -16,7 +16,7 @@ export default function Landing () {
         />
         <Row className="justify-content-center align-items-center">
           <Col className="d-flex flex-column justify-content-around align-items-center">
-            <div className="pt-3">
+            <div className="pt-2">
               <button
                 className="btn btn-primary btn-lg"
                 onClick={() => nextStep()}>
