@@ -16,7 +16,7 @@ export default function Landing () {
         />
         <Row className="justify-content-center align-items-center">
           <Col className="d-flex flex-column justify-content-around align-items-center">
-            <div className="pt-5">
+            <div className="pt-2">
               <button
                 className="btn btn-primary btn-lg"
                 onClick={() => nextStep()}>
@@ -24,10 +24,10 @@ export default function Landing () {
               </button>
             </div>
             <a
-              className="pt-5 small text-underline"
+              className="pt-4 small text-underline"
               href="#/About"
               target="_blank">
-              {'How do gifts work?'}
+              {'→ How do gifts work?'}
             </a>
           </Col>
         </Row>
