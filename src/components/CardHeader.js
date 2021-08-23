@@ -26,7 +26,7 @@ export default function CardHeader ({ cardText, title, backClickHandler }) {
           <div style={{ wordWrap: 'normal' }} className="card-header-title">
             {title}
           </div>
-          <p className="text-center text-card">{cardText}</p>
+          <p className="text-center text-card" dangerouslySetInnerHTML={{ __html: cardText }} />
         </Col>
       </Row>
     </>

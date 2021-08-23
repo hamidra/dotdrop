@@ -29,8 +29,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Claim Your Gift'}
-          cardText={`Every ${giftTheme?.network} account needs a minimum balance to be active on the network. 
-          Enter the secret hash you have received to claim your gift and fund your account.`}
+          cardText={'Enter the <b>secret gift hash</b> you received in your email.'}
           backClickHandler={prevStep}
         />
         <Formik
