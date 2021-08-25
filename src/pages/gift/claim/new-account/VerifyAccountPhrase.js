@@ -40,12 +40,12 @@ export default function VerifyAccountPhrase ({
     <Card.Body className="d-flex flex-column">
       <CardHeader
         title={'Verify Phrase'}
-        cardText="Enter the following words from the seed phrase to complete the
+        cardText="Enter the following words from the seed phrase saved in the previous step to complete the
         setup process."
         backClickHandler={() => prevStepHandler()}
       />
       <div>
-        <Row className="pt-5 flex-column">
+        <Row className="pt-4 flex-column">
           <Col>
             <Form autoComplete="off" className="w-100">
               <Form.Group controlId="formGroupWord1">

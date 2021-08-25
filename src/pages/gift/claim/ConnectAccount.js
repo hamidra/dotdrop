@@ -19,7 +19,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
             {`Create ${giftTheme?.network} Account`}
           </button>
         </Row>
-        <Divider text="Or" />
+        <div className="my-4 text-white">Or</div>
         <Row className="d-flex flex-column justify-content-center align-items-center">
           <button
             className="btn btn-link"
