@@ -11,12 +11,16 @@ import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
+import nft0 from '../../../images/ksm-nft0.jpg';
+import nft1 from '../../../images/ksm-nft1.jpg';
+import nft2 from '../../../images/ksm-nft2.jpg';
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
-const balanceDecimalPoints = 5;
-
 export { ClaimContext };
+
+// NFT artists
+const artists = { 0: 'Awer', 1: 'Vadim', 2: 'Andreas Preis' };
 export default function ClaimMain () {
   const { keyring, apiState, api, chainInfo } = useSubstrate();
   const { claimGift } = giftProvider;
@@ -27,7 +31,7 @@ export default function ClaimMain () {
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
-  const [claimedAmount, setClaimedAmount] = useState('');
+  const [claimedNft, setClaimedNft] = useState(null);
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -62,7 +66,7 @@ export default function ClaimMain () {
     } else if (!address) {
       console.log('no account is selected');
       window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
+        'You need to sign in with your account to be able to claim your gift. 🔑🔓'
       );
     } else {
       // retrive gift account from secret
@@ -83,16 +87,25 @@ export default function ClaimMain () {
 
       claimGift(api, interimAccount, recipientAccount)
         .then((claimedGift) => {
+          const classId = claimedGift?.uniques?.[0]?.classId;
           console.log(claimedGift);
-          // currently only show the balance amount in the claimed page. When we support NFTs and Assets we can change to show them too.
-          let claimedAmount = claimedGift?.balances?.[0];
-          claimedAmount = claimedAmount && utils.fromChainUnit(
-            claimedAmount,
-            chainInfo?.decimals,
-            balanceDecimalPoints
-          );
-          setClaimedAmount(claimedAmount);
-          console.log(`claimed amount: ${claimedAmount}`);
+          console.log(`claimed nft class = ${classId}`);
+          if (classId == null) {
+            throw new Error('The gift secret does not hold any NFTs');
+          }
+          let nft;
+          switch (classId) {
+            case '1':
+              nft = { art: nft1, artist: artists[1] };
+              break;
+            case '2':
+              nft = { art: nft2, artist: artists[2] };
+              break;
+            default:
+              nft = { art: nft0, artist: artists[0] };
+          }
+          setClaimedNft(nft);
+
           nextStep();
         })
         .catch((error) => {
@@ -153,7 +166,7 @@ export default function ClaimMain () {
   steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
 
   // Step-3
-  steps.push(<Claimed accountAddress={address} amount={claimedAmount} />);
+  steps.push(<Claimed accountAddress={address} nft={claimedNft} />);
 
   const currentStepComponent = steps[step];
 
@@ -169,16 +182,11 @@ export default function ClaimMain () {
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
-            {step === 0 &&
-              <div className="landingpage">{currentStepComponent}</div>
-            }
-            {step > 0 &&
-              <Card
-                style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
-                className="shadow">
-                {currentStepComponent}
-              </Card>
-            }
+            <Card
+              style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
+              className="shadow">
+              {currentStepComponent}
+            </Card>
           </Col>
         </Row>
       </Container>

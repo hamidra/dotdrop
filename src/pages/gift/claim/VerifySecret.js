@@ -28,8 +28,13 @@ export default function VerifySecret ({ claimGiftHandler }) {
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={'Claim Your Gift'}
-          cardText={['Enter the ', <b>gift secret</b>, ' you received in your email.']}
+          title={giftTheme?.content === 'NFT'
+            ? 'Claim Your NFT'
+            : 'Claim Your Gift'}
+          cardText={giftTheme?.content === 'NFT'
+            ? 'Enter the secret passphrase you received in your email. (This is not the seed phrase that you saved in the last step)'
+            : `Every ${giftTheme?.network} account needs a minimum balance to be active on the network. 
+          Enter the secret hash you have received to claim your gift and fund your account.`}
           backClickHandler={prevStep}
         />
         <Formik
@@ -78,6 +83,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
+                    disabled={props.values.redeemSecret.length < 22}
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>

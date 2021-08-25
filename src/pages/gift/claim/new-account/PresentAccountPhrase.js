@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+/* import { CopyToClipboard } from 'react-copy-to-clipboard'; */
 import { Copy, Eye, EyeSlash } from 'phosphor-react';
 
 export default function PresentAccountPhrase ({
@@ -75,7 +75,7 @@ export default function PresentAccountPhrase ({
               <Eye className="mr-1" size="18" />
               <p>{'Reveal seedphrase'}</p>
             </div>
-            <CopyToClipboard
+            {/* <CopyToClipboard
               text={mnemonicWords.join(' ')}
               onCopy={(result) => {
                 setCopied(result);
@@ -86,7 +86,7 @@ export default function PresentAccountPhrase ({
                 <Copy className="mr-1" size={18} />
                 <span className="copy">{copied ? 'Copied' : 'Copy'}</span>
               </div>
-            </CopyToClipboard>
+            </CopyToClipboard> */}
           </Row>
         </div>
         <div className="flex-row justify-content-start align-items-center px-2 pt-2">
@@ -108,6 +108,7 @@ export default function PresentAccountPhrase ({
         <div className="pt-4 d-flex justify-content-center">
           <button
             className="btn btn-primary"
+            disabled={!checked}
             onClick={() =>
               checked ? nextStepHandler() : setCheckedError(checkedErrorMessage)
             }>

@@ -32,5 +32,5 @@ const giftFactory = (palletType) => {
   }
   return giftProvider;
 };
-const giftProvider = giftFactory(palletTypes.balance);
+const giftProvider = giftFactory(palletTypes.bundle);
 export { giftProvider };

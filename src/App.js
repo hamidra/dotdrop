@@ -26,28 +26,28 @@ function Body () {
           <ClaimMain />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to the blockchain network..."
+            message="Connecting to Kusama"
           />
         </Route>
         <Route path={'/generate'}>
           <GenerateMain />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to the blockchain network..."
+            message="Connecting to Kusama"
           />
         </Route>
         <Route path={'/account/:accountAddress'}>
           <AccountOverview />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to the blockchain network..."
+            message="Connecting to Kusama"
           />
         </Route>
         <Route path={'/privacy-policy'}>
           <PrivacyPolicy />
         </Route>
         <Route path={'/'}>
-          <Redirect to={'/generate'} />
+          <Redirect to={'/claim'} />
         </Route>
       </Switch>
     </>
