@@ -31,9 +31,11 @@ export default function PresentAccountPhrase ({
         <CardHeader
           title={'Account Seed Phrase'}
           backClickHandler={() => prevStepHandler()}
-          cardText='Write down the following words <b>in order</b> and store them
-            in a safe place. This seed phrase allows you to recover your
-          account and funds!'
+          cardText={[
+            'Write down the following words ',
+            <b>in order</b>,
+            ' and store them in a safe place. This seed phrase allows you to recover your account and funds!'
+          ]}
         />
         <div
           style={{ position: 'relative' }}
