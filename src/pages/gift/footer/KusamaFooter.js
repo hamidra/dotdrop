@@ -19,7 +19,7 @@ export default function Footer ({ className, selectedAccount }) {
       <div className="footer-grow flex-grow-1" />
       <div>
         <strong>Questions?</strong>&nbsp;
-        <a href="mailto:support@kusama.network?subject=Gifts">
+        <a href="mailto:support@kusama.network?subject=NFTs">
           support@kusama.network
         </a>
       </div>
