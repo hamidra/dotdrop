@@ -15,6 +15,7 @@ import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
 
 function Body () {
   const { apiState } = useSubstrate();
+
   return (
     <>
       <Switch>
@@ -23,27 +24,32 @@ function Body () {
         </Route>
         <Route path={'/claim'}>
           <ClaimMain />
+          <Processing
+            show={apiState !== 'READY'}
+            message="Connecting to Kusama"
+          />
         </Route>
         <Route path={'/generate'}>
           <GenerateMain />
+          <Processing
+            show={apiState !== 'READY'}
+            message="Connecting to Kusama"
+          />
         </Route>
         <Route path={'/account/:accountAddress'}>
           <AccountOverview />
+          <Processing
+            show={apiState !== 'READY'}
+            message="Connecting to Kusama"
+          />
         </Route>
         <Route path={'/privacy-policy'}>
           <PrivacyPolicy />
         </Route>
-        <Route exact path={'/'}>
-          <ClaimMain />
-        </Route>
         <Route path={'/'}>
-          <Redirect to={'/'} />
+          <Redirect to={'/claim'} />
         </Route>
       </Switch>
-      <Processing
-        show={apiState !== 'READY'}
-        message="Connecting to Kusama"
-      />
     </>
   );
 }

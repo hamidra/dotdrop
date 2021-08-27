@@ -44,10 +44,7 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
       }
     });
   }
-  // NFT-Campaign only:  if there is no NFTs to claim throw an error
-  if ((uniquesTxs?.length || 0) === 0) {
-    throw new Error('The entered gift secret does not hold any NFTs. Make sure you are entering the correct secret to claim your NFT.');
-  }
+
   // create Tx for balance transfer
   // calculate the fee for batch transaction to get netBalance as netBalance=balance - txFee
   const balance = (await api.query.system.account(fromAddress))?.data;

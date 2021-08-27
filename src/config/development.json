@@ -1,4 +1,5 @@
 {
   "PROVIDER_SOCKET": "ws://127.0.0.1:9944",
-  "DEVELOPMENT_KEYRING": true
+  "DEVELOPMENT_KEYRING": true,
+  "CLAIM_URL":"http://localhost:3000/dotdrop/#/claim"
 }

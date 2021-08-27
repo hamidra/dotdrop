@@ -28,7 +28,7 @@ const giftFactory = (palletType) => {
       giftProvider = bundleGiftProvider;
       break;
     default:
-      giftProvider = giftPalletGiftProvider;
+      giftProvider = balancePalletGiftProvider;
   }
   return giftProvider;
 };

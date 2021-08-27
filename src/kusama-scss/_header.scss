@@ -1,33 +1,52 @@
 #dropdownMenuButton {
-    background-color: $gray-900;
-    border-color: $gray-800;
-    border-radius: 0 !important;
-    color: $secondary;
+  background-color: #000;
+  border-color: $gray-800;
+  border-radius: 0 !important;
+  color: $secondary;
 
-    &:hover {
-        border-color: $secondary; 
-    }
+  &:hover {
+    border-color: $secondary;
+  }
 }
 
 .dropdown-toggle::after {
-    display: none; // hide default bootstrap dropdown caret
+  display: none; // hide default bootstrap dropdown caret
 }
 
 .dropdown-menu {
-    background-color: $gray-800;
+  background-color: $gray-800;
 }
 
 .dropdown-item {
-    color: $secondary;
+  color: $secondary;
 
-    &:hover {
-        background-color: $gray-700;
-        color: $secondary;
-    }
+  &:hover {
+    background-color: $gray-700;
+    color: $secondary;
+  }
 }
 
 .account-box {
-    background-color: $gray-900;
-    padding: 7px 12px;
-    border: 2px solid $gray-800;
+  background-color: $gray-900;
+  padding: 7px 12px;
+  border: 2px solid $gray-800;
+}
+
+// Navbar
+.navbar-nav {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 2px !important;
+  border: 2px solid #333;
+}
+
+.nav-link {
+  padding: 8px 24px !important;
+}
+
+.nav-pills {
+  background-color: #000;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 500;
 }

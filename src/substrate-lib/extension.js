@@ -42,10 +42,11 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
       // and either don't have geneisHash(open for all chains)
       // or their genesisHash matches with the current network
       const newAccounts = extAccounts.filter(
-        (account) =>
-          !loadedSet.has(account.address) &&
-          (!account.meta?.genesisHash ||
-            account.meta?.genesisHash === chainInfo?.genesisHash?.toHex())
+        (account) => {
+          return !loadedSet.has(account.address) &&
+          (!chainInfo?.genesisHash || !account.meta?.genesisHash ||
+            account.meta?.genesisHash === chainInfo?.genesisHash?.toHex());
+        }
       );
       console.log(newAccounts);
       for (const account of newAccounts) {

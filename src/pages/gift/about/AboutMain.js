@@ -6,7 +6,7 @@ import FAQ from './FAQ';
 import ProcessExplainerCard from './ProcessExplainerCard';
 import { useSubstrate } from '../../../substrate-lib';
 
-export default function AboutMain() {
+export default function AboutMain () {
   const { giftTheme } = useSubstrate();
 
   return (
@@ -21,7 +21,7 @@ export default function AboutMain() {
             className="text-center text-large pb-5"
             style={{ maxWidth: '920px' }}>
             Gift {giftTheme?.content} to your friends and have them join the {giftTheme?.network} community
-            today. Simply wrap your DOT gift in a unique secret and share it
+            today. Simply wrap your {giftTheme?.content} gift in a unique secret and share it
             with someone close to you!
           </p>
         </div>

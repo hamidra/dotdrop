@@ -1,5 +1,18 @@
 // Custom.scss
 
+$gray-100: #f9fafb;
+$gray-200: #f0f2f5;
+$gray-300: #d5dbe0;
+$gray-600: #6c757d;
+$gray-700: #444;
+$gray-800: #333;
+$gray-900: #1e1e1e;
+
+$nav-pills-border-radius: 0rem !important;
+$nav-pills-link-active-color: #fff !important;
+$nav-pills-link-active-bg: #333 !important;
+$navbar-dark-hover-color: #fff !important;
+
 @import '~bootstrap/scss/bootstrap';
 @import 'kusama-scss/variables';
 
@@ -15,3 +28,4 @@
 @import 'kusama-scss/select';
 @import 'kusama-scss/privacypolicy';
 @import 'kusama-scss/about';
+@import 'kusama-scss/landingpage';

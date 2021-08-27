@@ -2,5 +2,6 @@
   "APP_NAME": "dotdrop",
   "DEVELOPMENT_KEYRING": true,
   "RPC": {},
-  "THEME": "kusamanft"
+  "THEME": "kusamanft",
+  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim"
 }

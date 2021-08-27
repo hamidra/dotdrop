@@ -10,6 +10,7 @@ import ledgerLogo from '../../../images/ledger_logo_128.png';
 import signerLogo from '../../../images/signer_logo_128.png';
 import { CaretRight } from 'phosphor-react';
 
+const balanceDecimalPoints = 5;
 const AccountField = ({ title, value }) => {
   return (
     <div className="mt-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center">
@@ -129,7 +130,8 @@ export default function AccountOverview () {
                         balance?.free &&
                         `${utils.fromChainUnit(
                           balance.free,
-                          chainInfo?.decimals
+                          chainInfo?.decimals,
+                          balanceDecimalPoints
                         )} ${chainInfo?.token}`
                       }
                     />
@@ -139,12 +141,13 @@ export default function AccountOverview () {
                         balance?.reserved &&
                         `${utils.fromChainUnit(
                           balance.reserved,
-                          chainInfo?.decimals
+                          chainInfo?.decimals,
+                          balanceDecimalPoints
                         )} ${chainInfo?.token}`
                       }
                     />
                     <div className="mt-4">
-                      <a href="https://polkascan.io/polkadot" target="_blank" rel="noreferrer">
+                      <a href={`https://polkascan.io/kusama/account/${accountAddress}`} target="_blank" rel="noreferrer">
                         {'→ See account on Polkascan'}
                       </a>
                     </div>

@@ -10,12 +10,14 @@ export default function VerifySecret ({ claimGiftHandler }) {
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
     // and is indeed a valid mnemonic phrase
+    redeemSecret = redeemSecret.trim();
     if (redeemSecret) {
       claimGiftHandler(redeemSecret);
     }
   };
   const { giftTheme } = useSubstrate();
   const validate = ({ redeemSecret }) => {
+    redeemSecret = redeemSecret.trim();
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
@@ -51,7 +53,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
                   <Form autoComplete="off" className="w-100">
                     <Form.Group>
                       <Form.Label htmlFor="redeemSecret">
-                        Secret Gift Hash
+                        Gift Secret
                       </Form.Label>
                       <Form.Control
                         id="redeemSecret"

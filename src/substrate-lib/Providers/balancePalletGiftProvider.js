@@ -1,5 +1,5 @@
 import utils from '../substrateUtils';
-import { signAndSendTx } from './txHandler';
+import { signAndSendTx, getClaimedAssets } from './txHandler';
 import BN from 'bn.js';
 
 const feeMultiplierValue = 1;
@@ -25,22 +25,7 @@ const transferBalanceAndFees = async (
 
 const transferAll = async (api, fromAccount, toAddress) => {
   const fromAddress = utils.getAccountAddress(fromAccount);
-
-  const { data: balance } = await api.query.system.account(fromAddress);
-  let txFee =
-    (
-      await api.tx.balances
-        .transfer(toAddress, balance.free)
-        .paymentInfo(fromAddress)
-    )?.partialFee || new BN(0, 10);
-  txFee = utils.calcFeeAdjustments(txFee);
-
-  // assuming all fees are deducted from account balance.
-  if (txFee.gt(balance?.free)) {
-    throw new Error('the total fees are greater than the balance.');
-  }
-  const netBalance = balance?.free?.sub(txFee);
-  const tx = api.tx.balances.transfer(toAddress, netBalance);
+  const tx = api.tx.balances.transferAll(toAddress, false);
   return signAndSendTx(api, tx, fromAccount);
 };
 
@@ -55,12 +40,28 @@ const balancePalletGiftProvider = {
       feeMultiplierValue // fee multiplier of 1x
     );
   },
-  claimGift: (api, interimAccount, recipientAccount) => {
+  claimGift: async (api, interimAccount, recipientAccount) => {
     const recepientAddress = utils.getAccountAddress(recipientAccount);
-    return transferAll(api, interimAccount, recepientAddress);
+    // verify the gift account holds any balances (gifts) before starting to transfer them:
+    const fromAddress = utils.getAccountAddress(interimAccount);
+    const balance = (await api.query.system.account(fromAddress))?.data;
+    console.log(balance?.free.toHuman());
+    if (!balance?.free || balance?.free?.eqn(0)) {
+      throw new Error('The gift secret does not hold any gifts. You might have entered the wrong secret or the gift might have been already claimed.');
+    }
+    const events = await transferAll(api, interimAccount, recepientAddress);
+    const claimed = getClaimedAssets(api, events);
+    return claimed;
   },
-  removeGift: (api, interimAccount, senderAccount) => {
+  removeGift: async (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);
+    // verify the gift account holds any balances (gifts) before starting to transfer them:
+    const fromAddress = utils.getAccountAddress(interimAccount);
+    const balance = (await api.query.system.account(fromAddress))?.data;
+    console.log(balance?.free.toHuman());
+    if (!balance?.free || balance?.free?.eqn(0)) {
+      throw new Error('The gift secret does not hold any gifts. The gift might have been already claimed or removed.');
+    }
     return transferAll(api, interimAccount, senderAddress);
   },
   getGiftFeeMultiplier: () => {
