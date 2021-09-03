@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/dotdrop/static/css/main.34506574.chunk.css",
-    "main.js": "/dotdrop/static/js/main.8bab9034.chunk.js",
-    "main.js.map": "/dotdrop/static/js/main.8bab9034.chunk.js.map",
-    "runtime-main.js": "/dotdrop/static/js/runtime-main.664c1d26.js",
-    "runtime-main.js.map": "/dotdrop/static/js/runtime-main.664c1d26.js.map",
-    "static/js/2.df767d9a.chunk.js": "/dotdrop/static/js/2.df767d9a.chunk.js",
-    "static/js/2.df767d9a.chunk.js.map": "/dotdrop/static/js/2.df767d9a.chunk.js.map",
+    "main.js": "/dotdrop/static/js/main.6c3e3930.chunk.js",
+    "main.js.map": "/dotdrop/static/js/main.6c3e3930.chunk.js.map",
+    "runtime-main.js": "/dotdrop/static/js/runtime-main.ca038c0a.js",
+    "runtime-main.js.map": "/dotdrop/static/js/runtime-main.ca038c0a.js.map",
+    "static/js/2.060b4497.chunk.js": "/dotdrop/static/js/2.060b4497.chunk.js",
+    "static/js/2.060b4497.chunk.js.map": "/dotdrop/static/js/2.060b4497.chunk.js.map",
     "index.html": "/dotdrop/index.html",
     "static/css/main.34506574.chunk.css.map": "/dotdrop/static/css/main.34506574.chunk.css.map",
-    "static/js/2.df767d9a.chunk.js.LICENSE.txt": "/dotdrop/static/js/2.df767d9a.chunk.js.LICENSE.txt",
+    "static/js/2.060b4497.chunk.js.LICENSE.txt": "/dotdrop/static/js/2.060b4497.chunk.js.LICENSE.txt",
     "static/media/kusama.scss": "/dotdrop/static/media/nft_bg.42ea60a4.jpg",
     "static/media/ksm-nft0.b668a607.jpg": "/dotdrop/static/media/ksm-nft0.b668a607.jpg",
     "static/media/ksm-nft1.fba26052.jpg": "/dotdrop/static/media/ksm-nft1.fba26052.jpg",
     "static/media/ksm-nft2.85e3f309.jpg": "/dotdrop/static/media/ksm-nft2.85e3f309.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.664c1d26.js",
-    "static/js/2.df767d9a.chunk.js",
+    "static/js/runtime-main.ca038c0a.js",
+    "static/js/2.060b4497.chunk.js",
     "static/css/main.34506574.chunk.css",
-    "static/js/main.8bab9034.chunk.js"
+    "static/js/main.6c3e3930.chunk.js"
   ]
 }
