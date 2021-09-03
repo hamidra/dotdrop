@@ -33,13 +33,11 @@ const transferAllAssets = async (api, classIds, fromAccount, toAddress) => {
   // Create Txs for uniques NFTs
   // 1- get the list of all uniques instanceIds owned by this source Account
   const uniquesTxs = [];
-  for (const cid of classIds) {
-    const assetKeys = await api.query.uniques.account.keys(fromAddress, cid);
-    assetKeys.forEach(({ args: [_, classId, instanceId] }) => {
-      const tx = api.tx.uniques.transfer(classId, instanceId, toAddress);
-      uniquesTxs.push(tx);
-    });
-  }
+  const assetKeys = await api.query.uniques.account.keys(fromAddress);
+  assetKeys.forEach(({ args: [_, classId, instanceId] }) => {
+    const tx = api.tx.uniques.transfer(classId, instanceId, toAddress);
+    uniquesTxs.push(tx);
+  });
 
   // create Tx for balance transferAll to reap account and tranfer all balance.
   const balanceTxs = [api.tx.balances.transferAll(toAddress, false)];
