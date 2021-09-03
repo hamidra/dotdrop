@@ -1,7 +1,9 @@
 import { Row, Col, Card, Image } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
-
+import config from '../../../config';
 export default function Claimed ({ accountAddress, nft }) {
+  console.log(config.NFT_PREVIEW_URL);
+  const previewUrl = new URL(`collectibles/statemine/${nft.classId}/${nft.instanceId}`, config.NFT_PREVIEW_URL);
   return (
     <>
       <Card.Body className="d-flex flex-column">
@@ -16,7 +18,7 @@ export default function Claimed ({ accountAddress, nft }) {
         <Col className="pt-5 d-flex justify-content-center align-items-center">
           <a
             className="btn btn-primary"
-            href="https://singular.rmrk.app/"
+            href={previewUrl}
             target="_blank"
             rel="noreferrer">
             See NFT on Singular

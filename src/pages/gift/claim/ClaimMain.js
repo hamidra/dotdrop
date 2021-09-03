@@ -20,7 +20,8 @@ const ClaimContext = createContext();
 export { ClaimContext };
 
 // NFT artists
-const artists = { 0: 'Awer', 1: 'Vadim', 2: 'Andreas Preis' };
+const artists = ['Awer', 'Vadim', 'Andreas Preis'];
+const arts = [nft0, nft1, nft2];
 export default function ClaimMain () {
   const { keyring, apiState, api, chainInfo } = useSubstrate();
   const { claimGift } = giftProvider;
@@ -88,22 +89,13 @@ export default function ClaimMain () {
       claimGift(api, interimAccount, recipientAccount)
         .then((claimedGift) => {
           const classId = claimedGift?.uniques?.[0]?.classId;
+          const instanceId = claimedGift?.uniques?.[0]?.instanceId;
           console.log(claimedGift);
           console.log(`claimed nft class = ${classId}`);
           if (classId == null) {
             throw new Error('The gift secret does not hold any NFTs');
           }
-          let nft;
-          switch (classId) {
-            case '1':
-              nft = { art: nft1, artist: artists[1] };
-              break;
-            case '2':
-              nft = { art: nft2, artist: artists[2] };
-              break;
-            default:
-              nft = { art: nft0, artist: artists[0] };
-          }
+          const nft = { art: arts[classId], artist: artists[classId], classId, instanceId };
           setClaimedNft(nft);
 
           nextStep();

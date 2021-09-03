@@ -3,5 +3,6 @@
   "DEVELOPMENT_KEYRING": true,
   "RPC": {},
   "THEME": "kusamanft",
-  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim"
+  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
+  "NFT_PREVIEW_URL": "https://singular.rmrk.app/"
 }
