@@ -21,6 +21,8 @@ export default function VerifySecret ({ claimGiftHandler }) {
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
+    } else if (redeemSecret.length !== 22) {
+      errors.redeemSecret = 'Please enter a valid gift secret. The secret must include 22 characters';
     }
     return errors;
   };
@@ -83,7 +85,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
-                    disabled={props.values.redeemSecret.length < 22}
+                    disabled={!props.touched.redeemSecret || !!props.errors.redeemSecret }
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>

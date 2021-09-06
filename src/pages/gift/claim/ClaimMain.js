@@ -59,53 +59,57 @@ export default function ClaimMain () {
   };
 
   const claimGiftHandler = async (secret) => {
-    if (apiState !== 'READY') {
-      console.log('api not READY!' + apiState);
-      window.alert(
-        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
-      );
-    } else if (!address) {
-      console.log('no account is selected');
-      window.alert(
-        'You need to sign in with your account to be able to claim your gift. 🔑🔓'
-      );
-    } else {
+    try {
+      if (apiState !== 'READY') {
+        console.log('api not READY!' + apiState);
+        window.alert(
+          'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
+        );
+      } else if (!address) {
+        console.log('no account is selected');
+        window.alert(
+          'You need to sign in with your account to be able to claim your gift. 🔑🔓'
+        );
+      } else {
       // retrive gift account from secret
-      const mnemonic = secret;
-      const giftAccountPair = keyring.createFromUri(
-        mnemonic,
-        { name: 'interim_gift' },
-        'sr25519'
-      );
+        const mnemonic = secret;
+        const giftAccountPair = keyring.createFromUri(
+          mnemonic,
+          { name: 'interim_gift' },
+          'sr25519'
+        );
 
-      // set the gift account as signing account
-      const interimAccount = { pairOrAddress: giftAccountPair };
+        // set the gift account as signing account
+        const interimAccount = { pairOrAddress: giftAccountPair };
 
-      // claim gift by the selected account
-      const recipientAccount = {
-        pairOrAddress: address
-      };
+        // claim gift by the selected account
+        const recipientAccount = {
+          pairOrAddress: address
+        };
 
-      claimGift(api, interimAccount, recipientAccount)
-        .then((claimedGift) => {
-          const classId = claimedGift?.uniques?.[0]?.classId;
-          const instanceId = claimedGift?.uniques?.[0]?.instanceId;
-          console.log(claimedGift);
-          console.log(`claimed nft class = ${classId}`);
-          if (classId == null) {
-            throw new Error('The gift secret does not hold any NFTs');
-          }
-          const nft = { art: arts[classId], artist: artists[classId], classId, instanceId };
-          setClaimedNft(nft);
+        claimGift(api, interimAccount, recipientAccount)
+          .then((claimedGift) => {
+            const classId = claimedGift?.uniques?.[0]?.classId;
+            const instanceId = claimedGift?.uniques?.[0]?.instanceId;
+            console.log(claimedGift);
+            console.log(`claimed nft class = ${classId}`);
+            if (classId == null) {
+              throw new Error('The gift secret does not hold any NFTs');
+            }
+            const nft = { art: arts[classId], artist: artists[classId], classId, instanceId };
+            setClaimedNft(nft);
 
-          nextStep();
-        })
-        .catch((error) => {
-          handleError(error);
-        });
+            nextStep();
+          })
+          .catch((error) => {
+            handleError(error);
+          });
 
-      setProcessingMsg('Transferring your gift to your account...');
-      setProcessing(true);
+        setProcessingMsg('Transferring your gift to your account...');
+        setProcessing(true);
+      }
+    } catch (error) {
+      handleError(error);
     }
   };
 
