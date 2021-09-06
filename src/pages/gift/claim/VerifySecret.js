@@ -85,7 +85,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
-                    disabled={!props.touched.redeemSecret || !!props.errors.redeemSecret }
+                    disabled={!!props.errors.redeemSecret }
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>
