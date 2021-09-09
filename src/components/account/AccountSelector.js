@@ -33,9 +33,6 @@ const AccountToggleItem = ({ account, balance, token }) => {
               <div className="text-left">{nameStr}</div>
               <div className="text-left">{addressStr}</div>
             </Col>
-            <Col>
-              <div className="text-left text-md-right balance-text">{`${balanceStr}`}</div>
-            </Col>
           </Row>
         </Media.Body>
       </Media>
@@ -126,9 +123,6 @@ const AccountDropdownItem = React.forwardRef(
               <Col>
                 <div>{nameStr}</div>
                 <div>{addressStr}</div>
-              </Col>
-              <Col>
-                <div className="text-md-right balance-text">{`${balanceStr}`}</div>
               </Col>
             </Row>
           </Media.Body>

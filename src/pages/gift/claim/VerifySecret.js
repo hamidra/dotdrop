@@ -2,10 +2,9 @@ import { useContext } from 'react';
 import { Row, Col, Card, Form } from 'react-bootstrap';
 import { ClaimContext } from './ClaimMain';
 import CardHeader from '../../../components/CardHeader';
-import { useSubstrate } from '../../../substrate-lib';
 import { Formik } from 'formik';
 
-export default function VerifySecret ({ claimGiftHandler }) {
+export default function VerifySecret ({ claimGiftHandler, accountSource }) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
@@ -15,7 +14,6 @@ export default function VerifySecret ({ claimGiftHandler }) {
       claimGiftHandler(redeemSecret);
     }
   };
-  const { giftTheme } = useSubstrate();
   const validate = ({ redeemSecret }) => {
     redeemSecret = redeemSecret.trim();
     const errors = {};
@@ -26,17 +24,16 @@ export default function VerifySecret ({ claimGiftHandler }) {
     }
     return errors;
   };
+  let cardText = 'Enter the secret passphrase you received in your email.';
+  if (accountSource === 'NEW') {
+    cardText += ' (This is not the seed phrase that you saved in the last step)';
+  }
   return (
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={giftTheme?.content === 'NFT'
-            ? 'Claim Your NFT'
-            : 'Claim Your Gift'}
-          cardText={giftTheme?.content === 'NFT'
-            ? 'Enter the secret passphrase you received in your email. (This is not the seed phrase that you saved in the last step)'
-            : `Every ${giftTheme?.network} account needs a minimum balance to be active on the network. 
-          Enter the secret hash you have received to claim your gift and fund your account.`}
+          title='Claim Your NFT'
+          cardText={cardText}
           backClickHandler={prevStep}
         />
         <Formik

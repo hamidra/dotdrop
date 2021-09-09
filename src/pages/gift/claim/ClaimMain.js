@@ -159,7 +159,7 @@ export default function ClaimMain () {
   steps.push(AccountOptionElement);
 
   // Step-2
-  steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
+  steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} accountSource={accountSource}/>);
 
   // Step-3
   steps.push(<Claimed accountAddress={address} nft={claimedNft} />);
