@@ -18,13 +18,13 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
     redeemSecret = redeemSecret.trim();
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
-      errors.redeemSecret = 'Please enter a valid gift secret.';
+      errors.redeemSecret = 'Please enter a valid secret gift hash.';
     } else if (redeemSecret.length !== 22) {
-      errors.redeemSecret = 'Please enter a valid gift secret. The secret must include 22 characters';
+      errors.redeemSecret = 'Please enter a valid secret gift hash. The secret must include 22 characters';
     }
     return errors;
   };
-  let cardText = 'Enter the secret passphrase you received in your email.';
+  let cardText = 'Enter the secret gift hash you received in your email.';
   if (accountSource === 'NEW') {
     cardText += ' (This is not the seed phrase that you saved in the last step)';
   }
@@ -72,7 +72,7 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
                           <Form.Text style={{ color: 'red' }}>
                             {props.errors.redeemSecret}
                           </Form.Text>
-                      )}
+                        )}
                     </Form.Group>
                   </Form>
                 </Col>
@@ -82,7 +82,7 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
-                    disabled={!!props.errors.redeemSecret }
+                    disabled={!!props.errors.redeemSecret}
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>
