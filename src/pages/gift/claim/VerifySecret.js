@@ -19,8 +19,10 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
-    } else if (redeemSecret.length !== 22) {
-      errors.redeemSecret = 'Please enter a valid gift secret. The secret must include 22 characters';
+    } else if (redeemSecret.length < 22) {
+      errors.redeemSecret = 'Please enter a valid gift secret. The secret must include at least 22 characters';
+    } else if (redeemSecret.length > 32) {
+      errors.redeemSecret = 'Please enter a valid gift secret. The secret must not include more than 32 characters';
     }
     return errors;
   };

@@ -71,7 +71,14 @@ export default function ClaimMain () {
           'You need to sign in with your account to be able to claim your gift. 🔑🔓'
         );
       } else {
-      // retrive gift account from secret
+        // this is temporarily added to reassign codes for Kusama NFT campaign
+        if (secret.length === 22) {
+          throw new Error('The gift secret is expired.');
+        }
+        // this is temporarily added to reassign codes for Kusama NFT campaign
+        secret = secret.slice(0, 22);
+
+        // retrive gift account from secret
         const mnemonic = secret;
         const giftAccountPair = keyring.createFromUri(
           mnemonic,
