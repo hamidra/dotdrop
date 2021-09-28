@@ -1,15 +1,15 @@
-# Dotdrop(a.k.a Dot Gifts)
+# Substrate Gifts
 
-Dotdrop is a dapp (decentralized app) built on top of substrate compatible networks to let the users of any substrate based network send tokens to anyone no matter if the recepient has any accounts in the network or not. The sender of a gift can simply wrap their DOTs as a gift in a unique secret hash that functions as a voucher and then share the secret with the recipient (through email, message or just simply write it on a paper), while the recipient of the gift can go to the app and reveal the recieved voucher (gift secret hash) to redeem their gifted DOTs to their account. If the recipient has no accounts in the network to redeem their gift, the app will walk them through account creation steps to let them create an account before redeeming their gift.
+Substrate Gifts is a dapp (decentralized app) built on top of substrate compatible networks to let the users of any substrate based network send tokens as a gift no matter if the recepient has any accounts in the network or not. The sender of a gift can simply wrap their tokens (KSMs, DOTs, etc) as a gift in a unique secret hash that functions as a voucher and share the gift secret with the recipient (through email, message or just simply write it on a paper), while the recipient of the gift can go to the dapp and reveal the recieved voucher (gift secret) to redeem their gifted tokens to their account. If the recipient has no accounts in the network to redeem their gift, the dapp will walk them through account creation steps to let them create an account before redeeming their gift.
 
-## Running the Dotdrop dapp
+## Running Substrate Gifts dapp
 
 ### Requirements
 
 - [node.js version >=14](https://nodejs.org/en/download/)
 - [yarn](https://yarnpkg.com/)
 - [git](https://git-scm.com/)
-- a [substrate node deployed with gift pallet](https://github.com/substrate-developer-hub/substrate-node-template/tree/shawntabrizi-gift) for the dot gift dapp to connect to.
+- a [substrate node/network] for the gift dapp to connect to.
 
 ### Installation
 
@@ -36,7 +36,7 @@ You can also build the app in production mode,
 yarn build
 ```
 
-and open `build/index.html` in your favorite browser.
+and host the `build/` folder using any webserver. refer to [create react app] (https://create-react-app.dev/docs/deployment) documentations for more info
 
 ## Configuration
 
@@ -46,8 +46,7 @@ and finally environment variables, with precedence.
 
 - `development.json` affects the development environment
 - `test.json` affects the test environment, triggered in `yarn test` command.
-- `production.json` affects the production environment, triggered in
-  `yarn build` command.
+- `production.json` affects the production environment, triggered in `yarn build` command.
 
 Some environment variables are read and integrated in the template `config` object,
 including:
