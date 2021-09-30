@@ -25,6 +25,8 @@ const ConnectExistingAccount = ({
               Polkadot Extension
             </CardButton>
           </Col>
+        </Row>
+        <Row className="w-100">
           <Col className="mb-3">
             <CardButton
               logo="signer"
@@ -33,14 +35,14 @@ const ConnectExistingAccount = ({
             </CardButton>
           </Col>
         </Row>
-        <Divider text="Or" />
+        {/* <Divider text="Or" />
         <Row className="justify-content-center pb-4">
           <button
             className="btn btn-link"
             onClick={() => setExistingAccountSourceHandler('ENTER')}>
             Enter Address Manually
           </button>
-        </Row>
+        </Row> */}
       </Col>
     </Card.Body>
   );
