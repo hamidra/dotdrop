@@ -53,7 +53,7 @@ const ExtensionOnboarding = () => {
                                 />
                                 <Row className="justify-content-center py-5">
                                     <div className="d-flex flex-column align-items-end mb-2 mr-2">
-                                        <strong className="bg-light p-2 mr-2 rounded">
+                                        <strong className="bg-gray p-2 mr-2 rounded">
                                             {`${accountAddress &&
                                                 utils.validateAddress(
                                                     accountAddress,
