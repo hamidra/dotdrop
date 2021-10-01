@@ -5,23 +5,20 @@ import config from '../../../config';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default function PresentGift ({ gift, removeGiftHandler }) {
-  const { email, amount, secret } = gift;
+  const { email, name, amount, secret } = gift;
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
   const mailSubject = `Someone has sent you ${giftTheme?.content}`;
   const claimUrl = config.CLAIM_URL;
-
-  const giftMessage = `
-  Hey! \n
-  I'm sending you ${amountStr} as a gift! You can go to \n
-  ${claimUrl} \n
-  and type in the following secret message to claim your ${giftTheme?.content}.
-  \n
-  ${secret}
-  \n
-  The website will walk you through to create your own secure
-  ${giftTheme.network} account. \n
-  Enjoy!`;
+  const greeting = name ? `Hey ${name?.trim()}!` : 'Hey!';
+  const giftMessage =
+    `${greeting}\n` +
+    `I'm sending you ${amountStr} as a gift! You can go to\n\n` +
+    `${claimUrl}\n\n` +
+    `and type in the following secret message to claim your ${giftTheme?.content}.\n\n` +
+    `${secret}\n\n` +
+    `The website will walk you through to create your own secure${giftTheme.network} account.\n` +
+    'Enjoy!';
 
   /* const mailToLink = `${email}?subject=${mailSubject}&body=${encodeURIComponent(
     giftMessage
@@ -48,7 +45,7 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
           <Col>
             <Card className="printable border">
               <Card.Body className="p-4">
-                <p>Hey!</p>
+                <p>{greeting}</p>
                 <p>I'm sending you {`${amountStr}`} as a gift! You can go to</p>
                 <p>
                   <em
