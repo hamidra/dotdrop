@@ -4,20 +4,22 @@ import { ClaimContext } from './ClaimMain';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate } from '../../../substrate-lib';
 import { Formik } from 'formik';
+import { stringHelpers } from '../../../utils';
 
 export default function VerifySecret ({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
     // and is indeed a valid mnemonic phrase
-    redeemSecret = redeemSecret.trim();
+    redeemSecret = stringHelpers.removeSpaces(redeemSecret);
+    console.log(redeemSecret);
     if (redeemSecret) {
       claimGiftHandler(redeemSecret);
     }
   };
   const { giftTheme } = useSubstrate();
   const validate = ({ redeemSecret }) => {
-    redeemSecret = redeemSecret.trim();
+    redeemSecret = stringHelpers.removeSpaces(redeemSecret);
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
