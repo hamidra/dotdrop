@@ -7,5 +7,12 @@ export const stringHelpers = {
       )}`;
     }
     return truncated;
+  },
+  formatGiftSecret: (giftSecret) => {
+    const formatted = [];
+    for (let i = 0; i < giftSecret.length; i += 4) {
+      formatted.push(giftSecret.slice(i, i + 4));
+    }
+    return formatted.join(' ');
   }
 };
