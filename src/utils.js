@@ -14,5 +14,8 @@ export const stringHelpers = {
       formatted.push(giftSecret.slice(i, i + 4));
     }
     return formatted.join(' ');
+  },
+  removeSpaces: (giftSecret) => {
+    return giftSecret.replace(/[\s]*/g, '');
   }
 };

@@ -12,7 +12,6 @@ export default function VerifySecret ({ claimGiftHandler }) {
     // ToDO: add better input validation to verify redeemSecret is not empty,
     // and is indeed a valid mnemonic phrase
     redeemSecret = stringHelpers.removeSpaces(redeemSecret);
-    console.log(redeemSecret);
     if (redeemSecret) {
       claimGiftHandler(redeemSecret);
     }
