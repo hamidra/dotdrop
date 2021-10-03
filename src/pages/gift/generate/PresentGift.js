@@ -61,7 +61,7 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                 <p>
                   and type in the following secret message to claim your{' '}
                   {`${giftTheme.content}`}.
-                  <strong
+                  <strong className="bg-gray"
                     style={{
                       display: 'block',
                       textAlign: 'center',
