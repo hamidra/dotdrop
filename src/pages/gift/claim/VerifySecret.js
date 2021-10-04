@@ -30,7 +30,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Claim Your Gift'}
-          cardText={['Enter the ', <b>gift secret</b>, ' you received in your email.']}
+          cardText={['Enter the ', <b>gift secret</b>, ' you received to claim your gift.']}
           backClickHandler={prevStep}
         />
         <Formik
@@ -55,7 +55,6 @@ export default function VerifySecret ({ claimGiftHandler }) {
                         id="redeemSecret"
                         name="redeemSecret"
                         type="input"
-                        placeholder="0x4rt6..."
                         isInvalid={
                           props.touched.redeemSecret &&
                           !!props.errors.redeemSecret

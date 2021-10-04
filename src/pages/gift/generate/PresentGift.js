@@ -15,7 +15,7 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
   Hey! \n 
   I'm sending you ${amountStr} as a gift! You can go to \n
   ${claimUrl} \n
-  and type in the following secret message to claim your ${giftTheme?.content}. 
+  and type in the following gift secret to claim your ${giftTheme?.content}. 
   \n \n 
   ${formattedSecret} 
   \n \n 
@@ -61,7 +61,7 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                     }}>{`${claimUrl}`}</em>
                   </p>
                   <p>
-                    and type in the following secret message to claim your{' '}
+                    and type in the following gift secret to claim your{' '}
                   {`${giftTheme.content}`}.
                   <strong
                     style={{
