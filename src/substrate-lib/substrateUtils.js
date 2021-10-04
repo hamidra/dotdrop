@@ -45,8 +45,7 @@ const utils = {
       result += `.${trimEnd(decimalVal, '0')}`;
     }
     if (token) {
-      result =
-        parseInt(wholeVal) > 1 ? `${result} ${token}s` : `${result} ${token}`;
+      result = `${result} ${token}`;
     }
     return result;
   },
