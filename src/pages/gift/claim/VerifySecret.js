@@ -22,6 +22,12 @@ export default function VerifySecret ({ claimGiftHandler }) {
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
+    } else if (redeemSecret.length < 16) {
+      errors.redeemSecret =
+        'Please enter a valid gift secret. The secret must include at least 16 digits';
+    } else if (redeemSecret.length > 32) {
+      errors.redeemSecret =
+        'Please enter a valid gift secret. The secret can not include more than 32 characters';
     }
     return errors;
   };
@@ -30,7 +36,11 @@ export default function VerifySecret ({ claimGiftHandler }) {
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Claim Your Gift'}
-          cardText={['Enter the ', <b>gift secret</b>, ' you received to claim your gift.']}
+          cardText={[
+            'Enter the ',
+            <b>gift secret</b>,
+            ' you received to claim your gift.'
+          ]}
           backClickHandler={prevStep}
         />
         <Formik
@@ -78,6 +88,9 @@ export default function VerifySecret ({ claimGiftHandler }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
+                    disabled={
+                      props.touched.redeemSecret && !!props.errors.redeemSecret
+                    }
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>

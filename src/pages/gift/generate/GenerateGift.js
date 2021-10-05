@@ -3,7 +3,7 @@ import { Row, Col, Form, Card, InputGroup } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import BN from 'bn.js';
 export default function GenerateGift ({
   account,
@@ -267,6 +267,7 @@ export default function GenerateGift ({
         <div className="d-flex justify-content-center">
           <button
             className="btn btn-primary"
+            disabled={!formik?.isValid}
             onClick={() => formik.submitForm()}>
             Generate Gift
           </button>
