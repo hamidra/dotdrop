@@ -2,31 +2,31 @@ import { Row, Col, Card } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import config from '../../../config';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default function PresentGift ({ gift, removeGiftHandler }) {
-  const { email, amount, secret } = gift;
+  const { email, name, amount, secret } = gift;
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
   const mailSubject = `Someone has sent you ${giftTheme?.content}`;
   const claimUrl = config.CLAIM_URL;
-  const mailBody = `
-  Hey! \n 
-  I'm sending you ${amountStr} as a gift! You can go to \n
-  ${claimUrl} \n
-  and type in the following secret message to claim your ${giftTheme?.content}. 
-  \n \n 
-  ${secret} 
-  \n \n 
-  The website will walk you through to create your own secure
-  ${giftTheme.network} account. \n 
-  Enjoy!`;
-  const mailToLink = `${email}?subject=${mailSubject}&body=${encodeURIComponent(
-    mailBody
+  const greeting = name ? `Hey ${name?.trim()}!` : 'Hey!';
+  const giftMessage =
+    `${greeting}\n` +
+    `I'm sending you ${amountStr} as a gift! You can go to\n\n` +
+    `${claimUrl}\n\n` +
+    `and type in the following secret message to claim your ${giftTheme?.content}.\n\n` +
+    `${secret}\n\n` +
+    `The website will walk you through to create your own secure${giftTheme.network} account.\n` +
+    'Enjoy!';
+
+  /* const mailToLink = `${email}?subject=${mailSubject}&body=${encodeURIComponent(
+    giftMessage
   )}`;
 
   const mailToHandler = () => {
     window.open(`mailto:${mailToLink}`, 'sendGiftEmail');
-  };
+  }; */
 
   const printHandler = () => {
     window.print();
@@ -37,17 +37,17 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
       <Card.Body>
         <CardHeader
           title={'Send Message'}
-          cardText={`Send ${giftTheme.content} to your friends and family, and have them join the
-          ${giftTheme.network} Network today.`}
+          cardText={
+            'Your gift was successfully created! Copy the following message and send it via email, or your favorite messaging app, or print it out and give it in person.'
+          }
         />
         <Row className="justify-content-center align-items-center my-4 mx-2">
           <Col>
             <Card className="printable border">
               <Card.Body className="p-4">
-                <p>Hey!</p>
+                <p>{greeting}</p>
+                <p>I'm sending you {`${amountStr}`} as a gift! You can go to</p>
                 <p>
-                  I'm sending you {`${amountStr}`} as a gift! You can go to</p>
-                  <p>
                   <em
                     style={{
                       display: 'block',
@@ -57,11 +57,11 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                       marginBottom: '20px',
                       borderRadius: '5px'
                     }}>{`${claimUrl}`}</em>
-                  </p>
-                  <p>
-                    and type in the following secret message to claim your{' '}
+                </p>
+                <p>
+                  and type in the following secret message to claim your{' '}
                   {`${giftTheme.content}`}.
-                  <strong
+                  <strong className="bg-gray"
                     style={{
                       display: 'block',
                       textAlign: 'center',
@@ -85,18 +85,20 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
             <button
               className="btn btn-link ml-3"
               onClick={() => removeGiftHandler(secret)}>
-              Delete
+              Remove Gift
             </button>
             <button
               className="btn btn-link ml-3"
               onClick={() => printHandler()}>
               Print
             </button>
-            <button
-              className="btn btn-primary ml-3"
-              onClick={() => mailToHandler()}>
-              Email
-            </button>
+            <CopyToClipboard text={giftMessage}>
+              <button
+                className="btn btn-primary ml-3"
+                onClick={(e) => e.stopPropagation()}>
+                Copy Message
+              </button>
+            </CopyToClipboard>
           </Col>
         </Row>
       </Card.Body>
