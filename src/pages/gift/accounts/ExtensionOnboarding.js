@@ -51,7 +51,7 @@ const ExtensionOnboarding = () => {
                                     title={'Import Your Address'}
                                     cardText="To get started using your Polkadot address, import it to the Polkadot.js Extension."
                                 />
-                                <Row className="justify-content-center py-5">
+                                <Row className="justify-content-center py-4">
                                     <div className="d-flex flex-column align-items-end mb-2 mr-2">
                                         <strong className="bg-gray p-2 mr-2 rounded">
                                             {`${accountAddress &&
@@ -74,6 +74,19 @@ const ExtensionOnboarding = () => {
                                             alt={'Polkadot Extension'}
                                         />
                                     </Media>
+                                </Row>
+                                <Row>
+                                    <Col className="d-flex justify-content-center text-secondary">
+                                        Address balance:&nbsp;
+                                        {balance?.free &&
+                                            utils.fromChainUnit(
+                                                balance.free,
+                                                chainInfo?.decimals,
+                                                2
+                                            ) +
+                                            ` ${chainInfo.token}`
+                                        }
+                                    </Col>
                                 </Row>
                                 <div className="d-flex flex-grow-1" />
                                 <Row>
