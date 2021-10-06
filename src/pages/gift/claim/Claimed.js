@@ -27,7 +27,7 @@ export default function Claimed ({ amount, accountAddress }) {
           <button
             className="btn btn-primary"
             onClick={() => history.push(`/account/${accountAddress}`)}>
-            See Account
+            {/* See Account */}Set up a {giftTheme.network} wallet
           </button>
         </Col>
       </Card.Body>
