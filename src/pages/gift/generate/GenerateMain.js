@@ -9,6 +9,7 @@ import ErrorModal from '../../../components/Error';
 import { useSubstrate, giftProvider } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { randomAsHex } from '@polkadot/util-crypto';
+import BN from 'bn.js';
 import ParityQRSigner from '../ParityQRSigner';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import Landing from './Landing';
@@ -19,6 +20,10 @@ import Footer from '../footer/Footer';
 
 const GenerateContext = createContext();
 export { GenerateContext };
+
+const generateGiftSecret = () => {
+  return (new BN(randomAsHex(8).slice(2), 16)).toString().slice(0, 16);
+};
 
 export default function GenerateMain () {
   const { apiState, api, keyring } = useSubstrate();
@@ -32,6 +37,7 @@ export default function GenerateMain () {
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
   const [gift, setGift] = useState(null);
+  const [seed, _] = useState(generateGiftSecret());
 
   const [{ isQrHashed, qrAddress, qrPayload, qrResolve }, setQrState] =
     useState({
@@ -39,6 +45,11 @@ export default function GenerateMain () {
       qrAddress: '',
       qrPayload: new Uint8Array()
     });
+
+  const generateGiftAccount = (seed) => {
+    const account = keyring.createFromUri(seed, null, 'sr25519');
+    return account;
+  };
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -80,12 +91,6 @@ export default function GenerateMain () {
     setProcessingError(error.message);
   };
 
-  const generateGiftAccount = () => {
-    const seed = randomAsHex(10);
-    const account = keyring.createFromUri(seed, null, 'sr25519');
-    return { seed, account };
-  };
-
   const getSigningAccount = async (account) => {
     let pairOrAddress = account;
     let signer = null;
@@ -116,15 +121,12 @@ export default function GenerateMain () {
       // load signing account
       const senderAccount = await getSigningAccount(account);
 
-      // generate mnemonic and interim recipiant account
-
-      const { seed, account: giftAccountPair } = generateGiftAccount();
       const gift = {
         amount: giftInfo.amount
       };
 
       const interimAccount = {
-        pairOrAddress: giftAccountPair
+        pairOrAddress: generateGiftAccount(seed)
       };
 
       createGift(api, interimAccount, senderAccount, gift)

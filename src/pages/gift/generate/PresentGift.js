@@ -2,21 +2,23 @@ import { Row, Col, Card } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import config from '../../../config';
+import { stringHelpers } from '../../../utils';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-export default function PresentGift ({ gift, removeGiftHandler }) {
+export default function PresentGift({ gift, removeGiftHandler }) {
   const { email, name, amount, secret } = gift;
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
   const mailSubject = `Someone has sent you ${giftTheme?.content}`;
   const claimUrl = config.CLAIM_URL;
+  const formattedSecret = stringHelpers.formatGiftSecret(secret);
   const greeting = name ? `Hey ${name?.trim()}!` : 'Hey!';
   const giftMessage =
     `${greeting}\n` +
     `I'm sending you ${amountStr} as a gift! You can go to\n\n` +
     `${claimUrl}\n\n` +
-    `and type in the following secret message to claim your ${giftTheme?.content}.\n\n` +
-    `${secret}\n\n` +
+    `and type in the following gift secret to claim your ${giftTheme?.content}.\n\n` +
+    `${formattedSecret}\n\n` +
     `The website will walk you through to create your own secure${giftTheme.network} account.\n` +
     'Enjoy!';
 
@@ -59,7 +61,7 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                     }}>{`${claimUrl}`}</em>
                 </p>
                 <p>
-                  and type in the following secret message to claim your{' '}
+                  and type in the following gift secret to claim your{' '}
                   {`${giftTheme.content}`}.
                   <strong className="bg-gray"
                     style={{
@@ -70,7 +72,7 @@ export default function PresentGift ({ gift, removeGiftHandler }) {
                       marginBottom: '20px',
                       borderRadius: '5px'
                     }}>
-                    {secret}
+                    {formattedSecret}
                   </strong>
                   The website will walk you through to create your own secure{' '}
                   {`${giftTheme.network}`} account.
