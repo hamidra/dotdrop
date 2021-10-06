@@ -149,9 +149,8 @@ export default function GenerateGift ({
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={`Gift ${giftTheme?.content}`}
-          cardText={`Send ${giftTheme?.content} to your friends and family, and have them join the
-          ${giftTheme?.network} Network today.`}
+          title="Gift Details"
+          cardText={`Enter the recipient’s name and the amount of ${giftTheme?.content} you would like to send`}
           backClickHandler={() => prevStep()}
         />
         <Row className="flex-column align-items-center">
