@@ -110,15 +110,11 @@ export default function GenerateGift ({
     }
   };
 
-  const validate = ({ recipientEmail, confirmEmail, amount }) => {
+  const validate = ({ recipientName, amount }) => {
     const errors = {};
-    if (
-      !recipientEmail ||
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(recipientEmail)
-    ) {
-      errors.recipientEmail = 'Please enter a valid email.';
-    } else if (recipientEmail !== confirmEmail) {
-      errors.confirmEmail = "The email addresses did'nt match.";
+    const maxNameLength = 50;
+    if (recipientName && recipientName.length > maxNameLength) {
+      errors.recipientName = `Recipient name can not be more than ${maxNameLength} characters`;
     }
     const amountError = validateGiftAmount(amount);
     if (amountError) {
@@ -138,13 +134,12 @@ export default function GenerateGift ({
   const formik = useFormik({
     initialValues: {
       amount: '',
-      recipientEmail: '',
-      confirmEmail: ''
+      recipientName: ''
     },
     validate,
-    onSubmit: ({ recipientEmail, amount }) => {
+    onSubmit: ({ recipientName, amount }) => {
       generateGiftHandler({
-        recipientEmail,
+        recipientName,
         amount
       });
     }
@@ -165,57 +160,30 @@ export default function GenerateGift ({
               autoComplete="off"
               className="w-100"
               onSubmit={formik.handleSubmit}>
-              <Form.Group className="row">
-                <Col md="6">
-                  <Form.Label htmlFor="recipientEmail">
-                    Recipient Email
+              <Form.Group>
+                  <Form.Label htmlFor="recipientName">
+                    Recipient Name
                   </Form.Label>
                   <Form.Control
-                    id="recipientEmail"
-                    name="recipientEmail"
-                    type="email"
+                    id="recipientName"
+                    name="recipientName"
+                    type="text"
                     autoComplete="off"
                     placeholder=""
-                    value={formik.values.recipientEmail}
+                    value={formik.values.recipientName}
                     isInvalid={
-                      formik.touched.recipientEmail &&
-                      !!formik.errors.recipientEmail
+                      formik.touched.recipientName &&
+                      !!formik.errors.recipientName
                     }
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                  {formik.touched.recipientEmail &&
-                    !!formik.errors.recipientEmail && (
+                  {formik.touched.recipientName &&
+                    !!formik.errors.recipientName && (
                       <Form.Text className="text-danger">
-                        {formik.errors.recipientEmail}
+                        {formik.errors.recipientName}
                       </Form.Text>
                   )}
-                </Col>
-                <Col md="6" className="mt-2 mt-md-0">
-                  <Form.Label htmlFor="confirmEmail">
-                    Confirm Recipient Email
-                  </Form.Label>
-                  <Form.Control
-                    id="confirmEmail"
-                    name="confirmEmail"
-                    type="email"
-                    autoComplete="nope"
-                    placeholder=""
-                    value={formik.values.confirmEmail}
-                    isInvalid={
-                      formik.touched.confirmEmail &&
-                      !!formik.errors.confirmEmail
-                    }
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.touched.confirmEmail &&
-                    !!formik.errors.confirmEmail && (
-                      <Form.Text className="text-danger">
-                        {formik.errors.confirmEmail}
-                      </Form.Text>
-                  )}
-                </Col>
               </Form.Group>
 
               <Form.Group>

@@ -75,7 +75,7 @@ export default function PresentAccountPhrase ({
               <Eye className="mr-1" size="18" />
               <p>{'Reveal seedphrase'}</p>
             </div>
-            <CopyToClipboard
+            {/* <CopyToClipboard
               text={mnemonicWords.join(' ')}
               onCopy={(result) => {
                 setCopied(result);
@@ -86,7 +86,7 @@ export default function PresentAccountPhrase ({
                 <Copy className="mr-1" size={18} />
                 <span className="copy">{copied ? 'Copied' : 'Copy'}</span>
               </div>
-            </CopyToClipboard>
+            </CopyToClipboard> */}
           </Row>
         </div>
         <div className="flex-row justify-content-start align-items-center px-2 pt-2">
