@@ -29,7 +29,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Claim Your Gift'}
-          cardText={['Enter the ', <b>gift secret</b>, ' you received in your email.']}
+          cardText={['Enter the 16-digit ', <b>gift secret</b>, ' you received.']}
           backClickHandler={prevStep}
         />
         <Formik
