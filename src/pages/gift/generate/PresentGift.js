@@ -5,7 +5,7 @@ import config from '../../../config';
 import { stringHelpers } from '../../../utils';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-export default function PresentGift({ gift, removeGiftHandler }) {
+export default function PresentGift ({ gift, removeGiftHandler }) {
   const { email, name, amount, secret } = gift;
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
