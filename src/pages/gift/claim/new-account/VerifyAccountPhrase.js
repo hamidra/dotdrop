@@ -39,8 +39,8 @@ export default function VerifyAccountPhrase ({
   return (
     <Card.Body className="d-flex flex-column">
       <CardHeader
-        title={'Verify Phrase'}
-        cardText="Enter the following words from the seed phrase saved in the previous step to complete the
+        title={'Verify Seed Phrase'}
+        cardText="Enter the following words from the seed phrase you saved in the previous step to complete the
         setup process."
         backClickHandler={() => prevStepHandler()}
       />
