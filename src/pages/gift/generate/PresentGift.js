@@ -82,7 +82,7 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
           </Col>
         </Row>
         <Row>
-          <Col className="px-5 d-flex justify-content-end">
+          <Col className="px-5 flex-column flex-md-row d-flex justify-content-end">
             <button
               className="btn btn-link ml-3"
               onClick={() => removeGiftHandler(secret)}>
