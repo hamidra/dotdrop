@@ -12,15 +12,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
   const { giftTheme, chainInfo } = useSubstrate();
   const formattedSecret = secret && stringHelpers.formatGiftSecret(secret);
   const { prevStep } = useContext(GenerateContext);
-
-  const amountFloat = !isNaN(amount) && parseFloat(amount);
-  const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
-  const maxAmount = config?.MAX_AMOUNT?.toString();
-  const maxAmountFloat = !isNaN(maxAmount) && parseFloat(maxAmount);
-  const maxAmountStr =
-    maxAmountFloat && utils.formatBalance(maxAmount, chainInfo?.token);
-  const isTooHighWarning =
-    amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
+  const amountStr = amount && utils.formatBalance(amount, chainInfo?.token, 5);
 
   const checkboxLabel = 'I have stored the gift secret in a safe place.';
   const [checked, setChecked] = useState(false);
@@ -40,7 +32,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
           ]}
           backClickHandler={() => prevStep()}
         />
-        <Row className="justify-content-center align-items-center my-1">
+        <Row className="justify-content-center align-items-center">
           <Col>
             <div className="container border rounded p-4">
               <Row className="mb-4">
@@ -56,20 +48,13 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
                   </div>
                   <div>{amountStr}</div>
                 </Col>
-                {isTooHighWarning && (
-                  <Col>
-                    <small className="text-warning">
-                      {`⚠️ The gift amount is higher than ${maxAmountStr}. Direct account transactions are recommended for high amounts.`}
-                    </small>
-                  </Col>
-                )}
               </Row>
               <Row>
                 <Col>
                   <div className="mb-1">
                     <b>Gift Secret</b>
                   </div>
-                  <div>{formattedSecret}</div>
+                  <div className={checkedError ? 'text-danger' : ''}>{formattedSecret}</div>
                 </Col>
               </Row>
             </div>
@@ -91,7 +76,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
           )}
         </div>
         <div className="d-flex flex-grow-1" />
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mt-1">
           <button
             className="btn btn-primary"
             disabled={!!checkedError}
