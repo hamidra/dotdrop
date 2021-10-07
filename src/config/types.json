@@ -1,7 +1,1 @@
-{
-  "GiftInfo": {
-    "gifter": "AccountId",
-    "deposit": "Balance",
-    "amount": "Balance"
-  }
-}
+{}
