@@ -6,7 +6,7 @@ import LedgerMain from '../accounts/LedgerWallet/LedgerMain';
 import ConnectSigner from '../accounts/ConnectSigner';
 import Processing from '../../../components/Processing';
 import ErrorModal from '../../../components/Error';
-import { useSubstrate, giftProvider } from '../../../substrate-lib';
+import { useSubstrate, giftProvider, utils } from '../../../substrate-lib';
 import { QRSigner } from '../../../substrate-lib/components';
 import { randomAsHex } from '@polkadot/util-crypto';
 import BN from 'bn.js';
@@ -24,6 +24,25 @@ export { GenerateContext };
 
 const generateGiftSecret = () => {
   return new BN(randomAsHex(8).slice(2), 16).toString().slice(0, 16);
+};
+
+const storeGiftInfo = (fromAccount, giftInfo) => {
+  let amount = giftInfo?.amount;
+  // try format gift balance
+  try {
+    amount = utils.formatBalance(amount);
+  } catch (err) {
+    console.log(err);
+  }
+  // store gift info in local storage
+  localStorage.setItem(
+    giftInfo?.secret,
+    JSON.stringify({
+      fromAddress: fromAccount?.address,
+      ...giftInfo,
+      amount
+    })
+  );
 };
 
 export default function GenerateMain () {
@@ -141,7 +160,10 @@ export default function GenerateMain () {
       };
 
       createGift(api, interimAccount, senderAccount, gift)
-        .then(() => nextStep())
+        .then(() => {
+          storeGiftInfo(account, giftInfo);
+          nextStep();
+        })
         .catch((error) => handleError(error));
 
       // ToDO: make it sync by showing a spinner while the gift is being registered on chain before moving to the next step!
@@ -184,6 +206,7 @@ export default function GenerateMain () {
       removeGift(api, interimAccount, senderAccount)
         .then(() => {
           setGiftInfo(null);
+          localStorage.removeItem(secret);
           jumpToStep(2);
         })
         .catch((error) => handleError(error));

@@ -10,34 +10,34 @@ import { ArrowBendDownRight } from 'phosphor-react';
 import extensionLogo from '../../../images/extension_logo_128.png';
 
 const ExtensionOnboarding = () => {
-    const { api, apiState, chainInfo } = useSubstrate();
-    const [balance, setBalance] = useState(null);
+  const { api, apiState, chainInfo } = useSubstrate();
+  const [balance, setBalance] = useState(null);
 
-    const { accountAddress } = useParams();
-    useEffect(() => {
-        let unsub;
-        setBalance(null);
-        accountAddress &&
+  const { accountAddress } = useParams();
+  useEffect(() => {
+    let unsub;
+    setBalance(null);
+    accountAddress &&
             utils.validateAddress(accountAddress, chainInfo?.ss58Format) &&
             api?.query?.system &&
             api.query.system
-                .account(accountAddress, ({ nonce, data: balance }) => {
-                    setBalance(balance);
-                    console.log(
+              .account(accountAddress, ({ nonce, data: balance }) => {
+                setBalance(balance);
+                console.log(
                         `free balance is ${balance.free} with ${balance.reserved} reserved and a nonce of ${nonce}`
-                    );
-                })
-                .then((result) => {
-                    unsub = result;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+                );
+              })
+              .then((result) => {
+                unsub = result;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
 
-        return () => unsub && unsub();
-    }, [api, apiState, accountAddress, chainInfo]);
+    return () => unsub && unsub();
+  }, [api, apiState, accountAddress, chainInfo]);
 
-    return (
+  return (
         <>
             <Header />
             <Container>
@@ -80,9 +80,9 @@ const ExtensionOnboarding = () => {
                                         Address balance:&nbsp;
                                         {balance?.free &&
                                             utils.fromChainUnit(
-                                                balance.free,
-                                                chainInfo?.decimals,
-                                                2
+                                              balance.free,
+                                              chainInfo?.decimals,
+                                              2
                                             ) +
                                             ` ${chainInfo.token}`
                                         }
@@ -94,8 +94,8 @@ const ExtensionOnboarding = () => {
                                         <button
                                             className="btn btn-primary"
                                             onClick={(e) => {
-                                                e.preventDefault();
-                                                window.open('https://polkadot.js.org/extension/', '_blank');
+                                              e.preventDefault();
+                                              window.open('https://polkadot.js.org/extension/', '_blank');
                                             }}
                                             type="button">
                                             Install Polkadot.js Extension
@@ -109,7 +109,7 @@ const ExtensionOnboarding = () => {
             </Container>
             <Footer />
         </>
-    );
+  );
 };
 
 export default ExtensionOnboarding;
