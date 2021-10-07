@@ -1,8 +1,8 @@
 {
   "APP_NAME": "Polkadot Gifts",
-  "DEVELOPMENT_KEYRING": true,
+  "DEVELOPMENT_KEYRING": false,
   "RPC": {},
   "THEME": "polkadot",
   "MAX_AMOUNT": 100,
-  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim"
+  "CLAIM_URL": "https://gifts.polkadot.network/#/claim"
 }
