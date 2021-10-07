@@ -7,7 +7,8 @@ import { Formik, useFormik } from 'formik';
 import BN from 'bn.js';
 export default function GenerateGift ({
   account,
-  generateGiftHandler,
+  initialGiftInfo,
+  setGiftInfoHandler,
   giftFeeMultiplier // this can be 0 or 1 and specifies if a gift provider charges fees or the gifts are free.
 }) {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
@@ -133,12 +134,12 @@ export default function GenerateGift ({
 
   const formik = useFormik({
     initialValues: {
-      amount: '',
-      recipientName: ''
+      amount: initialGiftInfo?.amount || '',
+      recipientName: initialGiftInfo?.name || ''
     },
     validate,
     onSubmit: ({ recipientName, amount }) => {
-      generateGiftHandler({
+      setGiftInfoHandler({
         recipientName,
         amount
       });
@@ -237,7 +238,7 @@ export default function GenerateGift ({
             className="btn btn-primary"
             disabled={!formik?.isValid}
             onClick={() => formik.submitForm()}>
-            Generate Gift
+            Next
           </button>
         </div>
       </Card.Body>
