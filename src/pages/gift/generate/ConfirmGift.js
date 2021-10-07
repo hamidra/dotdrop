@@ -42,7 +42,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
         />
         <Row className="justify-content-center align-items-center my-1">
           <Col>
-            <div className="container border rounded p-3">
+            <div className="container border rounded p-4">
               <Row className="mb-4">
                 <Col xs={12} sm={6}>
                   <div className="mb-1">

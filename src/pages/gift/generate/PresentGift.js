@@ -44,9 +44,8 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
           }
         />
         <Row className="justify-content-center align-items-center my-4 mx-2">
-          <Col>
-            <Card className="printable border">
-              <Card.Body className="p-4">
+          <Col className="px-0">
+            <div className="printable border rounded p-4">
                 <p>{greeting}</p>
                 <p>I'm sending you {`${amountStr}`} as a gift! You can go to</p>
                 <p>
@@ -79,12 +78,11 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
                   {`${giftTheme?.network}`} account.
                 </p>
                 <p>Enjoy!</p>
-              </Card.Body>
-            </Card>
+            </div>
           </Col>
         </Row>
         <Row>
-          <Col className="px-5 d-flex justify-content-end">
+          <Col className="px-5 flex-column flex-md-row d-flex justify-content-end">
             <button
               className="btn btn-link ml-3"
               onClick={() => removeGiftHandler(secret)}>
