@@ -45,35 +45,6 @@ $btn-border-radius-sm: 1.5rem;
 // Card
 $card-border-radius: 20px;
 
-.card {
-  border: none !important;
-}
-
-.card-body {
-  padding: 1.5rem !important;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: center;
-  padding: 1rem !important;
-  font-size: 14px;
-  border-top-color: #d5dbe0 !important;
-}
-
-.card-header-title {
-  font-size: 1.7rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
-}
-
-@media (min-width: 576px) {
-  .card-header-title {
-    font-size: 2.5rem;
-  }
-}
-
 // Set booststrap custom theme
 $theme-colors: (
   'primary': #e6007a,
