@@ -44,7 +44,7 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
           }
         />
         <Row className="justify-content-center align-items-center my-4 mx-2">
-          <Col>
+          <Col className="px-0">
             <Card className="printable border">
               <Card.Body className="p-4">
                 <p>{greeting}</p>
