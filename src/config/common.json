@@ -4,5 +4,6 @@
   "RPC": {},
   "THEME": "polkadot",
   "MAX_AMOUNT": 100,
-  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim"
+  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
+  "OTHER_RECOMMENDATION_URL": "https://gifts.kusama.network"
 }
