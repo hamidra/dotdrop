@@ -6,7 +6,8 @@ import { Formik } from 'formik';
 const randomIdx = (length) => {
   const random1 = Math.floor(Math.random() * length) + 1;
   let random2 = Math.floor(Math.random() * length) + 1;
-  random2 = random2 === random1 ? ((random2 * 2) % length) + 1 : random2;
+  random2 = random2 === random1 ? ((random2 + 1) % (length + 1)) : random2;
+  if (random2 === 0) { random2 += 1; }
   return [random1, random2].sort((a, b) => a - b);
 };
 
