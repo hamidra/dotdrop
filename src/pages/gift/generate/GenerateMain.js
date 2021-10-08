@@ -46,7 +46,7 @@ const storeGiftInfo = (fromAccount, giftInfo) => {
 };
 
 export default function GenerateMain () {
-  const { apiState, api, keyring } = useSubstrate();
+  const { apiState, api, giftTheme, keyring } = useSubstrate();
   const { removeGift, createGift, getGiftFeeMultiplier } = giftProvider;
 
   const [step, setStep] = useState(0);
@@ -139,14 +139,8 @@ export default function GenerateMain () {
   const generateGiftHandler = async () => {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
-      window.alert(
-        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
-      );
     } else if (!account) {
       console.log('no account is selected');
-      window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
-      );
     } else {
       // load signing account
       const senderAccount = await getSigningAccount(account);
@@ -170,7 +164,7 @@ export default function GenerateMain () {
       if (account?.meta?.isExternal) {
         setShowSigner(true);
       } else {
-        setProcessingMsg('Generating the gift on the blockchain...');
+        setProcessingMsg(`Generating the gift on ${giftTheme.network}...`);
         setProcessing(true);
       }
     }
@@ -179,14 +173,8 @@ export default function GenerateMain () {
   const removeGiftHandler = async (secret) => {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
-      window.alert(
-        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
-      );
     } else if (!account) {
       console.log('no account is selected');
-      window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
-      );
     } else {
       // load signing account
       const senderAccount = await getSigningAccount(account);
@@ -215,7 +203,7 @@ export default function GenerateMain () {
         setShowSigner(true);
       } else {
         // go to generate gift
-        setProcessingMsg('Removing the gift from the blockchain...');
+        setProcessingMsg(`Removing the gift from ${giftTheme.network}...`);
         setProcessing(true);
       }
     }

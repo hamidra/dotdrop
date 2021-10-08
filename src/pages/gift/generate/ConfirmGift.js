@@ -18,7 +18,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const checkedErrorMessage =
-    'Please confirm you have stored the gift secret, to be able to manage your gift in the future.';
+    'Please confirm you have stored the gift secret.';
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
           cardText={[
             'Please confirm the details below to generate the gift and write down the ',
             <b>gift secret</b>,
-            ' to be able to manage your gift in the future.'
+            '.'
           ]}
           backClickHandler={() => prevStep()}
         />

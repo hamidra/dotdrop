@@ -38,9 +38,9 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
     <>
       <Card.Body>
         <CardHeader
-          title={'Send Message'}
+          title={'Share Your Gift'}
           cardText={
-            'Your gift was successfully created! Copy the following message and send it via email, or your favorite messaging app, or print it out and give it in person.'
+            'Your gift was successfully created! Add a message and send it via your favourite messaging app, or print it out and give it in person.'
           }
         />
         <Row className="justify-content-center align-items-center my-4 mx-2">
