@@ -56,14 +56,8 @@ export default function ClaimMain () {
   const claimGiftHandler = async (secret) => {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
-      window.alert(
-        `We were not able to connect to ${giftTheme.network}!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!`
-      );
     } else if (!address) {
       console.log('no account is selected');
-      window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
-      );
     } else {
       // retrive gift account from secret
       const mnemonic = secret;

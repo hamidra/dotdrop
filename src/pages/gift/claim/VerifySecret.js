@@ -6,7 +6,7 @@ import { useSubstrate } from '../../../substrate-lib';
 import { Formik } from 'formik';
 import { stringHelpers } from '../../../utils';
 
-export default function VerifySecret({ claimGiftHandler }) {
+export default function VerifySecret ({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
@@ -78,7 +78,7 @@ export default function VerifySecret({ claimGiftHandler }) {
                           <Form.Text style={{ color: 'red' }}>
                             {props.errors.redeemSecret}
                           </Form.Text>
-                        )}
+                      )}
                     </Form.Group>
                   </Form>
                 </Col>

@@ -139,14 +139,8 @@ export default function GenerateMain () {
   const generateGiftHandler = async () => {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
-      window.alert(
-        `We were not able to connect to ${giftTheme.network}!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!`
-      );
     } else if (!account) {
       console.log('no account is selected');
-      window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
-      );
     } else {
       // load signing account
       const senderAccount = await getSigningAccount(account);
@@ -179,14 +173,8 @@ export default function GenerateMain () {
   const removeGiftHandler = async (secret) => {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
-      window.alert(
-        `We were not able to connect to ${giftTheme.network}!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!`
-      );
     } else if (!account) {
       console.log('no account is selected');
-      window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
-      );
     } else {
       // load signing account
       const senderAccount = await getSigningAccount(account);
@@ -215,7 +203,7 @@ export default function GenerateMain () {
         setShowSigner(true);
       } else {
         // go to generate gift
-        setProcessingMsg(`Removing the gift from the ${giftTheme.network}...`);
+        setProcessingMsg(`Removing the gift from ${giftTheme.network}...`);
         setProcessing(true);
       }
     }
