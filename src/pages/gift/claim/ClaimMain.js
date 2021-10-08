@@ -18,7 +18,7 @@ const balanceDecimalPoints = 5;
 
 export { ClaimContext };
 export default function ClaimMain () {
-  const { keyring, apiState, api, chainInfo } = useSubstrate();
+  const { keyring, apiState, api, chainInfo, giftTheme } = useSubstrate();
   const { claimGift } = giftProvider;
 
   const [step, setStep] = useState(0);
@@ -57,7 +57,7 @@ export default function ClaimMain () {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
       window.alert(
-        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
+        `We were not able to connect to ${giftTheme.network}!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!`
       );
     } else if (!address) {
       console.log('no account is selected');

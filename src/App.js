@@ -15,7 +15,7 @@ import GenerateMain from './pages/gift/generate/GenerateMain';
 import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
 
 function Body () {
-  const { apiState } = useSubstrate();
+  const { apiState, giftTheme } = useSubstrate();
 
   return (
     <>
@@ -27,14 +27,14 @@ function Body () {
           <ClaimMain />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to the blockchain network..."
+            message={`Connecting to the ${giftTheme.network}...`}
           />
         </Route>
         <Route path={'/generate'}>
           <GenerateMain />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to the blockchain network..."
+            message={`Connecting to the ${giftTheme.network}...`}
           />
         </Route>
         <Route path={'/account/:accountAddress'}>
@@ -42,7 +42,7 @@ function Body () {
           <ExtensionOnboarding />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to the blockchain network..."
+            message={`Connecting to the ${giftTheme.network}...`}
           />
         </Route>
         <Route path={'/privacy-policy'}>
