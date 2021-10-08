@@ -159,7 +159,7 @@ export default function GenerateGift ({
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title="Gift Details"
-          cardText={`Enter the recipient’s name and the amount of ${giftTheme?.content} you would like to send`}
+          cardText={`Enter the recipient’s name and the amount of ${giftTheme?.content} you would like to send.`}
           backClickHandler={() => prevStep()}
         />
         <Formik

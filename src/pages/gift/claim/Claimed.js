@@ -17,7 +17,7 @@ export default function Claimed ({ amount, accountAddress }) {
             <Image style={{ width: 120 }} src={confetti} />
           </Col>
           <Col className="pt-5">
-            <p className="text-center">
+            <p className="text-center text-secondary">
               {`Your ${giftTheme?.network} account has been funded and your gift ${amountStr ? `of ${amountStr}` : ''} has been successfully transferred.`}
             </p>
           </Col>
