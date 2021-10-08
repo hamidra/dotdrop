@@ -4,23 +4,30 @@ import { ClaimContext } from './ClaimMain';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate } from '../../../substrate-lib';
 import { Formik } from 'formik';
+import { stringHelpers } from '../../../utils';
 
-export default function VerifySecret ({ claimGiftHandler }) {
+export default function VerifySecret({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
     // and is indeed a valid mnemonic phrase
-    redeemSecret = redeemSecret.trim();
+    redeemSecret = stringHelpers.removeSpaces(redeemSecret);
     if (redeemSecret) {
       claimGiftHandler(redeemSecret);
     }
   };
   const { giftTheme } = useSubstrate();
   const validate = ({ redeemSecret }) => {
-    redeemSecret = redeemSecret.trim();
+    redeemSecret = stringHelpers.removeSpaces(redeemSecret);
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
+    } else if (redeemSecret.length < 16) {
+      errors.redeemSecret =
+        'Please enter a valid gift secret. The secret must include at least 16 digits';
+    } else if (redeemSecret.length > 32) {
+      errors.redeemSecret =
+        'Please enter a valid gift secret. The secret can not include more than 32 characters';
     }
     return errors;
   };
@@ -29,7 +36,11 @@ export default function VerifySecret ({ claimGiftHandler }) {
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Claim Your Gift'}
-          cardText={['Enter the 16-digit ', <b>gift secret</b>, ' you received.']}
+          cardText={[
+            'Enter the ',
+            <b>gift secret</b>,
+            ' you received to claim your gift.'
+          ]}
           backClickHandler={prevStep}
         />
         <Formik
@@ -54,7 +65,6 @@ export default function VerifySecret ({ claimGiftHandler }) {
                         id="redeemSecret"
                         name="redeemSecret"
                         type="input"
-                        placeholder="0x4rt6..."
                         isInvalid={
                           props.touched.redeemSecret &&
                           !!props.errors.redeemSecret
@@ -68,7 +78,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
                           <Form.Text style={{ color: 'red' }}>
                             {props.errors.redeemSecret}
                           </Form.Text>
-                      )}
+                        )}
                     </Form.Group>
                   </Form>
                 </Col>
@@ -78,6 +88,9 @@ export default function VerifySecret ({ claimGiftHandler }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
+                    disabled={
+                      props.touched.redeemSecret && !!props.errors.redeemSecret
+                    }
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>
