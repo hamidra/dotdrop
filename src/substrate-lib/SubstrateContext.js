@@ -138,7 +138,7 @@ const queryChainInfo = async (api, state, dispatch) => {
     decimals: api.registry?.chainDecimals[0] || 12,
     token: (api.registry?.chainTokens[0] || 'DOT')?.toUpperCase(),
     genesisHash: api.genesisHash,
-    ss58Format: (api.registry?.chainSS58 || api.registry?.chainSS5 == 0) ? api.registry?.chainSS58 : 42,
+    ss58Format: (api.registry?.chainSS58 || api.registry?.chainSS58 == 0) ? api.registry?.chainSS58 : 42,
     existentialDeposit:
       api.consts?.balances?.existentialDeposit || new BN(0, 10),
     chainName: await api.rpc.system.chain()
