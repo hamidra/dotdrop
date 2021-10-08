@@ -2,7 +2,7 @@ import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
-import { DotsThree, ImageSquare } from 'phosphor-react';
+import { Circle, DotsThree, ImageSquare } from 'phosphor-react';
 import KusamaLogo from '../../../images/kusama_logo.png';
 import KusamaIcon from '../../../images/kusama_icon.png';
 
@@ -92,8 +92,17 @@ export default function Header ({ selectedAccount }) {
               <Dropdown.Item
                 className="px-3"
                 onClick={() => history.push('/about')}>
-                <ImageSquare className="mr-1" size={18} />
+                <ImageSquare className="mr-2" size={18} />
                 About Gifts
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="px-3"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open('https://gifts.polkadot.network', '_blank');
+                }}>
+                <Circle className="mr-2" size={18} />
+                Gift DOT
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

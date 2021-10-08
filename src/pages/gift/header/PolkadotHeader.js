@@ -2,7 +2,7 @@ import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
-import { DotsThree, Gift } from 'phosphor-react';
+import { Bird, DotsThree, Gift } from 'phosphor-react';
 import PolkadotCircle from '../../../images/polkadot-circle.png';
 
 const AccountInfoBox = ({ accountAddress }) => {
@@ -95,8 +95,17 @@ export default function Header ({ selectedAccount }) {
               <Dropdown.Item
                 className="px-3"
                 onClick={() => history.push('/about')}>
-                <Gift className="mr-1" size={18} />
+                <Gift className="mr-2" size={18} />
                 About Gifts
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="px-3"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open('https://gifts.kusama.network', '_blank');
+                }}>
+                <Bird className="mr-2" size={18} />
+                Gift KSM
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
