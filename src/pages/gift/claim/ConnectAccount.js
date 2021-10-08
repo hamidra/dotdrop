@@ -9,7 +9,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
     <Card.Body className="d-flex flex-column">
       <CardHeader
         title={`Claim Your ${giftTheme?.content} Gift`}
-        cardText={`Create a new ${giftTheme?.network} address to store your funds or use an existing account.`}
+        cardText={[`Create a new ${giftTheme?.network} address to store your funds`, <br />, 'or use an existing account.']}
       />
       <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
         <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
