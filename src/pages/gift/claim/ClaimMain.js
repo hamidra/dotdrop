@@ -11,6 +11,7 @@ import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
+import analytics from '../../../analytics';
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
@@ -80,16 +81,20 @@ export default function ClaimMain () {
           console.log(claimedGift);
           // currently only show the balance amount in the claimed page. When we support NFTs and Assets we can change to show them too.
           let claimedAmount = claimedGift?.balances?.[0];
-          claimedAmount = claimedAmount && utils.fromChainUnit(
-            claimedAmount,
-            chainInfo?.decimals,
-            balanceDecimalPoints
-          );
+          claimedAmount =
+            claimedAmount &&
+            utils.fromChainUnit(
+              claimedAmount,
+              chainInfo?.decimals,
+              balanceDecimalPoints
+            );
           setClaimedAmount(claimedAmount);
           console.log(`claimed amount: ${claimedAmount}`);
+          analytics.track('claim_suceeded');
           nextStep();
         })
         .catch((error) => {
+          analytics.track('claim_failed');
           handleError(error);
         });
 
@@ -163,16 +168,16 @@ export default function ClaimMain () {
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
-            {step === 0 &&
+            {step === 0 && (
               <div className="landingpage">{currentStepComponent}</div>
-            }
-            {step > 0 &&
+            )}
+            {step > 0 && (
               <Card
                 style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
                 className="shadow">
                 {currentStepComponent}
               </Card>
-            }
+            )}
           </Col>
         </Row>
       </Container>

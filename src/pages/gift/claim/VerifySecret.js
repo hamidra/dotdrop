@@ -5,6 +5,7 @@ import CardHeader from '../../../components/CardHeader';
 import { useSubstrate } from '../../../substrate-lib';
 import { Formik } from 'formik';
 import { stringHelpers } from '../../../utils';
+import analytics from '../../../analytics';
 
 export default function VerifySecret ({ claimGiftHandler }) {
   const { prevStep } = useContext(ClaimContext);
@@ -91,7 +92,12 @@ export default function VerifySecret ({ claimGiftHandler }) {
                     disabled={
                       props.touched.redeemSecret && !!props.errors.redeemSecret
                     }
-                    onClick={() => !props.isSubmitting && props.submitForm()}>
+                    onClick={() => {
+                      if (!props.isSubmitting) {
+                        analytics.track('claim_clicked');
+                        props.submitForm();
+                      }
+                    }}>
                     Claim Gift
                   </button>
                 </Col>

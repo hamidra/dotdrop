@@ -5,6 +5,7 @@ import { useSubstrate, utils } from '../../../substrate-lib';
 import { stringHelpers } from '../../../utils';
 import { GenerateContext } from './GenerateMain';
 import config from '../../../config';
+import analytics from '../../../analytics';
 
 export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
   const { email, name, amount, secret } = giftInfo || {};
@@ -18,7 +19,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const checkedErrorMessage =
-    'Please confirm you have stored the gift secret.';
+    'Please confirm you have stored the gift secret, to be able to manage your gift in the future.';
 
   return (
     <>
@@ -28,7 +29,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
           cardText={[
             'Please confirm the details below to generate the gift and write down the ',
             <b>gift secret</b>,
-            '.'
+            ' to be able to manage your gift in the future.'
           ]}
           backClickHandler={() => prevStep()}
         />
@@ -54,7 +55,9 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
                   <div className="mb-1">
                     <b>Gift Secret</b>
                   </div>
-                  <div className={checkedError ? 'text-danger' : ''}>{formattedSecret}</div>
+                  <div className={checkedError ? 'text-danger' : ''}>
+                    {formattedSecret}
+                  </div>
                 </Col>
               </Row>
             </div>
@@ -80,11 +83,14 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
           <button
             className="btn btn-primary"
             disabled={!!checkedError}
-            onClick={() =>
-              !checked
-                ? setCheckedError(checkedErrorMessage)
-                : generateGiftHandler()
-            }>
+            onClick={() => {
+              if (!checked) {
+                setCheckedError(checkedErrorMessage);
+              } else {
+                analytics.track('generate_confirmed');
+                generateGiftHandler();
+              }
+            }}>
             Generate Gift
           </button>
         </div>

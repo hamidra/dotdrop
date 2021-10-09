@@ -6,6 +6,8 @@ import { useSubstrate, utils } from '../../../substrate-lib';
 import { Formik } from 'formik';
 import config from '../../../config';
 import BN from 'bn.js';
+import analytics from '../../../analytics';
+
 export default function GenerateGift ({
   account,
   initialGiftInfo,
@@ -243,15 +245,15 @@ export default function GenerateGift ({
 
                       {props.touched.amount && !!props.errors.amount
                         ? (
-                            <Form.Text className="text-danger">
-                              {props?.errors?.amount}
-                            </Form.Text>
+                        <Form.Text className="text-danger">
+                          {props?.errors?.amount}
+                        </Form.Text>
                           )
                         : (
                             amountWarning && (
-                              <Form.Text className="text-warning">
-                                {amountWarning}
-                              </Form.Text>
+                          <Form.Text className="text-warning">
+                            {amountWarning}
+                          </Form.Text>
                             )
                           )}
                     </Form.Group>
@@ -263,7 +265,10 @@ export default function GenerateGift ({
                 <button
                   className="btn btn-primary"
                   disabled={!props?.isValid}
-                  onClick={() => props.submitForm()}>
+                  onClick={() => {
+                    analytics.track('generate_form_filled');
+                    props.submitForm();
+                  }}>
                   Next
                 </button>
               </div>

@@ -18,6 +18,7 @@ import ConnectAccount from './ConnectAccount';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ConfirmGift from './ConfirmGift';
+import analytics from '../../../analytics';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -156,9 +157,13 @@ export default function GenerateMain () {
       createGift(api, interimAccount, senderAccount, gift)
         .then(() => {
           storeGiftInfo(account, giftInfo);
+          analytics.track('generate_succeeded');
           nextStep();
         })
-        .catch((error) => handleError(error));
+        .catch((error) => {
+          analytics.track('generate_failed');
+          handleError(error);
+        });
 
       // ToDO: make it sync by showing a spinner while the gift is being registered on chain before moving to the next step!
       if (account?.meta?.isExternal) {
