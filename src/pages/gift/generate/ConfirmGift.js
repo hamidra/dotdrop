@@ -71,7 +71,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
                     <b>Gift Amount</b>
                   </div>
                   <div>{amountStr}</div>
-                  <small className='text-muted'>{`+ ${feeStr} fees`}</small>
+                  <small className='text-muted'>{feeStr ? `+ ${feeStr} fees` : ''}</small>
                 </Col>
               </Row>
               <Row>
