@@ -1,6 +1,4 @@
-import giftPalletGiftProvider from './giftPalletGiftProvider';
 import balancePalletGiftProvider from './balancePalletGiftProvider';
-import uniquesPalletGiftProvider from './uniquesPalletGiftProvider';
 import bundleGiftProvider from './bundleGiftProvider';
 
 const palletTypes = {

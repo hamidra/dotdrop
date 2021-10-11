@@ -260,15 +260,17 @@ export default function GenerateMain () {
       account={account}
       initialGiftInfo={giftInfo}
       setGiftInfoHandler={setGiftHandler}
-      giftFeeMultiplier={getGiftFeeMultiplier ? getGiftFeeMultiplier() : 0}
+      giftFeeMultiplier={getGiftFeeMultiplier ? getGiftFeeMultiplier() : 1}
     />
   );
 
   // Step-4
   steps.push(
     <ConfirmGift
+      account={account}
       giftInfo={giftInfo}
       generateGiftHandler={generateGiftHandler}
+      giftFeeMultiplier={getGiftFeeMultiplier ? getGiftFeeMultiplier() : 1}
     />
   );
 
