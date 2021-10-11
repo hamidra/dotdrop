@@ -17,25 +17,31 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
 
   useEffect(() => {
     async function fetchTxFee () {
-      const address = account?.address;
-      if (address && api) {
-        const info = await api.tx.balances
-          .transfer(address, amount || 0)
-          .paymentInfo(address);
+      try {
+        const address = account?.address;
+        if (address && api) {
+          const chainAmount = utils.toChainUnit(amount, chainInfo?.decimals);
+          const info = await api.tx.balances
+            .transfer(address, chainAmount || 0)
+            .paymentInfo(address);
 
-        let estimatedFee = utils.calcFeeAdjustments(info?.partialFee);
-        estimatedFee = estimatedFee.muln(giftFeeMultiplier);
-        const fee = utils.fromChainUnit(
-          estimatedFee,
-          chainInfo?.decimals
-        );
-        setGiftFee(fee);
+          let estimatedFee = utils.calcFeeAdjustments(info?.partialFee);
+          estimatedFee = estimatedFee.muln(giftFeeMultiplier);
+          const fee = utils.fromChainUnit(
+            estimatedFee,
+            chainInfo?.decimals
+          );
+          setGiftFee(fee);
+        }
+      } catch (err) {
+        console.log(`error while loading gift fees: ${err}`);
       }
     }
     fetchTxFee();
   }, [api, apiState, account, chainInfo]);
 
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token, 5);
+  console.log(`fee:${giftFee}`);
   const feeStr = giftFee && utils.formatBalance(giftFee, chainInfo?.token, 5);
 
   const checkboxLabel = 'I have stored the gift secret in a safe place.';
@@ -71,7 +77,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
                     <b>Gift Amount</b>
                   </div>
                   <div>{amountStr}</div>
-                  <small className='text-muted'>{feeStr ? `+ ${feeStr} fees` : ''}</small>
+                  <small className='text-muted'>{feeStr ? `+ ${feeStr} fees` : '+ gift fees'}</small>
                 </Col>
               </Row>
               <Row>

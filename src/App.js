@@ -38,7 +38,13 @@ function Body () {
           />
         </Route>
         <Route path={'/account/:accountAddress'}>
-          {/* <AccountOverview /> */}
+          <AccountOverview />
+          <Processing
+            show={apiState !== 'READY'}
+            message={`Connecting to ${giftTheme.network}...`}
+          />
+        </Route>
+        <Route path={'/extension/:accountAddress'}>
           <ExtensionOnboarding />
           <Processing
             show={apiState !== 'READY'}
