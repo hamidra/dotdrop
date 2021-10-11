@@ -86,7 +86,7 @@ export default function GenerateGift ({
       amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
     if (isTooHigh) {
       setAmountWarning(
-        `⚠️ The gift amount is higher than ${maxAmountStr}. Direct account transactions are recommended for high amounts.`
+        `⚠️ This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
       );
     } else {
       setAmountWarning(null);
@@ -264,7 +264,7 @@ export default function GenerateGift ({
                           )
                         : (
                             amountWarning && (
-                          <Form.Text className="text-warning">
+                          <Form.Text className="alert alert-warning">
                             {amountWarning}
                           </Form.Text>
                             )
