@@ -5,5 +5,6 @@
   "THEME": "kusama",
   "MAX_AMOUNT": 10,
   "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
-  "OTHER_RECOMMENDATION_URL": "https://gifts.polkadot.network"
+  "ALTERNATIVE_APP_URL": "https://gifts.polkadot.network",
+  "ADDED_FEE_MULTIPLIER": 2
 }

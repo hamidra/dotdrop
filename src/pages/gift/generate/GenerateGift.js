@@ -12,7 +12,9 @@ export default function GenerateGift ({
   account,
   initialGiftInfo,
   setGiftInfoHandler,
-  giftFeeMultiplier // this can be 0 or 1 and specifies if a gift provider charges fees or the gifts are free.
+  // this can be 1 or more and specifies the number of tx's a gift sender covers the fees for.
+  // (at least 1 to conver 1 tx from interim gift account to the recipient account).
+  giftFeeMultiplier
 }) {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
 
@@ -84,7 +86,7 @@ export default function GenerateGift ({
       amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
     if (isTooHigh) {
       setAmountWarning(
-        `⚠️ The gift amount is higher than ${maxAmountStr}. Direct account transactions are recommended for high amounts.`
+        `⚠️ This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
       );
     } else {
       setAmountWarning(null);
@@ -93,9 +95,11 @@ export default function GenerateGift ({
 
   const validateGiftAmount = (amount) => {
     const giftChainAmount = utils.toChainUnit(amount, chainInfo.decimals);
-    // if the fees are applied the sender needs to pay 2 transaction fees.
-    // one txfee for tx sender_account->gift_account and one txfee for tx from gift_account->recipient_account
-    const totalTxFees = new BN(txFee || 0, 10).muln(giftFeeMultiplier).muln(2);
+    // calculated as one txfee for the tx from sender account to interim account,
+    // plus the number of future tx fees (specified by giftFeeMultiplier) that the sender will cover,
+    // which is at least 1 to conver 1 tx from interim gift account to the recipient account.
+
+    const totalTxFees = new BN(txFee || 0, 10).muln(giftFeeMultiplier + 1);
     // this is the amount that will be deducted from sender account
     const totalChainAmount = giftChainAmount?.add(totalTxFees);
     // validate gift amount
@@ -150,9 +154,10 @@ export default function GenerateGift ({
 
   const _setAmount = (value, formik) => {
     const pattern = /^([0-9]+\.?[0-9]*)?$/i;
+    const amount = pattern.test(value) ? value : formik.values.amount;
     formik.setFieldValue(
       'amount',
-      pattern.test(value) ? value : formik.values.amount
+      amount
     );
   };
 
@@ -171,9 +176,17 @@ export default function GenerateGift ({
           }}
           validate={validate}
           onSubmit={({ recipientName, amount }, actions) => {
+            const totalGiftFee = new BN(txFee || 0, 10).muln(giftFeeMultiplier);
+            const fee = utils.fromChainUnit(
+              totalGiftFee,
+              chainInfo.decimals,
+              balanceDecimalPoints
+            );
+
             setGiftInfoHandler({
               recipientName,
-              amount
+              amount,
+              fee
             });
           }}>
           {(props) => (
@@ -251,7 +264,7 @@ export default function GenerateGift ({
                           )
                         : (
                             amountWarning && (
-                          <Form.Text className="text-warning">
+                          <Form.Text className="alert alert-warning">
                             {amountWarning}
                           </Form.Text>
                             )
