@@ -4,5 +4,7 @@
   "RPC": {},
   "THEME": "polkadot",
   "MAX_AMOUNT": 100,
-  "CLAIM_URL": "https://gifts.polkadot.network/#/claim"
+  "CLAIM_URL": "https://gifts.polkadot.network/#/claim",
+  "ALTERNATIVE_APP_URL": "https://gifts.kusama.network",
+  "ADDED_FEE_MULTIPLIER": 2
 }

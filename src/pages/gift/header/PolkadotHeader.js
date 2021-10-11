@@ -2,8 +2,9 @@ import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
-import { DotsThree, Gift } from 'phosphor-react';
+import { Bird, DotsThree, Gift } from 'phosphor-react';
 import PolkadotCircle from '../../../images/polkadot-circle.png';
+import config from '../../../config';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
@@ -25,6 +26,7 @@ const AccountInfoBox = ({ accountAddress }) => {
 export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
+  const alternativeApp = config.ALTERNATIVE_APP_URL;
 
   return (
     <>
@@ -32,7 +34,6 @@ export default function Header ({ selectedAccount }) {
         className="px-4 py-3"
         style={{ display: 'grid', gridTemplateColumns: '60px 1fr 60px' }}
         variant="dark"
-        /* expand="sm" */
       >
         <Navbar.Brand>
           <a
@@ -95,9 +96,20 @@ export default function Header ({ selectedAccount }) {
               <Dropdown.Item
                 className="px-3"
                 onClick={() => history.push('/about')}>
-                <Gift className="mr-1" size={18} />
+                <Gift className="mr-2" size={18} />
                 About Gifts
               </Dropdown.Item>
+              {alternativeApp && (
+                <Dropdown.Item
+                  className="px-3"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(alternativeApp, '_blank');
+                  }}>
+                  <Bird className="mr-2" size={18} />
+                  Gift KSM
+                </Dropdown.Item>
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </div>

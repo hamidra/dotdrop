@@ -11,6 +11,7 @@ import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
+import analytics from '../../../analytics';
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
@@ -18,7 +19,7 @@ const balanceDecimalPoints = 5;
 
 export { ClaimContext };
 export default function ClaimMain () {
-  const { keyring, apiState, api, chainInfo } = useSubstrate();
+  const { keyring, apiState, api, chainInfo, giftTheme } = useSubstrate();
   const { claimGift } = giftProvider;
 
   const [step, setStep] = useState(0);
@@ -56,14 +57,8 @@ export default function ClaimMain () {
   const claimGiftHandler = async (secret) => {
     if (apiState !== 'READY') {
       console.log('api not READY!' + apiState);
-      window.alert(
-        'We were not able to connect to the blockchain!\nPlease Check if you have set the correct rpc address for the chain and in case you are using any adblockers make sure it is turned off!'
-      );
     } else if (!address) {
       console.log('no account is selected');
-      window.alert(
-        'You need to sign in with your account to be able to send a gift 🔑🔓'
-      );
     } else {
       // retrive gift account from secret
       const mnemonic = secret;
@@ -86,16 +81,20 @@ export default function ClaimMain () {
           console.log(claimedGift);
           // currently only show the balance amount in the claimed page. When we support NFTs and Assets we can change to show them too.
           let claimedAmount = claimedGift?.balances?.[0];
-          claimedAmount = claimedAmount && utils.fromChainUnit(
-            claimedAmount,
-            chainInfo?.decimals,
-            balanceDecimalPoints
-          );
+          claimedAmount =
+            claimedAmount &&
+            utils.fromChainUnit(
+              claimedAmount,
+              chainInfo?.decimals,
+              balanceDecimalPoints
+            );
           setClaimedAmount(claimedAmount);
           console.log(`claimed amount: ${claimedAmount}`);
+          analytics.track('claim_suceeded');
           nextStep();
         })
         .catch((error) => {
+          analytics.track('claim_failed');
           handleError(error);
         });
 
@@ -169,16 +168,16 @@ export default function ClaimMain () {
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
-            {step === 0 &&
+            {step === 0 && (
               <div className="landingpage">{currentStepComponent}</div>
-            }
-            {step > 0 &&
+            )}
+            {step > 0 && (
               <Card
                 style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
                 className="shadow">
                 {currentStepComponent}
               </Card>
-            }
+            )}
           </Col>
         </Row>
       </Container>

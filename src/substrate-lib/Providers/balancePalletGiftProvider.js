@@ -1,8 +1,9 @@
 import utils from '../substrateUtils';
 import { signAndSendTx, getClaimedAssets } from './txHandler';
 import BN from 'bn.js';
+import config from '../../config';
 
-const feeMultiplierValue = 1;
+const feeMultiplierValue = config.ADDED_FEE_MULTIPLIER;
 const transferBalanceAndFees = async (
   api,
   fromAccount,
@@ -17,7 +18,7 @@ const transferBalanceAndFees = async (
     .paymentInfo(fromAddress);
   const feeAdjustment = utils.calcFeeAdjustments(info?.partialFee);
   const chainAmountAndFees = chainAmount.add(
-    feeAdjustment.mul(new BN(feeMultiplier || 0))
+    feeAdjustment.mul(new BN(feeMultiplier || 1))
   );
   const tx = api.tx.balances.transfer(toAddress, chainAmountAndFees);
   return signAndSendTx(api, tx, fromAccount);
@@ -65,7 +66,10 @@ const balancePalletGiftProvider = {
     return transferAll(api, interimAccount, senderAddress);
   },
   getGiftFeeMultiplier: () => {
-    // gift creation fees are equal to 1x (for final tranaction from the gift interim account to the recipient account)
+    // tx fees are multiplied by this multiplier and added to the gift value when the gift is generated.
+    // the gift value is calculated as : gift_amount + feeMultiplierValue*(txfee)
+    // The added fee amount will cover the fees for the tranaction from the interim gif account to the recipient account during claim process
+    // , plus  maybe some more transactions after the claim that are covered.
     return feeMultiplierValue;
   }
 };

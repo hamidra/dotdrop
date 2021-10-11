@@ -1,24 +1,48 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Row, Col, Card, Form } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { stringHelpers } from '../../../utils';
 import { GenerateContext } from './GenerateMain';
 import config from '../../../config';
+import analytics from '../../../analytics';
 
-export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
-  const { email, name, amount, secret } = giftInfo || {};
+export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, giftFeeMultiplier }) {
+  const { email, name, amount, secret, fee } = giftInfo || {};
 
-  const { giftTheme, chainInfo } = useSubstrate();
+  const { api, apiState, giftTheme, chainInfo } = useSubstrate();
+  const [giftFee, setGiftFee] = useState(null);
   const formattedSecret = secret && stringHelpers.formatGiftSecret(secret);
   const { prevStep } = useContext(GenerateContext);
+
+  useEffect(() => {
+    async function fetchTxFee () {
+      const address = account?.address;
+      if (address && api) {
+        const info = await api.tx.balances
+          .transfer(address, amount || 0)
+          .paymentInfo(address);
+
+        let estimatedFee = utils.calcFeeAdjustments(info?.partialFee);
+        estimatedFee = estimatedFee.muln(giftFeeMultiplier);
+        const fee = utils.fromChainUnit(
+          estimatedFee,
+          chainInfo?.decimals
+        );
+        setGiftFee(fee);
+      }
+    }
+    fetchTxFee();
+  }, [api, apiState, account, chainInfo]);
+
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token, 5);
+  const feeStr = giftFee && utils.formatBalance(giftFee, chainInfo?.token, 5);
 
   const checkboxLabel = 'I have stored the gift secret in a safe place.';
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const checkedErrorMessage =
-    'Please confirm you have stored the gift secret, to be able to manage your gift in the future.';
+    'Please confirm you have stored the gift secret.';
 
   return (
     <>
@@ -28,7 +52,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
           cardText={[
             'Please confirm the details below to generate the gift and write down the ',
             <b>gift secret</b>,
-            ' to be able to manage your gift in the future.'
+            '.'
           ]}
           backClickHandler={() => prevStep()}
         />
@@ -47,6 +71,7 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
                     <b>Gift Amount</b>
                   </div>
                   <div>{amountStr}</div>
+                  <small className='text-muted'>{`+ ${feeStr} fees`}</small>
                 </Col>
               </Row>
               <Row>
@@ -54,7 +79,9 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
                   <div className="mb-1">
                     <b>Gift Secret</b>
                   </div>
-                  <div className={checkedError ? 'text-danger' : ''}>{formattedSecret}</div>
+                  <div className={checkedError ? 'text-danger' : ''}>
+                    {formattedSecret}
+                  </div>
                 </Col>
               </Row>
             </div>
@@ -80,11 +107,14 @@ export default function ConfirmGift ({ giftInfo, generateGiftHandler }) {
           <button
             className="btn btn-primary"
             disabled={!!checkedError}
-            onClick={() =>
-              !checked
-                ? setCheckedError(checkedErrorMessage)
-                : generateGiftHandler()
-            }>
+            onClick={() => {
+              if (!checked) {
+                setCheckedError(checkedErrorMessage);
+              } else {
+                analytics.track('generate_confirmed');
+                generateGiftHandler();
+              }
+            }}>
             Generate Gift
           </button>
         </div>

@@ -10,9 +10,8 @@ export default function Landing () {
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={`Gift ${giftTheme?.content}`}
-          cardText={`Send  ${giftTheme?.content} to your friends and family, and have them join the
-          ${giftTheme?.network} Network today.`}
+          title={`${giftTheme?.network} Gifts`}
+          cardText={`Share your love of ${giftTheme?.network} with friends and family and help onboard them to the network. ${giftTheme?.network} Gifts lets you send ${giftTheme?.content} to anyone, even if they don’t have a ${giftTheme?.network} account.`}
         />
         <Row className="justify-content-center align-items-center">
           <Col className="d-flex flex-column justify-content-around align-items-center">
@@ -20,14 +19,14 @@ export default function Landing () {
               <button
                 className="btn btn-primary btn-lg"
                 onClick={() => nextStep()}>
-                Send a New Gift
+                Send a Gift
               </button>
             </div>
             <a
               className="pt-4 small text-underline"
               href="#/About"
               target="_blank">
-              {'→ How do gifts work?'}
+              {`→ How does ${giftTheme?.network} Gifts work?`}
             </a>
           </Col>
         </Row>

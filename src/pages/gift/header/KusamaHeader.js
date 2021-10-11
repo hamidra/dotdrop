@@ -2,7 +2,8 @@ import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
-import { DotsThree, ImageSquare } from 'phosphor-react';
+import { Circle, DotsThree, ImageSquare } from 'phosphor-react';
+import config from '../../../config';
 import KusamaLogo from '../../../images/kusama_logo.png';
 import KusamaIcon from '../../../images/kusama_icon.png';
 
@@ -29,6 +30,7 @@ const AccountInfoBox = ({ accountAddress }) => {
 export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
+  const alternativeApp = config.ALTERNATIVE_APP_URL;
   return (
     <>
       <Navbar
@@ -40,8 +42,18 @@ export default function Header ({ selectedAccount }) {
             href="https://kusama.network"
             target="_blank"
             rel="noopener noreferrer">
-            <img width={120} className="p-1 d-none d-sm-inline-block" src={KusamaLogo} alt={'Kusama'} />
-            <img width={42} className="p-1 d-sm-none" src={KusamaIcon} alt={'Kusama'} />
+            <img
+              width={120}
+              className="p-1 d-none d-sm-inline-block"
+              src={KusamaLogo}
+              alt={'Kusama'}
+            />
+            <img
+              width={42}
+              className="p-1 d-sm-none"
+              src={KusamaIcon}
+              alt={'Kusama'}
+            />
           </a>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -92,9 +104,20 @@ export default function Header ({ selectedAccount }) {
               <Dropdown.Item
                 className="px-3"
                 onClick={() => history.push('/about')}>
-                <ImageSquare className="mr-1" size={18} />
+                <ImageSquare className="mr-2" size={18} />
                 About Gifts
               </Dropdown.Item>
+              {alternativeApp && (
+                <Dropdown.Item
+                  className="px-3"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(alternativeApp, '_blank');
+                  }}>
+                  <Circle className="mr-2" size={18} />
+                  Gift DOT
+                </Dropdown.Item>
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </div>
