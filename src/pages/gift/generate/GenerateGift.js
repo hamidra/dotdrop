@@ -62,14 +62,18 @@ export default function GenerateGift ({
     // since the txFees does not differ much for different amounts,
     // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
     async function fetchTxFee () {
-      const address = account?.address;
-      if (address) {
-        const info = await api.tx.balances
-          .transfer(address, balance?.free || 0)
-          .paymentInfo(address);
+      try {
+        const address = account?.address;
+        if (address) {
+          const info = await api.tx.balances
+            .transfer(address, balance?.free || 0)
+            .paymentInfo(address);
 
-        const estimatedFee = utils.calcFeeAdjustments(info.partialFee);
-        setTxFee(estimatedFee);
+          const estimatedFee = utils.calcFeeAdjustments(info.partialFee);
+          setTxFee(estimatedFee);
+        }
+      } catch (err) {
+        console.log(`error while loading tx fees: ${err}`);
       }
     }
     fetchTxFee();
@@ -277,7 +281,7 @@ export default function GenerateGift ({
               <div className="d-flex justify-content-center">
                 <button
                   className="btn btn-primary"
-                  disabled={!props?.isValid}
+                  disabled={props?.touched?.recipientName && props?.touched?.amount && !props?.isValid}
                   onClick={() => {
                     analytics.track('generate_form_filled');
                     props.submitForm();
