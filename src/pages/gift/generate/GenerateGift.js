@@ -281,7 +281,7 @@ export default function GenerateGift ({
               <div className="d-flex justify-content-center">
                 <button
                   className="btn btn-primary"
-                  disabled={!props?.isValid}
+                  disabled={props?.touched?.recipientName && props?.touched?.amount && !props?.isValid}
                   onClick={() => {
                     analytics.track('generate_form_filled');
                     props.submitForm();
