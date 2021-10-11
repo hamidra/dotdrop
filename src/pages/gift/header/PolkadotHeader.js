@@ -26,7 +26,7 @@ const AccountInfoBox = ({ accountAddress }) => {
 export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
-  const alternativeApp = config.OTHER_RECOMMENDATION_URL;
+  const alternativeApp = config.ALTERNATIVE_APP_URL;
 
   return (
     <>
@@ -34,7 +34,6 @@ export default function Header ({ selectedAccount }) {
         className="px-4 py-3"
         style={{ display: 'grid', gridTemplateColumns: '60px 1fr 60px' }}
         variant="dark"
-        /* expand="sm" */
       >
         <Navbar.Brand>
           <a

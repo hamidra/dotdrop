@@ -30,7 +30,7 @@ const AccountInfoBox = ({ accountAddress }) => {
 export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
-  const alternativeApp = config.RECOMMENDED_ALTERNATIVE_URL;
+  const alternativeApp = config.ALTERNATIVE_APP_URL;
   return (
     <>
       <Navbar

@@ -11,7 +11,7 @@ export default function FAQ ({ giftTheme }) {
     <p className="pb-3">
       {giftTheme.network} is a blockchain that connects other blockchains together into a single network,
       providing them with security and the ability to communicate with each other.&nbsp;
-      {giftTheme.content} is the utility token of Polkadot, and serves different functions in the network.
+      {giftTheme.content} is the utility token of {giftTheme.network}, and serves different functions in the network.
       Find out more about {giftTheme.network}&nbsp;
       <a
         href={giftTheme.network === 'Polkadot' ? 'https://polkadot.network' : 'https://kusama.network'}
