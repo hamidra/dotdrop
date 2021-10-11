@@ -13,6 +13,17 @@ const trimEnd = (str, char) => {
   return str.substring(0, i);
 };
 
+const trimStart = (str, char) => {
+  if (!str) {
+    return str;
+  }
+  let i = 0;
+  while (i < str.length && str.charAt(i) === char) {
+    i += 1;
+  }
+  return str.slice(i);
+};
+
 const utils = {
   getAccountAddress: (account) => {
     const { pairOrAddress } = account;
@@ -35,18 +46,24 @@ const utils = {
     }
   },
 
-  formatBalance: (balance, token) => {
+  formatBalance: (balance, token, decimalPints) => {
     if (!balance) {
       return balance;
     }
-    const [wholeVal, decimalVal] = balance.split('.');
-    let result = wholeVal;
+    let [wholeVal, decimalVal] = balance.split('.');
+    wholeVal = trimStart(wholeVal, '0');
+    let result = wholeVal || '0';
     if (decimalVal) {
-      result += `.${trimEnd(decimalVal, '0')}`;
+      if (decimalPints && !isNaN(decimalPints)) {
+        decimalVal = decimalVal.slice(0, decimalPints);
+      }
+      decimalVal = trimEnd(decimalVal, '0');
+      if (decimalVal) {
+        result += `.${decimalVal}`;
+      }
     }
     if (token) {
-      result =
-        parseInt(wholeVal) > 1 ? `${result} ${token}s` : `${result} ${token}`;
+      result = `${result} ${token}`;
     }
     return result;
   },

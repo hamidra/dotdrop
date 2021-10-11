@@ -15,14 +15,13 @@ export default function AboutMain () {
       <Container className="d-flex flex-column align-items-center pb-5">
         <div style={{ paddingBottom: '4rem' }}>
           <h1 className="py-5 text-center" style={{ fontSize: '3.5rem' }}>
-            There's No Better Gift than {giftTheme?.content}
+            The easiest way to send {giftTheme?.content}<br />to friends and family
           </h1>
           <p
             className="text-center text-large pb-5"
             style={{ maxWidth: '920px' }}>
-            Gift {giftTheme?.content} to your friends and have them join the {giftTheme?.network} community
-            today. Simply wrap your {giftTheme?.content} gift in a unique secret and share it
-            with someone close to you!
+            Share your love of {giftTheme?.network} with friends and family and help onboard them to the network.&nbsp;
+            {giftTheme?.network} Gifts lets you send {giftTheme?.content} to anyone, even if they don’t already have a {giftTheme?.network} account.
           </p>
         </div>
         <ProcessExplainerCard giftTheme={giftTheme} />

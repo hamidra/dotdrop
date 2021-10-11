@@ -3,12 +3,14 @@ import { Row, Col, Form, Card } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Copy, Eye, EyeSlash } from 'phosphor-react';
+import { useSubstrate } from '../../../../substrate-lib';
 
 export default function PresentAccountPhrase ({
   mnemonicWords,
   nextStepHandler,
   prevStepHandler
 }) {
+  const { giftTheme } = useSubstrate();
   const label = 'I have stored my seed phrase in a safe place.';
   const [blurred, setBlurred] = useState(true);
   const [checked, setChecked] = useState(false);
@@ -29,12 +31,13 @@ export default function PresentAccountPhrase ({
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={'Account Seed Phrase'}
+          title={'Save Your Seed Phrase'}
           backClickHandler={() => prevStepHandler()}
           cardText={[
-            'Write down the following words ',
+            'Write down the following phrase ',
             <b>in order</b>,
-            ' and store them in a safe place. This seed phrase allows you to recover your account and funds!'
+            ` and store it in a safe place. Anyone with access to your seed phrase has access to your ${giftTheme.content} `,
+            'so be sure to keep it safe and never share it with anyone.'
           ]}
         />
         <div
@@ -75,7 +78,7 @@ export default function PresentAccountPhrase ({
               <Eye className="mr-1" size="18" />
               <p>{'Reveal seedphrase'}</p>
             </div>
-            <CopyToClipboard
+            {/* <CopyToClipboard
               text={mnemonicWords.join(' ')}
               onCopy={(result) => {
                 setCopied(result);
@@ -86,7 +89,7 @@ export default function PresentAccountPhrase ({
                 <Copy className="mr-1" size={18} />
                 <span className="copy">{copied ? 'Copied' : 'Copy'}</span>
               </div>
-            </CopyToClipboard>
+            </CopyToClipboard> */}
           </Row>
         </div>
         <div className="flex-row justify-content-start align-items-center px-2 pt-2">
@@ -108,6 +111,7 @@ export default function PresentAccountPhrase ({
         <div className="pt-4 d-flex justify-content-center">
           <button
             className="btn btn-primary"
+            disabled={!!checkedError}
             onClick={() =>
               checked ? nextStepHandler() : setCheckedError(checkedErrorMessage)
             }>
