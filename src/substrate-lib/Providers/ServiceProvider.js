@@ -5,9 +5,7 @@ import bundleGiftProvider from './bundleGiftProvider';
 
 const palletTypes = {
   balance: 'balance',
-  gift: 'gift',
-  bundle: 'bundle',
-  uniques: 'uniques'
+  bundle: 'bundle'
   // ToDo: add other pallets
   // asset: 'asset',
 };
@@ -17,12 +15,6 @@ const giftFactory = (palletType) => {
   switch (palletType) {
     case palletTypes.balance:
       giftProvider = balancePalletGiftProvider;
-      break;
-    case palletTypes.gift:
-      giftProvider = giftPalletGiftProvider;
-      break;
-    case palletTypes.uniques:
-      giftProvider = uniquesPalletGiftProvider;
       break;
     case palletTypes.bundle:
       giftProvider = bundleGiftProvider;
