@@ -1,13 +1,13 @@
 .back-arrow {
-    position: absolute;
-    left: 0;
-    top: 0.75rem;
-    color: $secondary-lighter;
-    cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  color: $secondary-lighter;
+  cursor: pointer;
 
-    &:hover {
-        color: $secondary;
-    }
+  &:hover {
+    color: $secondary;
+  }
 }
 
 $card-border-radius: 20px;
@@ -17,7 +17,7 @@ $card-border-radius: 20px;
 }
 
 .card-body {
-  padding: 2rem !important;
+  padding: 2rem;
 }
 
 .card-footer {
