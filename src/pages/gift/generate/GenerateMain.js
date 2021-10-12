@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback, createElement } from 'react';
+import { createContext, useState, useCallback, useRef, createElement } from 'react';
 import GenerateGift from './GenerateGift';
 import PresentGift from './PresentGift';
 import ConnectExtension from '../accounts/ConnectExtension';
@@ -19,6 +19,7 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ConfirmGift from './ConfirmGift';
 import analytics from '../../../analytics';
+import config from '../../../config';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -54,12 +55,18 @@ export default function GenerateMain () {
   const [account, setAccount] = useState(null);
   const [accountSource, setAccountSource] = useState(null);
   const [showSigner, setShowSigner] = useState(false);
+
   const [processing, setProcessing] = useState(false);
+  const processingStateRef = useRef();
+  processingStateRef.current = processing;
+
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
   const [giftInfo, setGiftInfo] = useState(null);
   const [seed, _] = useState(generateGiftSecret());
+  const [processingTimeout, setProcessingTimeout] = useState(null);
 
+  const timeoutMS = config.TX_TIMEOUT_MS;
   const [{ isQrHashed, qrAddress, qrPayload, qrResolve }, setQrState] =
     useState({
       isQrHashed: false,
@@ -171,8 +178,13 @@ export default function GenerateMain () {
       } else {
         setProcessingMsg(`Generating the gift on ${giftTheme.network}...`);
         setProcessing(true);
+        timeoutMS && setProcessingTimeout(setTimeout(timeoutHandler, timeoutMS));
       }
     }
+  };
+
+  const timeoutHandler = () => {
+    if (processingStateRef.current === true) { handleError(new Error('Timeout')); }
   };
 
   const removeGiftHandler = async (secret) => {

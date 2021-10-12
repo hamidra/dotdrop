@@ -12,7 +12,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
 import analytics from '../../../analytics';
-/* import Confetti from 'react-confetti'; */
+import config from '../../../config';
 
 const ClaimContext = createContext();
 const balanceDecimalPoints = 5;
@@ -28,7 +28,10 @@ export default function ClaimMain () {
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
+  const [processingTimeout, setProcessingTimeout] = useState(null);
   const [claimedAmount, setClaimedAmount] = useState('');
+
+  const timeoutMS = config.TX_TIMEOUT_MS;
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -100,6 +103,7 @@ export default function ClaimMain () {
 
       setProcessingMsg('Transferring your gift to your account...');
       setProcessing(true);
+      timeoutMS && setProcessingTimeout(setTimeout(() => { if (processing === true) { handleError(new Error('Timeout')); } }, timeoutMS));
     }
   };
 
@@ -164,7 +168,6 @@ export default function ClaimMain () {
         jumpToStep
       }}>
       <Header selectedAccount={address} />
-      {/* {step === 3 && <Confetti />} */}
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
