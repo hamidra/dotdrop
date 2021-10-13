@@ -22,7 +22,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
         if (address && api) {
           const chainAmount = utils.toChainUnit(amount, chainInfo?.decimals);
           const transferTx = api.tx.balances.transfer(address, chainAmount || 0);
-          const remarkTx = api.tx.system.remarkWithEvent('gift:send');
+          const remarkTx = api.tx.system.remarkWithEvent('gift::create');
           const txs = [transferTx, remarkTx];
           const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
 
