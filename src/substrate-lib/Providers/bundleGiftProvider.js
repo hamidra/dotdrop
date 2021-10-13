@@ -37,7 +37,8 @@ const transferAllAssets = async (api, fromAccount, toAddress) => {
 
   // create Tx for balance transferAll to reap account and tranfer all balance.
   const balanceTxs = [api.tx.balances.transferAll(toAddress, false)];
-  const txs = [...uniquesTxs, ...balanceTxs];
+  const remarkTxs = [api.tx.system.remark("gift::accepted")];
+  const txs = [...uniquesTxs, ...balanceTxs, ...remarkTxs];
   const batchTx = api.tx.utility.batchAll(txs);
 
   return signAndSendTx(api, batchTx, fromAccount);
