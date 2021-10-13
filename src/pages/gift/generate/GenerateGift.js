@@ -90,7 +90,7 @@ export default function GenerateGift ({
       amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
     if (isTooHigh) {
       setAmountWarning(
-        `⚠️ This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
+        `This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
       );
     } else {
       setAmountWarning(null);
@@ -218,7 +218,7 @@ export default function GenerateGift ({
                       />
                       {props.touched.recipientName &&
                         !!props.errors.recipientName && (
-                          <Form.Text className="text-danger">
+                          <Form.Text className="danger">
                             {props.errors.recipientName}
                           </Form.Text>
                       )}
@@ -235,7 +235,7 @@ export default function GenerateGift ({
                           placeholder=""
                           style={
                             props.touched.amount && !!props.errors.amount
-                              ? { borderColor: 'red' }
+                              ? { borderColor: '#ff67b7' }
                               : {}
                           }
                           className="border-right-0"
@@ -249,7 +249,7 @@ export default function GenerateGift ({
                           <InputGroup.Text
                             style={{
                               ...(props.touched.amount && !!props.errors.amount
-                                ? { borderColor: 'red' }
+                                ? { borderColor: '#ff67b7' }
                                 : {})
                             }}
                             className="bg-transparent border-left-0 balance-text text-wrap">
@@ -262,17 +262,17 @@ export default function GenerateGift ({
 
                       {props.touched.amount && !!props.errors.amount
                         ? (
-                        <Form.Text className="text-danger">
-                          {props?.errors?.amount}
-                        </Form.Text>
-                          )
-                        : (
-                            amountWarning && (
-                          <Form.Text className="alert alert-warning">
-                            {amountWarning}
+                          <Form.Text className="danger">
+                            {props?.errors?.amount}
                           </Form.Text>
-                            )
-                          )}
+                        )
+                        : (
+                          amountWarning && (
+                            <Form.Text className="warning">
+                              {amountWarning}
+                            </Form.Text>
+                          )
+                        )}
                     </Form.Group>
                   </Form>
                 </Col>

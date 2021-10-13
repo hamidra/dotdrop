@@ -57,7 +57,7 @@ export default function EnterAccountAddress ({
                         value={props.values.address}
                       />
                       {props.touched?.address && !!props.errors?.address && (
-                        <Form.Text className="text-danger">
+                        <Form.Text className="danger">
                           {props.errors?.address}
                         </Form.Text>
                       )}

@@ -85,7 +85,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
                   <div className="mb-1">
                     <b>Gift Secret</b>
                   </div>
-                  <div className={checkedError ? 'text-danger' : ''}>
+                  <div>
                     {formattedSecret}
                   </div>
                 </Col>
@@ -105,7 +105,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
             }}
           />
           {checkedError && (
-            <Form.Text className="text-danger">{checkedError}</Form.Text>
+            <Form.Text className="danger ml-0">{checkedError}</Form.Text>
           )}
         </div>
         <div className="d-flex flex-grow-1" />
