@@ -31,8 +31,13 @@ const transferAll = async (api, fromAccount, toAddress) => {
 };
 
 const balancePalletGiftProvider = {
-  createGift: (api, interimAccount, senderAccount, gift) => {
+  createGift: async (api, interimAccount, senderAccount, gift) => {
     const interimAddress = utils.getAccountAddress(interimAccount);
+    const balance = (await api.query.system.account(interimAddress))?.data;
+    console.log(balance?.free.toHuman());
+    if (balance?.free && !balance?.free?.eqn(0)) {
+      throw new Error(`A gift for an amount of ${balance?.free.toHuman()} has already been created for this gift secret.`);
+    }
     return transferBalanceAndFees(
       api,
       senderAccount,
