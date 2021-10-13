@@ -69,7 +69,6 @@ export default function GenerateGift ({
           const remarkTx = api.tx.system.remarkWithEvent('gift::create');
           const txs = [transferTx, remarkTx];
           const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
-          console.log(info);
           const estimatedFee = utils.calcFeeAdjustments(info.partialFee);
           setTxFee(estimatedFee);
         }
