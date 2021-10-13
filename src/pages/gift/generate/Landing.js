@@ -4,7 +4,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate } from '../../../substrate-lib';
 
-export default function Landing() {
+export default function Landing () {
   const { nextStep } = useContext(GenerateContext);
   const { giftTheme } = useSubstrate();
   return (
