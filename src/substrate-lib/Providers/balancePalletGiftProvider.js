@@ -15,7 +15,7 @@ const transferBalanceAndFees = async (
   const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
   const fromAddress = utils.getAccountAddress(fromAccount);
   const transferTx = api.tx.balances.transfer(toAddress, chainAmount);
-  const remarkTx = api.tx.system.remark_with_event(remark);
+  const remarkTx = api.tx.system.remarkWithEvent(remark);
   const txs = [transferTx, remarkTx];
   const info = api.tx.utility.batchAll(txs).paymentInfo(fromAddress);
   const feeAdjustment = utils.calcFeeAdjustments(info?.partialFee);
@@ -30,7 +30,7 @@ const transferBalanceAndFees = async (
 
 const transferAll = async (api, fromAccount, toAddress, remark) => {
   const balanceTx = api.tx.balances.transferAll(toAddress, false);
-  const remarkTx = api.tx.system.remark_with_event(remark);
+  const remarkTx = api.tx.system.remarkWithEvent(remark);
   const txs = [balanceTx, remarkTx];
   const batchTx = api.tx.utility.batchAll(txs);
 
@@ -45,7 +45,8 @@ const balancePalletGiftProvider = {
       senderAccount,
       interimAddress,
       gift?.amount,
-      feeMultiplierValue // fee multiplier of 1x
+      feeMultiplierValue, // fee multiplier of 1x
+      'gift::create'
     );
   },
   claimGift: async (api, interimAccount, recipientAccount) => {
@@ -57,7 +58,7 @@ const balancePalletGiftProvider = {
     if (!balance?.free || balance?.free?.eqn(0)) {
       throw new Error('The gift secret does not hold any gifts. You might have entered the wrong secret or the gift might have been already claimed.');
     }
-    const events = await transferAll(api, interimAccount, recepientAddress);
+    const events = await transferAll(api, interimAccount, recepientAddress, 'gift::claim');
     const claimed = getClaimedAssets(api, events);
     return claimed;
   },
@@ -70,7 +71,7 @@ const balancePalletGiftProvider = {
     if (!balance?.free || balance?.free?.eqn(0)) {
       throw new Error('The gift secret does not hold any gifts. The gift might have been already claimed or removed.');
     }
-    return transferAll(api, interimAccount, senderAddress);
+    return transferAll(api, interimAccount, senderAddress, 'gift::remove');
   },
   getGiftFeeMultiplier: () => {
     // tx fees are multiplied by this multiplier and added to the gift value when the gift is generated.

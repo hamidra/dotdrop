@@ -14,7 +14,7 @@ const transferBalanceAndFees = async (
   const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
   const fromAddress = utils.getAccountAddress(fromAccount);
   const transferTx = api.tx.balances.transfer(toAddress, chainAmount);
-  const remarkTx = api.tx.system.remark_with_event(remark);
+  const remarkTx = api.tx.system.remarkWithEvent(remark);
   const txs = [transferTx, remarkTx];
   const info = api.tx.utility.batchAll(txs).paymentInfo(fromAddress);
   const feeAdjustment = utils.calcFeeAdjustments(info?.partialFee);
@@ -41,7 +41,7 @@ const transferAllAssets = async (api, fromAccount, toAddress, remark) => {
 
   // create Tx for balance transferAll to reap account and tranfer all balance.
   const balanceTxs = [api.tx.balances.transferAll(toAddress, false)];
-  const remarkTxs = [api.tx.system.remark_with_event(remark)];
+  const remarkTxs = [api.tx.system.remarkWithEvent(remark)];
   const txs = [...uniquesTxs, ...balanceTxs, ...remarkTxs];
   const batchTx = api.tx.utility.batchAll(txs);
 
