@@ -1,41 +1,9 @@
 import utils from '../substrateUtils';
-import { signAndSendTx, getClaimedAssets } from './txHandler';
-import BN from 'bn.js';
+import { getClaimedAssets } from './txHandler';
+import { transferBalanceAndFees, transferAll } from './txCalls';
 import config from '../../config';
 
 const feeMultiplierValue = config.ADDED_FEE_MULTIPLIER;
-const transferBalanceAndFees = async (
-  api,
-  fromAccount,
-  toAddress,
-  balance,
-  feeMultiplier,
-  remark
-) => {
-  const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
-  const fromAddress = utils.getAccountAddress(fromAccount);
-  const transferTx = api.tx.balances.transfer(toAddress, chainAmount);
-  const remarkTx = api.tx.system.remarkWithEvent(remark);
-  const txs = [transferTx, remarkTx];
-  const info = api.tx.utility.batchAll(txs).paymentInfo(fromAddress);
-  const feeAdjustment = utils.calcFeeAdjustments(info?.partialFee);
-  const chainAmountAndFees = chainAmount.add(
-    feeAdjustment.mul(new BN(feeMultiplier || 1))
-  );
-  const transferTxFinal = api.tx.balances.transfer(toAddress, chainAmountAndFees);
-  const txsFinal = [transferTxFinal, remarkTx];
-  const tx = api.tx.utility.batchAll(txsFinal);
-  return signAndSendTx(api, tx, fromAccount);
-};
-
-const transferAll = async (api, fromAccount, toAddress, remark) => {
-  const balanceTx = api.tx.balances.transferAll(toAddress, false);
-  const remarkTx = api.tx.system.remarkWithEvent(remark);
-  const txs = [balanceTx, remarkTx];
-  const batchTx = api.tx.utility.batchAll(txs);
-
-  return signAndSendTx(api, batchTx, fromAccount);
-};
 
 const balancePalletGiftProvider = {
   createGift: (api, interimAccount, senderAccount, gift) => {

@@ -65,10 +65,11 @@ export default function GenerateGift ({
       try {
         const address = account?.address;
         if (address) {
-          const info = await api.tx.balances
-            .transfer(address, balance?.free || 0)
-            .paymentInfo(address);
-
+          const transferTx = api.tx.balances.transfer(address, balance?.free || 0);
+          const remarkTx = api.tx.system.remarkWithEvent('gift:send');
+          const txs = [transferTx, remarkTx];
+          const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
+          console.log(info);
           const estimatedFee = utils.calcFeeAdjustments(info.partialFee);
           setTxFee(estimatedFee);
         }
