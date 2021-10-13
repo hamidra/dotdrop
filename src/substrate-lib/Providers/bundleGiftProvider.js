@@ -8,22 +8,26 @@ const transferBalanceAndFees = async (
   fromAccount,
   toAddress,
   balance,
-  feeMultiplier
+  feeMultiplier,
+  remark,
 ) => {
   const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
   const fromAddress = utils.getAccountAddress(fromAccount);
-  const info = await api.tx.balances
-    .transfer(toAddress, chainAmount)
-    .paymentInfo(fromAddress);
+  const transferTx = api.tx.balances.transfer(toAddress, chainAmount);
+  const remarkTx = api.tx.system.remark_with_event(remark);
+  const txs = [transferTx, remarkTx];
+  const info = api.tx.utility.batchAll(txs).paymentInfo(fromAddress);
   const feeAdjustment = utils.calcFeeAdjustments(info?.partialFee);
   const chainAmountAndFees = chainAmount.add(
     feeAdjustment.mul(new BN(feeMultiplier || 1))
   );
-  const tx = api.tx.balances.transfer(toAddress, chainAmountAndFees);
+  const transferTxFinal = api.tx.balances.transfer(toAddress, chainAmountAndFees);
+  const txsFinal = [transferTxFinal, remarkTx];
+  const tx = api.tx.utility.batchAll(txsFinal);
   return signAndSendTx(api, tx, fromAccount);
 };
 
-const transferAllAssets = async (api, fromAccount, toAddress) => {
+const transferAllAssets = async (api, fromAccount, toAddress, remark) => {
   const fromAddress = utils.getAccountAddress(fromAccount);
 
   // Create Txs for uniques NFTs
@@ -37,7 +41,7 @@ const transferAllAssets = async (api, fromAccount, toAddress) => {
 
   // create Tx for balance transferAll to reap account and tranfer all balance.
   const balanceTxs = [api.tx.balances.transferAll(toAddress, false)];
-  const remarkTxs = [api.tx.system.remark("gift::accepted")];
+  const remarkTxs = [api.tx.system.remark_with_event(remark)];
   const txs = [...uniquesTxs, ...balanceTxs, ...remarkTxs];
   const batchTx = api.tx.utility.batchAll(txs);
 
@@ -53,7 +57,8 @@ const uniquesPalletGiftProvider = {
       senderAccount,
       interimAddress,
       gift?.amount,
-      feeMultiplierValue // fee multiplier of 1x
+      feeMultiplierValue, // fee multiplier of 1x
+      'gift::send'
     );
   },
   claimGift: async (api, interimAccount, recipientAccount) => {
@@ -61,14 +66,15 @@ const uniquesPalletGiftProvider = {
     const events = await transferAllAssets(
       api,
       interimAccount,
-      recepientAddress
+      recepientAddress,
+      'gift::claim'
     );
     const claimed = getClaimedAssets(api, events);
     return claimed;
   },
   removeGift: (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);
-    return transferAllAssets(api, interimAccount, senderAddress);
+    return transferAllAssets(api, interimAccount, senderAddress, 'gift::remove');
   },
   getGiftFeeMultiplier: () => {
     // gift creation fees are multiplied by this multiplier and added to the gift value when the gift is generated.
