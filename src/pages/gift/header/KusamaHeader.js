@@ -65,7 +65,7 @@ export default function Header ({ selectedAccount }) {
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
                 onClick={() => history.push('/claim')}>
-                Claim Gift
+                Claim
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
