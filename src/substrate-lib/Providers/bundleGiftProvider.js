@@ -58,7 +58,7 @@ const uniquesPalletGiftProvider = {
       interimAddress,
       gift?.amount,
       feeMultiplierValue, // fee multiplier of 1x
-      'gift::send'
+      'gift::create'
     );
   },
   claimGift: async (api, interimAccount, recipientAccount) => {
