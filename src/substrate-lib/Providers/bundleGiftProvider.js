@@ -9,7 +9,7 @@ const transferBalanceAndFees = async (
   toAddress,
   balance,
   feeMultiplier,
-  remark,
+  remark
 ) => {
   const chainAmount = utils.toChainUnit(balance, api.registry.chainDecimals);
   const fromAddress = utils.getAccountAddress(fromAccount);
