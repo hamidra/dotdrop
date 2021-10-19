@@ -65,11 +65,14 @@ input[type='checkbox']:checked + label:before {
 }
 
 .input-danger,
-.input-warning,
 .was-validated .form-control:invalid,
 .form-control.is-invalid,
 .was-validated .form-control:invalid:focus, 
 .form-control.is-invalid:focus {
-  border-color: $primary;
+  border-color: $primary !important;
   box-shadow: none;
+}
+
+.input-warning {
+  border-color: #fff !important;
 }
