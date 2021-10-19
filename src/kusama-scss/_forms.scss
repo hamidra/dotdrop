@@ -26,6 +26,11 @@ form .balance-text {
   color: $secondary;
 }
 
+.form-check-input.is-invalid~.form-check-label,
+.was-validated .form-check-input:invalid~.form-check-label {
+  color: $primary;
+}
+
 input[type='checkbox'] + label {
   display: flex;
   margin-left: -22px;
