@@ -63,3 +63,13 @@ input[type='checkbox']:checked + label:before {
   background-color: $gray-700;
   color: #fff;
 }
+
+.input-danger,
+.input-warning,
+.was-validated .form-control:invalid,
+.form-control.is-invalid,
+.was-validated .form-control:invalid:focus, 
+.form-control.is-invalid:focus {
+  border-color: $primary;
+  box-shadow: none;
+}
