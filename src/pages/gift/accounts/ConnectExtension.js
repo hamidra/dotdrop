@@ -61,8 +61,9 @@ export default function ExtensionAccount ({
   balances &&
     accounts?.forEach(({ address }) => {
       if (address && balances[address]) {
+        const usableBalance = utils.getUsableBalances(balances);
         accountsBalances[address] = utils.fromChainUnit(
-          balances[address]?.free,
+          usableBalance,
           chainInfo?.decimals,
           balanceDecimalPoints
         );
