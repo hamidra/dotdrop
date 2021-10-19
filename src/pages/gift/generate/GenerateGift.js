@@ -108,7 +108,7 @@ export default function GenerateGift ({
     const totalChainAmount = giftChainAmount?.add(totalTxFees);
     // validate gift amount
     if (!amount) {
-      return 'Please enter the gift amount';
+      return 'Please enter the gift amount.';
     }
     if (giftChainAmount) {
       // check if the gift amount is above existential deposit
@@ -233,12 +233,7 @@ export default function GenerateGift ({
                           type="text"
                           autoComplete="off"
                           placeholder=""
-                          style={
-                            props.touched.amount && !!props.errors.amount
-                              ? { borderColor: '#ff67b7' }
-                              : {}
-                          }
-                          className="border-right-0"
+                          className={`border-right-0 ${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
                           value={props.values.amount}
                           onChange={(e) => {
                             _setAmount(e.target.value, props);
@@ -247,11 +242,6 @@ export default function GenerateGift ({
                         />
                         <InputGroup.Append>
                           <InputGroup.Text
-                            style={{
-                              ...(props.touched.amount && !!props.errors.amount
-                                ? { borderColor: '#ff67b7' }
-                                : {})
-                            }}
                             className="bg-transparent border-left-0 balance-text text-wrap">
                             {balanceStr
                               ? `${balanceStr} available`

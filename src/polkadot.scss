@@ -83,9 +83,16 @@ $input-border-color: $gray-300;
 $input--color: $gray-900;
 $input-height: 2.5rem;
 
-.danger, .warning {
+.danger {
   color: #e6007a;
   margin-left: 0.5rem;
+  margin-top: 0.5rem !important;
+}
+
+.warning {
+  color: #ee5d41;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem !important;
 }
 
 .was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
@@ -189,3 +196,4 @@ $border-radius: 0.5rem;
 @import 'polkadot-scss/about';
 @import 'polkadot-scss/landingpage';
 @import 'polkadot-scss/extensiononboarding';
+@import 'polkadot-scss/forms';
