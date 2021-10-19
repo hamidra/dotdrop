@@ -117,6 +117,7 @@ export default function ExtensionAccount ({
               <Col className="pt-4 d-flex justify-content-center">
                 <button
                   className="btn btn-primary"
+                  disabled={!selectedAccount}
                   onClick={() => _setAccountHandler()}>
                   Connect
                 </button>

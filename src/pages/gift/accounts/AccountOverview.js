@@ -173,12 +173,6 @@ export default function AccountOverview () {
                         subtitle="Secure offline wallet"
                       />
                     </div>
-                    <div className="w-100 py-2">
-                      <WalletInfoField
-                        title="Hardware Wallet"
-                        subtitle="Secure offline wallet"
-                      />
-                    </div>
                   </Col>
                 </Row>
               </Card.Body>

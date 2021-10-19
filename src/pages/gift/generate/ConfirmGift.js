@@ -21,9 +21,10 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
         const address = account?.address;
         if (address && api) {
           const chainAmount = utils.toChainUnit(amount, chainInfo?.decimals);
-          const info = await api.tx.balances
-            .transfer(address, chainAmount || 0)
-            .paymentInfo(address);
+          const transferTx = api.tx.balances.transfer(address, chainAmount || 0);
+          const remarkTx = api.tx.system.remarkWithEvent('gift::create');
+          const txs = [transferTx, remarkTx];
+          const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
 
           let estimatedFee = utils.calcFeeAdjustments(info?.partialFee);
           estimatedFee = estimatedFee.muln(giftFeeMultiplier);
@@ -41,7 +42,6 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
   }, [api, apiState, account, chainInfo]);
 
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token, 5);
-  console.log(`fee:${giftFee}`);
   const feeStr = giftFee && utils.formatBalance(giftFee, chainInfo?.token, 5);
 
   const checkboxLabel = 'I have stored the gift secret in a safe place.';
