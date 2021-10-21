@@ -25,21 +25,33 @@ const Connecting = () => {
 };
 
 const DownloadExtension = () => {
-  const extensionLink = 'https://polkadot.js.org/extension/';
+  const polkadotExtensionLink = 'https://polkadot.js.org/extension/';
+  const paritySignerCompanionLink = 'https://parity.link/signer-companion';
   return (
     <Row className="p-md-5 justify-content-center">
       <Col className="d-flex flex-column justify-content-center align-items-center text-center">
-        <a
-          style={{ height: '100px' }}
-          className="d-flex flex-column justify-content-around align-items-center"
-          href={extensionLink}
-          target="_blank"
-          rel="noopener noreferrer">
-          <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={68} />
-          <div style={{ fontSize: '1rem' }} className="text-secondary">
-            Download Polkadot Extension
-          </div>
-        </a>
+        <div>
+          <a
+            className="d-flex flex-row align-items-center p-1 btn btn-primary mb-3"
+            href={paritySignerCompanionLink}
+            target="_blank"
+            rel="noopener noreferrer">
+            <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={36} />
+            <div style={{ fontSize: '1rem' }} className="pr-3">
+              Parity Signer Companion
+            </div>
+          </a>
+          <a
+            className="d-flex flex-row align-items-center p-1 btn btn-primary mb-3"
+            href={polkadotExtensionLink}
+            target="_blank"
+            rel="noopener noreferrer">
+            <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={36} />
+            <div style={{ fontSize: '1rem' }} className="pr-3">
+              Polkadot Extension
+            </div>
+          </a>
+        </div>
       </Col>
     </Row>
   );
