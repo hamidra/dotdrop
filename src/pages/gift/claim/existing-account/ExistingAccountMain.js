@@ -13,7 +13,7 @@ export default function ExistingAccountMain ({
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
-  const [existingAccountSource, setExistingAccountSource] = useState(null);
+  const [existingAccountSource, setExistingAccountSource] = useState('EXTENSION');
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -45,22 +45,13 @@ export default function ExistingAccountMain ({
   };
 
   const steps = [];
-  // add Step-0
-  steps.push(
-    <ConnectExistingAccount
-      setExistingAccountSourceHandler={setExistingAccountSourceHandler}
-      prevStepHandler={prevStepHandler}
-    />
-  );
 
-  // add Step-1
+  // add Step-0
   const AccountOptionElement = accountOption[existingAccountSource]
     ? (
         createElement(accountOption[existingAccountSource], {
           setAddressHandler: setAddressHandler,
-          prevStepHandler: () => {
-            prevStep();
-          }
+          prevStepHandler: prevStepHandler
         })
       )
     : (
