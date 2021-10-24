@@ -2,6 +2,7 @@ import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
 import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';
 import AccountOverview from './pages/gift/accounts/AccountOverview';
+import ExtensionOnboarding from './pages/gift/accounts/ExtensionOnboarding';
 import {
   HashRouter as Router,
   Switch,
@@ -14,7 +15,7 @@ import GenerateMain from './pages/gift/generate/GenerateMain';
 import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
 
 function Body () {
-  const { apiState } = useSubstrate();
+  const { apiState, giftTheme } = useSubstrate();
 
   return (
     <>
@@ -26,21 +27,28 @@ function Body () {
           <ClaimMain />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to Kusama"
+            message={`Connecting to ${giftTheme.network}...`}
           />
         </Route>
         <Route path={'/generate'}>
           <GenerateMain />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to Kusama"
+            message={`Connecting to ${giftTheme.network}...`}
           />
         </Route>
         <Route path={'/account/:accountAddress'}>
           <AccountOverview />
           <Processing
             show={apiState !== 'READY'}
-            message="Connecting to Kusama"
+            message={`Connecting to ${giftTheme.network}...`}
+          />
+        </Route>
+        <Route path={'/extension/:accountAddress'}>
+          <ExtensionOnboarding />
+          <Processing
+            show={apiState !== 'READY'}
+            message={`Connecting to ${giftTheme.network}...`}
           />
         </Route>
         <Route path={'/privacy-policy'}>

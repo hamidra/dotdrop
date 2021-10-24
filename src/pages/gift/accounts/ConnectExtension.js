@@ -66,7 +66,7 @@ export default function ExtensionAccount ({
   const { dispatch, ...state } = useSubstrate();
   const { keyring, balances, chainInfo, giftTheme, extensionState } = state;
   const [selectedAccount, setSelectedAccount] = useState(null);
-  const accounts = keyring.getPairs();
+  const accounts = keyring?.getPairs() || [];
   const accountsBalances = {};
   const balanceDecimalPoints = 4;
   balances &&
@@ -74,7 +74,7 @@ export default function ExtensionAccount ({
       if (address && balances[address]) {
         accountsBalances[address] = utils.fromChainUnit(
           balances[address]?.free,
-          chainInfo.decimals,
+          chainInfo?.decimals,
           balanceDecimalPoints
         );
       }
@@ -87,17 +87,17 @@ export default function ExtensionAccount ({
     setAddressHandler && setAddressHandler(selectedAccount?.address);
   };
   const cardMessage =
-  extensionState === 'NOT_AVAILABLE'
-    ? ''
-    : extensionState === 'READY'
-      ? `Select your ${giftTheme?.network} account below:`
-      : '';
+    extensionState === 'NOT_AVAILABLE'
+      ? ''
+      : extensionState === 'READY'
+        ? `Select your ${giftTheme?.network} account below:`
+        : '';
   const cardTitle =
-  extensionState === 'NOT_AVAILABLE'
-    ? 'Extension Not Detected'
-    : extensionState === 'READY'
-      ? title || 'Select Account'
-      : 'Connecting To Polkadot Extension';
+    extensionState === 'NOT_AVAILABLE'
+      ? 'Extension Not Detected'
+      : extensionState === 'READY'
+        ? title || 'Select Account'
+        : 'Connecting To Polkadot Extension';
   return (
     <>
       <Card.Body className="d-flex flex-column">
@@ -106,39 +106,39 @@ export default function ExtensionAccount ({
           cardText={cardMessage}
           backClickHandler={prevStepHandler}
         />
-        {
-         extensionState === 'NOT_AVAILABLE'
-           ? (<DownloadExtension/>)
-           : extensionState === 'READY'
-             ? (
-                <>
-                  <Row className="p-md-5 justify-content-center">
-                    <Col className="d-flex flex-column justify-content-center align-items-center text-center">
-                      <AccountSelector
-                        accounts={accounts}
-                        balances={accountsBalances}
-                        token={chainInfo?.token}
-                        selectedAccount={selectedAccount}
-                        setSelectedAccount={setSelectedAccount}
-                        maxStrlength={15}
-                      />
-                    </Col>
-                  </Row>
-                  <div className="d-flex flex-grow-1" />
-                  <Row>
-                    <Col className="pt-4 d-flex justify-content-center">
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => _setAccountHandler()}>
-                        Connect
-                      </button>
-                    </Col>
-                  </Row>
-                </>
-               )
-             : (
-                <Connecting />
-               )}
+        {extensionState === 'NOT_AVAILABLE'
+          ? (<DownloadExtension />)
+          : extensionState === 'READY'
+            ? (
+          <>
+            <Row className="p-md-5 justify-content-center">
+              <Col className="d-flex flex-column justify-content-center align-items-center text-center">
+                <AccountSelector
+                  accounts={accounts}
+                  balances={accountsBalances}
+                  token={chainInfo?.token}
+                  selectedAccount={selectedAccount}
+                  setSelectedAccount={setSelectedAccount}
+                  maxStrlength={15}
+                />
+              </Col>
+            </Row>
+            <div className="d-flex flex-grow-1" />
+            <Row>
+              <Col className="pt-4 d-flex justify-content-center">
+                <button
+                  className="btn btn-primary"
+                  disabled={!selectedAccount}
+                  onClick={() => _setAccountHandler()}>
+                  Connect
+                </button>
+              </Col>
+            </Row>
+          </>
+              )
+            : (
+          <Connecting />
+              )}
       </Card.Body>
     </>
   );

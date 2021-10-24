@@ -9,7 +9,7 @@ Substrate Gifts is a dapp (decentralized app) built on top of substrate compatib
 - [node.js version >=14](https://nodejs.org/en/download/)
 - [yarn](https://yarnpkg.com/)
 - [git](https://git-scm.com/)
-- a [substrate node/network] for the gift dapp to connect to.
+- a [substrate node](https://github.com/substrate-developer-hub/substrate-node-template) or network(e.x. polkadot, kusama) for the gift dapp to connect to.
 
 ### Installation
 

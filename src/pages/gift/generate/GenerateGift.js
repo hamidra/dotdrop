@@ -3,12 +3,17 @@ import { Row, Col, Form, Card, InputGroup } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { GenerateContext } from './GenerateMain';
 import { useSubstrate, utils } from '../../../substrate-lib';
-import { useFormik } from 'formik';
+import { Formik } from 'formik';
+import config from '../../../config';
 import BN from 'bn.js';
+
 export default function GenerateGift ({
   account,
-  generateGiftHandler,
-  giftFeeMultiplier // this can be 0 or 1 and specifies if a gift provider charges fees or the gifts are free.
+  initialGiftInfo,
+  setGiftInfoHandler,
+  // this can be 1 or more and specifies the number of tx's a gift sender covers the fees for.
+  // (at least 1 to conver 1 tx from interim gift account to the recipient account).
+  giftFeeMultiplier
 }) {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
 
@@ -16,6 +21,8 @@ export default function GenerateGift ({
 
   const [balance, setBalance] = useState(null);
   const [txFee, setTxFee] = useState(null);
+  const [amountWarning, setAmountWarning] = useState(null);
+
   const balanceDecimalPoints = 5;
   const balanceVal = balance?.free
     ? utils.fromChainUnit(
@@ -54,24 +61,48 @@ export default function GenerateGift ({
     // since the txFees does not differ much for different amounts,
     // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
     async function fetchTxFee () {
-      const address = account?.address;
-      if (address) {
-        const info = await api.tx.balances
-          .transfer(address, balance?.free || 0)
-          .paymentInfo(address);
-
-        const estimatedFee = utils.calcFeeAdjustments(info.partialFee);
-        setTxFee(estimatedFee);
+      try {
+        const address = account?.address;
+        if (address) {
+          const transferTx = api.tx.balances.transfer(address, balance?.free || 0);
+          const remarkTx = api.tx.system.remarkWithEvent('gift::create');
+          const txs = [transferTx, remarkTx];
+          const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
+          const estimatedFee = utils.calcFeeAdjustments(info.partialFee);
+          setTxFee(estimatedFee);
+        }
+      } catch (err) {
+        console.log(`error while loading tx fees: ${err}`);
       }
     }
     fetchTxFee();
   }, [api, apiState, account, chainInfo, balance]);
 
+  const checkAmountWarning = (amount) => {
+    const amountFloat = !isNaN(amount) && parseFloat(amount);
+
+    const maxAmount = config?.MAX_AMOUNT?.toString();
+    const maxAmountFloat = !isNaN(maxAmount) && parseFloat(maxAmount);
+    const maxAmountStr =
+      maxAmountFloat && utils.formatBalance(maxAmount, chainInfo?.token);
+    const isTooHigh =
+      amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
+    if (isTooHigh) {
+      setAmountWarning(
+        `⚠️ This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
+      );
+    } else {
+      setAmountWarning(null);
+    }
+  };
+
   const validateGiftAmount = (amount) => {
     const giftChainAmount = utils.toChainUnit(amount, chainInfo.decimals);
-    // if the fees are applied the sender needs to pay 2 transaction fees.
-    // one txfee for tx sender_account->gift_account and one txfee for tx from gift_account->recipient_account
-    const totalTxFees = new BN(txFee || 0, 10).muln(giftFeeMultiplier).muln(2);
+    // calculated as one txfee for the tx from sender account to interim account,
+    // plus the number of future tx fees (specified by giftFeeMultiplier) that the sender will cover,
+    // which is at least 1 to conver 1 tx from interim gift account to the recipient account.
+
+    const totalTxFees = new BN(txFee || 0, 10).muln(giftFeeMultiplier + 1);
     // this is the amount that will be deducted from sender account
     const totalChainAmount = giftChainAmount?.add(totalTxFees);
     // validate gift amount
@@ -108,17 +139,14 @@ export default function GenerateGift ({
         return minAvailableBalanceError;
       }
     }
+    checkAmountWarning(amount);
   };
 
-  const validate = ({ recipientEmail, confirmEmail, amount }) => {
+  const validate = ({ recipientName, amount }) => {
     const errors = {};
-    if (
-      !recipientEmail ||
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(recipientEmail)
-    ) {
-      errors.recipientEmail = 'Please enter a valid email.';
-    } else if (recipientEmail !== confirmEmail) {
-      errors.confirmEmail = "The email addresses did'nt match.";
+    const maxNameLength = 50;
+    if (recipientName && recipientName.length > maxNameLength) {
+      errors.recipientName = `Recipient name can not be more than ${maxNameLength} characters`;
     }
     const amountError = validateGiftAmount(amount);
     if (amountError) {
@@ -127,150 +155,141 @@ export default function GenerateGift ({
     return errors;
   };
 
-  const _setAmount = (value) => {
-    const pattern = /^([0-9]+\.?[0-9]{0,5})?$/i;
-    formik.setValues({
-      ...formik.values,
-      amount: pattern.test(value) ? value : formik.values.amount
-    });
+  const _setAmount = (value, formik) => {
+    const pattern = /^([0-9]+\.?[0-9]*)?$/i;
+    const amount = pattern.test(value) ? value : formik.values.amount;
+    formik.setFieldValue(
+      'amount',
+      amount
+    );
   };
-
-  const formik = useFormik({
-    initialValues: {
-      amount: '',
-      recipientEmail: '',
-      confirmEmail: ''
-    },
-    validate,
-    onSubmit: ({ recipientEmail, amount }) => {
-      generateGiftHandler({
-        recipientEmail,
-        amount
-      });
-    }
-  });
 
   return (
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title={`Gift ${giftTheme?.content}`}
-          cardText={`Send ${giftTheme?.content} to your friends and family, and have them join the
-          ${giftTheme?.network} Network today.`}
+          title="Gift Details"
+          cardText={`Enter the recipient’s name and the amount of ${giftTheme?.content} you would like to send.`}
           backClickHandler={() => prevStep()}
         />
-        <Row className="flex-column align-items-center">
-          <Col className="d-flex justify-content-center align-items-center pt-4">
-            <Form
-              autoComplete="off"
-              className="w-100"
-              onSubmit={formik.handleSubmit}>
-              <Form.Group className="row">
-                <Col md="6">
-                  <Form.Label htmlFor="recipientEmail">
-                    Recipient Email
-                  </Form.Label>
-                  <Form.Control
-                    id="recipientEmail"
-                    name="recipientEmail"
-                    type="email"
-                    autoComplete="off"
-                    placeholder=""
-                    value={formik.values.recipientEmail}
-                    isInvalid={
-                      formik.touched.recipientEmail &&
-                      !!formik.errors.recipientEmail
-                    }
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.touched.recipientEmail &&
-                    !!formik.errors.recipientEmail && (
-                      <Form.Text className="text-danger">
-                        {formik.errors.recipientEmail}
-                      </Form.Text>
-                  )}
-                </Col>
-                <Col md="6" className="mt-2 mt-md-0">
-                  <Form.Label htmlFor="confirmEmail">
-                    Confirm Recipient Email
-                  </Form.Label>
-                  <Form.Control
-                    id="confirmEmail"
-                    name="confirmEmail"
-                    type="email"
-                    autoComplete="nope"
-                    placeholder=""
-                    value={formik.values.confirmEmail}
-                    isInvalid={
-                      formik.touched.confirmEmail &&
-                      !!formik.errors.confirmEmail
-                    }
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.touched.confirmEmail &&
-                    !!formik.errors.confirmEmail && (
-                      <Form.Text className="text-danger">
-                        {formik.errors.confirmEmail}
-                      </Form.Text>
-                  )}
-                </Col>
-              </Form.Group>
+        <Formik
+          initialValues={{
+            amount: initialGiftInfo?.amount || '',
+            recipientName: initialGiftInfo?.name || ''
+          }}
+          validate={validate}
+          onSubmit={({ recipientName, amount }, actions) => {
+            const totalGiftFee = new BN(txFee || 0, 10).muln(giftFeeMultiplier);
+            const fee = utils.fromChainUnit(
+              totalGiftFee,
+              chainInfo.decimals,
+              balanceDecimalPoints
+            );
 
-              <Form.Group>
-                <Form.Label htmlFor="amount">Amount</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    id="amount"
-                    name="amount"
-                    type="text"
-                    autoComplete="nope"
-                    placeholder=""
-                    style={
-                      formik.touched.amount && !!formik.errors.amount
-                        ? { borderColor: 'red' }
-                        : {}
-                    }
-                    className="border-right-0"
-                    value={formik.values.amount}
-                    onChange={(e) => {
-                      _setAmount(e.target.value);
-                    }}
-                    onBlur={formik.handleBlur}
-                  />
-                  <InputGroup.Append>
-                    <InputGroup.Text
-                      style={{
-                        ...(formik.touched.amount && !!formik.errors.amount
-                          ? { borderColor: 'red' }
-                          : {})
-                      }}
-                      className="bg-transparent border-left-0 balance-text text-wrap">
-                      {balanceStr
-                        ? `${balanceStr} available`
-                        : `${chainInfo?.token}`}
-                    </InputGroup.Text>
-                  </InputGroup.Append>
-                </InputGroup>
+            setGiftInfoHandler({
+              recipientName,
+              amount,
+              fee
+            });
+          }}>
+          {(props) => (
+            <>
+              <Row className="flex-column align-items-center">
+                <Col className="d-flex justify-content-center align-items-center pt-4">
+                  <Form autoComplete="off" className="w-100">
+                    <Form.Group>
+                      <Form.Label htmlFor="recipientName">
+                        Recipient Name
+                      </Form.Label>
+                      <Form.Control
+                        id="recipientName"
+                        name="recipientName"
+                        type="text"
+                        autoComplete="off"
+                        placeholder=""
+                        value={props.values.recipientName}
+                        isInvalid={
+                          props.touched.recipientName &&
+                          !!props.errors.recipientName
+                        }
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                      />
+                      {props.touched.recipientName &&
+                        !!props.errors.recipientName && (
+                          <Form.Text className="text-danger">
+                            {props.errors.recipientName}
+                          </Form.Text>
+                      )}
+                    </Form.Group>
 
-                {formik.touched.amount && !!formik.errors.amount && (
-                  <Form.Text className="text-danger">
-                    {formik?.errors?.amount}
-                  </Form.Text>
-                )}
-              </Form.Group>
-            </Form>
-          </Col>
-        </Row>
-        <div className="d-flex flex-grow-1" />
-        <div className="d-flex justify-content-center">
-          <button
-            className="btn btn-primary"
-            onClick={() => formik.submitForm()}>
-            Generate Gift
-          </button>
-        </div>
+                    <Form.Group>
+                      <Form.Label htmlFor="amount">Amount</Form.Label>
+                      <InputGroup>
+                        <Form.Control
+                          id="amount"
+                          name="amount"
+                          type="text"
+                          autoComplete="off"
+                          placeholder=""
+                          style={
+                            props.touched.amount && !!props.errors.amount
+                              ? { borderColor: 'red' }
+                              : {}
+                          }
+                          className="border-right-0"
+                          value={props.values.amount}
+                          onChange={(e) => {
+                            _setAmount(e.target.value, props);
+                          }}
+                          onBlur={props.handleBlur}
+                        />
+                        <InputGroup.Append>
+                          <InputGroup.Text
+                            style={{
+                              ...(props.touched.amount && !!props.errors.amount
+                                ? { borderColor: 'red' }
+                                : {})
+                            }}
+                            className="bg-transparent border-left-0 balance-text text-wrap">
+                            {balanceStr
+                              ? `${balanceStr} available`
+                              : `${chainInfo?.token}`}
+                          </InputGroup.Text>
+                        </InputGroup.Append>
+                      </InputGroup>
+
+                      {props.touched.amount && !!props.errors.amount
+                        ? (
+                        <Form.Text className="text-danger">
+                          {props?.errors?.amount}
+                        </Form.Text>
+                          )
+                        : (
+                            amountWarning && (
+                          <Form.Text className="alert alert-warning">
+                            {amountWarning}
+                          </Form.Text>
+                            )
+                          )}
+                    </Form.Group>
+                  </Form>
+                </Col>
+              </Row>
+              <div className="d-flex flex-grow-1" />
+              <div className="d-flex justify-content-center">
+                <button
+                  className="btn btn-primary"
+                  disabled={props?.touched?.recipientName && props?.touched?.amount && !props?.isValid}
+                  onClick={() => {
+                    props.submitForm();
+                  }}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+        </Formik>
       </Card.Body>
     </>
   );

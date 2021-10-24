@@ -3,24 +3,23 @@ import { Row, Col, Card, Form } from 'react-bootstrap';
 import { ClaimContext } from './ClaimMain';
 import CardHeader from '../../../components/CardHeader';
 import { Formik } from 'formik';
+import { stringHelpers } from '../../../utils';
 
 export default function VerifySecret ({ claimGiftHandler, accountSource }) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
     // and is indeed a valid mnemonic phrase
-    redeemSecret = redeemSecret.trim();
+    redeemSecret = stringHelpers.removeSpaces(redeemSecret);
     if (redeemSecret) {
       claimGiftHandler(redeemSecret);
     }
   };
   const validate = ({ redeemSecret }) => {
-    redeemSecret = redeemSecret.trim();
+    redeemSecret = stringHelpers.removeSpaces(redeemSecret);
     const errors = {};
     if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
       errors.redeemSecret = 'Please enter a valid gift secret.';
-    } else if (redeemSecret.length < 22) {
-      errors.redeemSecret = 'Please enter a valid gift secret. The secret must include at least 22 characters';
     } else if (redeemSecret.length > 32) {
       errors.redeemSecret = 'Please enter a valid gift secret. The secret must not include more than 32 characters';
     }
@@ -60,7 +59,6 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
                         id="redeemSecret"
                         name="redeemSecret"
                         type="input"
-                        placeholder="0x4rt6..."
                         isInvalid={
                           props.touched.redeemSecret &&
                           !!props.errors.redeemSecret
@@ -84,7 +82,9 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
                 <Col className="d-flex justify-content-center">
                   <button
                     className="btn btn-primary"
-                    disabled={!!props.errors.redeemSecret}
+                    disabled={
+                      props.touched.redeemSecret && !!props.errors.redeemSecret
+                    }
                     onClick={() => !props.isSubmitting && props.submitForm()}>
                     Claim Gift
                   </button>

@@ -16,15 +16,15 @@
     "deploy": "gh-pages -d build -m 'deploy'"
   },
   "dependencies": {
-    "@polkadot/api": "^5.4.1",
-    "@polkadot/extension-dapp": "^0.39.2",
+    "@polkadot/api": "^6.3.1",
+    "@polkadot/extension-dapp": "^0.40.3",
     "@polkadot/keyring": "^7.1.1",
     "@polkadot/networks": "^7.1.1",
-    "@polkadot/react-identicon": "^0.84.3",
-    "@polkadot/react-qr": "^0.84.3",
-    "@polkadot/types": "^5.4.1",
-    "@polkadot/ui-keyring": "^0.84.3",
-    "@polkadot/ui-settings": "^0.84.3",
+    "@polkadot/react-identicon": "^0.85.5",
+    "@polkadot/react-qr": "^0.85.5",
+    "@polkadot/types": "^6.3.1",
+    "@polkadot/ui-keyring": "^0.85.5",
+    "@polkadot/ui-settings": "^0.85.5",
     "@polkadot/util": "^7.1.1",
     "@polkadot/util-crypto": "^7.1.1",
     "bn.js": "^5.2.0",
@@ -32,7 +32,7 @@
     "file-saver": "^2.0.5",
     "formik": "^2.2.8",
     "node-sass": "^6.0.1",
-    "phosphor-react": "^1.2.1",
+    "phosphor-react": "^1.3.1",
     "prop-types": "^15.7.2",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
@@ -63,7 +63,8 @@
   "eslintConfig": {
     "rules": {
       "no-unused-vars": "off",
-      "react-hooks/exhaustive-deps": "off"
+      "react-hooks/exhaustive-deps": "off",
+      "eqeqeq": "off"
     },
     "extends": [
       "react-app",

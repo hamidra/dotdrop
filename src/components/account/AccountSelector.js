@@ -105,7 +105,7 @@ const AccountDropdownItem = React.forwardRef(
       account?.address,
       addressPaddingLen
     );
-    const balanceStr = utils.formatBalance(balance, token);
+    const balanceStr = utils.formatBalance(balance, token) || '';
     return (
       <>
         <Media
