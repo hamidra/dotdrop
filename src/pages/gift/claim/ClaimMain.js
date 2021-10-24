@@ -14,14 +14,15 @@ import ExistingAccountMain from './existing-account/ExistingAccountMain';
 import nft0 from '../../../images/ksm-nft0.jpg';
 import nft1 from '../../../images/ksm-nft1.jpg';
 import nft2 from '../../../images/ksm-nft2.jpg';
+import nft13 from '../../../images/ksm-nft13.jpg';
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
 export { ClaimContext };
 
 // NFT artists
-const artists = ['Awer', 'Vadim', 'Andreas Preis'];
-const arts = [nft0, nft1, nft2];
+const artists = { 0: 'Awer', 1: 'Vadim', 2: 'Andreas Preis' };
+const arts = { 0: nft0, 1: nft1, 2: nft2, 13: nft13 };
 export default function ClaimMain () {
   const { keyring, apiState, api, chainInfo, giftTheme } = useSubstrate();
   const { claimGift } = giftProvider;

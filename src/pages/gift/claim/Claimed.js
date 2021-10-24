@@ -4,15 +4,16 @@ import config from '../../../config';
 export default function Claimed ({ accountAddress, nft }) {
   console.log(config.NFT_PREVIEW_URL);
   const previewUrl = new URL(`collectibles/statemine/${nft.classId}/${nft.instanceId}`, config.NFT_PREVIEW_URL);
+  const cardText = 'Congratulations! You have successfully claimed your NFT.';
   return (
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'You broke the wall!'}
-          cardText={`Congratulations! You have successfully claimed a limited edition NFT by ${nft?.artist}.`}
+          cardText={cardText}
         />
         <Col className="pt-4 d-flex justify-content-center align-items-center">
-          <Image className="w-100 nft" src={nft?.art} />
+          {(nft?.art) && (<Image style={{ height: 300 }} className="nft" src={nft?.art} />)}
         </Col>
         <div className="flex-grow-1" />
         <Col className="pt-5 d-flex justify-content-center align-items-center">

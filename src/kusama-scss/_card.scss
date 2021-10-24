@@ -1,46 +1,46 @@
 .card {
-    background-color: #000;
-    border: 2px solid $primary;
-    border-radius: 0;
+  background-color: #000;
+  border: 2px solid $primary;
+  border-radius: 0;
 }
 
 .card-body {
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .card-footer {
-    padding: 1.5rem 2rem;
-    font-size: 0.75rem;
-    color: $secondary-darker;
+  padding: 1.5rem 2rem;
+  font-size: 0.75rem;
+  color: $secondary-darker;
 }
 
 .back-arrow {
-    position: absolute;
-    left: 0;
-    top: 1rem;
-    color: $secondary-darker;
-    cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  color: $secondary-darker;
+  cursor: pointer;
 
-    &:hover {
-        color: $secondary;
-    }
+  &:hover {
+    color: $secondary;
+  }
 }
 
 .divider {
-    color: $secondary;
+  color: $secondary;
 
-    .border-top {
-        border-top-color: $gray-800 !important;
-    }
+  .border-top {
+    border-top-color: $gray-800 !important;
+  }
 }
 
 .image-box {
-    max-height: 3rem;
-    height: auto;
-    max-width: 90%;
-    width: auto;
+  max-height: 3rem;
+  height: auto;
+  max-width: 90%;
+  width: auto;
 }
 
 .nft {
-    border: 1px solid $gray-700;
+  border: 1px solid $gray-700;
 }
