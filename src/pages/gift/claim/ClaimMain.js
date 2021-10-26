@@ -91,7 +91,7 @@ export default function ClaimMain () {
             if (classId == null) {
               throw new Error('The gift secret does not hold any NFTs');
             }
-            const nft = { art: arts[classId], artist: artists[classId], classId, instanceId };
+            const nft = { classId, instanceId };
             setClaimedNft(nft);
 
             nextStep();
