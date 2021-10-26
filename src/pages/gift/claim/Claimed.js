@@ -23,7 +23,7 @@ export default function Claimed ({ accountAddress, nft }) {
             href={previewUrl}
             target="_blank"
             rel="noreferrer">
-            See NFT on Singular
+            See your NFT on Singular
           </a>
         </Col>
       </Card.Body>

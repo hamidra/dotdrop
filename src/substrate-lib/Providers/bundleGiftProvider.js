@@ -20,6 +20,15 @@ const uniquesPalletGiftProvider = {
   },
   claimGift: async (api, interimAccount, recipientAccount) => {
     const recepientAddress = utils.getAccountAddress(recipientAccount);
+
+    // NFT-Campaign only:  if there is no NFTs to claim throw an error
+    // verify the gift account holds any uniques assets.
+    const fromAddress = utils.getAccountAddress(interimAccount);
+    const assetKeys = await api.query.uniques?.account.keys(fromAddress);
+    if ((assetKeys?.length || 0) === 0) {
+      throw new Error('The entered gift secret does not hold any NFTs. You might have entered the wrong secret or the NFT might have been already claimed.');
+    }
+
     const events = await transferAllAssets(
       api,
       interimAccount,
