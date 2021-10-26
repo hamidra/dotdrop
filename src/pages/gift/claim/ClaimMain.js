@@ -22,7 +22,7 @@ export { ClaimContext };
 
 // NFT artists
 const artists = { 0: 'Awer', 1: 'Vadim', 2: 'Andreas Preis' };
-const arts = { 0: nft0, 1: nft1, 2: nft2, 13: nft13 };
+const arts = { 0: nft0, 1: nft1, 2: nft2 };
 export default function ClaimMain () {
   const { keyring, apiState, api, chainInfo, giftTheme } = useSubstrate();
   const { claimGift } = giftProvider;
