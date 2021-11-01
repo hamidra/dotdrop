@@ -19,7 +19,7 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
     `${claimUrl}\n\n` +
     `and type in the following gift secret to claim your ${giftTheme?.content}.\n\n` +
     `${formattedSecret}\n\n` +
-    `The website will walk you through to create your own secure${giftTheme.network} account.\n` +
+    `The website will walk you through the steps to create your own secure ${giftTheme.network} account.\n` +
     'Enjoy!';
 
   /* const mailToLink = `${email}?subject=${mailSubject}&body=${encodeURIComponent(
@@ -46,38 +46,38 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
         <Row className="justify-content-center align-items-center my-4 mx-2">
           <Col className="px-0">
             <div className="printable border rounded p-4">
-                <p>{greeting}</p>
-                <p>I'm sending you {`${amountStr}`} as a gift! You can go to</p>
-                <p>
-                  <em
-                    style={{
-                      display: 'block',
-                      textAlign: 'center',
-                      padding: '5px',
-                      marginTop: '20px',
-                      marginBottom: '20px',
-                      borderRadius: '5px'
-                    }}>{`${claimUrl}`}</em>
-                </p>
-                <p>
-                  and type in the following gift secret to claim your{' '}
-                  {`${giftTheme.content}`}.
-                  <strong
-                    className="bg-gray"
-                    style={{
-                      display: 'block',
-                      textAlign: 'center',
-                      padding: '5px',
-                      marginTop: '20px',
-                      marginBottom: '20px',
-                      borderRadius: '5px'
-                    }}>
-                    {formattedSecret}
-                  </strong>
-                  The website will walk you through to create your own secure{' '}
-                  {`${giftTheme?.network}`} account.
-                </p>
-                <p>Enjoy!</p>
+              <p>{greeting}</p>
+              <p>I'm sending you {`${amountStr}`} as a gift! You can go to</p>
+              <p>
+                <em
+                  style={{
+                    display: 'block',
+                    textAlign: 'center',
+                    padding: '5px',
+                    marginTop: '20px',
+                    marginBottom: '20px',
+                    borderRadius: '5px'
+                  }}>{`${claimUrl}`}</em>
+              </p>
+              <p>
+                and type in the following gift secret to claim your{' '}
+                {`${giftTheme.content}`}.
+                <strong
+                  className="bg-gray"
+                  style={{
+                    display: 'block',
+                    textAlign: 'center',
+                    padding: '5px',
+                    marginTop: '20px',
+                    marginBottom: '20px',
+                    borderRadius: '5px'
+                  }}>
+                  {formattedSecret}
+                </strong>
+                The website will walk you through the steps to create your own secure{' '}
+                {`${giftTheme?.network}`} account.
+              </p>
+              <p>Enjoy!</p>
             </div>
           </Col>
         </Row>
