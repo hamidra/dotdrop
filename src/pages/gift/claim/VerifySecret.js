@@ -76,7 +76,7 @@ export default function VerifySecret ({ claimGiftHandler }) {
                       />
                       {props.touched.redeemSecret &&
                         !!props.errors.redeemSecret && (
-                          <Form.Text style={{ color: 'red' }}>
+                          <Form.Text className="danger">
                             {props.errors.redeemSecret}
                           </Form.Text>
                       )}

@@ -47,7 +47,7 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                         id="accountName"
                         name="accountName"
                         type="input"
-                        placeholder="new account"
+                        placeholder="New account"
                         isInvalid={
                           props.touched.accountName &&
                           !!props.errors.accountName
@@ -58,7 +58,7 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                       />
                       {props.touched.accountName &&
                         !!props.errors.accountName && (
-                          <Form.Text style={{ color: 'red' }}>
+                          <Form.Text className="danger">
                             {props.errors.accountName}
                           </Form.Text>
                       )}
@@ -78,7 +78,7 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                         onBlur={props.handleBlur}
                       />
                       {props.touched.password && !!props.errors.password && (
-                        <Form.Text style={{ color: 'red' }}>
+                        <Form.Text className="danger">
                           {props.errors.password}
                         </Form.Text>
                       )}
@@ -102,7 +102,7 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                       />
                       {props.touched.confirmPassword &&
                         !!props.errors.confirmPassword && (
-                          <Form.Text style={{ color: 'red' }}>
+                          <Form.Text className="danger">
                             {props.errors.confirmPassword}
                           </Form.Text>
                       )}

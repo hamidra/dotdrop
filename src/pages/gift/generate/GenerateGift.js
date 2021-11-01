@@ -90,7 +90,7 @@ export default function GenerateGift ({
       amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
     if (isTooHigh) {
       setAmountWarning(
-        `⚠️ This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
+        `This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
       );
     } else {
       setAmountWarning(null);
@@ -108,7 +108,7 @@ export default function GenerateGift ({
     const totalChainAmount = giftChainAmount?.add(totalTxFees);
     // validate gift amount
     if (!amount) {
-      return 'Please enter the gift amount';
+      return 'Please enter the gift amount.';
     }
     if (giftChainAmount) {
       // check if the gift amount is above existential deposit
@@ -218,7 +218,7 @@ export default function GenerateGift ({
                       />
                       {props.touched.recipientName &&
                         !!props.errors.recipientName && (
-                          <Form.Text className="text-danger">
+                          <Form.Text className="danger">
                             {props.errors.recipientName}
                           </Form.Text>
                       )}
@@ -233,12 +233,7 @@ export default function GenerateGift ({
                           type="text"
                           autoComplete="off"
                           placeholder=""
-                          style={
-                            props.touched.amount && !!props.errors.amount
-                              ? { borderColor: 'red' }
-                              : {}
-                          }
-                          className="border-right-0"
+                          className={`border-right-0 ${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
                           value={props.values.amount}
                           onChange={(e) => {
                             _setAmount(e.target.value, props);
@@ -247,11 +242,6 @@ export default function GenerateGift ({
                         />
                         <InputGroup.Append>
                           <InputGroup.Text
-                            style={{
-                              ...(props.touched.amount && !!props.errors.amount
-                                ? { borderColor: 'red' }
-                                : {})
-                            }}
                             className="bg-transparent border-left-0 balance-text text-wrap">
                             {balanceStr
                               ? `${balanceStr} available`
@@ -262,17 +252,17 @@ export default function GenerateGift ({
 
                       {props.touched.amount && !!props.errors.amount
                         ? (
-                        <Form.Text className="text-danger">
-                          {props?.errors?.amount}
-                        </Form.Text>
-                          )
-                        : (
-                            amountWarning && (
-                          <Form.Text className="alert alert-warning">
-                            {amountWarning}
+                          <Form.Text className="danger">
+                            {props?.errors?.amount}
                           </Form.Text>
-                            )
-                          )}
+                        )
+                        : (
+                          amountWarning && (
+                            <Form.Text className="warning">
+                              {amountWarning}
+                            </Form.Text>
+                          )
+                        )}
                     </Form.Group>
                   </Form>
                 </Col>
