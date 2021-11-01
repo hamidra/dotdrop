@@ -82,7 +82,7 @@ export default function AccountOverview () {
         .account(accountAddress, ({ nonce, data: balance }) => {
           setBalance(balance);
           console.log(
-            `free balance is ${balance.free} with ${balance.reserved} reserved and a nonce of ${nonce}`
+            `free balance is ${balance?.free} with ${balance?.miscFrozen} frozen and ${balance?.reserved} reserved and a nonce of ${nonce}`
           );
         })
         .then((result) => {
@@ -125,11 +125,22 @@ export default function AccountOverview () {
                         }`}
                     />
                     <AccountField
-                      title="Balance (Free)"
+                      title="Balance (transferrable)"
                       value={
                         balance?.free &&
                         `${utils.fromChainUnit(
-                          balance.free,
+                          utils.getUsableBalances(balance),
+                          chainInfo?.decimals,
+                          balanceDecimalPoints
+                        )} ${chainInfo?.token}`
+                      }
+                    />
+                    <AccountField
+                      title="Balance (locked)"
+                      value={
+                        balance?.miscFrozen &&
+                        `${utils.fromChainUnit(
+                          balance?.miscFrozen,
                           chainInfo?.decimals,
                           balanceDecimalPoints
                         )} ${chainInfo?.token}`

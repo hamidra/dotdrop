@@ -27,7 +27,7 @@ export default function GenerateGift ({
   const balanceDecimalPoints = 5;
   const balanceVal = balance?.free
     ? utils.fromChainUnit(
-      balance.free,
+      utils.getUsableBalances(balance),
       chainInfo?.decimals,
       balanceDecimalPoints
     )
@@ -45,7 +45,7 @@ export default function GenerateGift ({
           const balance = accountInfo?.data;
           setBalance(balance);
           console.log(
-            `free balance is ${balance?.free} with ${balance?.reserved} reserved and a nonce of ${accountInfo?.nonce}`
+            `free balance is ${balance?.free} with ${balance?.miscFrozen} frozen and ${balance?.reserved} reserved and a nonce of ${accountInfo?.nonce}`
           );
         })
         .then((result) => {
@@ -65,7 +65,7 @@ export default function GenerateGift ({
       try {
         const address = account?.address;
         if (address) {
-          const transferTx = api.tx.balances.transfer(address, balance?.free || 0);
+          const transferTx = api.tx.balances.transfer(address, utils.getUsableBalances(balance) || 0);
           const remarkTx = api.tx.system.remarkWithEvent('gift::create');
           const txs = [transferTx, remarkTx];
           const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
@@ -90,7 +90,7 @@ export default function GenerateGift ({
       amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
     if (isTooHigh) {
       setAmountWarning(
-        `⚠️ This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
+        `This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
       );
     } else {
       setAmountWarning(null);
@@ -108,11 +108,11 @@ export default function GenerateGift ({
     const totalChainAmount = giftChainAmount?.add(totalTxFees);
     // validate gift amount
     if (!amount) {
-      return 'Please enter the gift amount';
+      return 'Please enter the gift amount.';
     }
     if (giftChainAmount) {
       // check if the gift amount is above existential deposit
-      const minChainGiftAmount = chainInfo?.existentialDeposit;
+      const minChainGiftAmount = chainInfo?.existentialDeposit || 0;
       if (giftChainAmount.lt(minChainGiftAmount)) {
         const minGiftAmount = utils.fromChainUnit(
           minChainGiftAmount,
@@ -125,9 +125,9 @@ export default function GenerateGift ({
     if (totalChainAmount && balance) {
       // check if the account has enough funds to pay the gift amount and fees
       const minRequiredBalance = totalChainAmount;
-      if (balance?.free?.lt(minRequiredBalance)) {
+      if (utils.getUsableBalances(balance)?.lt(minRequiredBalance)) {
         const freeBalance = utils.fromChainUnit(
-          balance?.free,
+          utils.getUsableBalances(balance),
           chainInfo.decimals,
           balanceDecimalPoints
         );
@@ -138,6 +138,16 @@ export default function GenerateGift ({
         );
         const minAvailableBalanceError = `The account balance of ${freeBalance} ${chainInfo.token} is not enough to pay the gift amount of ${amount} ${chainInfo.token} plus fees of (${fees} ${chainInfo.token})`;
         return minAvailableBalanceError;
+      }
+      // check if the account balance - gift_amount is hight then the existential deposit so the gift won't kill the account.
+      const remainingBalance = utils.getUsableBalances(balance)?.sub(totalChainAmount);
+      const edAmount = utils.fromChainUnit(
+        chainInfo?.existentialDeposit,
+        chainInfo?.decimals
+      ) || 0;
+      if (remainingBalance.lt(chainInfo?.existentialDeposit || 0)) {
+        const keepAliveError = `The gift amount of ${amount} ${chainInfo.token} will bring your account balance below ${edAmount} ${chainInfo.token} (existential deposit for the ${chainInfo?.chainName} network). This will kill your account and make you lose the remaining funds.`;
+        return keepAliveError;
       }
     }
     checkAmountWarning(amount);
@@ -218,7 +228,7 @@ export default function GenerateGift ({
                       />
                       {props.touched.recipientName &&
                         !!props.errors.recipientName && (
-                          <Form.Text className="text-danger">
+                          <Form.Text className="danger">
                             {props.errors.recipientName}
                           </Form.Text>
                       )}
@@ -233,12 +243,7 @@ export default function GenerateGift ({
                           type="text"
                           autoComplete="off"
                           placeholder=""
-                          style={
-                            props.touched.amount && !!props.errors.amount
-                              ? { borderColor: 'red' }
-                              : {}
-                          }
-                          className="border-right-0"
+                          className={`border-right-0 ${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
                           value={props.values.amount}
                           onChange={(e) => {
                             _setAmount(e.target.value, props);
@@ -247,11 +252,6 @@ export default function GenerateGift ({
                         />
                         <InputGroup.Append>
                           <InputGroup.Text
-                            style={{
-                              ...(props.touched.amount && !!props.errors.amount
-                                ? { borderColor: 'red' }
-                                : {})
-                            }}
                             className="bg-transparent border-left-0 balance-text text-wrap">
                             {balanceStr
                               ? `${balanceStr} available`
@@ -262,15 +262,15 @@ export default function GenerateGift ({
 
                       {props.touched.amount && !!props.errors.amount
                         ? (
-                        <Form.Text className="text-danger">
-                          {props?.errors?.amount}
-                        </Form.Text>
+                          <Form.Text className="danger">
+                            {props?.errors?.amount}
+                          </Form.Text>
                           )
                         : (
                             amountWarning && (
-                          <Form.Text className="alert alert-warning">
-                            {amountWarning}
-                          </Form.Text>
+                            <Form.Text className="warning">
+                              {amountWarning}
+                            </Form.Text>
                             )
                           )}
                     </Form.Group>
