@@ -29,7 +29,7 @@ export const transferBalanceAndFees = async (
   const chainAmountAndFees = chainAmount.add(
     feeAdjustment.mul(new BN(feeMultiplier || 1))
   );
-  const transferTxFinal = api.tx.balances.transfer(toAddress, chainAmountAndFees);
+  const transferTxFinal = api.tx.balances.transferKeepAlive(toAddress, chainAmountAndFees);
   const txsFinal = [transferTxFinal, remarkTx];
   const tx = api.tx.utility.batchAll(txsFinal);
   return signAndSendTx(api, tx, fromAccount);
