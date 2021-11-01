@@ -46,7 +46,14 @@ const utils = {
     }
   },
 
-  formatBalance: (balance, token, decimalPints) => {
+  getUsableBalances: (balances) => {
+    const free = new BN(balances?.free || 0);
+    const blocked = new BN(balances?.miscFrozen || 0);
+    const usable = free?.gte(blocked) ? free?.sub(blocked) : free;
+    return usable;
+  },
+
+  formatBalance: (balance, token, decimalPoints) => {
     if (!balance) {
       return balance;
     }
@@ -54,8 +61,8 @@ const utils = {
     wholeVal = trimStart(wholeVal, '0');
     let result = wholeVal || '0';
     if (decimalVal) {
-      if (decimalPints && !isNaN(decimalPints)) {
-        decimalVal = decimalVal.slice(0, decimalPints);
+      if (decimalPoints && !isNaN(decimalPoints)) {
+        decimalVal = decimalVal.slice(0, decimalPoints);
       }
       decimalVal = trimEnd(decimalVal, '0');
       if (decimalVal) {
