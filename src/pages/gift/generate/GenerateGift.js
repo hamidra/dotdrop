@@ -112,7 +112,7 @@ export default function GenerateGift ({
     }
     if (giftChainAmount) {
       // check if the gift amount is above existential deposit
-      const minChainGiftAmount = chainInfo?.existentialDeposit;
+      const minChainGiftAmount = chainInfo?.existentialDeposit || 0;
       if (giftChainAmount.lt(minChainGiftAmount)) {
         const minGiftAmount = utils.fromChainUnit(
           minChainGiftAmount,
@@ -138,6 +138,16 @@ export default function GenerateGift ({
         );
         const minAvailableBalanceError = `The account balance of ${freeBalance} ${chainInfo.token} is not enough to pay the gift amount of ${amount} ${chainInfo.token} plus fees of (${fees} ${chainInfo.token})`;
         return minAvailableBalanceError;
+      }
+      // check if the account balance - gift_amount is hight then the existential deposit so the gift won't kill the account.
+      const remainingBalance = utils.getUsableBalances(balance)?.sub(totalChainAmount);
+      const edAmount = utils.fromChainUnit(
+        chainInfo?.existentialDeposit,
+        chainInfo?.decimals
+      ) || 0;
+      if (remainingBalance.lt(chainInfo?.existentialDeposit || 0)) {
+        const keepAliveError = `The gift amount of ${amount} ${chainInfo.token} will bring your account balance below ${edAmount} ${chainInfo.token} (existential deposit for the ${chainInfo?.chainName} network). This will kill your account and make you lose the remaining funds.`;
+        return keepAliveError;
       }
     }
     checkAmountWarning(amount);
@@ -255,14 +265,14 @@ export default function GenerateGift ({
                           <Form.Text className="danger">
                             {props?.errors?.amount}
                           </Form.Text>
-                        )
+                          )
                         : (
-                          amountWarning && (
+                            amountWarning && (
                             <Form.Text className="warning">
                               {amountWarning}
                             </Form.Text>
-                          )
-                        )}
+                            )
+                          )}
                     </Form.Group>
                   </Form>
                 </Col>
