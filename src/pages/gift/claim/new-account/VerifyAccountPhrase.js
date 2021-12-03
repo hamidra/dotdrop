@@ -71,7 +71,7 @@ export default function VerifyAccountPhrase ({
                         placeholder={`Word #${randIdx[0]}`}
                       />
                       {props.touched?.phrase1 && !!props.errors?.phrase1 && (
-                        <Form.Text style={{ color: 'red' }}>
+                        <Form.Text className="danger">
                           {props.errors.phrase1}
                         </Form.Text>
                       )}
@@ -91,7 +91,7 @@ export default function VerifyAccountPhrase ({
                         placeholder={`Word #${randIdx[1]}`}
                       />
                       {props.touched.phrase2 && !!props.errors.phrase2 && (
-                        <Form.Text style={{ color: 'red' }}>
+                        <Form.Text className="danger">
                           {props.errors.phrase2}
                         </Form.Text>
                       )}
