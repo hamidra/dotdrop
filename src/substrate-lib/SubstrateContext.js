@@ -34,6 +34,10 @@ const getGiftTheme = (theme) => {
       giftTheme.content = 'NFT';
       giftTheme.network = 'Kusama';
       break;
+    case 'polkadotnft':
+      giftTheme.content = 'NFT';
+      giftTheme.network = 'Polkadot';
+      break;
     default:
   }
   return giftTheme;
