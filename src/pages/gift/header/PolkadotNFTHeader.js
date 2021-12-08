@@ -32,7 +32,7 @@ export default function Header ({ selectedAccount }) {
     <>
       <Navbar
         className="px-4 py-3"
-        style={{ display: 'grid', gridTemplateColumns: '60px 1fr 60px' }}
+        style={{ display: 'grid', gridTemplateColumns: '0px 1fr 0px' }}
         variant="dark"
       >
         <Navbar.Brand>
@@ -72,12 +72,6 @@ export default function Header ({ selectedAccount }) {
             <Dropdown.Menu
               aria-labelledby="dropdownMenuButton"
               className="dropdown-menu-right mt-2 shadow">
-              <Dropdown.Item
-                className="px-3"
-                onClick={() => history.push('/about')}>
-                <Gift className="mr-2" size={18} />
-                About Gifts
-              </Dropdown.Item>
               {alternativeApp && (
                 <Dropdown.Item
                   className="px-3"
@@ -86,7 +80,7 @@ export default function Header ({ selectedAccount }) {
                     window.open(alternativeApp, '_blank');
                   }}>
                   <Bird className="mr-2" size={18} />
-                  Gift KSM
+                  Kusama NFTs
                 </Dropdown.Item>
               )}
             </Dropdown.Menu>
