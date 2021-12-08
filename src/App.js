@@ -13,6 +13,7 @@ import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
 import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
+import PrelaunchLanding from './pages/gift/PrelaunchLanding';
 
 function Body () {
   const { apiState, giftTheme } = useSubstrate();
@@ -23,7 +24,7 @@ function Body () {
         <Route path={'/about'}>
           <AboutMain />
         </Route>
-        <Route path={'/claim'}>
+        {/* <Route path={'/claim'}>
           <ClaimMain />
           <Processing
             show={apiState !== 'READY'}
@@ -50,12 +51,12 @@ function Body () {
             show={apiState !== 'READY'}
             message={`Connecting to ${giftTheme.network}...`}
           />
-        </Route>
+        </Route> */}
         <Route path={'/privacy-policy'}>
           <PrivacyPolicy />
         </Route>
         <Route path={'/'}>
-          <Redirect to={'/claim'} />
+          <PrelaunchLanding/>
         </Route>
       </Switch>
     </>
