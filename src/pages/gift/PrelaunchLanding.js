@@ -22,6 +22,7 @@ export default function Landing () {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 }
