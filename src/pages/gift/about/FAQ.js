@@ -33,7 +33,7 @@ export default function FAQ ({ giftTheme }) {
   const a6 = (
     <p className="pb-3">
       Please contact&nbsp;
-      <a href={giftTheme.network === 'Polkadot' ? 'mailto:support@polkadot.network' : 'support@kusama.network'}>{giftTheme.network === 'Polkadot' ? 'support@polkadot.network' : 'support@kusama.network'}</a>.
+      <a href={'mailto:support@polkadot.network'}>{'support@polkadot.network'}</a>.
     </p>
   );
 
