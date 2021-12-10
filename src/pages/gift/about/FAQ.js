@@ -32,8 +32,8 @@ export default function FAQ ({ giftTheme }) {
     'Try reaching out to your recipient personally. If your recipient still does not claim the gift, there is an option to revoke it and return the gift amount to your account.';
   const a6 = (
     <p className="pb-3">
-      Please contact&nbsp;
-      <a href={'mailto:support@polkadot.network'}>{'support@polkadot.network'}</a>.
+      Please visit our&nbsp;
+      <a href="https://support.polkadot.network/" rel="noreferrer" target="_blank">support page</a>.
     </p>
   );
 

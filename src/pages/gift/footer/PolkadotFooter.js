@@ -19,9 +19,7 @@ export default function Footer ({ className, selectedAccount }) {
       <div className="footer-grow flex-grow-1" />
       <div>
         <strong>Questions?</strong>&nbsp;
-        <a href="mailto:support@polkadot.network?subject=Gifts">
-          support@polkadot.network
-        </a>
+        <a href="https://support.polkadot.network/" rel="noreferrer" target="_blank">Visit our support page.</a>
       </div>
     </footer>
   );
