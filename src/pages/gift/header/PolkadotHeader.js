@@ -42,7 +42,7 @@ export default function Header ({ selectedAccount }) {
             rel="noopener noreferrer">
             <img
               width={40}
-              className="p-1 shadow-sm rounded-circle"
+              className="shadow-sm rounded-circle"
               src={PolkadotCircle}
               alt={'Polkadot'}
             />
