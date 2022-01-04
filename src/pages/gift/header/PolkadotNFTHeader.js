@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { Bird, DotsThree, Gift } from 'phosphor-react';
-import PolkadotCircle from '../../../images/polkadot-circle.png';
+import PolkadotCircle2 from '../../../images/polkadot-circle-new.svg';
 import config from '../../../config';
 
 const AccountInfoBox = ({ accountAddress }) => {
@@ -42,8 +42,8 @@ export default function Header ({ selectedAccount }) {
             rel="noopener noreferrer">
             <img
               width={40}
-              className="shadow-sm rounded-circle"
-              src={PolkadotCircle}
+              className="shadow-sm rounded-circle p-1"
+              src={PolkadotCircle2}
               alt={'Polkadot'}
             />
           </a>
