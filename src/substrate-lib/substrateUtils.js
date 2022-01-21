@@ -54,11 +54,11 @@ const utils = {
   },
 
   /**
-   *
-   * @param {*} balance the balance in string
+   * formats a balance by removing leading (and trailing if decimal) zeros and adding token symbol
+   * @param {*} balance the balance value in string
    * @param {*} token the token symbol (e.g. DOT, KSM)
-   * @param {*} decimalPoints the balance decimals as string or number
-   * @returns
+   * @param {*} decimalPoints a string or number  that specifies the number of digits after decimal point.
+   * @returns formatted balance in string
    */
   formatBalance: (balance, token, decimalPoints) => {
     if (!balance) {
@@ -82,18 +82,26 @@ const utils = {
     return result;
   },
 
+  /**
+   * convert a value from chain unit to a base 10 decimal number
+   * @param {*} value the value in chain unit (in string or BN)
+   * @param {*} chainDecimal chain token decimals
+   * @param {*} decimalPoints number of digits to keep after decimal points
+   * @returns  the value in base 10 decimal format in string
+   */
   fromChainUnit: (value, chainDecimal, decimalPoints) => {
-    if (!value || !chainDecimal) {
+    if ((!value && value != 0) || !chainDecimal) {
       return null;
     }
     chainDecimal = parseInt(chainDecimal);
+    value = new BN(value);
     const B10 = new BN(10);
     const BChainUnit = B10.pow(new BN(chainDecimal));
-    const dm = new BN(value).divmod(BChainUnit);
+    const dm = value.divmod(BChainUnit);
     const wholeStr = dm.div.toString();
     let decimalStr = dm.mod.toString().padStart(chainDecimal, '0');
-    if (decimalPoints) {
-      decimalStr = decimalStr?.substr(0, decimalPoints);
+    if (decimalPoints || decimalPoints === 0) {
+      decimalStr = decimalStr?.slice(0, decimalPoints);
     }
     decimalStr = trimEnd(decimalStr, '0');
     let result = wholeStr;
@@ -105,9 +113,10 @@ const utils = {
   },
 
   toChainUnit: (value, chainDecimal) => {
-    if (!value || !chainDecimal) {
+    if ((!value && value != 0) || !chainDecimal) {
       return null;
     }
+    value = value.toString();
     chainDecimal = parseInt(chainDecimal);
     const B10 = new BN(10);
     let [wholeVal, decimalVal] = value.split('.');
