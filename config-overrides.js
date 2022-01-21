@@ -13,6 +13,7 @@ module.exports = {
       '/node_modules/(?!(@polkadot|@babel/runtime/helpers/esm)/)',
       '^.+\\.module\\.(css|sass|scss)$'
     ];
+    config.setupFilesAfterEnv = ['<rootDir>/__tests__/setup.js'];
     return config;
   }
 };
