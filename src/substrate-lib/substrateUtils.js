@@ -26,7 +26,7 @@ const trimStart = (str, char) => {
 
 const utils = {
   getAccountAddress: (account) => {
-    const { pairOrAddress } = account;
+    const { pairOrAddress } = account || {};
     if (typeof pairOrAddress === 'string' || pairOrAddress instanceof String) {
       // the stored value is an address
       return pairOrAddress;
@@ -48,11 +48,18 @@ const utils = {
 
   getUsableBalances: (balances) => {
     const free = new BN(balances?.free || 0);
-    const blocked = new BN(balances?.miscFrozen || 0);
-    const usable = free?.gte(blocked) ? free?.sub(blocked) : free;
+    const frozen = new BN(balances?.miscFrozen || 0);
+    const usable = free?.gte(frozen) ? free?.sub(frozen) : new BN(0);
     return usable;
   },
 
+  /**
+   *
+   * @param {*} balance the balance in string
+   * @param {*} token the token symbol (e.g. DOT, KSM)
+   * @param {*} decimalPoints the balance decimals as string or number
+   * @returns
+   */
   formatBalance: (balance, token, decimalPoints) => {
     if (!balance) {
       return balance;
