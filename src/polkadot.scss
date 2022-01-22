@@ -95,11 +95,13 @@ $input-height: 2.5rem;
   margin-top: 0.5rem !important;
 }
 
-.was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
+.was-validated .form-check-input:invalid ~ .form-check-label,
+.form-check-input.is-invalid ~ .form-check-label {
   color: inherit !important;
 }
 
-.was-validated .form-control:invalid, .form-control.is-invalid {
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
   border-color: #ff67b7 !important;
   box-shadow: 0 0 0 0.2rem rgba(230, 0, 122, 0.25);
 }
@@ -119,6 +121,10 @@ $h5-font-size: 1rem;
 .navbar {
   img {
     background-color: #fff;
+    &.logo {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
   }
 
   .dropdown-toggle::after {
