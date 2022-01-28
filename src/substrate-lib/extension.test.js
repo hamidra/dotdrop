@@ -1,5 +1,5 @@
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
-import { injectedExtensionInfo, injectedAccountWithMeta } from '../mockData';
+import { injectedExtensionInfo, injectedAccountWithMeta } from './mockData';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { ApiPromise } from '@polkadot/api';
 import uiKeyring from '@polkadot/ui-keyring';
