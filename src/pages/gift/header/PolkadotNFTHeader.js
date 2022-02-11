@@ -23,7 +23,7 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header ({ selectedAccount }) {
+export default function Header({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
@@ -62,7 +62,7 @@ export default function Header ({ selectedAccount }) {
           )}
           <Dropdown id="dropdown-item-button">
             <Dropdown.Toggle
-              className="btn-dropdown p-1 rounded shadow-sm"
+              className="btn-dropdown p-2 rounded shadow-sm"
               type="button"
               data-toggle="dropdown"
               id="dropdownMenuButton">
