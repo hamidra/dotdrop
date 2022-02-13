@@ -1,3 +1,15 @@
+.cards {
+    display: grid;
+    grid-column-gap: 22px;
+    grid-row-gap: 22px;
+    max-width: 1040px;
+  
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+    }
+  }
+
 .card {
     background-color: #000;
     border: 2px solid $primary;
@@ -40,3 +52,32 @@
     max-width: 90%;
     width: auto;
 }
+
+.card-image {
+    display: inline-block;
+    width: 144px;
+    height: 144px;
+    background: no-repeat center center;
+    background-size: 144px;
+  
+    &--create {
+      background-image: url('../images/icon_kusama_create.svg');
+    }
+  
+    &--share {
+      background-image: url('../images/icon_kusama_share.svg');
+    }
+  
+    &--claim {
+      background-image: url('../images/icon_kusama_claim.svg');
+    }
+  }
+  
+  .card-text {
+    &--explanation {
+        max-width: 256px;
+        @media (min-width: 992px) {
+            padding: 0 20px;
+          }
+    }
+  }
