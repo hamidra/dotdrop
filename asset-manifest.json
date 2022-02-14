@@ -1,23 +1,20 @@
 {
   "files": {
-    "main.css": "/dotdrop/static/css/main.89f35238.chunk.css",
-    "main.js": "/dotdrop/static/js/main.73bf03d2.chunk.js",
-    "main.js.map": "/dotdrop/static/js/main.73bf03d2.chunk.js.map",
-    "runtime-main.js": "/dotdrop/static/js/runtime-main.018d62df.js",
-    "runtime-main.js.map": "/dotdrop/static/js/runtime-main.018d62df.js.map",
-    "static/js/2.d92d4f14.chunk.js": "/dotdrop/static/js/2.d92d4f14.chunk.js",
-    "static/js/2.d92d4f14.chunk.js.map": "/dotdrop/static/js/2.d92d4f14.chunk.js.map",
+    "main.css": "/dotdrop/static/css/main.b2b129ca.css",
+    "main.js": "/dotdrop/static/js/main.30a3adae.js",
+    "static/media/Gift_Polkadot.svg": "/dotdrop/static/media/Gift_Polkadot.06fc1d6d2b0d2c3597bd99c68ff040ad.svg",
+    "static/media/Gift_Kusama.svg": "/dotdrop/static/media/Gift_Kusama.ad78a296b5f94e413d81f29414aafc04.svg",
+    "static/media/icon_polkadot_claim.svg": "/dotdrop/static/media/icon_polkadot_claim.8ada59cec3a6a14c6053.svg",
+    "static/media/icon_polkadot_create.svg": "/dotdrop/static/media/icon_polkadot_create.76245ee32404efd86b10.svg",
     "index.html": "/dotdrop/index.html",
-    "static/css/main.89f35238.chunk.css.map": "/dotdrop/static/css/main.89f35238.chunk.css.map",
-    "static/js/2.d92d4f14.chunk.js.LICENSE.txt": "/dotdrop/static/js/2.d92d4f14.chunk.js.LICENSE.txt",
-    "static/media/Gift_Kusama.7fe0c4ae.png": "/dotdrop/static/media/Gift_Kusama.7fe0c4ae.png",
-    "static/media/Gift_Polkadot.a00f9544.png": "/dotdrop/static/media/Gift_Polkadot.a00f9544.png",
-    "static/media/polkadot-circle-new.4345f3e4.svg": "/dotdrop/static/media/polkadot-circle-new.4345f3e4.svg"
+    "static/media/polkadot-circle-new.svg": "/dotdrop/static/media/polkadot-circle-new.4345f3e48698d0e1e9362232d5a0e99f.svg",
+    "static/media/icon_polkadot_share.svg": "/dotdrop/static/media/icon_polkadot_share.17ae2777ecddb42b5ce7.svg",
+    "static/media/index.cjs": "/dotdrop/static/media/index.f2b6f7ffc9a430272d20.cjs",
+    "main.b2b129ca.css.map": "/dotdrop/static/css/main.b2b129ca.css.map",
+    "main.30a3adae.js.map": "/dotdrop/static/js/main.30a3adae.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.018d62df.js",
-    "static/js/2.d92d4f14.chunk.js",
-    "static/css/main.89f35238.chunk.css",
-    "static/js/main.73bf03d2.chunk.js"
+    "static/css/main.b2b129ca.css",
+    "static/js/main.30a3adae.js"
   ]
 }
