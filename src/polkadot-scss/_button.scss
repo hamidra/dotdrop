@@ -92,6 +92,13 @@
     left: 0;
     width: 100%;
   }
+
+  &:disabled {
+    background: $white !important;
+    color: $secondary !important;
+    opacity: 0.5 !important;
+    pointer-events: none;
+  }
 }
 
 .notification .btn-primary,
@@ -190,6 +197,11 @@
     left: 0;
     width: 100%;
   }
+
+  &:disabled {
+    opacity: 0.5 !important;
+    pointer-events: none;
+  }
 }
 
 .btn-card, .card-link {
@@ -237,4 +249,10 @@
       margin-right: -1rem;
     }
   }
+}
+
+.btn-set-error {
+  position: absolute;
+  top: 1.5rem;
+  opacity: 0;
 }

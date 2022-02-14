@@ -8,7 +8,7 @@ import config from '../../../config';
 import BN from 'bn.js';
 import analytics from '../../../analytics';
 
-export default function GenerateGift ({
+export default function GenerateGift({
   account,
   initialGiftInfo,
   setGiftInfoHandler,
@@ -61,7 +61,7 @@ export default function GenerateGift ({
   useEffect(() => {
     // since the txFees does not differ much for different amounts,
     // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
-    async function fetchTxFee () {
+    async function fetchTxFee() {
       try {
         const address = account?.address;
         if (address) {
@@ -231,48 +231,46 @@ export default function GenerateGift ({
                           <Form.Text className="danger">
                             {props.errors.recipientName}
                           </Form.Text>
-                      )}
+                        )}
                     </Form.Group>
 
                     <Form.Group>
                       <Form.Label htmlFor="amount">Amount</Form.Label>
-                      <InputGroup>
+                      <div className="position-relative">
                         <Form.Control
                           id="amount"
                           name="amount"
                           type="text"
                           autoComplete="off"
                           placeholder=""
-                          className={`border-right-0 ${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
+                          className={`${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
                           value={props.values.amount}
                           onChange={(e) => {
                             _setAmount(e.target.value, props);
                           }}
                           onBlur={props.handleBlur}
                         />
-                        <InputGroup.Append>
-                          <InputGroup.Text
-                            className="bg-transparent border-left-0 balance-text text-wrap">
-                            {balanceStr
-                              ? `${balanceStr} available`
-                              : `${chainInfo?.token}`}
-                          </InputGroup.Text>
-                        </InputGroup.Append>
-                      </InputGroup>
+                        <div
+                          className="bg-transparent balance-text balance-text--available text-wrap position-absolute">
+                          {balanceStr
+                            ? `${balanceStr} available`
+                            : `${chainInfo?.token}`}
+                        </div>
+                      </div>
 
                       {props.touched.amount && !!props.errors.amount
                         ? (
                           <Form.Text className="danger">
                             {props?.errors?.amount}
                           </Form.Text>
-                          )
+                        )
                         : (
-                            amountWarning && (
+                          amountWarning && (
                             <Form.Text className="warning">
                               {amountWarning}
                             </Form.Text>
-                            )
-                          )}
+                          )
+                        )}
                     </Form.Group>
                   </Form>
                 </Col>

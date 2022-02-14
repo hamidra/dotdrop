@@ -4,9 +4,9 @@ import { Card, Row, Col } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate } from '../../../substrate-lib';
 
-export default function Landing () {
+export default function Landing() {
   const { nextStep } = useContext(GenerateContext);
-  const { giftTheme } = useSubstrate();
+  const { apiState, giftTheme } = useSubstrate();
   return (
     <>
       <Card.Body className="d-flex flex-column">
@@ -19,6 +19,7 @@ export default function Landing () {
             <div className="pt-2">
               <button
                 className="btn btn-primary btn-lg"
+                disabled={apiState !== 'READY'}
                 onClick={() => nextStep()}>
                 Send a Gift
               </button>
