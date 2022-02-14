@@ -23,7 +23,7 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header({ selectedAccount }) {
+export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;

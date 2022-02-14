@@ -5,7 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Copy, Eye, EyeSlash } from 'phosphor-react';
 import { useSubstrate } from '../../../../substrate-lib';
 
-export default function PresentAccountPhrase({
+export default function PresentAccountPhrase ({
   mnemonicWords,
   nextStepHandler,
   prevStepHandler

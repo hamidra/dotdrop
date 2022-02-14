@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { isWeb3Injected } from '@polkadot/extension-dapp';
 
-export default function Claimed({ amount, accountAddress }) {
+export default function Claimed ({ amount, accountAddress }) {
   const history = useHistory();
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = utils.formatBalance(amount, chainInfo?.token);

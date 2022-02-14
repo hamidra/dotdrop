@@ -4,7 +4,7 @@ import CardHeader from '../../../components/CardHeader';
 import Divider from '../../../components/Divider';
 import { useSubstrate } from '../../../substrate-lib';
 
-export default function ConnectAccount({ setAccountSourceHandler }) {
+export default function ConnectAccount ({ setAccountSourceHandler }) {
   const { apiState, giftTheme } = useSubstrate();
   return (
     <Card.Body className="d-flex flex-column">

@@ -1,6 +1,6 @@
 import { Gift, PaperPlaneTilt, Smiley } from 'phosphor-react';
 
-export default function ProcessExplainerCard({ giftTheme }) {
+export default function ProcessExplainerCard ({ giftTheme }) {
   return (
     <div
       className="d-flex flex-column align-items-center w-100 mb-5">

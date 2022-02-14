@@ -8,7 +8,7 @@ import config from '../../../config';
 import BN from 'bn.js';
 import analytics from '../../../analytics';
 
-export default function GenerateGift({
+export default function GenerateGift ({
   account,
   initialGiftInfo,
   setGiftInfoHandler,
@@ -61,7 +61,7 @@ export default function GenerateGift({
   useEffect(() => {
     // since the txFees does not differ much for different amounts,
     // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
-    async function fetchTxFee() {
+    async function fetchTxFee () {
       try {
         const address = account?.address;
         if (address) {
@@ -231,7 +231,7 @@ export default function GenerateGift({
                           <Form.Text className="danger">
                             {props.errors.recipientName}
                           </Form.Text>
-                        )}
+                      )}
                     </Form.Group>
 
                     <Form.Group>
@@ -263,14 +263,14 @@ export default function GenerateGift({
                           <Form.Text className="danger">
                             {props?.errors?.amount}
                           </Form.Text>
-                        )
+                          )
                         : (
-                          amountWarning && (
+                            amountWarning && (
                             <Form.Text className="warning">
                               {amountWarning}
                             </Form.Text>
-                          )
-                        )}
+                            )
+                          )}
                     </Form.Group>
                   </Form>
                 </Col>

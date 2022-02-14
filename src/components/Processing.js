@@ -1,6 +1,6 @@
 import { WrapperOpaque } from '@polkadot/types';
 import { Spinner } from 'react-bootstrap';
-export default function Processing({ show, message }) {
+export default function Processing ({ show, message }) {
   return (
     <>
       <div className={show ? 'processing-wrapper' : 'processing-wrapper processing-wrapper--hidden'}>
