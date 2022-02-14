@@ -39,4 +39,11 @@
 .balance-text {
   font-size: 0.85rem !important;
   color: $secondary;
+
+  &--available {
+    position: absolute;
+    right: 1rem;
+    top: 0.67rem;
+    pointer-events: none;
+  }
 }
