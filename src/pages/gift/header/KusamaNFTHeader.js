@@ -48,13 +48,13 @@ export default function Header ({ selectedAccount }) {
           {selectedAccount && (
             <>
               <div className="d-none d-sm-block w-100 d-sm-none" />
-              <Nav className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm">
+              <div className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm border-0 p-0">
                 <div
-                  style={{ minWidth: '5rem', fontWeight: '400' }}
-                  className="account-box align-items-center text-center">
+                  style={{ minWidth: '5rem', fontWeight: '400', height: '42px' }}
+                  className="account-box align-items-center text-center d-flex bg-transparent balance-text">
                   <AccountInfoBox accountAddress={selectedAccount} />
                 </div>
-              </Nav>
+              </div>
             </>
           )}
           <Dropdown id="dropdown-item-button">

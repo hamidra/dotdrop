@@ -1,7 +1,6 @@
 import utils from './substrateUtils';
 import { Keyring } from '@polkadot/keyring';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { validateChars } from '@polkadot/util-crypto/base58/validate';
 import BN from 'bn.js';
 
 const chainDecimal = 12;

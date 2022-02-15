@@ -236,29 +236,27 @@ export default function GenerateGift ({
 
                     <Form.Group>
                       <Form.Label htmlFor="amount">Amount</Form.Label>
-                      <InputGroup>
+                      <div className="position-relative">
                         <Form.Control
                           id="amount"
                           name="amount"
                           type="text"
                           autoComplete="off"
                           placeholder=""
-                          className={`border-right-0 ${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
+                          className={`${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
                           value={props.values.amount}
                           onChange={(e) => {
                             _setAmount(e.target.value, props);
                           }}
                           onBlur={props.handleBlur}
                         />
-                        <InputGroup.Append>
-                          <InputGroup.Text
-                            className="bg-transparent border-left-0 balance-text text-wrap">
-                            {balanceStr
-                              ? `${balanceStr} available`
-                              : `${chainInfo?.token}`}
-                          </InputGroup.Text>
-                        </InputGroup.Append>
-                      </InputGroup>
+                        <div
+                          className="bg-transparent balance-text balance-text--available text-wrap position-absolute">
+                          {balanceStr
+                            ? `${balanceStr} available`
+                            : `${chainInfo?.token}`}
+                        </div>
+                      </div>
 
                       {props.touched.amount && !!props.errors.amount
                         ? (

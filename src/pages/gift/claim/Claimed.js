@@ -1,7 +1,7 @@
 import { Row, Col, Card, Image } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
-import giftPolkadot from '../../../images/Gift_Polkadot.png';
-import giftKusama from '../../../images/Gift_Kusama.png';
+import giftPolkadot from '../../../images/Gift_Polkadot.svg';
+import giftKusama from '../../../images/Gift_Kusama.svg';
 import { useHistory } from 'react-router-dom';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { isWeb3Injected } from '@polkadot/extension-dapp';
@@ -28,15 +28,15 @@ export default function Claimed ({ amount, accountAddress }) {
         <Col className="pt-5 d-flex justify-content-center align-items-center">
           {isWeb3Injected
             ? (<button
-                className="btn btn-primary"
-                onClick={() => history.push(`/account/${accountAddress}`)}>
-                  {'See Account'}
-              </button>)
+              className="btn btn-primary"
+              onClick={() => history.push(`/account/${accountAddress}`)}>
+              {'See Account'}
+            </button>)
             : (<button
-                className="btn btn-primary"
-                onClick={() => history.push(`/extension/${accountAddress}`)}>
-                  {`Set up a ${giftTheme.network} wallet`}
-              </button>)
+              className="btn btn-primary"
+              onClick={() => history.push(`/extension/${accountAddress}`)}>
+              {`Set up a ${giftTheme.network} wallet`}
+            </button>)
           }
         </Col>
       </Card.Body>

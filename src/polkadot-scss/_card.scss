@@ -1,9 +1,13 @@
 .back-arrow {
   position: absolute;
   left: 0;
-  top: 0.75rem;
+  top: 0.25rem;
   color: $secondary-lighter;
   cursor: pointer;
+
+  @media (min-width: 576px) {
+    top: 0.75rem;
+  }
 
   &:hover {
     color: $secondary;
@@ -11,6 +15,18 @@
 }
 
 $card-border-radius: 20px;
+
+.cards {
+  display: grid;
+  grid-column-gap: 22px;
+  grid-row-gap: 22px;
+  max-width: 1040px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+  }
+}
 
 .card {
   border: none !important;
@@ -38,5 +54,34 @@ $card-border-radius: 20px;
 @media (min-width: 576px) {
   .card-header-title {
     font-size: 2.5rem;
+  }
+}
+
+.card-image {
+  display: inline-block;
+  width: 144px;
+  height: 144px;
+  background: no-repeat center center;
+  background-size: 144px;
+
+  &--create {
+    background-image: url('../images/icon_polkadot_create.svg');
+  }
+
+  &--share {
+    background-image: url('../images/icon_polkadot_share.svg');
+  }
+
+  &--claim {
+    background-image: url('../images/icon_polkadot_claim.svg');
+  }
+}
+
+.card-text {
+  &--explanation {
+    max-width: 256px;
+    @media (min-width: 992px) {
+      padding: 0 20px;
+    }
   }
 }

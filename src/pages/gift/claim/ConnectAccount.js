@@ -5,7 +5,7 @@ import Divider from '../../../components/Divider';
 import { useSubstrate } from '../../../substrate-lib';
 
 export default function ConnectAccount ({ setAccountSourceHandler }) {
-  const { giftTheme } = useSubstrate();
+  const { apiState, giftTheme } = useSubstrate();
   return (
     <Card.Body className="d-flex flex-column">
       <CardHeader
@@ -20,6 +20,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
         <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
           <button
             className="btn btn-primary btn-lg"
+            disabled={apiState !== 'READY'}
             onClick={() => {
               analytics.track('claim_new_account');
               setAccountSourceHandler('NEW');
@@ -31,6 +32,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
         <Row className="d-flex flex-column justify-content-center align-items-center">
           <button
             className="btn btn-link"
+            disabled={apiState !== 'READY'}
             onClick={() => {
               analytics.track('claim_existing_account');
               setAccountSourceHandler('EXISTING');
