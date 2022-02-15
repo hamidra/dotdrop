@@ -1,9 +1,13 @@
 .back-arrow {
   position: absolute;
   left: 0;
-  top: 0.75rem;
+  top: 0.25rem;
   color: $secondary-lighter;
   cursor: pointer;
+
+  @media (min-width: 576px) {
+    top: 0.75rem;
+  }
 
   &:hover {
     color: $secondary;

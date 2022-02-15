@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
-export default function FAQ ({ giftTheme }) {
+export default function FAQ({ giftTheme }) {
   const q1 = `What is ${giftTheme.network}? What is ${giftTheme.content}?`;
   const q2 = 'How do gifts work?';
   const q3 = 'How can I make sure the gift I received is legit?';
@@ -40,11 +40,11 @@ export default function FAQ ({ giftTheme }) {
   return (
     <>
       <div className="py-5" style={{ maxWidth: '1040px' }}>
-        <h3 className="d-flex justify-content-center pb-5 mb-3">
+        <h3 className="d-flex justify-content-center pt-5 pb-5 mb-3">
           {giftTheme.network} Gifts FAQ
         </h3>
         <Row>
-          <Col>
+          <Col md>
             <h5>{q1}</h5>
             <>{a1}</>
             <h5>{q2}</h5>
@@ -52,7 +52,7 @@ export default function FAQ ({ giftTheme }) {
             <h5>{q3}</h5>
             <p className="pb-3">{a3}</p>
           </Col>
-          <Col>
+          <Col md>
             <h5>{q4}</h5>
             <p className="pb-3">{a4}</p>
             <h5>{q5}</h5>

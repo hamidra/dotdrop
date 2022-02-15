@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 import { ArrowLeft } from 'phosphor-react';
 
-export default function CardHeader ({ cardText, title, backClickHandler }) {
+export default function CardHeader({ cardText, title, backClickHandler }) {
   const arrowSize = 24;
   const arrowPositionLeft = 10;
   const colPaddingX = arrowSize + arrowPositionLeft + 3;
@@ -22,8 +22,8 @@ export default function CardHeader ({ cardText, title, backClickHandler }) {
             style={{
               wordWrap: 'normal',
               ...(backClickHandler
-                ? {}
-                : { paddingLeft: colPaddingX, paddingRight: colPaddingX })
+                ? { paddingLeft: colPaddingX, paddingRight: colPaddingX }
+                : {})
             }}
             className="card-header-title">
             {title}

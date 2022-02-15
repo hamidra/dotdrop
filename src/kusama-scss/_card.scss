@@ -29,12 +29,16 @@
 .back-arrow {
     position: absolute;
     left: 0;
-    top: 1rem;
+    top: 0.6rem;
     color: $secondary-darker;
     cursor: pointer;
 
     &:hover {
         color: $secondary;
+    }
+
+    @media (min-width: 576px) {
+      top: 1.2rem;
     }
 }
 
