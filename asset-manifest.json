@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/dotdrop/static/css/main.be792d80.css",
-    "main.js": "/dotdrop/static/js/main.ea0162a9.js",
+    "main.css": "/dotdrop/static/css/main.2d14e1ca.css",
+    "main.js": "/dotdrop/static/js/main.12403a64.js",
     "static/media/Gift_Polkadot.svg": "/dotdrop/static/media/Gift_Polkadot.06fc1d6d2b0d2c3597bd99c68ff040ad.svg",
     "static/media/Gift_Kusama.svg": "/dotdrop/static/media/Gift_Kusama.ad78a296b5f94e413d81f29414aafc04.svg",
-    "static/media/icon_polkadot_claim.svg": "/dotdrop/static/media/icon_polkadot_claim.8ada59cec3a6a14c6053.svg",
-    "static/media/icon_polkadot_create.svg": "/dotdrop/static/media/icon_polkadot_create.76245ee32404efd86b10.svg",
+    "static/media/icon_polkadot_claim.svg": "/dotdrop/static/media/icon_polkadot_claim.e637d55c19a743ad6930.svg",
+    "static/media/icon_polkadot_create.svg": "/dotdrop/static/media/icon_polkadot_create.a41ffa16eab72b2820d7.svg",
     "index.html": "/dotdrop/index.html",
     "static/media/polkadot-circle-new.svg": "/dotdrop/static/media/polkadot-circle-new.4345f3e48698d0e1e9362232d5a0e99f.svg",
-    "static/media/icon_polkadot_share.svg": "/dotdrop/static/media/icon_polkadot_share.17ae2777ecddb42b5ce7.svg",
+    "static/media/icon_polkadot_share.svg": "/dotdrop/static/media/icon_polkadot_share.59f6f7c0dc178ddae5c0.svg",
     "static/media/index.cjs": "/dotdrop/static/media/index.f2b6f7ffc9a430272d20.cjs",
-    "main.be792d80.css.map": "/dotdrop/static/css/main.be792d80.css.map",
-    "main.ea0162a9.js.map": "/dotdrop/static/js/main.ea0162a9.js.map"
+    "main.2d14e1ca.css.map": "/dotdrop/static/css/main.2d14e1ca.css.map",
+    "main.12403a64.js.map": "/dotdrop/static/js/main.12403a64.js.map"
   },
   "entrypoints": [
-    "static/css/main.be792d80.css",
-    "static/js/main.ea0162a9.js"
+    "static/css/main.2d14e1ca.css",
+    "static/js/main.12403a64.js"
   ]
 }
