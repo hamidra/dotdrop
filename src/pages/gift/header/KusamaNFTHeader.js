@@ -26,7 +26,7 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header({ selectedAccount }) {
+export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   return (

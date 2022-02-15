@@ -6,7 +6,7 @@ import FAQ from './FAQ';
 import ProcessExplainerCard from './ProcessExplainerCard';
 import { useSubstrate } from '../../../substrate-lib';
 
-export default function AboutMain() {
+export default function AboutMain () {
   const { giftTheme } = useSubstrate();
 
   return (
