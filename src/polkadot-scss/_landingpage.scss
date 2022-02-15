@@ -1,9 +1,14 @@
 .landingpage {
     width: 700px;
+    max-width: 100vw;
 
     .card-header-title {
         color: #fff;
-        font-size: 3.5rem;
+        font-size: 3rem;
+
+        @media (min-width: 40rem) {
+            font-size: 3.5rem;
+        }
     }
 
     .text-card {

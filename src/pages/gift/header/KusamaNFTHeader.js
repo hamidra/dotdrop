@@ -26,7 +26,7 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header ({ selectedAccount }) {
+export default function Header({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   return (
@@ -50,7 +50,7 @@ export default function Header ({ selectedAccount }) {
               <div className="d-none d-sm-block w-100 d-sm-none" />
               <div className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm border-0 p-0">
                 <div
-                  style={{ minWidth: '5rem', fontWeight: '400', height: '42px !important' }}
+                  style={{ minWidth: '5rem', fontWeight: '400', height: '42px' }}
                   className="account-box align-items-center text-center d-flex bg-transparent balance-text">
                   <AccountInfoBox accountAddress={selectedAccount} />
                 </div>
