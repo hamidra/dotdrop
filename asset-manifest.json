@@ -1,20 +1,26 @@
 {
   "files": {
-    "main.css": "/dotdrop/static/css/main.2d14e1ca.css",
-    "main.js": "/dotdrop/static/js/main.12403a64.js",
+    "main.css": "/dotdrop/static/css/main.7fa4bb27.css",
+    "main.js": "/dotdrop/static/js/main.84257990.js",
+    "static/media/ksm-nft13.jpg": "/dotdrop/static/media/ksm-nft13.6cbd7adb1ca97224acd7.jpg",
+    "static/media/nft_bg.svg": "/dotdrop/static/media/nft_bg.607ea93e299d3d5d1894.svg",
+    "static/media/ksm-nft0.jpg": "/dotdrop/static/media/ksm-nft0.b668a6079c204a987b5a.jpg",
+    "static/media/ksm-nft1.jpg": "/dotdrop/static/media/ksm-nft1.fba2605201c82c5c7eab.jpg",
+    "static/media/ksm-nft2.jpg": "/dotdrop/static/media/ksm-nft2.85e3f309e16512a984e7.jpg",
+    "static/media/icon_kusama_share.svg": "/dotdrop/static/media/icon_kusama_share.cb7ac0e81ea43999bb44.svg",
     "static/media/Gift_Polkadot.svg": "/dotdrop/static/media/Gift_Polkadot.06fc1d6d2b0d2c3597bd99c68ff040ad.svg",
+    "static/media/icon_kusama_claim.svg": "/dotdrop/static/media/icon_kusama_claim.0ee4aa8ff6354bc95665.svg",
     "static/media/Gift_Kusama.svg": "/dotdrop/static/media/Gift_Kusama.ad78a296b5f94e413d81f29414aafc04.svg",
-    "static/media/icon_polkadot_claim.svg": "/dotdrop/static/media/icon_polkadot_claim.e637d55c19a743ad6930.svg",
-    "static/media/icon_polkadot_create.svg": "/dotdrop/static/media/icon_polkadot_create.a41ffa16eab72b2820d7.svg",
-    "index.html": "/dotdrop/index.html",
+    "static/media/icon_kusama_create.svg": "/dotdrop/static/media/icon_kusama_create.e7c0abbab915df4bad2a.svg",
     "static/media/polkadot-circle-new.svg": "/dotdrop/static/media/polkadot-circle-new.4345f3e48698d0e1e9362232d5a0e99f.svg",
-    "static/media/icon_polkadot_share.svg": "/dotdrop/static/media/icon_polkadot_share.59f6f7c0dc178ddae5c0.svg",
+    "index.html": "/dotdrop/index.html",
     "static/media/index.cjs": "/dotdrop/static/media/index.f2b6f7ffc9a430272d20.cjs",
-    "main.2d14e1ca.css.map": "/dotdrop/static/css/main.2d14e1ca.css.map",
-    "main.12403a64.js.map": "/dotdrop/static/js/main.12403a64.js.map"
+    "static/media/check_icon.svg": "/dotdrop/static/media/check_icon.2f796970d4b1d6e2b983.svg",
+    "main.7fa4bb27.css.map": "/dotdrop/static/css/main.7fa4bb27.css.map",
+    "main.84257990.js.map": "/dotdrop/static/js/main.84257990.js.map"
   },
   "entrypoints": [
-    "static/css/main.2d14e1ca.css",
-    "static/js/main.12403a64.js"
+    "static/css/main.7fa4bb27.css",
+    "static/js/main.84257990.js"
   ]
 }
