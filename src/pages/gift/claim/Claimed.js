@@ -2,7 +2,6 @@ import { Row, Col, Card, Image } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import config from '../../../config';
 
-  
 import giftPolkadot from '../../../images/Gift_Polkadot.svg';
 import giftKusama from '../../../images/Gift_Kusama.svg';
 import { useSubstrate, utils } from '../../../substrate-lib';
@@ -19,9 +18,9 @@ export default function Claimed ({ accountAddress, nft }) {
           cardText={cardText}
         />
           <Col className="pt-4 d-flex justify-content-center align-items-center">
-            {(nft?.art) ? 
-            (<Image style={{ height: 300 }} className="nft" src={nft?.art} />) : 
-            (<Image style={{ width: 256 }} src={giftTheme.network === 'Polkadot' ? giftPolkadot : giftKusama} />)}
+            {(nft?.art)
+              ? (<Image style={{ height: 300 }} className="nft" src={nft?.art} />)
+              : (<Image style={{ width: 256 }} src={giftTheme.network === 'Polkadot' ? giftPolkadot : giftKusama} />)}
           </Col>
         <div className="flex-grow-1" />
         <Col className="pt-5 d-flex justify-content-center align-items-center">
