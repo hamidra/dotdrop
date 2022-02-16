@@ -22,8 +22,8 @@ export default function CardHeader ({ cardText, title, backClickHandler }) {
             style={{
               wordWrap: 'normal',
               ...(backClickHandler
-                ? {}
-                : { paddingLeft: colPaddingX, paddingRight: colPaddingX })
+                ? { paddingLeft: colPaddingX, paddingRight: colPaddingX }
+                : {})
             }}
             className="card-header-title">
             {title}

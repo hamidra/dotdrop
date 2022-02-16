@@ -30,8 +30,24 @@ h6,
 .card-header-title {
     font-family: 'Space Grotesk', sans-serif !important;
     font-weight: $font-weight-bold;
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     color: $secondary-lighter;
+
+    @media (min-width: 576px) {
+      font-size: 2.5rem;
+    }
+}
+
+.about-heading {
+  font-size: 1.75rem;
+
+  @media (min-width: 576px) {
+    font-size: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 3.5rem;
+  }
 }
 
 a {
