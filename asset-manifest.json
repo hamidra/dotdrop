@@ -1,12 +1,8 @@
 {
   "files": {
     "main.css": "/dotdrop/static/css/main.7fa4bb27.css",
-    "main.js": "/dotdrop/static/js/main.84257990.js",
-    "static/media/ksm-nft13.jpg": "/dotdrop/static/media/ksm-nft13.6cbd7adb1ca97224acd7.jpg",
+    "main.js": "/dotdrop/static/js/main.5ea48792.js",
     "static/media/nft_bg.svg": "/dotdrop/static/media/nft_bg.607ea93e299d3d5d1894.svg",
-    "static/media/ksm-nft0.jpg": "/dotdrop/static/media/ksm-nft0.b668a6079c204a987b5a.jpg",
-    "static/media/ksm-nft1.jpg": "/dotdrop/static/media/ksm-nft1.fba2605201c82c5c7eab.jpg",
-    "static/media/ksm-nft2.jpg": "/dotdrop/static/media/ksm-nft2.85e3f309e16512a984e7.jpg",
     "static/media/icon_kusama_share.svg": "/dotdrop/static/media/icon_kusama_share.cb7ac0e81ea43999bb44.svg",
     "static/media/Gift_Polkadot.svg": "/dotdrop/static/media/Gift_Polkadot.06fc1d6d2b0d2c3597bd99c68ff040ad.svg",
     "static/media/icon_kusama_claim.svg": "/dotdrop/static/media/icon_kusama_claim.0ee4aa8ff6354bc95665.svg",
@@ -17,10 +13,10 @@
     "static/media/index.cjs": "/dotdrop/static/media/index.f2b6f7ffc9a430272d20.cjs",
     "static/media/check_icon.svg": "/dotdrop/static/media/check_icon.2f796970d4b1d6e2b983.svg",
     "main.7fa4bb27.css.map": "/dotdrop/static/css/main.7fa4bb27.css.map",
-    "main.84257990.js.map": "/dotdrop/static/js/main.84257990.js.map"
+    "main.5ea48792.js.map": "/dotdrop/static/js/main.5ea48792.js.map"
   },
   "entrypoints": [
     "static/css/main.7fa4bb27.css",
-    "static/js/main.84257990.js"
+    "static/js/main.5ea48792.js"
   ]
 }
