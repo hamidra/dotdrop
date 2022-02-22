@@ -28,12 +28,7 @@ const balancePalletGiftProvider = {
         'The gift secret does not hold any gifts. You might have entered the wrong secret or the gift might have been already claimed.'
       );
     }
-    const events = await transferAll(
-      api,
-      interimAccount,
-      recepientAddress,
-      'gift::claim'
-    );
+    const events = await transferAll(api, interimAccount, recepientAddress, 'gift::claim');
     const claimed = await getClaimedAssets(api, events);
     return claimed;
   },
