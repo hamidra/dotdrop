@@ -1,4 +1,4 @@
-const getClaimedUniquesAsset = async (classId, instanceId) => {
+const getClaimedUniquesAsset = async (api, classId, instanceId) => {
   const asset = {
     classId,
     instanceId
@@ -33,7 +33,7 @@ export const getClaimedAssets = async (api, events) => {
       // parse claimed uniques
       const classId = event?.data[0]?.toString();
       const instanceId = event?.data[1]?.toString();
-      const claimedAsset = await getClaimedUniquesAsset(classId, instanceId);
+      const claimedAsset = await getClaimedUniquesAsset(api, classId, instanceId);
       claimedAsset && claimed.uniques.push(claimedAsset);
     }
   }

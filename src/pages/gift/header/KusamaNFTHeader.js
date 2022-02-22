@@ -1,10 +1,10 @@
-import { Dropdown, Nav, Navbar, Media, Row, Col } from "react-bootstrap";
-import { useHistory, useLocation } from "react-router-dom";
-import { stringHelpers } from "../../../utils";
-import Identicon from "@polkadot/react-identicon";
-import { DotsThree, ImageSquare } from "phosphor-react";
-import KusamaLogo from "../../../images/kusama_logo.png";
-import KusamaIcon from "../../../images/kusama_icon.png";
+import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
+import { useHistory, useLocation } from 'react-router-dom';
+import { stringHelpers } from '../../../utils';
+import Identicon from '@polkadot/react-identicon';
+import { DotsThree, ImageSquare } from 'phosphor-react';
+import KusamaLogo from '../../../images/kusama_logo.png';
+import KusamaIcon from '../../../images/kusama_icon.png';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
@@ -26,14 +26,14 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header({ selectedAccount }) {
+export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   return (
     <>
       <Navbar
         className="px-3 px-sm-4 py-3"
-        style={{ display: "grid", gridTemplateColumns: "0px 1fr 0px" }}
+        style={{ display: 'grid', gridTemplateColumns: '0px 1fr 0px' }}
         variant="dark"
       >
         <Navbar.Brand>
@@ -46,13 +46,13 @@ export default function Header({ selectedAccount }) {
               width={120}
               className="p-1 d-none d-sm-inline-block"
               src={KusamaLogo}
-              alt={"Kusama"}
+              alt={'Kusama'}
             />
             <img
               width={42}
               className="p-1 d-sm-none"
               src={KusamaIcon}
-              alt={"Kusama"}
+              alt={'Kusama'}
             />
           </a>
         </Navbar.Brand>
@@ -63,9 +63,9 @@ export default function Header({ selectedAccount }) {
               <div className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm border-0 p-0">
                 <div
                   style={{
-                    minWidth: "5rem",
-                    fontWeight: "400",
-                    height: "42px",
+                    minWidth: '5rem',
+                    fontWeight: '400',
+                    height: '42px'
                   }}
                   className="account-box align-items-center text-center d-flex bg-transparent balance-text"
                 >
