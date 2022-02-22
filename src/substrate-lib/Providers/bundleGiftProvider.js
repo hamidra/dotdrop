@@ -26,7 +26,9 @@ const uniquesPalletGiftProvider = {
     const fromAddress = utils.getAccountAddress(interimAccount);
     const assetKeys = await api.query.uniques?.account.keys(fromAddress);
     if ((assetKeys?.length || 0) === 0) {
-      throw new Error('The entered gift secret does not hold any NFTs. You might have entered the wrong secret or the NFT might have been already claimed.');
+      throw new Error(
+        'The entered gift secret does not hold any NFTs. You might have entered the wrong secret or the NFT might have been already claimed.'
+      );
     }
 
     const events = await transferAllAssets(
@@ -40,7 +42,12 @@ const uniquesPalletGiftProvider = {
   },
   removeGift: (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);
-    return transferAllAssets(api, interimAccount, senderAddress, 'gift::remove');
+    return transferAllAssets(
+      api,
+      interimAccount,
+      senderAddress,
+      'gift::remove'
+    );
   },
   getGiftFeeMultiplier: () => {
     // gift creation fees are multiplied by this multiplier and added to the gift value when the gift is generated.
