@@ -1,5 +1,5 @@
 import utils from '../substrateUtils';
-import { getClaimedAssets } from './txHandler';
+import { getClaimedAssets } from './txUtils';
 import { transferBalanceAndFees, transferAll } from './txCalls';
 import config from '../../config';
 
@@ -27,7 +27,7 @@ const balancePalletGiftProvider = {
       throw new Error('The gift secret does not hold any gifts. You might have entered the wrong secret or the gift might have been already claimed.');
     }
     const events = await transferAll(api, interimAccount, recepientAddress, 'gift::claim');
-    const claimed = getClaimedAssets(api, events);
+    const claimed = await getClaimedAssets(api, events);
     return claimed;
   },
   removeGift: async (api, interimAccount, senderAccount) => {

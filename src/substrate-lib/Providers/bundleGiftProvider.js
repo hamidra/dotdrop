@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 import utils from '../substrateUtils';
-import { signAndSendTx, getClaimedAssets } from './txHandler';
+import { getClaimedAssets } from './txUtils';
 import config from '../../config';
 import { transferBalanceAndFees, transferAllAssets } from './txCalls';
 const feeMultiplierValue = config.ADDED_FEE_MULTIPLIER;
@@ -26,7 +26,7 @@ const uniquesPalletGiftProvider = {
       recepientAddress,
       'gift::claim'
     );
-    const claimed = getClaimedAssets(api, events);
+    const claimed = await getClaimedAssets(api, events);
     return claimed;
   },
   removeGift: (api, interimAccount, senderAccount) => {
