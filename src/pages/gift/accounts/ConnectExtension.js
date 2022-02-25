@@ -31,6 +31,7 @@ const DownloadExtension = () => {
     <Row className="p-md-5 justify-content-center">
       <Col className="d-flex flex-column justify-content-center align-items-center text-center">
         <div>
+          {/*
           <a
             className="d-flex flex-row align-items-center p-1 btn btn-primary mb-3"
             href={paritySignerCompanionLink}
@@ -41,6 +42,7 @@ const DownloadExtension = () => {
               Parity Signer Companion
             </div>
           </a>
+          */}
           <a
             className="d-flex flex-row align-items-center p-1 btn btn-primary mb-3"
             href={polkadotExtensionLink}
