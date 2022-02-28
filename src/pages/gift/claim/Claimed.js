@@ -16,7 +16,7 @@ export default function Claimed ({ accountAddress, nft }) {
   return (
     <>
       <Card.Body className="d-flex flex-column">
-        <CardHeader title={'You broke the wall!'} cardText={cardText} />
+        <CardHeader title={'You did it!'} cardText={cardText} />
         <Col className="pt-4 d-flex justify-content-center align-items-center">
           {nft?.image
             ? (
