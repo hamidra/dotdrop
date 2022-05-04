@@ -24,9 +24,16 @@ const balancePalletGiftProvider = {
     const balance = (await api.query.system.account(fromAddress))?.data;
     console.log(balance?.free.toHuman());
     if (!balance?.free || balance?.free?.eqn(0)) {
-      throw new Error('The gift secret does not hold any gifts. You might have entered the wrong secret or the gift might have been already claimed.');
+      throw new Error(
+        'The gift secret does not hold any gifts. You might have entered the wrong secret or the gift might have been already claimed.'
+      );
     }
-    const events = await transferAll(api, interimAccount, recepientAddress, 'gift::claim');
+    const events = await transferAll(
+      api,
+      interimAccount,
+      recepientAddress,
+      'gift::claim'
+    );
     const claimed = await getClaimedAssets(api, events);
     return claimed;
   },
@@ -37,9 +44,22 @@ const balancePalletGiftProvider = {
     const balance = (await api.query.system.account(fromAddress))?.data;
     console.log(balance?.free.toHuman());
     if (!balance?.free || balance?.free?.eqn(0)) {
-      throw new Error('The gift secret does not hold any gifts. The gift might have been already claimed or removed.');
+      throw new Error(
+        'The gift secret does not hold any gifts. The gift might have been already claimed or removed.'
+      );
     }
     return transferAll(api, interimAccount, senderAddress, 'gift::remove');
+  },
+  queryGift: async (api, giftAccount) => {
+    const giftAssets = { uniques: [], balances: [], assets: [] };
+    const giftAddress = utils.getAccountAddress(giftAccount);
+
+    // query balances
+    const balance = (await api.query.system.account(giftAddress))?.data;
+    const freeBalance = balance?.free.toHuman();
+    freeBalance && giftAssets.balances.push(freeBalance);
+
+    return giftAssets;
   },
   getGiftFeeMultiplier: () => {
     // tx fees are multiplied by this multiplier and added to the gift value when the gift is generated.

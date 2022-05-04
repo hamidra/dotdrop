@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 
-export default function Footer ({ className, selectedAccount }) {
+export default function Footer ({ className }) {
   return (
     <footer
-      className={`${className} footer d-flex flex-column flex-md-row px-4`}
-      expand="md">
+      className={`${className} footer d-flex flex-column flex-md-row px-4`}>
       <div className="d-flex flex-column flex-sm-row">
         <div>
           © {new Date().getFullYear()} All rights reserved.
