@@ -1,5 +1,6 @@
 import { createContext, useState, createElement } from 'react';
 import { utils, giftProvider, useSubstrate } from '../../../substrate-lib';
+import { resolveAssetImage } from '../../../metadata';
 import Claimed from './Claimed';
 import VerifySecret from './VerifySecret';
 import ErrorModal from '../../../components/Error';
@@ -11,18 +12,12 @@ import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
-import nft0 from '../../../images/ksm-nft0.jpg';
-import nft1 from '../../../images/ksm-nft1.jpg';
-import nft2 from '../../../images/ksm-nft2.jpg';
-import nft13 from '../../../images/ksm-nft13.jpg';
+
 /* import Confetti from 'react-confetti'; */
 
 const ClaimContext = createContext();
 export { ClaimContext };
 
-// NFT artists
-const artists = { 0: 'Awer', 1: 'Vadim', 2: 'Andreas Preis' };
-const arts = { 0: nft0, 1: nft1, 2: nft2 };
 export default function ClaimMain () {
   const { keyring, apiState, api, chainInfo, giftTheme } = useSubstrate();
   const { claimGift } = giftProvider;
@@ -84,16 +79,14 @@ export default function ClaimMain () {
 
         claimGift(api, interimAccount, recipientAccount)
           .then((claimedGift) => {
-            const classId = claimedGift?.uniques?.[0]?.classId;
-            const instanceId = claimedGift?.uniques?.[0]?.instanceId;
+            const { classId, instanceId, classMetadata, instanceMetadata } =
+              claimedGift?.uniques?.[0];
             console.log(claimedGift);
-            console.log(`claimed nft class = ${classId}`);
-            if (classId == null) {
+            if (classId == null || instanceId == null) {
               throw new Error('The gift secret does not hold any NFTs');
             }
-            const nft = { art: arts[classId], artist: artists[classId], classId, instanceId };
-            setClaimedNft(nft);
-
+            const image = resolveAssetImage(classMetadata, instanceMetadata);
+            setClaimedNft({ classId, instanceId, image });
             nextStep();
           })
           .catch((error) => {
@@ -154,7 +147,12 @@ export default function ClaimMain () {
   steps.push(AccountOptionElement);
 
   // Step-2
-  steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} accountSource={accountSource}/>);
+  steps.push(
+    <VerifySecret
+      claimGiftHandler={claimGiftHandler}
+      accountSource={accountSource}
+    />
+  );
 
   // Step-3
   steps.push(<Claimed accountAddress={address} nft={claimedNft} />);
@@ -167,7 +165,8 @@ export default function ClaimMain () {
         nextStep,
         prevStep,
         jumpToStep
-      }}>
+      }}
+    >
       <Header selectedAccount={address} />
       {/* {step === 3 && <Confetti />} */}
       <Container>
@@ -175,7 +174,8 @@ export default function ClaimMain () {
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
             <Card
               style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
-              className="shadow">
+              className="shadow"
+            >
               {currentStepComponent}
             </Card>
           </Col>

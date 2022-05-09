@@ -14,7 +14,7 @@ export default function AboutMain () {
       <Header />
       <Container className="d-flex flex-column align-items-center pb-5">
         <div style={{ paddingBottom: '4rem' }}>
-          <h1 className="py-5 text-center" style={{ fontSize: '3.5rem' }}>
+          <h1 className="about-heading pt-5 pb-4 text-center">
             The easiest way to send {giftTheme?.content}<br />to friends and family
           </h1>
           <p

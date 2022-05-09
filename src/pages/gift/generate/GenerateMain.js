@@ -23,7 +23,7 @@ const GenerateContext = createContext();
 export { GenerateContext };
 
 const generateGiftSecret = () => {
-  return new BN(randomAsHex(8).slice(2), 16).toString().slice(0, 16);
+  return randomAsHex(10).slice(2);
 };
 
 const storeGiftInfo = (fromAccount, giftInfo) => {
