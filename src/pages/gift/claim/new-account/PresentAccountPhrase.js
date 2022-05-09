@@ -47,9 +47,8 @@ export default function PresentAccountPhrase ({
             revealSecret();
           }}>
           <Row
-            className={`seedphrase justify-content-center align-items-center ${
-              blurred ? 'blurred' : ''
-            }`}>
+            className={`seedphrase justify-content-center align-items-center ${blurred ? 'blurred' : ''
+              }`}>
             {mnemonicWords.map((word, index) => (
               <Col md={4} key={index}>
                 <div className="seedphrase-item d-flex flex-row">
@@ -72,9 +71,8 @@ export default function PresentAccountPhrase ({
               <span>{'Hide secret words'}</span>
             </div>
             <div
-              className={`phrase-toggle text-center p-2 ${
-                blurred ? 'd-flex' : 'd-none'
-              }`}>
+              className={`phrase-toggle text-center p-2 ${blurred ? 'd-flex' : 'd-none'
+                }`}>
               <Eye className="mr-1" size="18" />
               <p>{'Reveal seedphrase'}</p>
             </div>
@@ -108,15 +106,23 @@ export default function PresentAccountPhrase ({
           )}
         </div>
         <div className="d-flex flex-grow-1" />
-        <div className="pt-4 d-flex justify-content-center">
+        <div className="position-relative pt-4 d-flex justify-content-center">
           <button
             className="btn btn-primary"
-            disabled={!checked}
+            disabled={!!checkedError || !checked}
             onClick={() =>
               checked ? nextStepHandler() : setCheckedError(checkedErrorMessage)
             }>
             Next
           </button>
+          {!checked && (
+            <button
+              className="btn btn-primary btn-set-error"
+              onClick={() => setCheckedError(checkedErrorMessage)}
+            >
+              Next
+            </button>
+          )}
         </div>
       </Card.Body>
     </>

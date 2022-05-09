@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 import utils from '../substrateUtils';
-import { signAndSendTx, getClaimedAssets } from './txHandler';
+import { getClaimedAssets } from './txUtils';
 import config from '../../config';
 import { transferBalanceAndFees, transferAllAssets } from './txCalls';
 const feeMultiplierValue = config.ADDED_FEE_MULTIPLIER;
@@ -26,7 +26,9 @@ const uniquesPalletGiftProvider = {
     const fromAddress = utils.getAccountAddress(interimAccount);
     const assetKeys = await api.query.uniques?.account.keys(fromAddress);
     if ((assetKeys?.length || 0) === 0) {
-      throw new Error('The entered gift secret does not hold any NFTs. You might have entered the wrong secret or the NFT might have been already claimed.');
+      throw new Error(
+        'The entered gift secret does not hold any NFTs. You might have entered the wrong secret or the NFT might have been already claimed.'
+      );
     }
 
     const events = await transferAllAssets(
@@ -35,12 +37,17 @@ const uniquesPalletGiftProvider = {
       recepientAddress,
       'gift::claim'
     );
-    const claimed = getClaimedAssets(api, events);
+    const claimed = await getClaimedAssets(api, events);
     return claimed;
   },
   removeGift: (api, interimAccount, senderAccount) => {
     const senderAddress = utils.getAccountAddress(senderAccount);
-    return transferAllAssets(api, interimAccount, senderAddress, 'gift::remove');
+    return transferAllAssets(
+      api,
+      interimAccount,
+      senderAddress,
+      'gift::remove'
+    );
   },
   getGiftFeeMultiplier: () => {
     // gift creation fees are multiplied by this multiplier and added to the gift value when the gift is generated.

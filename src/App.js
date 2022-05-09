@@ -24,7 +24,7 @@ function Body () {
         <Route path={'/about'}>
           <AboutMain />
         </Route>
-        {/* <Route path={'/claim'}>
+        <Route path={'/claim'}>
           <ClaimMain />
           <Processing
             show={apiState !== 'READY'}
@@ -51,12 +51,12 @@ function Body () {
             show={apiState !== 'READY'}
             message={`Connecting to ${giftTheme.network}...`}
           />
-        </Route> */}
+        </Route>
         <Route path={'/privacy-policy'}>
           <PrivacyPolicy />
         </Route>
         <Route path={'/'}>
-          <PrelaunchLanding/>
+          <Redirect to={'/claim'} />
         </Route>
       </Switch>
     </>

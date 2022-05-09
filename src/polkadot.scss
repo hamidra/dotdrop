@@ -137,6 +137,7 @@ $h5-font-size: 1rem;
     color: $gray-600;
     transition: none;
     transform: none;
+    padding: 0.5625rem !important;
 
     &:before,
     &:hover {
@@ -203,3 +204,4 @@ $border-radius: 0.5rem;
 @import 'polkadot-scss/landingpage';
 @import 'polkadot-scss/extensiononboarding';
 @import 'polkadot-scss/forms';
+@import 'polkadot-scss/processing';

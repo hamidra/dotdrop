@@ -11,10 +11,6 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
     // ToDO: add better input validation to verify redeemSecret is not empty,
     // and is indeed a valid mnemonic phrase
     redeemSecret = stringHelpers.removeSpaces(redeemSecret);
-    // NFT only:  add 0x to the secret if it is removed.
-    if (!redeemSecret?.startsWith('0x')) {
-      redeemSecret = '0x' + redeemSecret;
-    }
     if (redeemSecret) {
       claimGiftHandler(redeemSecret);
     }
