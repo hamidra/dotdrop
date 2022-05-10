@@ -189,7 +189,7 @@ export default function ClaimMain () {
                 {currentStepComponent}
               </Card>
             )}
-            
+
           </Col>
         </Row>
       </Container>
