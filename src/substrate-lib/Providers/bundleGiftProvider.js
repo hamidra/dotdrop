@@ -49,6 +49,22 @@ const uniquesPalletGiftProvider = {
       'gift::remove'
     );
   },
+  queryGift: async (api, giftAccount) => {
+    const giftAssets = { uniques: [], balances: [], assets: [] };
+    const giftAddress = utils.getAccountAddress(giftAccount);
+
+    // query balances
+    const balance = (await api.query.system.account(giftAddress))?.data;
+    const freeBalance = balance?.free.toHuman();
+    freeBalance && giftAssets.balances.push(freeBalance);
+
+    // query uniques assets
+    const assetKeys = await api.query.uniques.account.keys(giftAddress);
+    assetKeys.forEach(({ args: [_, classId, instanceId] }) => {
+      giftAssets.uniques.push({ classId, instanceId });
+    });
+    return giftAssets;
+  },
   getGiftFeeMultiplier: () => {
     // gift creation fees are multiplied by this multiplier and added to the gift value when the gift is generated.
     // the gift value is calculated as : gift_amount + feeMultiplierValue*(txfee)
