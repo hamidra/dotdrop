@@ -4,10 +4,9 @@
   "RPC": {},
   "THEME": "polkadotnft",
   "MAX_AMOUNT": 100,
-  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
-
+  "CLAIM_URL": "https://claimnft.polkadot.network/#/claim",
   "ALTERNATIVE_APP_URL": "https://claimnft.kusama.network",
   "NFT_PREVIEW_URL": "https://singular.rmrk.app/collectibles/statemint/",
   "ADDED_FEE_MULTIPLIER": 2,
-  "CHAIN_SCANNER_URL": "https://polkadot.subscan.io"
+  "CHAIN_SCANNER_URL": "https://statemint.subscan.io/"
 }

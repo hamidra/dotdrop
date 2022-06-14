@@ -112,7 +112,7 @@ export default function GiftSecretScanner () {
                             target="_blank"
                             rel="noreferrer"
                           >
-                            {'→ See account on Sunscan'}
+                            {'→ See account on Subscan'}
                           </a>
                         </div>
                       </Col>
