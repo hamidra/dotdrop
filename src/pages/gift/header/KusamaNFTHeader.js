@@ -89,7 +89,7 @@ export default function Header ({ selectedAccount }) {
             >
               <Dropdown.Item
                 className="px-3"
-                href="https://kusama.network/valentines/"
+                href="https://wiki.polkadot.network/docs/learn-nft"
                 target="_blank"
                 rel="noopener noreferrer"
                 role="link"
