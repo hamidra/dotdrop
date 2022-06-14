@@ -21,14 +21,9 @@ export default function VerifySecret ({ claimGiftHandler }) {
   const validate = ({ redeemSecret }) => {
     redeemSecret = stringHelpers.removeSpaces(redeemSecret);
     const errors = {};
-    if (!redeemSecret || !/^[\w ]+$/i.test(redeemSecret)) {
-      errors.redeemSecret = 'Please enter a valid gift secret.';
-    } else if (redeemSecret.length < 16) {
-      errors.redeemSecret =
-        'Please enter a valid gift secret. The secret must include at least 16 digits';
-    } else if (redeemSecret.length > 32) {
-      errors.redeemSecret =
-        'Please enter a valid gift secret. The secret can not include more than 32 characters';
+    const error = stringHelpers.validateGiftSecret(redeemSecret);
+    if (error) {
+      errors.redeemSecret = error;
     }
     return errors;
   };

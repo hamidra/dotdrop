@@ -6,5 +6,6 @@
   "MAX_AMOUNT": 10,
   "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
   "ALTERNATIVE_APP_URL": "https://gifts.polkadot.network",
-  "ADDED_FEE_MULTIPLIER": 2
+  "ADDED_FEE_MULTIPLIER": 2,
+  "CHAIN_SCANNER_URL": "https://polkadot.subscan.io"
 }
