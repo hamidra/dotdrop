@@ -4,9 +4,9 @@
   "RPC": {},
   "THEME": "kusamanft",
   "MAX_AMOUNT": 100,
-  "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
-  "ALTERNATIVE_APP_URL": "https://gifts.kusama.network",
+  "CLAIM_URL": "https://claimnft.polkadot.network/#/claim",
+  "ALTERNATIVE_APP_URL": "https://claimnft.polkadot.network",
   "NFT_PREVIEW_URL": "https://singular.rmrk.app/",
   "ADDED_FEE_MULTIPLIER": 2,
-  "CHAIN_SCANNER_URL": "https://polkadot.subscan.io"
+  "CHAIN_SCANNER_URL": "https://statemine.subscan.io/"
 }
