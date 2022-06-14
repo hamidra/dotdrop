@@ -7,5 +7,6 @@
   "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
   "ALTERNATIVE_APP_URL": "https://gifts.kusama.network",
   "NFT_PREVIEW_URL": "https://singular.rmrk.app/",
-  "ADDED_FEE_MULTIPLIER": 2
+  "ADDED_FEE_MULTIPLIER": 2,
+  "CHAIN_SCANNER_URL": "https://polkadot.subscan.io"
 }

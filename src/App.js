@@ -13,6 +13,7 @@ import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
 import GenerateMain from './pages/gift/generate/GenerateMain';
 import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
+import GiftSecretScanner from './pages/gift/GiftSecretScanner';
 
 function Body () {
   const { apiState, giftTheme } = useSubstrate();
@@ -39,6 +40,13 @@ function Body () {
         </Route>
         <Route path={'/account/:accountAddress'}>
           <AccountOverview />
+          <Processing
+            show={apiState !== 'READY'}
+            message={`Connecting to ${giftTheme.network}...`}
+          />
+        </Route>
+        <Route path={'/giftScanner'}>
+          <GiftSecretScanner />
           <Processing
             show={apiState !== 'READY'}
             message={`Connecting to ${giftTheme.network}...`}
