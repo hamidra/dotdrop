@@ -9,7 +9,7 @@ import { useSubstrate, utils } from '../../../substrate-lib';
 export default function Claimed ({ accountAddress, nft }) {
   const { giftTheme } = useSubstrate();
   const previewUrl = new URL(
-    `collectibles/statemine/${nft?.classId}/${nft?.instanceId}`,
+    `${nft?.classId}/${nft?.instanceId}`,
     config.NFT_PREVIEW_URL
   );
   const cardText = 'Congratulations! You have successfully claimed your NFT.';
