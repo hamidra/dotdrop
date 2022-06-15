@@ -2,6 +2,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import Divider from '../../../components/Divider';
 import { useSubstrate } from '../../../substrate-lib';
+import analytics from '../../../analytics';
 
 export default function ConnectAccount ({ setAccountSourceHandler }) {
   const { apiState, giftTheme } = useSubstrate();
@@ -21,6 +22,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
             className="btn btn-primary btn-lg"
             disabled={apiState !== 'READY'}
             onClick={() => {
+              analytics.track('claim_new_account');
               setAccountSourceHandler('NEW');
             }}>
             {`Create ${giftTheme?.network} Address`}
@@ -32,6 +34,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
             className="btn btn-link"
             disabled={apiState !== 'READY'}
             onClick={() => {
+              analytics.track('claim_existing_account');
               setAccountSourceHandler('EXISTING');
             }}>
             Connect Existing Account

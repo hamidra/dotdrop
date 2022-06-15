@@ -12,6 +12,7 @@ import Footer from '../footer/Footer';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import NewAccountMain from './new-account/NewAccountMain';
 import ExistingAccountMain from './existing-account/ExistingAccountMain';
+import analytics from '../../../analytics';
 
 /* import Confetti from 'react-confetti'; */
 
@@ -88,9 +89,11 @@ export default function ClaimMain () {
             const image = resolveAssetImage(classMetadata, instanceMetadata);
             setClaimedNft({ classId, instanceId, image });
             nextStep();
+            analytics.track('claim_suceeded');
           })
           .catch((error) => {
             handleError(error);
+            analytics.track('claim_failed');
           });
 
         setProcessingMsg('Transferring your gift to your account...');

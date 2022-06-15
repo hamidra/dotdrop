@@ -18,6 +18,7 @@ import ConnectAccount from './ConnectAccount';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ConfirmGift from './ConfirmGift';
+import analytics from '../../../analytics';
 
 const GenerateContext = createContext();
 export { GenerateContext };
@@ -156,9 +157,11 @@ export default function GenerateMain () {
       createGift(api, interimAccount, senderAccount, gift)
         .then(() => {
           storeGiftInfo(account, giftInfo);
+          analytics.track('generate_succeeded');
           nextStep();
         })
         .catch((error) => {
+          analytics.track('generate_failed');
           handleError(error);
         });
 

@@ -8,6 +8,7 @@ import { stringHelpers } from '../../../utils';
 import { useParams } from 'react-router-dom';
 import { ArrowBendDownRight } from 'phosphor-react';
 import extensionLogo from '../../../images/extension_logo_128.png';
+import analytics from '../../../analytics';
 
 const ExtensionOnboarding = () => {
   const { api, apiState, chainInfo } = useSubstrate();
@@ -93,6 +94,7 @@ const ExtensionOnboarding = () => {
                     <button
                       className="btn btn-primary"
                       onClick={(e) => {
+                        analytics.track('extension_install_clicked');
                         e.preventDefault();
                         window.open(
                           'https://polkadot.js.org/extension/',
