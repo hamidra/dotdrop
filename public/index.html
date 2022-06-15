@@ -31,6 +31,17 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <!--Simple Analytics-->
+    <script>
+      window.sa_event =
+        window.sa_event ||
+        function () {
+          var a = [].slice.call(arguments);
+          window.sa_event.q
+            ? window.sa_event.q.push(a)
+            : (window.sa_event.q = [a]);
+        };
+    </script>
     <title>Polkadot - Claim Your NFT</title>
   </head>
   <body>
@@ -46,5 +57,13 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script async defer src="https://apisa.web3.foundation/latest.js"></script>
+    <noscript
+      ><img
+        src="https://apisa.web3.foundation/noscript.gif"
+        alt=""
+        referrerpolicy="no-referrer-when-downgrade"
+    /></noscript>
   </body>
 </html>

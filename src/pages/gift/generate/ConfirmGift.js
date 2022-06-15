@@ -4,6 +4,7 @@ import CardHeader from '../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { stringHelpers } from '../../../utils';
 import { GenerateContext } from './GenerateMain';
+import analytics from '../../../analytics';
 
 export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, giftFeeMultiplier }) {
   const { email, name, amount, secret, fee } = giftInfo || {};
@@ -115,6 +116,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
               if (!checked) {
                 setCheckedError(checkedErrorMessage);
               } else {
+                analytics.track('generate_confirmed');
                 generateGiftHandler();
               }
             }}>

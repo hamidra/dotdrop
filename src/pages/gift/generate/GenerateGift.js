@@ -6,6 +6,7 @@ import { useSubstrate, utils } from '../../../substrate-lib';
 import { Formik } from 'formik';
 import config from '../../../config';
 import BN from 'bn.js';
+import analytics from '../../../analytics';
 
 export default function GenerateGift ({
   account,
@@ -280,6 +281,7 @@ export default function GenerateGift ({
                   className="btn btn-primary"
                   disabled={props?.touched?.recipientName && props?.touched?.amount && !props?.isValid}
                   onClick={() => {
+                    analytics.track('generate_form_filled');
                     props.submitForm();
                   }}>
                   Next
