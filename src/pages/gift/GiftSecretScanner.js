@@ -5,7 +5,7 @@ import { useSubstrate, giftProvider } from '../../substrate-lib';
 import { stringHelpers } from '../../utils';
 import config from '../../config';
 
-export default function GiftSecretScanner () {
+export default function GiftSecretScanner() {
   const { keyring, api, apiState, giftTheme } = useSubstrate();
   const [giftSecret, setGiftSecret] = useState('');
   const [giftSecretError, setGiftSecretError] = useState(null);
@@ -45,6 +45,18 @@ export default function GiftSecretScanner () {
     setGiftSecret(secret);
   };
 
+  const _getScanUrl = () => {
+    let url = '';
+    try {
+      let base = config.CHAIN_SCANNER_URL;
+      let path = `account/${giftAccountPair?.address}?tab=transfer`;
+      url = new URL(path, base);
+    } catch (err) {
+      console.log(err);
+    }
+    return url;
+  };
+
   return (
     <>
       <Container>
@@ -60,7 +72,7 @@ export default function GiftSecretScanner () {
                   cardText={[
                     'Enter the ',
                     <b>gift secret</b>,
-                    ' to browse the gift and scan the gift transactions.'
+                    ' to browse the gift and scan the gift transactions.',
                   ]}
                 />
                 <>
@@ -108,7 +120,7 @@ export default function GiftSecretScanner () {
                       <Col className="12">
                         <div className="mt-4">
                           <a
-                            href={`${config.CHAIN_SCANNER_URL}/account/${giftAccountPair?.address}?tab=transfer`}
+                            href={_getScanUrl()}
                             target="_blank"
                             rel="noreferrer"
                           >
