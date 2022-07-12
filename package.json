@@ -10,9 +10,9 @@
     "test:ci": "CI=true react-app-rewired test --env=jsdom",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "lint": "eslint src/**/*.js",
-    "lint:ci": "eslint src/**/*.js --max-warnings=0",
-    "lint:fix": "eslint --fix src/**/*.js",
+    "lint": "eslint --ext js --ext jsx src",
+    "lint:ci": "eslint --ext js --ext jsx --max-warnings=0 src",
+    "lint:fix": "eslint --ext js --ext jsx --fix src",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build -m 'deploy'"
   },
