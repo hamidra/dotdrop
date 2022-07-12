@@ -45,6 +45,18 @@ export default function GiftSecretScanner () {
     setGiftSecret(secret);
   };
 
+  const _getScanUrl = () => {
+    let url = '';
+    try {
+      const base = config.CHAIN_SCANNER_URL;
+      const path = `account/${giftAccountPair?.address}?tab=transfer`;
+      url = new URL(path, base);
+    } catch (err) {
+      console.log(err);
+    }
+    return url;
+  };
+
   return (
     <>
       <Container>
@@ -108,7 +120,7 @@ export default function GiftSecretScanner () {
                       <Col className="12">
                         <div className="mt-4">
                           <a
-                            href={`${config.CHAIN_SCANNER_URL}/account/${giftAccountPair?.address}?tab=transfer`}
+                            href={_getScanUrl()}
                             target="_blank"
                             rel="noreferrer"
                           >
