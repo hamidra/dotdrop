@@ -4,6 +4,8 @@ import CardHeader from '../../components/CardHeader';
 import { useSubstrate, giftProvider } from '../../substrate-lib';
 import { stringHelpers } from '../../utils';
 import config from '../../config';
+import Header from '../gift/header/Header';
+import Footer from '../gift/footer/Footer';
 
 export default function GiftSecretScanner () {
   const { keyring, api, apiState, giftTheme } = useSubstrate();
@@ -59,6 +61,7 @@ export default function GiftSecretScanner () {
 
   return (
     <>
+      <Header />
       <Container>
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
@@ -136,6 +139,7 @@ export default function GiftSecretScanner () {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   );
 }
