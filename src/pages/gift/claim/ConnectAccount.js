@@ -9,9 +9,13 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
   return (
     <Card.Body className="d-flex flex-column">
       <CardHeader
-        title={giftTheme?.content === 'NFT' ? 'Claim Your NFT' : `Claim Your ${giftTheme?.content} Gift`}
+        title={
+          giftTheme?.content === 'NFT'
+            ? 'Claim Your NFT'
+            : `Claim Your ${giftTheme?.content} Gift`
+        }
         cardText={[
-          `Create a new ${giftTheme?.network} address to store your funds`,
+          `Create a new ${giftTheme?.network} address to store your NFTs and funds`,
           <br />,
           'or use an existing account.'
         ]}
@@ -24,7 +28,8 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
             onClick={() => {
               analytics.track('claim_new_account');
               setAccountSourceHandler('NEW');
-            }}>
+            }}
+          >
             {`Create ${giftTheme?.network} Address`}
           </button>
         </Row>
@@ -36,7 +41,8 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
             onClick={() => {
               analytics.track('claim_existing_account');
               setAccountSourceHandler('EXISTING');
-            }}>
+            }}
+          >
             Connect Existing Account
           </button>
         </Row>
