@@ -36,10 +36,7 @@ export default function Header ({ selectedAccount }) {
         variant="dark"
       >
         <Navbar.Brand>
-          <a
-            href="https://polkadot.network"
-            target="_blank"
-            rel="noopener noreferrer">
+          <a href="/" rel="noopener noreferrer">
             <img
               className="shadow-sm rounded-circle p-1 logo"
               src={PolkadotCircle}
@@ -50,19 +47,22 @@ export default function Header ({ selectedAccount }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse
           id="basic-navbar-nav"
-          className="justify-content-center">
+          className="justify-content-center"
+        >
           <Nav className="nav-pills shadow-sm p-1">
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
-                onClick={() => history.push('/claim')}>
+                onClick={() => history.push('/claim')}
+              >
                 Claim
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/generate' && 'active'}
-                onClick={() => history.push('/generate')}>
+                onClick={() => history.push('/generate')}
+              >
                 New Gift
               </Nav.Link>
             </Nav.Item>
@@ -75,7 +75,8 @@ export default function Header ({ selectedAccount }) {
               <Nav className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm rounded">
                 <div
                   style={{ minWidth: '5rem', fontWeight: '400' }}
-                  className="py-2 px-3 bg-white rounded text-center h-100 d-flex">
+                  className="py-2 px-3 bg-white rounded text-center h-100 d-flex"
+                >
                   <AccountInfoBox accountAddress={selectedAccount} />
                 </div>
               </Nav>
@@ -86,15 +87,18 @@ export default function Header ({ selectedAccount }) {
               className="btn-dropdown p-2 rounded shadow-sm"
               type="button"
               data-toggle="dropdown"
-              id="dropdownMenuButton">
+              id="dropdownMenuButton"
+            >
               <DotsThree size={30} weight="bold" />
             </Dropdown.Toggle>
             <Dropdown.Menu
               aria-labelledby="dropdownMenuButton"
-              className="dropdown-menu-right mt-2 shadow">
+              className="dropdown-menu-right mt-2 shadow"
+            >
               <Dropdown.Item
                 className="px-3"
-                onClick={() => history.push('/about')}>
+                onClick={() => history.push('/about')}
+              >
                 <Gift className="mr-2" size={18} />
                 About Gifts
               </Dropdown.Item>
@@ -104,7 +108,8 @@ export default function Header ({ selectedAccount }) {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(alternativeApp, '_blank');
-                  }}>
+                  }}
+                >
                   <Bird className="mr-2" size={18} />
                   Gift KSM
                 </Dropdown.Item>
