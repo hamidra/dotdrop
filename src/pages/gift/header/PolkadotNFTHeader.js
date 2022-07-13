@@ -32,14 +32,11 @@ export default function Header ({ selectedAccount }) {
     <>
       <Navbar
         className="px-4 py-3"
-        style={{ display: 'grid', gridTemplateColumns: '0px 1fr 0px' }}
+        style={{ display: 'grid', gridTemplateColumns: '60px 1fr 60px' }}
         variant="dark"
       >
         <Navbar.Brand>
-          <a
-            href="https://polkadot.network"
-            target="_blank"
-            rel="noopener noreferrer">
+          <a href="/" rel="noopener noreferrer">
             <img
               className="shadow-sm rounded-circle p-1 logo"
               src={PolkadotCircle}
@@ -54,7 +51,8 @@ export default function Header ({ selectedAccount }) {
               <Nav className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm rounded">
                 <div
                   style={{ minWidth: '5rem', fontWeight: '400' }}
-                  className="py-2 px-3 bg-white rounded text-center h-100 d-flex">
+                  className="py-2 px-3 bg-white rounded text-center h-100 d-flex"
+                >
                   <AccountInfoBox accountAddress={selectedAccount} />
                 </div>
               </Nav>
@@ -65,19 +63,22 @@ export default function Header ({ selectedAccount }) {
               className="btn-dropdown p-2 rounded shadow-sm"
               type="button"
               data-toggle="dropdown"
-              id="dropdownMenuButton">
+              id="dropdownMenuButton"
+            >
               <DotsThree size={30} weight="bold" />
             </Dropdown.Toggle>
             <Dropdown.Menu
               aria-labelledby="dropdownMenuButton"
-              className="dropdown-menu-right mt-2 shadow">
+              className="dropdown-menu-right mt-2 shadow"
+            >
               {alternativeApp && (
                 <Dropdown.Item
                   className="px-3"
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(alternativeApp, '_blank');
-                  }}>
+                  }}
+                >
                   <Bird className="mr-2" size={18} />
                   Kusama NFTs
                 </Dropdown.Item>

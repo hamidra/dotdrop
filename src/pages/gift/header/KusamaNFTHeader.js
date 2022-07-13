@@ -33,15 +33,11 @@ export default function Header ({ selectedAccount }) {
     <>
       <Navbar
         className="px-3 px-sm-4 py-3"
-        style={{ display: 'grid', gridTemplateColumns: '0px 1fr 0px' }}
+        style={{ display: 'grid', gridTemplateColumns: '100px 1fr 100px' }}
         variant="dark"
       >
         <Navbar.Brand>
-          <a
-            href="https://kusama.network"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="/" rel="noopener noreferrer">
             <img
               width={120}
               className="p-1 d-none d-sm-inline-block"
