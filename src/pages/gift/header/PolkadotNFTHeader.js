@@ -44,6 +44,7 @@ export default function Header ({ selectedAccount }) {
             />
           </a>
         </Navbar.Brand>
+        <div />
         <div className="d-flex justify-content-end">
           {selectedAccount && (
             <>
