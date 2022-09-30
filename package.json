@@ -54,7 +54,7 @@
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-standard": "^5.0.0",
-    "gh-pages": "^3.1.0",
+    "gh-pages": "^4.0.0",
     "react-app-rewired": "^2.1.8",
     "sass": "^1.49.7",
     "semistandard": "^16.0.0"
