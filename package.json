@@ -41,7 +41,7 @@
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^18.2.0",
     "react-icons": "^4.2.0",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.4.1",
     "react-scripts": "^5.0.0",
     "styled-components": "^5.2.1"
   },
