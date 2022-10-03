@@ -101,9 +101,7 @@ export default function PresentAccountPhrase ({
               setChecked(e.target.checked);
             }}
           />
-          {checkedError && (
-            <Form.Text className="danger ml-0">{checkedError}</Form.Text>
-          )}
+          <Form.Text className="danger ml-0">{checkedError || ''}</Form.Text>
         </div>
         <div className="d-flex flex-grow-1" />
         <div className="position-relative pt-4 d-flex justify-content-center">

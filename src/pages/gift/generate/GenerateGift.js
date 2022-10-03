@@ -65,7 +65,10 @@ export default function GenerateGift ({
       try {
         const address = account?.address;
         if (address) {
-          const transferTx = api.tx.balances.transfer(address, utils.getUsableBalances(balance) || 0);
+          const transferTx = api.tx.balances.transfer(
+            address,
+            utils.getUsableBalances(balance) || 0
+          );
           const remarkTx = api.tx.system.remarkWithEvent('gift::create');
           const txs = [transferTx, remarkTx];
           const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
@@ -140,11 +143,14 @@ export default function GenerateGift ({
         return minAvailableBalanceError;
       }
       // check if the account balance - gift_amount is hight then the existential deposit so the gift won't kill the account.
-      const remainingBalance = utils.getUsableBalances(balance)?.sub(totalChainAmount);
-      const edAmount = utils.fromChainUnit(
-        chainInfo?.existentialDeposit,
-        chainInfo?.decimals
-      ) || 0;
+      const remainingBalance = utils
+        .getUsableBalances(balance)
+        ?.sub(totalChainAmount);
+      const edAmount =
+        utils.fromChainUnit(
+          chainInfo?.existentialDeposit,
+          chainInfo?.decimals
+        ) || 0;
       if (remainingBalance.lt(chainInfo?.existentialDeposit || 0)) {
         const keepAliveError = `The gift amount of ${amount} ${chainInfo.token} will bring your account balance below ${edAmount} ${chainInfo.token} (existential deposit for the ${chainInfo?.chainName} network). This will kill your account and make you lose the remaining funds.`;
         return keepAliveError;
@@ -169,10 +175,7 @@ export default function GenerateGift ({
   const _setAmount = (value, formik) => {
     const pattern = /^([0-9]+\.?[0-9]*)?$/i;
     const amount = pattern.test(value) ? value : formik.values.amount;
-    formik.setFieldValue(
-      'amount',
-      amount
-    );
+    formik.setFieldValue('amount', amount);
   };
 
   return (
@@ -202,7 +205,8 @@ export default function GenerateGift ({
               amount,
               fee
             });
-          }}>
+          }}
+        >
           {(props) => (
             <>
               <Row className="flex-column align-items-center">
@@ -226,12 +230,12 @@ export default function GenerateGift ({
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
                       />
-                      {props.touched.recipientName &&
-                        !!props.errors.recipientName && (
-                          <Form.Text className="danger">
-                            {props.errors.recipientName}
-                          </Form.Text>
-                      )}
+                      <Form.Text className="danger">
+                        {props.touched.recipientName &&
+                        !!props.errors.recipientName
+                          ? props.errors.recipientName
+                          : ''}
+                      </Form.Text>
                     </Form.Group>
 
                     <Form.Group>
@@ -243,15 +247,18 @@ export default function GenerateGift ({
                           type="text"
                           autoComplete="off"
                           placeholder=""
-                          className={`${props.touched.amount && !!props.errors.amount && 'input-danger'} ${amountWarning && 'input-warning'}`}
+                          className={`${
+                            props.touched.amount &&
+                            !!props.errors.amount &&
+                            'input-danger'
+                          } ${amountWarning && 'input-warning'}`}
                           value={props.values.amount}
                           onChange={(e) => {
                             _setAmount(e.target.value, props);
                           }}
                           onBlur={props.handleBlur}
                         />
-                        <div
-                          className="bg-transparent balance-text balance-text--available text-wrap position-absolute">
+                        <div className="bg-transparent balance-text balance-text--available text-wrap position-absolute">
                           {balanceStr
                             ? `${balanceStr} available`
                             : `${chainInfo?.token}`}
@@ -260,15 +267,15 @@ export default function GenerateGift ({
 
                       {props.touched.amount && !!props.errors.amount
                         ? (
-                          <Form.Text className="danger">
-                            {props?.errors?.amount}
-                          </Form.Text>
+                        <Form.Text className="danger">
+                          {props?.errors?.amount}
+                        </Form.Text>
                           )
                         : (
                             amountWarning && (
-                            <Form.Text className="warning">
-                              {amountWarning}
-                            </Form.Text>
+                          <Form.Text className="warning">
+                            {amountWarning}
+                          </Form.Text>
                             )
                           )}
                     </Form.Group>
@@ -279,11 +286,16 @@ export default function GenerateGift ({
               <div className="d-flex justify-content-center">
                 <button
                   className="btn btn-primary"
-                  disabled={props?.touched?.recipientName && props?.touched?.amount && !props?.isValid}
+                  disabled={
+                    props?.touched?.recipientName &&
+                    props?.touched?.amount &&
+                    !props?.isValid
+                  }
                   onClick={() => {
                     analytics.track('generate_form_filled');
                     props.submitForm();
-                  }}>
+                  }}
+                >
                   Next
                 </button>
               </div>
