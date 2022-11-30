@@ -137,7 +137,7 @@ export default function ClaimMain () {
   const AccountOptionElement = accountOption[accountSource]
     ? (
         createElement(accountOption[accountSource], {
-          setAddressHandler: setAddressHandler,
+          setAddressHandler,
           prevStepHandler: () => {
             prevStep();
           }
