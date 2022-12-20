@@ -1,4 +1,4 @@
-/* eslint-disable node/no-callback-literal */
+/* eslint-disable n/no-callback-literal */
 const decodeResult = (api, result) => {
   let { dispatchInfo, dispatchError, events = [] } = result;
   const success = !dispatchError;
