@@ -6,8 +6,10 @@ import { Formik } from 'formik';
 const randomIdx = (length) => {
   const random1 = Math.floor(Math.random() * length) + 1;
   let random2 = Math.floor(Math.random() * length) + 1;
-  random2 = random2 === random1 ? ((random2 + 1) % (length + 1)) : random2;
-  if (random2 === 0) { random2 += 1; }
+  random2 = random2 === random1 ? (random2 + 1) % (length + 1) : random2;
+  if (random2 === 0) {
+    random2 += 1;
+  }
   return [random1, random2].sort((a, b) => a - b);
 };
 
@@ -49,7 +51,8 @@ export default function VerifyAccountPhrase ({
         onSubmit={(values, actions) => {
           nextStepHandler();
           actions.setSubmitting(false);
-        }}>
+        }}
+      >
         {(props) => (
           <>
             <div>
@@ -70,11 +73,11 @@ export default function VerifyAccountPhrase ({
                         onBlur={props.handleBlur}
                         placeholder={`Word #${randIdx[0]}`}
                       />
-                      {props.touched?.phrase1 && !!props.errors?.phrase1 && (
-                        <Form.Text className="danger">
-                          {props.errors.phrase1}
-                        </Form.Text>
-                      )}
+                      <Form.Text className="danger">
+                        {props.touched?.phrase1 && !!props.errors?.phrase1
+                          ? props.errors.phrase1
+                          : ''}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group>
                       <Form.Label>{`Word #${randIdx[1]}`}</Form.Label>
@@ -90,11 +93,11 @@ export default function VerifyAccountPhrase ({
                         onBlur={props.handleBlur}
                         placeholder={`Word #${randIdx[1]}`}
                       />
-                      {props.touched.phrase2 && !!props.errors.phrase2 && (
-                        <Form.Text className="danger">
-                          {props.errors.phrase2}
-                        </Form.Text>
-                      )}
+                      <Form.Text className="danger">
+                        {props.touched.phrase2 && !!props.errors.phrase2
+                          ? props.errors.phrase2
+                          : ''}
+                      </Form.Text>
                     </Form.Group>
                   </Form>
                 </Col>
@@ -108,7 +111,8 @@ export default function VerifyAccountPhrase ({
                   (props.touched.phrase1 && !!props.errors.phrase1) ||
                   (props.touched.phrase2 && !!props.errors.phrase2)
                 }
-                onClick={() => !props.isSubmitting && props.submitForm()}>
+                onClick={() => !props.isSubmitting && props.submitForm()}
+              >
                 Verify Phrase
               </button>
             </Col>

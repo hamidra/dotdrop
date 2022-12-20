@@ -45,7 +45,8 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
           onSubmit={(values, actions) => {
             redeemHandler(values.redeemSecret);
             actions.setSubmitting(false);
-          }}>
+          }}
+        >
           {(props) => (
             <>
               <Row className="pt-4 justify-content-center align-items-center">
@@ -67,12 +68,14 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
                       />
-                      {props.touched.redeemSecret &&
-                        !!props.errors.redeemSecret && (
-                          <Form.Text className="danger">
-                            {props.errors.redeemSecret}
-                          </Form.Text>
-                      )}
+                      {
+                        <Form.Text className="danger">
+                          {props.touched.redeemSecret &&
+                          !!props.errors.redeemSecret
+                            ? props.errors.redeemSecret
+                            : ''}
+                        </Form.Text>
+                      }
                     </Form.Group>
                   </Form>
                 </Col>
@@ -90,7 +93,8 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
                         analytics.track('claim_clicked');
                         props.submitForm();
                       }
-                    }}>
+                    }}
+                  >
                     Claim Gift
                   </button>
                 </Col>

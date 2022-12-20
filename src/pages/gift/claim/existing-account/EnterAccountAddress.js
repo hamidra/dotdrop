@@ -20,7 +20,7 @@ export default function EnterAccountAddress ({
 
   return (
     <>
-      <Card.Body>
+      <Card.Body className="d-flex flex-column">
         <CardHeader
           title={'Account Address'}
           cardText={`Enter your existing ${giftTheme?.network} account address below`}
@@ -34,12 +34,14 @@ export default function EnterAccountAddress ({
           onSubmit={(values, actions) => {
             setAddressHandler(values.address);
             actions.setSubmitting(false);
-          }}>
+          }}
+        >
           {(props) => (
             <>
               <Row
                 style={{ height: 200 }}
-                className="justify-content-center align-items-center">
+                className="justify-content-center align-items-center"
+              >
                 <Col>
                   <Form autoComplete="off" className="w-100">
                     <Form.Group controlId="formAccountAddressGroup">
@@ -56,11 +58,11 @@ export default function EnterAccountAddress ({
                         onBlur={props.handleBlur}
                         value={props.values.address}
                       />
-                      {props.touched?.address && !!props.errors?.address && (
-                        <Form.Text className="danger">
-                          {props.errors?.address}
-                        </Form.Text>
-                      )}
+                      <Form.Text className="danger">
+                        {props.touched?.address && !!props.errors?.address
+                          ? props.errors?.address
+                          : ''}
+                      </Form.Text>
                     </Form.Group>
                   </Form>
                 </Col>
@@ -71,7 +73,8 @@ export default function EnterAccountAddress ({
                   <button
                     className="btn btn-primary"
                     disabled={props.touched?.address && !!props.errors?.address}
-                    onClick={() => props.submitForm()}>
+                    onClick={() => props.submitForm()}
+                  >
                     Claim Gift
                   </button>
                 </Col>
