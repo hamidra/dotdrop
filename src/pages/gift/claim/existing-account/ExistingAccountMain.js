@@ -57,7 +57,7 @@ export default function ExistingAccountMain ({
   const AccountOptionElement = accountOption[existingAccountSource]
     ? (
         createElement(accountOption[existingAccountSource], {
-          setAddressHandler: setAddressHandler,
+          setAddressHandler,
           prevStepHandler: () => {
             prevStep();
           }

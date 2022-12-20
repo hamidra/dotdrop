@@ -24,7 +24,7 @@ yarn install
 
 ## Usage
 
-You can start the dapp in development mode to connect to a locally running node with gift pallet
+You can start the dapp in development mode to connect to a locally running node.
 
 ```bash
 yarn start
@@ -71,8 +71,6 @@ There are two ways to specify it:
 
 - With `PROVIDER_SOCKET` in `{common, development, production}.json`.
 - With `rpc=<ws or wss connection>` query paramter after the URL. This overrides the above setting.
-
-  **_The connecting node should include the gift pallet in order to be able to issue gift vouchers_**
 
 ## Reusable Components
 
