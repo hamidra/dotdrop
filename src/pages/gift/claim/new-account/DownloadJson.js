@@ -32,7 +32,8 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
         onSubmit={({ accountName, password }, actions) => {
           downloadJsonHandler(accountName, password);
           actions.setSubmitting(false);
-        }}>
+        }}
+      >
         {(props) => (
           <>
             <div>
@@ -56,12 +57,12 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
                       />
-                      {props.touched.accountName &&
-                        !!props.errors.accountName && (
-                          <Form.Text className="danger">
-                            {props.errors.accountName}
-                          </Form.Text>
-                      )}
+
+                      <Form.Text className="danger">
+                        {props.touched.accountName && !!props.errors.accountName
+                          ? props.errors.accountName
+                          : ''}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group>
                       <Form.Label htmlFor="password">Password</Form.Label>
@@ -77,11 +78,12 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
                       />
-                      {props.touched.password && !!props.errors.password && (
-                        <Form.Text className="danger">
-                          {props.errors.password}
-                        </Form.Text>
-                      )}
+
+                      <Form.Text className="danger">
+                        {props.touched.password && !!props.errors.password
+                          ? props.errors.password
+                          : ''}
+                      </Form.Text>
                     </Form.Group>
                     <Form.Group>
                       <Form.Label htmlFor="confirmPassword">
@@ -100,12 +102,12 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
                       />
-                      {props.touched.confirmPassword &&
-                        !!props.errors.confirmPassword && (
-                          <Form.Text className="danger">
-                            {props.errors.confirmPassword}
-                          </Form.Text>
-                      )}
+                      <Form.Text className="danger">
+                        {props.touched.confirmPassword &&
+                        !!props.errors.confirmPassword
+                          ? props.errors.confirmPassword
+                          : ''}
+                      </Form.Text>
                     </Form.Group>
                   </Form>
                 </Col>
@@ -115,7 +117,8 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
             <Col className="d-flex pt-4 justify-content-center align-items-center">
               <button
                 className="btn btn-primary"
-                onClick={() => !props.isSubmitting && props.submitForm()}>
+                onClick={() => !props.isSubmitting && props.submitForm()}
+              >
                 Download Json
               </button>
             </Col>

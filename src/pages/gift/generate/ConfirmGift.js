@@ -6,7 +6,12 @@ import { stringHelpers } from '../../../utils';
 import { GenerateContext } from './GenerateMain';
 import analytics from '../../../analytics';
 
-export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, giftFeeMultiplier }) {
+export default function ConfirmGift ({
+  account,
+  giftInfo,
+  generateGiftHandler,
+  giftFeeMultiplier
+}) {
   const { email, name, amount, secret, fee } = giftInfo || {};
 
   const { api, apiState, giftTheme, chainInfo } = useSubstrate();
@@ -20,17 +25,17 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
         const address = account?.address;
         if (address && api) {
           const chainAmount = utils.toChainUnit(amount, chainInfo?.decimals);
-          const transferTx = api.tx.balances.transfer(address, chainAmount || 0);
+          const transferTx = api.tx.balances.transfer(
+            address,
+            chainAmount || 0
+          );
           const remarkTx = api.tx.system.remarkWithEvent('gift::create');
           const txs = [transferTx, remarkTx];
           const info = await api.tx.utility.batchAll(txs).paymentInfo(address);
 
           let estimatedFee = utils.calcFeeAdjustments(info?.partialFee);
           estimatedFee = estimatedFee.muln(giftFeeMultiplier);
-          const fee = utils.fromChainUnit(
-            estimatedFee,
-            chainInfo?.decimals
-          );
+          const fee = utils.fromChainUnit(estimatedFee, chainInfo?.decimals);
           setGiftFee(fee);
         }
       } catch (err) {
@@ -46,8 +51,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
   const checkboxLabel = 'I have stored the gift secret in a safe place.';
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState('');
-  const checkedErrorMessage =
-    'Please confirm you have stored the gift secret.';
+  const checkedErrorMessage = 'Please confirm you have stored the gift secret.';
 
   return (
     <>
@@ -76,7 +80,9 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
                     <b>Gift Amount</b>
                   </div>
                   <div>{amountStr}</div>
-                  <small className='text-muted'>{feeStr ? `+ ${feeStr} fees` : '+ gift fees'}</small>
+                  <small className="text-muted">
+                    {feeStr ? `+ ${feeStr} fees` : '+ gift fees'}
+                  </small>
                 </Col>
               </Row>
               <Row>
@@ -84,9 +90,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
                   <div className="mb-1">
                     <b>Gift Secret</b>
                   </div>
-                  <div>
-                    {formattedSecret}
-                  </div>
+                  <div>{formattedSecret}</div>
                 </Col>
               </Row>
             </div>
@@ -103,9 +107,7 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
               setChecked(e.target.checked);
             }}
           />
-          {checkedError && (
-            <Form.Text className="danger ml-0">{checkedError}</Form.Text>
-          )}
+          <Form.Text className="danger ml-0">{checkedError || ''}</Form.Text>
         </div>
         <div className="d-flex flex-grow-1" />
         <div className="d-flex justify-content-center mt-1">
@@ -119,7 +121,8 @@ export default function ConfirmGift ({ account, giftInfo, generateGiftHandler, g
                 analytics.track('generate_confirmed');
                 generateGiftHandler();
               }
-            }}>
+            }}
+          >
             Generate Gift
           </button>
         </div>

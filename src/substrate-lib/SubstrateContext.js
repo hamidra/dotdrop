@@ -58,7 +58,7 @@ const INIT_STATE = {
   apiError: null,
   apiState: null,
   chainInfo: null,
-  theme: theme,
+  theme,
   giftTheme: getGiftTheme(theme)
 };
 
@@ -78,7 +78,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         apiState: 'READY',
-        chainInfo: chainInfo
+        chainInfo
       };
     }
 
