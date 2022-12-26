@@ -17,7 +17,7 @@
     "deploy": "gh-pages -d build -m 'deploy'"
   },
   "dependencies": {
-    "@polkadot/api": "^9.9.4",
+    "@polkadot/api": "^9.10.4",
     "@polkadot/extension-dapp": "^0.44.6",
     "@polkadot/keyring": "^10.1.14",
     "@polkadot/networks": "^10.1.14",
