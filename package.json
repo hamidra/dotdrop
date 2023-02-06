@@ -62,7 +62,7 @@
     "react-app-rewired": "^2.1.8",
     "sass": "^1.49.7",
     "semistandard": "^16.0.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.5"
   },
   "eslintConfig": {
     "rules": {
