@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: Inter, sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: Unbounded, sans-serif !important;
+}
+
+.about-heading {
+  font-size: 1.5rem;
+
+  @media (min-width: 576px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+// Fonts
+.text-card {
+  font-size: 1.125rem;
+  color: $gray-600;
+}
+
+.text-large {
+  font-size: 1.25rem;
+}
+
+.step-text {
+  font-size: 1.125rem;
+}
