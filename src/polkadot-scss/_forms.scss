@@ -1,11 +1,41 @@
+// Form
+.form-label {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
 .input-warning {
-    border-color: #FF7F66;
-    box-shadow: 0 0 0 0.2rem rgba(238, 93, 65, 0.25) !important;
+  border-color: #ff7f66;
+  box-shadow: 0 0 0 0.2rem rgba(238, 93, 65, 0.25) !important;
 }
 
 .input-danger,
 .was-validated .form-control:invalid:focus,
 .form-control.is-invalid:focus {
-    border-color: #ff67b7;
-    box-shadow: 0 0 0 0.2rem rgba(230, 0, 122, 0.25) !important;
+  border-color: #ff67b7;
+  box-shadow: 0 0 0 0.2rem rgba(230, 0, 122, 0.25) !important;
+}
+
+.danger {
+  color: #e6007a;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem !important;
+  min-height: 1.5rem;
+}
+
+.warning {
+  color: #ee5d41;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem !important;
+}
+
+.was-validated .form-check-input:invalid ~ .form-check-label,
+.form-check-input.is-invalid ~ .form-check-label {
+  color: inherit !important;
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  border-color: #ff67b7 !important;
+  box-shadow: 0 0 0 0.2rem rgba(230, 0, 122, 0.25);
 }

@@ -45,6 +45,7 @@ $card-border-radius: 20px;
 }
 
 .card-header-title {
+  font-family: 'Unbounded', sans-serif !important;
   font-size: 1.7rem;
   font-weight: 700;
   line-height: 1.2;
@@ -53,7 +54,7 @@ $card-border-radius: 20px;
 
 @media (min-width: 576px) {
   .card-header-title {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
 }
 

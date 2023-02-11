@@ -1,22 +1,10 @@
 #about-page {
-    background-color: #fff;
-    color: $black;
+  background-color: #fff;
+  color: $black;
 }
 
 .explainer-card {
-    border-radius: 1.5rem;
-    color: #FFF;
-    padding: 5rem;
-}
-
-.about-heading {
-    font-size: 1.75rem;
-    
-    @media (min-width: 576px) {
-        font-size: 2.5rem;
-    }
-    
-    @media (min-width: 768px) {
-        font-size: 3.5rem;
-    }
+  border-radius: 1.5rem;
+  color: #fff;
+  padding: 5rem;
 }
