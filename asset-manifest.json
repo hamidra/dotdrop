@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/dotdrop/static/css/main.45b6d0f3.css",
-    "main.js": "/dotdrop/static/js/main.1a249137.js",
+    "main.css": "/dotdrop/static/css/main.d3124de8.css",
+    "main.js": "/dotdrop/static/js/main.73199470.js",
     "static/media/Gift_Polkadot.svg": "/dotdrop/static/media/Gift_Polkadot.06fc1d6d2b0d2c3597bd99c68ff040ad.svg",
     "static/media/Gift_Kusama.svg": "/dotdrop/static/media/Gift_Kusama.ad78a296b5f94e413d81f29414aafc04.svg",
     "static/media/icon_polkadot_claim.svg": "/dotdrop/static/media/icon_polkadot_claim.e637d55c19a743ad6930.svg",
@@ -9,11 +9,11 @@
     "index.html": "/dotdrop/index.html",
     "static/media/polkadot-circle-new.svg": "/dotdrop/static/media/polkadot-circle-new.4345f3e48698d0e1e9362232d5a0e99f.svg",
     "static/media/icon_polkadot_share.svg": "/dotdrop/static/media/icon_polkadot_share.59f6f7c0dc178ddae5c0.svg",
-    "main.45b6d0f3.css.map": "/dotdrop/static/css/main.45b6d0f3.css.map",
-    "main.1a249137.js.map": "/dotdrop/static/js/main.1a249137.js.map"
+    "main.d3124de8.css.map": "/dotdrop/static/css/main.d3124de8.css.map",
+    "main.73199470.js.map": "/dotdrop/static/js/main.73199470.js.map"
   },
   "entrypoints": [
-    "static/css/main.45b6d0f3.css",
-    "static/js/main.1a249137.js"
+    "static/css/main.d3124de8.css",
+    "static/js/main.73199470.js"
   ]
 }
