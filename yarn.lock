@@ -1739,15 +1739,15 @@
     react-copy-to-clipboard "^5.1.0"
     styled-components "^5.3.6"
 
-"@polkadot/react-qr@^2.9.13":
-  version "2.9.14"
-  resolved "https://registry.yarnpkg.com/@polkadot/react-qr/-/react-qr-2.9.14.tgz#58c231f1b00674d35a4d04d8c1595beb097a67a3"
-  integrity sha512-F6Cbwz4Hqp0QP7kOaISolZc7DLSu/L+yCYreRZUbqbuzG0er8t3wApKpZByF/AMmZJSvD7vFPleqpATtR6I0jA==
+"@polkadot/react-qr@^2.11.1":
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/react-qr/-/react-qr-2.11.1.tgz#f76c6c87623bef38399eeaafea0dad1c0c01f284"
+  integrity sha512-wZoNEMfr2Y31axVF5uEpNyg2wMR2CUXK8jRC7ppWXhcdNVqBlycJlovmbde9J4BGMft3WJaS5cfvnAy8elmB2Q==
   dependencies:
-    "@babel/runtime" "^7.20.6"
-    "@polkadot/ui-settings" "2.9.14"
-    "@polkadot/util" "^10.2.1"
-    "@polkadot/util-crypto" "^10.2.1"
+    "@babel/runtime" "^7.20.13"
+    "@polkadot/ui-settings" "2.11.1"
+    "@polkadot/util" "^10.3.1"
+    "@polkadot/util-crypto" "^10.3.1"
     qrcode-generator "^1.4.4"
     react-qr-reader "^2.2.1"
     styled-components "^5.3.6"
