@@ -39,7 +39,8 @@ const WalletInfoField = ({ title, subtitle, ...props }) => {
     href = 'https://www.parity.io/technologies/signer/';
   } else if (title === 'Hardware Wallet') {
     logo = ledgerLogo;
-    href = 'https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT';
+    href =
+      'https://support.ledger.com/hc/en-us/articles/360016289919-Polkadot-DOT';
   }
 
   return (
@@ -102,10 +103,12 @@ export default function AccountOverview () {
           <Col className="d-flex justify-content-center">
             <Card
               style={{ width: 920, maxWidth: '100%', minHeight: 450 }}
-              className="shadow mb-5 m-sm-0">
+              className="shadow mb-5 m-sm-0"
+            >
               <Card.Header
                 className="bg-transparent border-0"
-                style={{ padding: '2rem 2rem 0 2rem' }}>
+                style={{ padding: '2rem 2rem 0 2rem' }}
+              >
                 <h3 className="font-weight-bold text-center text-sm-left">
                   Account Details
                 </h3>
@@ -115,14 +118,15 @@ export default function AccountOverview () {
                   <Col className="mx-2 mb-5 mb-md-0">
                     <AccountField
                       title="Account Address"
-                      value={`${accountAddress &&
+                      value={`${
+                        accountAddress &&
                         utils.validateAddress(
                           accountAddress,
                           chainInfo?.ss58Format
                         )
-                        ? stringHelpers.truncateMiddle(accountAddress, 5)
-                        : 'Not a valid Account'
-                        }`}
+                          ? stringHelpers.truncateMiddle(accountAddress, 5)
+                          : 'Not a valid Account'
+                      }`}
                     />
                     <AccountField
                       title="Balance (transferrable)"
@@ -165,12 +169,18 @@ export default function AccountOverview () {
                   </Col>
                   <div
                     className="mx-2 d-none d-sm-flex"
-                    style={giftTheme.network === 'Polkadot' ? { backgroundColor: '#D5DBE0', width: '1px' } : { backgroundColor: '#333', width: '1px' }}
+                    style={
+                      giftTheme.network === 'Kusama'
+                        ? { backgroundColor: '#333', width: '1px' }
+                        : { backgroundColor: '#D5DBE0', width: '1px' }
+                    }
                   />
                   <Col className="d-flex flex-column mx-2 align-items-start justify-content-center">
                     <div>
                       <h4>{giftTheme.content} Wallets</h4>
-                      <p class="text-secondary">Import your account to one of the following wallets:</p>
+                      <p class="text-secondary">
+                        Import your account to one of the following wallets:
+                      </p>
                     </div>
                     <div className="w-100 py-2">
                       <WalletInfoField
