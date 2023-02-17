@@ -40,7 +40,7 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
               <Row className="pt-5 flex-column">
                 <Col>
                   <Form autoComplete="off" className="w-100">
-                    <Form.Group>
+                    <Form.Group className='mb-1'>
                       <Form.Label htmlFor="accountName">
                         Account name
                       </Form.Label>
@@ -64,7 +64,7 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                           : ''}
                       </Form.Text>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group className='mb-1'>
                       <Form.Label htmlFor="password">Password</Form.Label>
                       <Form.Control
                         id="password"
@@ -85,7 +85,7 @@ export default function DownloadJson ({ downloadJsonHandler, prevStepHandler }) 
                           : ''}
                       </Form.Text>
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group className='mb-1'>
                       <Form.Label htmlFor="confirmPassword">
                         Confirm Password
                       </Form.Label>

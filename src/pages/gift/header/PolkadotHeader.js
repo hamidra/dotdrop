@@ -6,6 +6,7 @@ import { Bird, DotsThree, Gift } from 'phosphor-react';
 import PolkadotCircle from '../../../images/polkadot-circle-new.svg';
 import WestendLogo from '../../../images/westend.svg';
 import config from '../../../config';
+import { useSubstrate } from '../../../substrate-lib';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
@@ -28,7 +29,7 @@ export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
-  const { theme } = config;
+  const { theme } = useSubstrate();
   return (
     <>
       <Navbar

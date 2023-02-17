@@ -2,7 +2,7 @@
   "APP_NAME": "Polkadot Gifts",
   "DEVELOPMENT_KEYRING": true,
   "RPC": {},
-  "THEME": "polkadot",
+  "THEME": "westend",
   "MAX_AMOUNT": 100,
   "CLAIM_URL": "https://hamidra.github.io/dotdrop/#/claim",
   "ALTERNATIVE_APP_URL": "https://gifts.kusama.network",
