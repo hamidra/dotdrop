@@ -16,28 +16,40 @@ export default function Claimed ({ amount, accountAddress }) {
         <CardHeader title={'Congratulations!'} />
         <Row className="justify-content-center flex-column align-items-center">
           <Col className="pt-4 d-flex justify-content-center align-items-center">
-            <Image style={{ width: 256 }} src={giftTheme.network === 'Polkadot' ? giftPolkadot : giftKusama} />
+            <Image
+              style={{ width: 256 }}
+              src={giftTheme.network === 'Kusama' ? giftKusama : giftPolkadot}
+            />
           </Col>
           <Col className="pt-4">
             <p className="text-center text-secondary">
-              {`Your ${giftTheme?.network} account has been funded and your gift ${amountStr ? `of ${amountStr}` : ''} has been successfully transferred.`}
+              {`Your ${
+                giftTheme?.network
+              } account has been funded and your gift ${
+                amountStr ? `of ${amountStr}` : ''
+              } has been successfully transferred.`}
             </p>
           </Col>
         </Row>
         <div className="flex-grow-1" />
         <Col className="pt-5 d-flex justify-content-center align-items-center">
           {isWeb3Injected
-            ? (<button
+            ? (
+            <button
               className="btn btn-primary"
-              onClick={() => history.push(`/account/${accountAddress}`)}>
+              onClick={() => history.push(`/account/${accountAddress}`)}
+            >
               {'See Account'}
-            </button>)
-            : (<button
+            </button>
+              )
+            : (
+            <button
               className="btn btn-primary"
-              onClick={() => history.push(`/extension/${accountAddress}`)}>
+              onClick={() => history.push(`/extension/${accountAddress}`)}
+            >
               {`Set up a ${giftTheme.network} wallet`}
-            </button>)
-          }
+            </button>
+              )}
         </Col>
       </Card.Body>
     </>
