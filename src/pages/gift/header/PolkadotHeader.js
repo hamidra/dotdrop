@@ -4,7 +4,9 @@ import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { Bird, DotsThree, Gift } from 'phosphor-react';
 import PolkadotCircle from '../../../images/polkadot-circle-new.svg';
+import WestendLogo from '../../../images/westend.svg';
 import config from '../../../config';
+import { useSubstrate } from '../../../substrate-lib';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
@@ -27,7 +29,7 @@ export default function Header ({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
-
+  const { theme } = useSubstrate();
   return (
     <>
       <Navbar
@@ -39,7 +41,7 @@ export default function Header ({ selectedAccount }) {
           <a href="/" rel="noopener noreferrer">
             <img
               className="shadow-sm rounded-circle p-1 logo"
-              src={PolkadotCircle}
+              src={theme == 'westend' ? WestendLogo : PolkadotCircle}
               alt={'Polkadot'}
             />
           </a>

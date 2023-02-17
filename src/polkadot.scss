@@ -1,4 +1,4 @@
-// Custom.scss
+// variable overrides
 
 // set font family
 $font-family-base: 'Work Sans', sans-serif;
@@ -8,104 +8,32 @@ $btn-border-radius: 1.5rem;
 $btn-border-radius-lg: 2rem;
 $btn-border-radius-sm: 1.5rem;
 
-.card-button {
-  display: inline-flex !important;
-  align-items: center !important;
-  width: 100% !important;
-  background-color: #fff !important;
-  border-radius: 8px !important;
-  border-color: #d5dbe0 !important;
-  color: #1e1e1e !important;
-  padding: 0.75rem !important;
-  text-align: left !important;
-}
-
-.card-button:hover {
-  background-color: #f9fafb !important;
-  box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
-}
-
-.text-button {
-  padding: 0.75rem !important;
-  cursor: pointer;
-}
-
-.text-button:hover {
-  color: #c40061 !important;
-}
-
-.link-button:hover {
-  color: #c40061 !important;
-}
-
-.link-button:focus {
-  box-shadow: none !important;
-}
-
 // Card
 $card-border-radius: 20px;
 
-// Set booststrap custom theme
-$theme-colors: (
-  'primary': #e6007a,
-);
-
+// Colors
+$primary: #e6007a;
+$primary-darker: #c40061;
+$primary-lighter: #ff4da0;
+$primary-highlight: #ffe6f4;
+$secondary: #6c757d;
+$secondary-lighter: #b7b8bb;
+$secondary-darker: #172026;
+$black: #1e1e1e;
+$gray: #efefef;
+$white: #fff;
 $gray-100: #f9fafb;
 $gray-200: #f0f2f5;
 $gray-300: #d5dbe0;
 $gray-600: #6c757d;
 $gray-900: #1e1e1e;
 
-// Fonts
-.text-card {
-  font-size: 1.125rem;
-  color: $gray-600;
-}
-
-.text-large {
-  font-size: 1.25rem;
-}
-
-.step-text {
-  font-size: 1.125rem;
-}
-
-// Form
-.form-label {
-  font-weight: 600;
-  margin-left: 0.5rem;
-}
-
+// forms
 $form-group-margin-bottom: 2rem;
-
 $input-border-radius: 0.5rem;
 $input-border-color: $gray-300;
 $input--color: $gray-900;
 $input-height: 2.5rem;
-
-.danger {
-  color: #e6007a;
-  margin-left: 0.5rem;
-  margin-top: 0.5rem !important;
-  min-height: 1.5rem;
-}
-
-.warning {
-  color: #ee5d41;
-  margin-left: 0.5rem;
-  margin-top: 0.5rem !important;
-}
-
-.was-validated .form-check-input:invalid ~ .form-check-label,
-.form-check-input.is-invalid ~ .form-check-label {
-  color: inherit !important;
-}
-
-.was-validated .form-control:invalid,
-.form-control.is-invalid {
-  border-color: #ff67b7 !important;
-  box-shadow: 0 0 0 0.2rem rgba(230, 0, 122, 0.25);
-}
 
 // headings
 $headings-font-weight: bold;
@@ -113,65 +41,10 @@ $h2-font-size: 2.5rem;
 $h4-font-size: 1.25rem;
 $h5-font-size: 1rem;
 
-// Navbar
-.navbar-nav {
-  border-radius: 2rem;
-  font-weight: 500;
-}
-
-.navbar {
-  img {
-    background-color: #fff;
-    &.logo {
-      height: 2.5rem;
-      width: 2.5rem;
-    }
-  }
-
-  .dropdown-toggle::after {
-    content: none;
-  }
-
-  #dropdownMenuButton {
-    background-color: #fff !important;
-    border: none;
-    color: $gray-600;
-    transition: none;
-    transform: none;
-    padding: 0.5625rem !important;
-
-    &:before,
-    &:hover {
-      background-color: $gray-100;
-      color: $gray-900;
-      border: none;
-      transition: none;
-      transform: none;
-    }
-  }
-
-  .dropdown-menu {
-    border: none;
-
-    .dropdown-item {
-      color: $gray-600;
-    }
-
-    .dropdown-item:hover,
-    .dropdown-item:hover {
-      background-color: $gray-100;
-      color: $gray-900 !important;
-    }
-  }
-}
-
-.nav-pills {
-  background-color: #fff;
-}
+// nav
 $nav-pills-border-radius: 1.5rem !important;
 $nav-pills-link-active-color: $gray-900 !important;
 $nav-pills-link-active-bg: $gray-200 !important;
-
 $navbar-nav-link-padding-x: 1.25rem;
 $navbar-dark-color: $gray-600;
 $navbar-dark-hover-color: $gray-900;
@@ -179,21 +52,9 @@ $navbar-dark-hover-color: $gray-900;
 // Radii
 $border-radius: 0.5rem;
 
-.image-box {
-  max-height: 3rem;
-  height: auto;
-  max-width: 90%;
-  width: auto;
-  transition: transform 0.2s;
-}
-
-.image-box:hover {
-  transform: scale(1.25);
-}
-
 // import should be at the end
 @import '~bootstrap/scss/bootstrap';
-@import 'polkadot-scss/variables';
+@import 'polkadot-scss/typography';
 @import 'polkadot-scss/bg';
 @import 'polkadot-scss/button';
 @import 'polkadot-scss/card';
@@ -205,4 +66,6 @@ $border-radius: 0.5rem;
 @import 'polkadot-scss/landingpage';
 @import 'polkadot-scss/extensiononboarding';
 @import 'polkadot-scss/forms';
+@import 'polkadot-scss/navbar';
 @import 'polkadot-scss/processing';
+@import 'polkadot-scss/image';
