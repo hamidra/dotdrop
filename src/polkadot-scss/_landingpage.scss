@@ -1,36 +1,36 @@
 .landingpage {
-    width: 700px;
-    max-width: 100vw;
+  width: 700px;
+  max-width: 100vw;
 
-    .card-header-title {
-        color: #fff;
-        font-size: 3rem;
+  .card-header-title {
+    color: #fff;
+    font-size: 2.5rem;
 
-        @media (min-width: 40rem) {
-            font-size: 3.5rem;
-        }
+    @media (min-width: 40rem) {
+      font-size: 3rem;
     }
+  }
 
-    .text-card {
-        color: #fff;
+  .text-card {
+    color: #fff;
+  }
+
+  .btn-primary {
+    background-color: #fff;
+    border: solid 1px #fff;
+
+    &:hover {
+      background-color: transparent;
+      border: solid 1px transparent;
     }
+  }
 
-    .btn-primary {
-        background-color: #fff;
-        border: solid 1px #fff;
+  .btn-link {
+    color: #fff;
+    font-weight: 400;
+  }
 
-        &:hover {
-            background-color: transparent;
-            border: solid 1px transparent;
-        }
-    }
-
-    .btn-link {
-        color: #fff;
-        font-weight: 400;
-    }
-
-    a {
-        color: #fff;
-    }
+  a {
+    color: #fff;
+  }
 }

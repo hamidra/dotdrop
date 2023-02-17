@@ -1,0 +1,11 @@
+.image-box {
+  max-height: 3rem;
+  height: auto;
+  max-width: 90%;
+  width: auto;
+  transition: transform 0.2s;
+}
+
+.image-box:hover {
+  transform: scale(1.25);
+}

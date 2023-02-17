@@ -256,3 +256,37 @@
   top: 1.5rem;
   opacity: 0;
 }
+
+.card-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  border-color: #d5dbe0 !important;
+  color: #1e1e1e !important;
+  padding: 0.75rem !important;
+  text-align: left !important;
+}
+
+.card-button:hover {
+  background-color: #f9fafb !important;
+  box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
+}
+
+.text-button {
+  padding: 0.75rem !important;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  color: #c40061 !important;
+}
+
+.link-button:hover {
+  color: #c40061 !important;
+}
+
+.link-button:focus {
+  box-shadow: none !important;
+}

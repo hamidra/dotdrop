@@ -303,7 +303,8 @@ export default function GenerateMain () {
         prevStep,
         jumpToStep,
         setAccountSource
-      }}>
+      }}
+    >
       <Header selectedAccount={account?.address} />
       <Container className="justify-content-center align-items-center">
         <Row className="my-2 my-md-5 justify-content-center align-items-center">

@@ -9,25 +9,27 @@ export default function CardHeader ({ cardText, title, backClickHandler }) {
     <>
       <Row
         className="align-items-center text-center position-relative pt-2 no-gutters"
-        style={{ marginBottom: '2rem' }}>
+        style={{ marginBottom: '2rem' }}
+      >
         <Col>
           {backClickHandler && (
             <ArrowLeft
-              className='back-arrow'
+              className="back-arrow"
               size={arrowSize}
               onClick={() => backClickHandler()}
             />
           )}
-          <div
+          <h2
             style={{
               wordWrap: 'normal',
               ...(backClickHandler
                 ? { paddingLeft: colPaddingX, paddingRight: colPaddingX }
                 : {})
             }}
-            className="card-header-title">
+            className="card-header-title"
+          >
             {title}
-          </div>
+          </h2>
           <p className="text-center text-card">{cardText}</p>
         </Col>
       </Row>
