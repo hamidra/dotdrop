@@ -88,7 +88,9 @@ export default function VerifySecret({ claimGiftHandler, processing }) {
                   <button
                     className="btn btn-primary"
                     disabled={
-                      (props.touched.redeemSecret && !!props.errors.redeemSecret) || processing
+                      (props.touched.redeemSecret &&
+                        !!props.errors.redeemSecret) ||
+                      processing
                     }
                     onClick={() => {
                       if (!props.isSubmitting) {

@@ -60,7 +60,7 @@ const uniquesPalletGiftProvider = {
     // The added fee amount will cover the fees for the tranaction from the interim gif account to the recipient account during claim process
     // , plus  maybe some more transactions after the claim that are covered.
     return feeMultiplierValue;
-  }
+  },
 };
 
 export default uniquesPalletGiftProvider;

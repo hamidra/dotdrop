@@ -45,8 +45,13 @@ const ExtensionOnboarding = () => {
         <Row className="p-3 py-sm-5">
           <Col className="d-flex justify-content-center">
             <Card
-              style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
-              className="d-flex shadow mb-5 m-sm-0">
+              style={{
+                width: 580,
+                maxWidth: '100%',
+                minHeight: 540,
+              }}
+              className="d-flex shadow mb-5 m-sm-0"
+            >
               <Card.Body className="d-flex flex-column">
                 <CardHeader
                   title={'Import Your Address'}
@@ -101,7 +106,8 @@ const ExtensionOnboarding = () => {
                           '_blank'
                         );
                       }}
-                      type="button">
+                      type="button"
+                    >
                       Install Polkadot.js Extension
                     </button>
                   </Col>

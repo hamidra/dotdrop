@@ -2,9 +2,9 @@ import { Card, Row, Col } from 'react-bootstrap';
 import CardHeader from '../../../../components/CardHeader';
 import Divider from '../../../../components/Divider';
 
-export default function ConnectAccount ({
+export default function ConnectAccount({
   handleDownloadOption,
-  prevStepHandler
+  prevStepHandler,
 }) {
   return (
     <>
@@ -18,7 +18,8 @@ export default function ConnectAccount ({
           <Row className="d-flex flex-column justify-content-center align-items-center pt-2">
             <button
               className="btn btn-primary btn-lg"
-              onClick={() => handleDownloadOption(true)}>
+              onClick={() => handleDownloadOption(true)}
+            >
               Create JSON backup
             </button>
           </Row>
@@ -26,7 +27,8 @@ export default function ConnectAccount ({
           <Row className="d-flex flex-column justify-content-center align-items-center">
             <button
               className="btn btn-link"
-              onClick={() => handleDownloadOption(false)}>
+              onClick={() => handleDownloadOption(false)}
+            >
               Skip backup and claim gift
             </button>
           </Row>

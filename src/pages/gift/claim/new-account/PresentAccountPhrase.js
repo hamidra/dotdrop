@@ -5,10 +5,10 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Copy, Eye, EyeSlash } from 'phosphor-react';
 import { useSubstrate } from '../../../../substrate-lib';
 
-export default function PresentAccountPhrase ({
+export default function PresentAccountPhrase({
   mnemonicWords,
   nextStepHandler,
-  prevStepHandler
+  prevStepHandler,
 }) {
   const { giftTheme } = useSubstrate();
   const label = 'I have stored my seed phrase in a safe place.';
@@ -37,7 +37,7 @@ export default function PresentAccountPhrase ({
             'Write down the following phrase ',
             <b>in order</b>,
             ` and store it in a safe place. Anyone with access to your seed phrase has access to your ${giftTheme.content} `,
-            'so be sure to keep it safe and never share it with anyone.'
+            'so be sure to keep it safe and never share it with anyone.',
           ]}
         />
         <div
@@ -45,10 +45,13 @@ export default function PresentAccountPhrase ({
           className="container d-flex justify-content-center align-items-center flex-column"
           onClick={() => {
             revealSecret();
-          }}>
+          }}
+        >
           <Row
-            className={`seedphrase justify-content-center align-items-center ${blurred ? 'blurred' : ''
-              }`}>
+            className={`seedphrase justify-content-center align-items-center ${
+              blurred ? 'blurred' : ''
+            }`}
+          >
             {mnemonicWords.map((word, index) => (
               <Col md={4} key={index}>
                 <div className="seedphrase-item d-flex flex-row">
@@ -62,17 +65,21 @@ export default function PresentAccountPhrase ({
           </Row>
           <Row
             className="justify-content-start w-100 pt-2"
-            style={{ marginLeft: '-40px' }}>
+            style={{ marginLeft: '-40px' }}
+          >
             <div
               className="phrase-toggle text-button p-2"
               style={!blurred ? { display: 'flex' } : { display: 'none' }}
-              onClick={() => hideSecret()}>
+              onClick={() => hideSecret()}
+            >
               <EyeSlash className="mr-1" size="18" />
               <span>{'Hide secret words'}</span>
             </div>
             <div
-              className={`phrase-toggle text-center p-2 ${blurred ? 'd-flex' : 'd-none'
-                }`}>
+              className={`phrase-toggle text-center p-2 ${
+                blurred ? 'd-flex' : 'd-none'
+              }`}
+            >
               <Eye className="mr-1" size="18" />
               <p>{'Reveal seedphrase'}</p>
             </div>
@@ -110,7 +117,8 @@ export default function PresentAccountPhrase ({
             disabled={!!checkedError || !checked}
             onClick={() =>
               checked ? nextStepHandler() : setCheckedError(checkedErrorMessage)
-            }>
+            }
+          >
             Next
           </button>
           {!checked && (

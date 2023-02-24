@@ -22,8 +22,8 @@ describe('test loading extension', () => {
     const api = new ApiPromise();
     api.query = {
       system: {
-        account: jest.fn()
-      }
+        account: jest.fn(),
+      },
     };
     uiKeyring.keyring = keyring;
     const state = {
@@ -31,7 +31,7 @@ describe('test loading extension', () => {
       keyringState: 'READY',
       extensionState: null,
       api,
-      apiState: 'READY'
+      apiState: 'READY',
     };
     const dispatch = jest.fn();
     await loadExtension(state, dispatch);

@@ -26,8 +26,8 @@ form .balance-text {
   color: $secondary;
 }
 
-.form-check-input.is-invalid~.form-check-label,
-.was-validated .form-check-input:invalid~.form-check-label {
+.form-check-input.is-invalid ~ .form-check-label,
+.was-validated .form-check-input:invalid ~ .form-check-label {
   color: $primary;
 }
 
@@ -72,7 +72,7 @@ input[type='checkbox']:checked + label:before {
 .input-danger,
 .was-validated .form-control:invalid,
 .form-control.is-invalid,
-.was-validated .form-control:invalid:focus, 
+.was-validated .form-control:invalid:focus,
 .form-control.is-invalid:focus {
   border-color: $primary !important;
   box-shadow: none;

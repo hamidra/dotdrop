@@ -42,9 +42,7 @@ const AccountToggleItem = ({ account, balance, token }) => {
     );
   } else {
     ContentElement = (
-      <div style={{ marginLeft: caretSize + caretMargin }}>
-        Select Account
-      </div>
+      <div style={{ marginLeft: caretSize + caretMargin }}>Select Account</div>
     );
   }
   return (
@@ -83,7 +81,8 @@ const AccountDropdownMenu = React.forwardRef(
         ref={ref}
         style={style}
         className={className}
-        aria-labelledby={labeledBy}>
+        aria-labelledby={labeledBy}
+      >
         <Form className="mx-2 mb-2">
           <Form.Control
             autoFocus
@@ -117,7 +116,8 @@ const AccountDropdownItem = React.forwardRef(
           onClick={(e) => {
             e.preventDefault();
             onClick(e);
-          }}>
+          }}
+        >
           <div className="mr-2">
             <Identicon value={account?.address} size={40} theme="polkadot" />
           </div>
@@ -137,12 +137,12 @@ const AccountDropdownItem = React.forwardRef(
     );
   }
 );
-export default function AccounSelector ({
+export default function AccounSelector({
   accounts,
   balances,
   token,
   selectedAccount,
-  setSelectedAccount
+  setSelectedAccount,
 }) {
   const selectAccountHandler = (idx) => {
     setSelectedAccount(accounts[idx]);
@@ -152,11 +152,13 @@ export default function AccounSelector ({
     <>
       <Dropdown
         className="w-100"
-        onSelect={(eventKey, e) => selectAccountHandler(eventKey)}>
+        onSelect={(eventKey, e) => selectAccountHandler(eventKey)}
+      >
         <Dropdown.Toggle
           as="div"
           id="dropdown-item-button"
-          className="w-100 account-dropdown-toggle">
+          className="w-100 account-dropdown-toggle"
+        >
           <AccountToggleItem
             account={selectedAccount}
             balance={balances && balances[selectedAccount?.address]}
