@@ -149,7 +149,9 @@ export default function ClaimMain () {
   steps.push(AccountOptionElement);
 
   // Step-2
-  steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
+  steps.push(
+    <VerifySecret claimGiftHandler={claimGiftHandler} processing={processing} />
+  );
 
   // Step-3
   steps.push(<Claimed accountAddress={address} amount={claimedAmount} />);

@@ -10,6 +10,7 @@ import analytics from '../../../analytics';
 export default function ConfirmGift ({
   account,
   giftInfo,
+  processing,
   generateGiftHandler,
   giftFeeMultiplier
 }) {
@@ -114,7 +115,7 @@ export default function ConfirmGift ({
         <div className="d-flex justify-content-center mt-1">
           <button
             className="btn btn-primary"
-            disabled={!!checkedError}
+            disabled={!!checkedError || processing}
             onClick={() => {
               if (!checked) {
                 setCheckedError(checkedErrorMessage);

@@ -271,6 +271,7 @@ export default function GenerateMain () {
       giftInfo={giftInfo}
       generateGiftHandler={generateGiftHandler}
       giftFeeMultiplier={getGiftFeeMultiplier ? getGiftFeeMultiplier() : 1}
+      processing={processing}
     />
   );
 
