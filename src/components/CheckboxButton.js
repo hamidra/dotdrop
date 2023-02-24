@@ -8,15 +8,17 @@ const CheckboxButton = ({ children, className, onClick }) => {
     <div
       className={`checkbox-button ${className || ''}`}
       onClick={onClick}
-      style={{ fontSize: '16px' }}>
+      style={{ fontSize: '16px' }}
+    >
       <div
         style={{
           width: '48px',
           height: '48px',
           flexShrink: '0',
           borderRadius: '8px',
-          marginRight: '8px'
-        }}>
+          marginRight: '8px',
+        }}
+      >
         {checked ? <GrCheckbox size="xlarge" /> : <GrCheckboxSelected />}
       </div>
       {children}

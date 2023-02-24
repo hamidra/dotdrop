@@ -5,7 +5,7 @@ import config from '../../../config';
 import { stringHelpers } from '../../../utils';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-export default function PresentGift ({ giftInfo, removeGiftHandler }) {
+export default function PresentGift({ giftInfo, removeGiftHandler }) {
   const { email, name, amount, secret } = giftInfo || {};
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = amount && utils.formatBalance(amount, chainInfo?.token);
@@ -56,8 +56,9 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
                     padding: '5px',
                     marginTop: '20px',
                     marginBottom: '20px',
-                    borderRadius: '5px'
-                  }}>{`${claimUrl}`}</em>
+                    borderRadius: '5px',
+                  }}
+                >{`${claimUrl}`}</em>
               </p>
               <p>
                 and type in the following gift secret to claim your{' '}
@@ -70,12 +71,13 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
                     padding: '5px',
                     marginTop: '20px',
                     marginBottom: '20px',
-                    borderRadius: '5px'
-                  }}>
+                    borderRadius: '5px',
+                  }}
+                >
                   {formattedSecret}
                 </strong>
-                The website will walk you through the steps to create your own secure{' '}
-                {`${giftTheme?.network}`} account.
+                The website will walk you through the steps to create your own
+                secure {`${giftTheme?.network}`} account.
               </p>
               <p>Enjoy!</p>
             </div>
@@ -85,18 +87,21 @@ export default function PresentGift ({ giftInfo, removeGiftHandler }) {
           <Col className="px-5 flex-column flex-md-row d-flex justify-content-end">
             <button
               className="btn btn-link ml-3"
-              onClick={() => removeGiftHandler(secret)}>
+              onClick={() => removeGiftHandler(secret)}
+            >
               Remove Gift
             </button>
             <button
               className="btn btn-link ml-3"
-              onClick={() => printHandler()}>
+              onClick={() => printHandler()}
+            >
               Print
             </button>
             <CopyToClipboard text={giftMessage}>
               <button
                 className="btn btn-primary ml-3"
-                onClick={(e) => e.stopPropagation()}>
+                onClick={(e) => e.stopPropagation()}
+              >
                 Copy Message
               </button>
             </CopyToClipboard>

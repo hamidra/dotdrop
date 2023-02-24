@@ -31,5 +31,5 @@ export const stringHelpers = {
         'Please enter a valid gift secret. The secret can not include more than 32 characters';
     }
     return error;
-  }
+  },
 };

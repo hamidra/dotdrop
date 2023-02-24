@@ -4,7 +4,7 @@ import CardHeader from '../../../components/CardHeader';
 import Divider from '../../../components/Divider';
 import { useSubstrate } from '../../../substrate-lib';
 
-export default function ConnectAccount ({ setAccountSourceHandler }) {
+export default function ConnectAccount({ setAccountSourceHandler }) {
   const { apiState, giftTheme } = useSubstrate();
   return (
     <Card.Body className="d-flex flex-column">
@@ -13,7 +13,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
         cardText={[
           `Create a new ${giftTheme?.network} address to store your funds`,
           <br />,
-          'or use an existing account.'
+          'or use an existing account.',
         ]}
       />
       <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">
@@ -24,7 +24,8 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
             onClick={() => {
               analytics.track('claim_new_account');
               setAccountSourceHandler('NEW');
-            }}>
+            }}
+          >
             {`Create ${giftTheme?.network} Address`}
           </button>
         </Row>
@@ -36,7 +37,8 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
             onClick={() => {
               analytics.track('claim_existing_account');
               setAccountSourceHandler('EXISTING');
-            }}>
+            }}
+          >
             Connect Existing Account
           </button>
         </Row>

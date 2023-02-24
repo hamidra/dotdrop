@@ -4,7 +4,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import { useSubstrate } from '../../../substrate-lib';
 
-export default function Landing () {
+export default function Landing() {
   const { nextStep } = useContext(GenerateContext);
   const { apiState, giftTheme } = useSubstrate();
   return (
@@ -20,14 +20,16 @@ export default function Landing () {
               <button
                 className="btn btn-primary btn-lg"
                 disabled={apiState !== 'READY'}
-                onClick={() => nextStep()}>
+                onClick={() => nextStep()}
+              >
                 Send a Gift
               </button>
             </div>
             <a
               className="pt-4 small text-underline"
               href="#/About"
-              target="_blank">
+              target="_blank"
+            >
               {`→ How does ${giftTheme?.network} Gifts work?`}
             </a>
           </Col>

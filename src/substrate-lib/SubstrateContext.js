@@ -19,7 +19,7 @@ const getGiftTheme = (theme) => {
   // default values
   const giftTheme = {
     content: 'DOT',
-    network: 'Polkadot'
+    network: 'Polkadot',
   };
   switch (theme) {
     case 'polkadot':
@@ -63,7 +63,7 @@ const INIT_STATE = {
   apiState: null,
   chainInfo: null,
   theme,
-  giftTheme: getGiftTheme(theme)
+  giftTheme: getGiftTheme(theme),
 };
 
 ///
@@ -82,7 +82,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         apiState: 'READY',
-        chainInfo
+        chainInfo,
       };
     }
 
@@ -107,7 +107,10 @@ const reducer = (state, action) => {
       return { ...state, extensionState: 'READY' };
     case 'BALANCE_UPDATE': {
       const { address, balance } = action.payload;
-      return { ...state, balances: { ...state?.balances, [address]: balance } };
+      return {
+        ...state,
+        balances: { ...state?.balances, [address]: balance },
+      };
     }
     default:
       throw new Error(`Unknown type: ${action.type}`);
@@ -152,7 +155,7 @@ const queryChainInfo = async (api, state, dispatch) => {
         : 42,
     existentialDeposit:
       api.consts?.balances?.existentialDeposit || new BN(0, 10),
-    chainName: await api.rpc.system.chain()
+    chainName: await api.rpc.system.chain(),
   };
 
   // ToDo: remove this when the pallet is deployed on polkadot
@@ -175,7 +178,7 @@ const loadAccounts = (state, dispatch) => {
       keyring.loadAll({
         genesisHash: state.chainInfo.genesisHash,
         isDevelopment: config.DEVELOPMENT_KEYRING,
-        ss58Format: state.chainInfo.ss58Format
+        ss58Format: state.chainInfo.ss58Format,
       });
 
       dispatch({ type: 'SET_KEYRING', payload: keyring });
@@ -203,7 +206,10 @@ const loadBalances = (state, dispatch) => {
     // get the balance for all addresses in keyring:
     state.keyring.getAccounts().forEach(({ address }) => {
       state.api.query.system.account(address, ({ data: balance }) => {
-        dispatch({ type: 'BALANCE_UPDATE', payload: { address, balance } });
+        dispatch({
+          type: 'BALANCE_UPDATE',
+          payload: { address, balance },
+        });
       });
     });
   }
@@ -246,7 +252,7 @@ const SubstrateContextProvider = (props) => {
 // prop typechecking
 SubstrateContextProvider.propTypes = {
   socket: PropTypes.string,
-  types: PropTypes.object
+  types: PropTypes.object,
 };
 
 const useSubstrate = () => ({ ...useContext(SubstrateContext) });

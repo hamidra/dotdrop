@@ -29,13 +29,21 @@ export const transferBalanceAndFees = async (
   const chainAmountAndFees = chainAmount.add(
     feeAdjustment.mul(new BN(feeMultiplier || 1))
   );
-  const transferTxFinal = api.tx.balances.transferKeepAlive(toAddress, chainAmountAndFees);
+  const transferTxFinal = api.tx.balances.transferKeepAlive(
+    toAddress,
+    chainAmountAndFees
+  );
   const txsFinal = [transferTxFinal, remarkTx];
   const tx = api.tx.utility.batchAll(txsFinal);
   return signAndSendTx(api, tx, fromAccount);
 };
 
-export const transferAllAssets = async (api, fromAccount, toAddress, remark) => {
+export const transferAllAssets = async (
+  api,
+  fromAccount,
+  toAddress,
+  remark
+) => {
   const fromAddress = utils.getAccountAddress(fromAccount);
 
   // Create Txs for uniques NFTs

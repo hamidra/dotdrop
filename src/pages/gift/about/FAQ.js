@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
-export default function FAQ ({ giftTheme }) {
+export default function FAQ({ giftTheme }) {
   const q1 = `What is ${giftTheme.network}? What is ${giftTheme.content}?`;
   const q2 = 'How do gifts work?';
   const q3 = 'How can I make sure the gift I received is legit?';

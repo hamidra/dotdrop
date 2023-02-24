@@ -9,24 +9,26 @@ const CardLink = ({ title, subtitle, hRef }) => {
       className="card-link d-flex flex-row"
       href={hRef}
       rel="noreferrer"
-      target="_blank">
-        {title === 'Step 1'
-          ? <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={48} />
-          : <Plus className="flex-shrink-0 p-2 rounded icon" size={48} />
-      }
+      target="_blank"
+    >
+      {title === 'Step 1' ? (
+        <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={48} />
+      ) : (
+        <Plus className="flex-shrink-0 p-2 rounded icon" size={48} />
+      )}
       <div>
         <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
         <div className="subtitle">{subtitle}</div>
       </div>
-      <div className="d-flex flex-grow-1"/>
+      <div className="d-flex flex-grow-1" />
       <CaretRight className="caret flex-shrink-0" size={14} weight="bold" />
     </a>
   );
 };
 
-export default function LedgerInstructions ({
+export default function LedgerInstructions({
   prevStepHandler,
-  nextStepHandler
+  nextStepHandler,
 }) {
   const title = 'Import Ledger Account';
   const extensionLink = 'https://polkadot.js.org/extension/';
@@ -62,7 +64,8 @@ export default function LedgerInstructions ({
           <Col className="pt-4 d-flex justify-content-center">
             <button
               className="btn btn-primary"
-              onClick={() => nextStepHandler()}>
+              onClick={() => nextStepHandler()}
+            >
               Connect
             </button>
           </Col>

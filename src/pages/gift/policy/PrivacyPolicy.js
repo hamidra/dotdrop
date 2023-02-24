@@ -34,8 +34,8 @@ const PrivacyPolicyList = () => {
             <strong>Services</strong>") and, thus, the Data Controller is the
             Web 3.0 Technologies Foundation, a company registered in the
             commercial register of the Canton of Zug, Switzerland (registration
-            number CH-322.596.347), with the registered address Baarerstrasse 14,
-            6300 Zug, Switzerland (hereinafter referred to as "
+            number CH-322.596.347), with the registered address Baarerstrasse
+            14, 6300 Zug, Switzerland (hereinafter referred to as "
             <strong>Controller</strong>", "<strong>we</strong>", "
             <strong>us</strong>").
           </privacy-policy-section>
