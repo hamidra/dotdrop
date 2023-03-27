@@ -23,7 +23,7 @@
     "@polkadot/extension-dapp": "^0.44.9",
     "@polkadot/keyring": "^10.4.1",
     "@polkadot/networks": "^10.4.1",
-    "@polkadot/react-identicon": "^2.11.2",
+    "@polkadot/react-identicon": "^3.1.3",
     "@polkadot/react-qr": "^3.0.1",
     "@polkadot/types": "^9.14.1",
     "@polkadot/ui-keyring": "^2.11.2",
