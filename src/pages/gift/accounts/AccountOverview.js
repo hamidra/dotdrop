@@ -166,7 +166,11 @@ export default function AccountOverview() {
                       }
                     />
                     <div className="mt-4">
-                      <a href={`https://polkascan.io/kusama/account/${accountAddress}`} target="_blank" rel="noreferrer">
+                      <a
+                        href={`https://polkascan.io/kusama/account/${accountAddress}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         {'→ See account on Polkascan'}
                       </a>
                     </div>

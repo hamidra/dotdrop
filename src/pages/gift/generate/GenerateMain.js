@@ -310,7 +310,8 @@ export default function GenerateMain() {
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
             <Card
               style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
-              className="shadow">
+              className="shadow"
+            >
               {currentComponent}
             </Card>
           </Col>

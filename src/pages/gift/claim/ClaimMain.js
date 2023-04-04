@@ -19,7 +19,7 @@ import analytics from '../../../analytics';
 const ClaimContext = createContext();
 export { ClaimContext };
 
-export default function ClaimMain () {
+export default function ClaimMain() {
   const { keyring, apiState, api, chainInfo, giftTheme } = useSubstrate();
   const { claimGift } = giftProvider;
 
@@ -75,7 +75,7 @@ export default function ClaimMain () {
 
         // claim gift by the selected account
         const recipientAccount = {
-          pairOrAddress: address
+          pairOrAddress: address,
         };
 
         claimGift(api, interimAccount, recipientAccount)
@@ -152,7 +152,7 @@ export default function ClaimMain () {
     <VerifySecret
       claimGiftHandler={claimGiftHandler}
       accountSource={accountSource}
-      processing={processing} 
+      processing={processing}
     />
   );
 

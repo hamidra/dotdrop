@@ -9,14 +9,13 @@ const CardLink = ({ title, subtitle, hRef }) => {
       className="card-link d-flex flex-row"
       href={hRef}
       rel="noreferrer"
-      target="_blank">
-      {title === 'Step 1'
-        ? (
+      target="_blank"
+    >
+      {title === 'Step 1' ? (
         <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={48} />
-          )
-        : (
+      ) : (
         <Plus className="flex-shrink-0 p-2 rounded icon" size={48} />
-          )}
+      )}
       <div>
         <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
         <div className="subtitle">{subtitle}</div>

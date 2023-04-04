@@ -48,8 +48,12 @@ const DownloadExtension = () => {
             className="d-flex flex-row align-items-center p-1 btn btn-primary mb-3"
             href={polkadotExtensionLink}
             target="_blank"
-            rel="noopener noreferrer">
-            <DownloadSimple className="flex-shrink-0 p-2 rounded icon" size={36} />
+            rel="noopener noreferrer"
+          >
+            <DownloadSimple
+              className="flex-shrink-0 p-2 rounded icon"
+              size={36}
+            />
             <div style={{ fontSize: '1rem' }} className="pr-3">
               Polkadot Extension
             </div>
