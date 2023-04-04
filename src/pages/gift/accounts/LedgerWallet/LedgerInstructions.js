@@ -27,9 +27,9 @@ const CardLink = ({ title, subtitle, hRef }) => {
   );
 };
 
-export default function LedgerInstructions ({
+export default function LedgerInstructions({
   prevStepHandler,
-  nextStepHandler
+  nextStepHandler,
 }) {
   const title = 'Import Ledger Account';
   const extensionLink = 'https://polkadot.js.org/extension/';
@@ -65,7 +65,8 @@ export default function LedgerInstructions ({
           <Col className="pt-4 d-flex justify-content-center">
             <button
               className="btn btn-primary"
-              onClick={() => nextStepHandler()}>
+              onClick={() => nextStepHandler()}
+            >
               Connect
             </button>
           </Col>

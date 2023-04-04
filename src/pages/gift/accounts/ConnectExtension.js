@@ -12,7 +12,8 @@ const Connecting = () => {
       <Col className="d-flex flex-column justify-content-center align-items-center text-center">
         <div
           style={{ height: '100px' }}
-          className="d-flex flex-column justify-content-around align-items-center">
+          className="d-flex flex-column justify-content-around align-items-center"
+        >
           <div>
             <Spinner animation="border" role="status">
               <span className="sr-only">Processing...</span>
@@ -59,11 +60,11 @@ const DownloadExtension = () => {
   );
 };
 
-export default function ExtensionAccount ({
+export default function ExtensionAccount({
   setAccountHandler,
   setAddressHandler,
   title,
-  prevStepHandler
+  prevStepHandler,
 }) {
   const { dispatch, ...state } = useSubstrate();
   const { keyring, balances, chainInfo, giftTheme, extensionState } = state;
@@ -93,14 +94,14 @@ export default function ExtensionAccount ({
     extensionState === 'NOT_AVAILABLE'
       ? ''
       : extensionState === 'READY'
-        ? `Select your ${giftTheme?.network} account below:`
-        : '';
+      ? `Select your ${giftTheme?.network} account below:`
+      : '';
   const cardTitle =
     extensionState === 'NOT_AVAILABLE'
       ? 'Extension Not Detected'
       : extensionState === 'READY'
-        ? title || 'Select Account'
-        : 'Connecting To Polkadot Extension';
+      ? title || 'Select Account'
+      : 'Connecting To Polkadot Extension';
   return (
     <>
       <Card.Body className="d-flex flex-column">
@@ -109,10 +110,9 @@ export default function ExtensionAccount ({
           cardText={cardMessage}
           backClickHandler={prevStepHandler}
         />
-        {extensionState === 'NOT_AVAILABLE'
-          ? (<DownloadExtension />)
-          : extensionState === 'READY'
-            ? (
+        {extensionState === 'NOT_AVAILABLE' ? (
+          <DownloadExtension />
+        ) : extensionState === 'READY' ? (
           <>
             <Row className="p-md-5 justify-content-center">
               <Col className="d-flex flex-column justify-content-center align-items-center text-center">
@@ -132,16 +132,16 @@ export default function ExtensionAccount ({
                 <button
                   className="btn btn-primary"
                   disabled={!selectedAccount}
-                  onClick={() => _setAccountHandler()}>
+                  onClick={() => _setAccountHandler()}
+                >
                   Connect
                 </button>
               </Col>
             </Row>
           </>
-              )
-            : (
+        ) : (
           <Connecting />
-              )}
+        )}
       </Card.Body>
     </>
   );

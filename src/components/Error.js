@@ -1,5 +1,5 @@
 import { Modal } from 'react-bootstrap';
-export default function Error ({ show, message, handleClose }) {
+export default function Error({ show, message, handleClose }) {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -9,7 +9,8 @@ export default function Error ({ show, message, handleClose }) {
         <Modal.Body>
           <div
             style={{ height: '100px' }}
-            className="d-flex flex-column justify-content-around align-items-center">
+            className="d-flex flex-column justify-content-around align-items-center"
+          >
             <div>{message}</div>
           </div>
         </Modal.Body>

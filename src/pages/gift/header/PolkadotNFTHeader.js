@@ -23,7 +23,7 @@ const AccountInfoBox = ({ accountAddress }) => {
     </Media>
   );
 };
-export default function Header ({ selectedAccount }) {
+export default function Header({ selectedAccount }) {
   const history = useHistory();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
@@ -32,7 +32,10 @@ export default function Header ({ selectedAccount }) {
     <>
       <Navbar
         className="px-4 py-3"
-        style={{ display: 'grid', gridTemplateColumns: '60px 1fr 60px' }}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '60px 1fr 60px',
+        }}
         variant="dark"
       >
         <Navbar.Brand>
@@ -51,7 +54,10 @@ export default function Header ({ selectedAccount }) {
               <div className="d-none d-sm-block w-100 d-sm-none" />
               <Nav className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm rounded">
                 <div
-                  style={{ minWidth: '5rem', fontWeight: '400' }}
+                  style={{
+                    minWidth: '5rem',
+                    fontWeight: '400',
+                  }}
                   className="py-2 px-3 bg-white rounded text-center h-100 d-flex"
                 >
                   <AccountInfoBox accountAddress={selectedAccount} />

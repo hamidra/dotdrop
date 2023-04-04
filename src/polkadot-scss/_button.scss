@@ -49,7 +49,7 @@
   transform: scale(0.999);
 
   &:before {
-    content: "";
+    content: '';
     height: 100%;
     position: absolute;
     top: 0;
@@ -80,9 +80,9 @@
     background-color: transparent;
   }
 
-  &[type="submit"]:hover,
-  &[type="submit"]:focus,
-  &[type="submit"]:active {
+  &[type='submit']:hover,
+  &[type='submit']:focus,
+  &[type='submit']:active {
     background: $primary;
   }
 
@@ -170,7 +170,7 @@
   transform: scale(0.999);
 
   &:before {
-    content: "";
+    content: '';
     height: 100%;
     position: absolute;
     top: 0;
@@ -204,13 +204,14 @@
   }
 }
 
-.btn-card, .card-link {
+.btn-card,
+.card-link {
   display: inline-flex;
   align-items: center;
   width: 100%;
   padding: 0.75rem;
   text-align: left;
-  background-color: #FFF;
+  background-color: #fff;
   border: 1px solid $gray-300;
   border-radius: 0.5rem;
 

@@ -1,11 +1,9 @@
 import { Gift, PaperPlaneTilt, Smiley } from 'phosphor-react';
 
-export default function ProcessExplainerCard ({ giftTheme }) {
+export default function ProcessExplainerCard({ giftTheme }) {
   return (
-    <div
-      className="d-flex flex-column align-items-center w-100 mb-5">
-      <h2
-        className="about-heading pb-5 text-center">
+    <div className="d-flex flex-column align-items-center w-100 mb-5">
+      <h2 className="about-heading pb-5 text-center">
         How to Gift {giftTheme.content}
       </h2>
       <div className="cards">
@@ -38,7 +36,8 @@ export default function ProcessExplainerCard ({ giftTheme }) {
             </div>
             <h3 className="mb-3">Claim Gift</h3>
             <div className="card-text card-text--explanation">
-              The recipient creates a new {giftTheme.network} address and claims their gift.
+              The recipient creates a new {giftTheme.network} address and claims
+              their gift.
             </div>
           </div>
         </div>

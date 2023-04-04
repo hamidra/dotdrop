@@ -4,7 +4,7 @@ import Divider from '../../../components/Divider';
 import { useSubstrate } from '../../../substrate-lib';
 import analytics from '../../../analytics';
 
-export default function ConnectAccount ({ setAccountSourceHandler }) {
+export default function ConnectAccount({ setAccountSourceHandler }) {
   const { apiState, giftTheme } = useSubstrate();
   return (
     <Card.Body className="d-flex flex-column">
@@ -17,7 +17,7 @@ export default function ConnectAccount ({ setAccountSourceHandler }) {
         cardText={[
           `Create a new ${giftTheme?.network} address to store your NFTs and funds`,
           <br />,
-          'or use an existing account.'
+          'or use an existing account.',
         ]}
       />
       <Col className="d-flex flex-column  flex-grow-1 justify-content-center align-items-center">

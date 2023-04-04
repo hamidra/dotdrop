@@ -33,7 +33,9 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
 
       console.log(extAccounts);
       // toDO: subscribe to extension account updates
-      const loadedAddresses = keyring?.getAccounts()?.map((account) => account.address);
+      const loadedAddresses = keyring
+        ?.getAccounts()
+        ?.map((account) => account.address);
       const loadedSet = new Set(loadedAddresses);
 
       // filter the extension accounts that are not already loaded,
@@ -54,9 +56,9 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
           address: account.address,
           meta: {
             ...account.meta,
-            isInjected: true
+            isInjected: true,
           },
-          type: account.type
+          type: account.type,
         };
         const pair = keyring.keyring.addFromAddress(
           injectedAcct.address,

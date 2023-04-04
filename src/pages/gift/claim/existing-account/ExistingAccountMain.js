@@ -4,9 +4,9 @@ import EnterAccountAddress from './EnterAccountAddress';
 import ConnectExtension from '../../accounts/ConnectExtension';
 import ConnectSigner from '../../accounts/ConnectSigner';
 
-export default function ExistingAccountMain ({
+export default function ExistingAccountMain({
   setAddressHandler,
-  prevStepHandler
+  prevStepHandler,
 }) {
   const [step, setStep] = useState(0);
 
@@ -41,7 +41,7 @@ export default function ExistingAccountMain ({
   const accountOption = {
     ENTER: EnterAccountAddress,
     EXTENSION: ConnectExtension,
-    SIGNER: ConnectSigner
+    SIGNER: ConnectSigner,
   };
 
   const steps = [];
@@ -56,7 +56,7 @@ export default function ExistingAccountMain ({
       )
     : (
     <div>No account type is selected</div>
-      );
+  );
   steps.push(AccountOptionElement);
 
   return <>{steps[step]}</>;

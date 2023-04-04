@@ -4,7 +4,7 @@ import { cryptoWaitReady } from '@polkadot/util-crypto';
 import BN from 'bn.js';
 
 const chainDecimal = 12;
-const chainDecimalUnit = (new BN(10)).pow(new BN(chainDecimal));
+const chainDecimalUnit = new BN(10).pow(new BN(chainDecimal));
 
 describe('test substrate uitility functions', () => {
   describe('getAccountAddress', () => {
@@ -42,30 +42,30 @@ describe('test substrate uitility functions', () => {
 
   describe('getUsableBalances', () => {
     it('return usable balance when no balance is frozen', () => {
-      const free = (new BN(80)).mul(chainDecimalUnit);
+      const free = new BN(80).mul(chainDecimalUnit);
       const noFrozenBalance = {
         free,
-        miscFrozen: new BN(0)
+        miscFrozen: new BN(0),
       };
       expect(utils.getUsableBalances(noFrozenBalance).eq(free)).toBe(true);
     });
     it('return usable balance when there is some frozen balance', () => {
-      const free = (new BN(80)).mul(chainDecimalUnit);
-      const frozen = (new BN(2)).mul(chainDecimalUnit);
+      const free = new BN(80).mul(chainDecimalUnit);
+      const frozen = new BN(2).mul(chainDecimalUnit);
       const usable = free.sub(frozen);
       const noFrozenBalance = {
         free,
-        miscFrozen: frozen
+        miscFrozen: frozen,
       };
       expect(utils.getUsableBalances(noFrozenBalance).eq(usable)).toBe(true);
     });
     it('return 0 usable balance when free balance is less than frozen balance', () => {
-      const free = (new BN(2)).mul(chainDecimalUnit);
-      const frozen = (new BN(80)).mul(chainDecimalUnit);
+      const free = new BN(2).mul(chainDecimalUnit);
+      const frozen = new BN(80).mul(chainDecimalUnit);
       const usable = new BN(0);
       const noFrozenBalance = {
         free,
-        miscFrozen: frozen
+        miscFrozen: frozen,
       };
       expect(utils.getUsableBalances(noFrozenBalance).eq(usable)).toBe(true);
     });
@@ -75,7 +75,7 @@ describe('test substrate uitility functions', () => {
       const usable = new BN(0);
       const noFrozenBalance = {
         free,
-        miscFrozen: frozen
+        miscFrozen: frozen,
       };
       expect(utils.getUsableBalances(noFrozenBalance).eq(usable)).toBe(true);
     });
@@ -124,25 +124,33 @@ describe('test substrate uitility functions', () => {
 
   describe('formatChainUnit', () => {
     it('convert chain unit value with no decimal points', () => {
-      const valueInChainUnit = (new BN(2)).mul(chainDecimalUnit); // 2 tokens
+      const valueInChainUnit = new BN(2).mul(chainDecimalUnit); // 2 tokens
       const valueInString = '2000000000000';
       const value = '2';
       expect(utils.fromChainUnit(valueInChainUnit, 12)).toBe(value);
       expect(utils.fromChainUnit(valueInString, 12)).toBe(value);
     });
     it('convert chain unit value with decimal points', () => {
-      const wholeValueInChainUnit = (new BN(2)).mul(chainDecimalUnit); // 2
-      const decimlaValueInChainUnit = (new BN(2)).mul(chainDecimalUnit).divn(1000); // 0.002
-      const valueInChainUnit = wholeValueInChainUnit.add(decimlaValueInChainUnit); // 2.002
+      const wholeValueInChainUnit = new BN(2).mul(chainDecimalUnit); // 2
+      const decimlaValueInChainUnit = new BN(2)
+        .mul(chainDecimalUnit)
+        .divn(1000); // 0.002
+      const valueInChainUnit = wholeValueInChainUnit.add(
+        decimlaValueInChainUnit
+      ); // 2.002
       const valueInString = '2002000000000';
       const value = '2.002';
       expect(utils.fromChainUnit(valueInChainUnit, 12)).toBe(value);
       expect(utils.fromChainUnit(valueInString, 12)).toBe(value);
     });
     it('convert chain unit value with decimal points with fixed decimals', () => {
-      const wholeValueInChainUnit = (new BN(2)).mul(chainDecimalUnit); // 2
-      const decimlaValueInChainUnit = (new BN(21)).mul(chainDecimalUnit).divn(1000); // 0.021
-      const valueInChainUnit = wholeValueInChainUnit.add(decimlaValueInChainUnit); // 2.021
+      const wholeValueInChainUnit = new BN(2).mul(chainDecimalUnit); // 2
+      const decimlaValueInChainUnit = new BN(21)
+        .mul(chainDecimalUnit)
+        .divn(1000); // 0.021
+      const valueInChainUnit = wholeValueInChainUnit.add(
+        decimlaValueInChainUnit
+      ); // 2.021
       const valueInString = '2021000000000';
       const value = '2.021';
       const value2Decimals = '2.02';
@@ -175,16 +183,24 @@ describe('test substrate uitility functions', () => {
       const value = 11;
       const valueInChainUnit = new BN(11).mul(chainDecimalUnit);
       expect(utils.toChainUnit(value, 12).eq(valueInChainUnit)).toBe(true);
-      expect(utils.toChainUnit(valueString, 12).eq(valueInChainUnit)).toBe(true);
+      expect(utils.toChainUnit(valueString, 12).eq(valueInChainUnit)).toBe(
+        true
+      );
     });
     it('convert value with decimals to chainUnit', () => {
       const valueString = '2.021';
       const value = 2.021;
-      const wholeValueInChainUnit = (new BN(2)).mul(chainDecimalUnit); // 2
-      const decimlaValueInChainUnit = (new BN(21)).mul(chainDecimalUnit).divn(1000); // 0.021
-      const valueInChainUnit = wholeValueInChainUnit.add(decimlaValueInChainUnit); // 2.021
+      const wholeValueInChainUnit = new BN(2).mul(chainDecimalUnit); // 2
+      const decimlaValueInChainUnit = new BN(21)
+        .mul(chainDecimalUnit)
+        .divn(1000); // 0.021
+      const valueInChainUnit = wholeValueInChainUnit.add(
+        decimlaValueInChainUnit
+      ); // 2.021
       expect(utils.toChainUnit(value, 12).eq(valueInChainUnit)).toBe(true);
-      expect(utils.toChainUnit(valueString, 12).eq(valueInChainUnit)).toBe(true);
+      expect(utils.toChainUnit(valueString, 12).eq(valueInChainUnit)).toBe(
+        true
+      );
     });
 
     it('convert 0 to chainUnit', () => {
@@ -192,7 +208,9 @@ describe('test substrate uitility functions', () => {
       const value = 0;
       const valueInChainUnit = new BN(0);
       expect(utils.toChainUnit(value, 12).eq(valueInChainUnit)).toBe(true);
-      expect(utils.toChainUnit(valueString, 12).eq(valueInChainUnit)).toBe(true);
+      expect(utils.toChainUnit(valueString, 12).eq(valueInChainUnit)).toBe(
+        true
+      );
     });
   });
 });

@@ -3,7 +3,7 @@ import bundleGiftProvider from './bundleGiftProvider';
 
 const palletTypes = {
   balance: 'balance',
-  bundle: 'bundle'
+  bundle: 'bundle',
   // ToDo: add other pallets
   // asset: 'asset',
 };

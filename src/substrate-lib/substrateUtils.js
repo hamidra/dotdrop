@@ -133,7 +133,7 @@ const utils = {
   },
   calcFeeAdjustments: (fee) => {
     return new BN(fee || 0).muln(feeAdjustMultiplier).divn(100);
-  }
+  },
 };
 
 export default utils;

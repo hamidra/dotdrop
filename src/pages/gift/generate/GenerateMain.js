@@ -41,12 +41,12 @@ const storeGiftInfo = (fromAccount, giftInfo) => {
     JSON.stringify({
       fromAddress: fromAccount?.address,
       ...giftInfo,
-      amount
+      amount,
     })
   );
 };
 
-export default function GenerateMain () {
+export default function GenerateMain() {
   const { apiState, api, giftTheme, keyring } = useSubstrate();
   const { removeGift, createGift, getGiftFeeMultiplier } = giftProvider;
 
@@ -64,7 +64,7 @@ export default function GenerateMain () {
     useState({
       isQrHashed: false,
       qrAddress: '',
-      qrPayload: new Uint8Array()
+      qrPayload: new Uint8Array(),
     });
 
   const generateGiftAccount = (seed) => {
@@ -98,7 +98,7 @@ export default function GenerateMain () {
       qrResolve &&
         qrResolve({
           id: ++qrId,
-          signature
+          signature,
         });
       setShowSigner(false);
       setProcessing(true);
@@ -132,7 +132,7 @@ export default function GenerateMain () {
       secret: seed,
       name: giftInfo?.recipientName || '',
       email: giftInfo?.recipientEmail || '',
-      amount: giftInfo?.amount
+      amount: giftInfo?.amount,
     });
     nextStep();
   };
@@ -147,11 +147,11 @@ export default function GenerateMain () {
       const senderAccount = await getSigningAccount(account);
 
       const gift = {
-        amount: giftInfo?.amount
+        amount: giftInfo?.amount,
       };
 
       const interimAccount = {
-        pairOrAddress: generateGiftAccount(giftInfo?.secret)
+        pairOrAddress: generateGiftAccount(giftInfo?.secret),
       };
 
       createGift(api, interimAccount, senderAccount, gift)
@@ -193,7 +193,7 @@ export default function GenerateMain () {
       );
 
       const interimAccount = {
-        pairOrAddress: giftAccountPair
+        pairOrAddress: giftAccountPair,
       };
 
       removeGift(api, interimAccount, senderAccount)
@@ -228,7 +228,7 @@ export default function GenerateMain () {
   const accountOption = {
     EXTENSION: ConnectExtension,
     HARDWALLET: LedgerMain,
-    SIGNER: ConnectSigner
+    SIGNER: ConnectSigner,
   };
 
   if (step < 2 && account) {
@@ -242,16 +242,14 @@ export default function GenerateMain () {
   steps.push(<ConnectAccount />);
 
   // Step-2
-  const AccountOptionElement = accountOption[accountSource]
-    ? (
-        createElement(accountOption[accountSource], {
-          setAccountHandler,
-          prevStepHandler: prevStep
-        })
-      )
-    : (
+  const AccountOptionElement = accountOption[accountSource] ? (
+    createElement(accountOption[accountSource], {
+      setAccountHandler,
+      prevStepHandler: prevStep,
+    })
+  ) : (
     <div>No account type is selected</div>
-      );
+  );
   steps.push(AccountOptionElement);
 
   // Step-3
@@ -271,6 +269,7 @@ export default function GenerateMain () {
       giftInfo={giftInfo}
       generateGiftHandler={generateGiftHandler}
       giftFeeMultiplier={getGiftFeeMultiplier ? getGiftFeeMultiplier() : 1}
+      processing={processing}
     />
   );
 
@@ -302,7 +301,7 @@ export default function GenerateMain () {
         nextStep,
         prevStep,
         jumpToStep,
-        setAccountSource
+        setAccountSource,
       }}
     >
       <Header selectedAccount={account?.address} />
