@@ -17,26 +17,29 @@ const CardButton = ({ children, logo, onClick, smallFont }) => {
   }
 
   return (
-        <button
-            className='btn-card'
-            onClick={onClick}
-            style={smallFont ? { fontSize: '14px' } : { fontSize: '16px' }}
-        >
-            <Image
-              src={image}
-              style={{
-                width: '48px',
-                height: '48px',
-                flexShrink: '0',
-                borderRadius: '8px',
-                marginRight: '8px'
-              }}
-            >
-            </Image>
-            {children}
-            <div className='flex-grow-1'></div>
-            <CaretRight style={{ flexShrink: '0', color: '#6C757D' }} size={14} weight="bold" />
-        </button>
+    <button
+      className="btn-card"
+      onClick={onClick}
+      style={smallFont ? { fontSize: '14px' } : { fontSize: '16px' }}
+    >
+      <Image
+        src={image}
+        style={{
+          width: '48px',
+          height: '48px',
+          flexShrink: '0',
+          borderRadius: '8px',
+          marginRight: '8px',
+        }}
+      ></Image>
+      {children}
+      <div className="flex-grow-1"></div>
+      <CaretRight
+        style={{ flexShrink: '0', color: '#6C757D' }}
+        size={14}
+        weight="bold"
+      />
+    </button>
   );
 };
 

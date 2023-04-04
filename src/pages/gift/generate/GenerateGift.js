@@ -8,13 +8,13 @@ import config from '../../../config';
 import BN from 'bn.js';
 import analytics from '../../../analytics';
 
-export default function GenerateGift ({
+export default function GenerateGift({
   account,
   initialGiftInfo,
   setGiftInfoHandler,
   // this can be 1 or more and specifies the number of tx's a gift sender covers the fees for.
   // (at least 1 to conver 1 tx from interim gift account to the recipient account).
-  giftFeeMultiplier
+  giftFeeMultiplier,
 }) {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
 
@@ -27,10 +27,10 @@ export default function GenerateGift ({
   const balanceDecimalPoints = 5;
   const balanceVal = balance?.free
     ? utils.fromChainUnit(
-      utils.getUsableBalances(balance),
-      chainInfo?.decimals,
-      balanceDecimalPoints
-    )
+        utils.getUsableBalances(balance),
+        chainInfo?.decimals,
+        balanceDecimalPoints
+      )
     : null;
   const balanceStr =
     balanceVal && utils.formatBalance(balanceVal, chainInfo?.token);
@@ -61,7 +61,7 @@ export default function GenerateGift ({
   useEffect(() => {
     // since the txFees does not differ much for different amounts,
     // to be safe and efficient we just calculate the maximum possible txFee for the whole available balance of the account
-    async function fetchTxFee () {
+    async function fetchTxFee() {
       try {
         const address = account?.address;
         if (address) {
@@ -189,7 +189,7 @@ export default function GenerateGift ({
         <Formik
           initialValues={{
             amount: initialGiftInfo?.amount || '',
-            recipientName: initialGiftInfo?.name || ''
+            recipientName: initialGiftInfo?.name || '',
           }}
           validate={validate}
           onSubmit={({ recipientName, amount }, actions) => {
@@ -203,7 +203,7 @@ export default function GenerateGift ({
             setGiftInfoHandler({
               recipientName,
               amount,
-              fee
+              fee,
             });
           }}
         >
@@ -265,19 +265,17 @@ export default function GenerateGift ({
                         </div>
                       </div>
 
-                      {props.touched.amount && !!props.errors.amount
-                        ? (
+                      {props.touched.amount && !!props.errors.amount ? (
                         <Form.Text className="danger">
                           {props?.errors?.amount}
                         </Form.Text>
-                          )
-                        : (
-                            amountWarning && (
+                      ) : (
+                        amountWarning && (
                           <Form.Text className="warning">
                             {amountWarning}
                           </Form.Text>
-                            )
-                          )}
+                        )
+                      )}
                     </Form.Group>
                   </Form>
                 </Col>

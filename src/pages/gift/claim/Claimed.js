@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { isWeb3Injected } from '@polkadot/extension-dapp';
 
-export default function Claimed ({ amount, accountAddress }) {
+export default function Claimed({ amount, accountAddress }) {
   const history = useHistory();
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = utils.formatBalance(amount, chainInfo?.token);
@@ -33,23 +33,21 @@ export default function Claimed ({ amount, accountAddress }) {
         </Row>
         <div className="flex-grow-1" />
         <Col className="pt-5 d-flex justify-content-center align-items-center">
-          {isWeb3Injected
-            ? (
+          {isWeb3Injected ? (
             <button
               className="btn btn-primary"
               onClick={() => history.push(`/account/${accountAddress}`)}
             >
               {'See Account'}
             </button>
-              )
-            : (
+          ) : (
             <button
               className="btn btn-primary"
               onClick={() => history.push(`/extension/${accountAddress}`)}
             >
               {`Set up a ${giftTheme.network} wallet`}
             </button>
-              )}
+          )}
         </Col>
       </Card.Body>
     </>

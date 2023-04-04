@@ -7,7 +7,7 @@ import config from '../../config';
 import Header from '../gift/header/Header';
 import Footer from '../gift/footer/Footer';
 
-export default function GiftSecretScanner () {
+export default function GiftSecretScanner() {
   const { keyring, api, apiState, giftTheme } = useSubstrate();
   const [giftSecret, setGiftSecret] = useState('');
   const [giftSecretError, setGiftSecretError] = useState(null);
@@ -66,7 +66,11 @@ export default function GiftSecretScanner () {
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
             <Card
-              style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
+              style={{
+                width: 580,
+                maxWidth: '100%',
+                minHeight: 540,
+              }}
               className="shadow"
             >
               <Card.Body className="d-flex flex-column">
@@ -75,7 +79,7 @@ export default function GiftSecretScanner () {
                   cardText={[
                     'Enter the ',
                     <b>gift secret</b>,
-                    ' to browse the gift and scan the gift transactions.'
+                    ' to browse the gift and scan the gift transactions.',
                   ]}
                 />
                 <>

@@ -33,28 +33,31 @@ export const loadExtension = async (state, dispatch, chainInfo) => {
 
       console.log(extAccounts);
       // toDO: subscribe to extension account updates
-      const loadedAddresses = keyring?.getAccounts()?.map((account) => account.address);
+      const loadedAddresses = keyring
+        ?.getAccounts()
+        ?.map((account) => account.address);
       const loadedSet = new Set(loadedAddresses);
 
       // filter the extension accounts that are not already loaded,
       // and either don't have geneisHash(open for all chains)
       // or their genesisHash matches with the current network
-      const newAccounts = extAccounts.filter(
-        (account) => {
-          return !loadedSet.has(account.address) &&
-          (!chainInfo?.genesisHash || !account.meta?.genesisHash ||
-            account.meta?.genesisHash === chainInfo?.genesisHash?.toHex());
-        }
-      );
+      const newAccounts = extAccounts.filter((account) => {
+        return (
+          !loadedSet.has(account.address) &&
+          (!chainInfo?.genesisHash ||
+            !account.meta?.genesisHash ||
+            account.meta?.genesisHash === chainInfo?.genesisHash?.toHex())
+        );
+      });
       console.log(newAccounts);
       for (const account of newAccounts) {
         const injectedAcct = {
           address: account.address,
           meta: {
             ...account.meta,
-            isInjected: true
+            isInjected: true,
           },
-          type: account.type
+          type: account.type,
         };
         const pair = keyring.keyring.addFromAddress(
           injectedAcct.address,

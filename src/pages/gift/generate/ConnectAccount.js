@@ -3,7 +3,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import CardButton from '../../../components/CardButton';
 import { GenerateContext } from './GenerateMain';
 import CardHeader from '../../../components/CardHeader';
-export default function ConnectAccount () {
+export default function ConnectAccount() {
   const { nextStep, setAccountSource } = useContext(GenerateContext);
 
   const optionSelectHandler = (accountSource) => {
@@ -18,7 +18,8 @@ export default function ConnectAccount () {
         <Col sm="6">
           <CardButton
             logo="extension"
-            onClick={() => optionSelectHandler('EXTENSION')}>
+            onClick={() => optionSelectHandler('EXTENSION')}
+          >
             Polkadot Extension
           </CardButton>
         </Col>
@@ -32,14 +33,16 @@ export default function ConnectAccount () {
         <Col sm="6" className="mb-3">
           <CardButton
             logo="ledger"
-            onClick={() => optionSelectHandler('HARDWALLET')}>
+            onClick={() => optionSelectHandler('HARDWALLET')}
+          >
             Ledger
           </CardButton>
         </Col>
         <Col sm="6" className="mb-3">
           <CardButton
             logo="signer"
-            onClick={() => optionSelectHandler('SIGNER')}>
+            onClick={() => optionSelectHandler('SIGNER')}
+          >
             Parity Signer
           </CardButton>
         </Col>

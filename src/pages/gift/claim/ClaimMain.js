@@ -18,7 +18,7 @@ const ClaimContext = createContext();
 const balanceDecimalPoints = 5;
 
 export { ClaimContext };
-export default function ClaimMain () {
+export default function ClaimMain() {
   const { keyring, apiState, api, chainInfo, giftTheme } = useSubstrate();
   const { claimGift } = giftProvider;
 
@@ -73,7 +73,7 @@ export default function ClaimMain () {
 
       // claim gift by the selected account
       const recipientAccount = {
-        pairOrAddress: address
+        pairOrAddress: address,
       };
 
       claimGift(api, interimAccount, recipientAccount)
@@ -121,7 +121,7 @@ export default function ClaimMain () {
 
   const accountOption = {
     NEW: NewAccountMain,
-    EXISTING: ExistingAccountMain
+    EXISTING: ExistingAccountMain,
   };
 
   if (step < 1 && address) {
@@ -134,22 +134,22 @@ export default function ClaimMain () {
   );
 
   // Step-1
-  const AccountOptionElement = accountOption[accountSource]
-    ? (
-        createElement(accountOption[accountSource], {
-          setAddressHandler,
-          prevStepHandler: () => {
-            prevStep();
-          }
-        })
-      )
-    : (
+  const AccountOptionElement = accountOption[accountSource] ? (
+    createElement(accountOption[accountSource], {
+      setAddressHandler,
+      prevStepHandler: () => {
+        prevStep();
+      },
+    })
+  ) : (
     <div>No account type is selected</div>
-      );
+  );
   steps.push(AccountOptionElement);
 
   // Step-2
-  steps.push(<VerifySecret claimGiftHandler={claimGiftHandler} />);
+  steps.push(
+    <VerifySecret claimGiftHandler={claimGiftHandler} processing={processing} />
+  );
 
   // Step-3
   steps.push(<Claimed accountAddress={address} amount={claimedAmount} />);
@@ -161,7 +161,7 @@ export default function ClaimMain () {
       value={{
         nextStep,
         prevStep,
-        jumpToStep
+        jumpToStep,
       }}
     >
       <Header selectedAccount={address} />
@@ -170,22 +170,28 @@ export default function ClaimMain () {
         <Row className="my-2 my-md-5 justify-content-center align-items-center">
           <Col className="my-md-3 d-flex justify-content-center align-items-center">
             {step === 0 &&
-              (giftTheme.network === 'Kusama'
-                ? (
+              (giftTheme.network === 'Kusama' ? (
                 <Card
-                  style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
+                  style={{
+                    width: 580,
+                    maxWidth: '100%',
+                    minHeight: 540,
+                  }}
                   className="shadow"
                 >
                   {currentStepComponent}
                 </Card>
-                  )
-                : (
+              ) : (
                 <div className="landingpage">{currentStepComponent}</div>
-                  ))}
+              ))}
 
             {step > 0 && (
               <Card
-                style={{ width: 580, maxWidth: '100%', minHeight: 540 }}
+                style={{
+                  width: 580,
+                  maxWidth: '100%',
+                  minHeight: 540,
+                }}
                 className="shadow"
               >
                 {currentStepComponent}

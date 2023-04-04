@@ -4,9 +4,9 @@ import CardHeader from '../../../../components/CardHeader';
 import { useSubstrate, utils } from '../../../../substrate-lib';
 import { Formik } from 'formik';
 
-export default function EnterAccountAddress ({
+export default function EnterAccountAddress({
   setAddressHandler,
-  prevStepHandler
+  prevStepHandler,
 }) {
   const { chainInfo, giftTheme } = useSubstrate();
 
@@ -28,7 +28,7 @@ export default function EnterAccountAddress ({
         />
         <Formik
           initialValues={{
-            address: ''
+            address: '',
           }}
           validate={validate}
           onSubmit={(values, actions) => {

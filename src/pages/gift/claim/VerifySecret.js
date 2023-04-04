@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import { stringHelpers } from '../../../utils';
 import analytics from '../../../analytics';
 
-export default function VerifySecret ({ claimGiftHandler }) {
+export default function VerifySecret({ claimGiftHandler, processing }) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
@@ -35,13 +35,13 @@ export default function VerifySecret ({ claimGiftHandler }) {
           cardText={[
             'Enter the ',
             <b>gift secret</b>,
-            ' you received to claim your gift.'
+            ' you received to claim your gift.',
           ]}
           backClickHandler={prevStep}
         />
         <Formik
           initialValues={{
-            redeemSecret: ''
+            redeemSecret: '',
           }}
           validate={validate}
           onSubmit={(values, actions) => {
@@ -88,7 +88,9 @@ export default function VerifySecret ({ claimGiftHandler }) {
                   <button
                     className="btn btn-primary"
                     disabled={
-                      props.touched.redeemSecret && !!props.errors.redeemSecret
+                      (props.touched.redeemSecret &&
+                        !!props.errors.redeemSecret) ||
+                      processing
                     }
                     onClick={() => {
                       if (!props.isSubmitting) {

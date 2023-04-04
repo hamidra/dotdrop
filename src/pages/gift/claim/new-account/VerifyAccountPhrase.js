@@ -13,10 +13,10 @@ const randomIdx = (length) => {
   return [random1, random2].sort((a, b) => a - b);
 };
 
-export default function VerifyAccountPhrase ({
+export default function VerifyAccountPhrase({
   mnemonicWords,
   nextStepHandler,
-  prevStepHandler
+  prevStepHandler,
 }) {
   const [randIdx, setRandIdx] = useState(randomIdx(mnemonicWords.length));
 
@@ -45,7 +45,7 @@ export default function VerifyAccountPhrase ({
       <Formik
         initialValues={{
           phrase1: '',
-          phrase2: ''
+          phrase2: '',
         }}
         validate={validate}
         onSubmit={(values, actions) => {

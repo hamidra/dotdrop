@@ -7,11 +7,12 @@ import { GenerateContext } from './GenerateMain';
 import config from '../../../config';
 import analytics from '../../../analytics';
 
-export default function ConfirmGift ({
+export default function ConfirmGift({
   account,
   giftInfo,
+  processing,
   generateGiftHandler,
-  giftFeeMultiplier
+  giftFeeMultiplier,
 }) {
   const { email, name, amount, secret, fee } = giftInfo || {};
 
@@ -21,7 +22,7 @@ export default function ConfirmGift ({
   const { prevStep } = useContext(GenerateContext);
 
   useEffect(() => {
-    async function fetchTxFee () {
+    async function fetchTxFee() {
       try {
         const address = account?.address;
         if (address && api) {
@@ -62,7 +63,7 @@ export default function ConfirmGift ({
           cardText={[
             'Please confirm the details below to generate the gift and write down the ',
             <b>gift secret</b>,
-            '.'
+            '.',
           ]}
           backClickHandler={() => prevStep()}
         />
@@ -114,7 +115,7 @@ export default function ConfirmGift ({
         <div className="d-flex justify-content-center mt-1">
           <button
             className="btn btn-primary"
-            disabled={!!checkedError}
+            disabled={!!checkedError || processing}
             onClick={() => {
               if (!checked) {
                 setCheckedError(checkedErrorMessage);
