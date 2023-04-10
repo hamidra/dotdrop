@@ -61,7 +61,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-promise": "^6.0.0",
-    "gh-pages": "^4.0.0",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.8.4",
     "react-app-rewired": "^2.1.8",
     "sass": "^1.61.0",
