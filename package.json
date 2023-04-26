@@ -46,7 +46,7 @@
     "react-is": "^18.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
