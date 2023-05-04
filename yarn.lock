@@ -1763,20 +1763,20 @@
     "@substrate/ss58-registry" "^1.40.0"
     tslib "^2.5.0"
 
-"@polkadot/react-identicon@^3.1.4":
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/@polkadot/react-identicon/-/react-identicon-3.1.4.tgz#5d103a7655894e2b53f2d78a37266681678f266d"
-  integrity sha512-afwXe8H3yfsQx9/0k2XZU5xOObr4dSzAtT2pvkyCHJxsEoh39kdTW1JyMAkTSj5AsYP5lSUHiX/T3NV/Dgf7Pg==
+"@polkadot/react-identicon@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/react-identicon/-/react-identicon-3.2.2.tgz#347cae637225f8f36be5a18feec163d0cc87ae34"
+  integrity sha512-3Dp3+ROHoAXsBL/8cLaCF75frW44IOe42rRGJhfz2B0E6h/InIKY8vdFOdWVWW4lqcB8Lq0PAUxCyImtj+K3KQ==
   dependencies:
-    "@polkadot/keyring" "^11.1.3"
-    "@polkadot/ui-settings" "3.1.4"
-    "@polkadot/ui-shared" "3.1.4"
-    "@polkadot/util" "^11.1.3"
-    "@polkadot/util-crypto" "^11.1.3"
+    "@polkadot/keyring" "^12.1.1"
+    "@polkadot/ui-settings" "3.2.2"
+    "@polkadot/ui-shared" "3.2.2"
+    "@polkadot/util" "^12.1.1"
+    "@polkadot/util-crypto" "^12.1.1"
     ethereum-blockies-base64 "^1.0.2"
     jdenticon "3.2.0"
     react-copy-to-clipboard "^5.1.0"
-    styled-components "^5.3.9"
+    styled-components "^5.3.10"
     tslib "^2.5.0"
 
 "@polkadot/react-qr@^3.1.4":
@@ -1933,10 +1933,10 @@
     store "^2.0.12"
     tslib "^2.5.0"
 
-"@polkadot/ui-shared@3.1.4":
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-3.1.4.tgz#218a137941cf2afefb1c1fe9fe33872850e12ee9"
-  integrity sha512-jDdeOWKIy2r5isYp24b/KXqGcmub5MJfPKJ5mnUGz2F1GPhBAz+NAOGcmfUZeI/a6g1dPtN4mjbmapfG7c+dyQ==
+"@polkadot/ui-shared@3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-3.2.2.tgz#ec3b72becccfb3a0bc2fd4b6c223a8cb478aa35f"
+  integrity sha512-i6FQ3v22lIcwMh1CmhLirNaVBATfhKO9r3J0nba4DOpUDzweboOzNJTqgSldsx4CblaMgrT57MW8BkBC+zctvA==
   dependencies:
     colord "^2.9.3"
     tslib "^2.5.0"
