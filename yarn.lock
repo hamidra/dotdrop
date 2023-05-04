@@ -1727,7 +1727,7 @@
     "@polkadot/util-crypto" "11.1.3"
     tslib "^2.5.0"
 
-"@polkadot/keyring@^12.0.1", "@polkadot/keyring@^12.1.1":
+"@polkadot/keyring@^12.1.1":
   version "12.1.1"
   resolved "https://registry.yarnpkg.com/@polkadot/keyring/-/keyring-12.1.1.tgz#ad6dd4120c2d3ce8e88b7918b1b82efe802111a5"
   integrity sha512-Sogua16f4bQCvfrG85CW3z5iATqjJtwYb4I51/4I0aX/Ok1yyqVPcxVKyi88LQxMyEHjZ+i6e0CvaSOuAtB72g==
@@ -1754,7 +1754,7 @@
     "@substrate/ss58-registry" "^1.40.0"
     tslib "^2.5.0"
 
-"@polkadot/networks@^12.0.1", "@polkadot/networks@^12.1.1", "@polkadot/networks@^12.1.2":
+"@polkadot/networks@^12.1.1", "@polkadot/networks@^12.1.2":
   version "12.1.2"
   resolved "https://registry.yarnpkg.com/@polkadot/networks/-/networks-12.1.2.tgz#4631ec701f87f6a1805faaf24f0199ca50f36716"
   integrity sha512-9gC5GYGFKXHY4oQaMfYvLLxGJ55slT3V8Zc6uk96KKysEvpSMDXdPUAKZJ3SXN9Iz3KaEa9x6RD5ZEf5j6BJ6g==
@@ -1897,17 +1897,17 @@
     rxjs "^7.8.1"
     tslib "^2.5.0"
 
-"@polkadot/ui-keyring@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-keyring/-/ui-keyring-3.2.1.tgz#43377889da7fcd961018d23ccfeabbbfa48dc737"
-  integrity sha512-1pvwzGTxXiqYsJxazvfNCHWelMKUIEAD8UX5xmPB2W4p0IHPe2AEaiV+OB76HiQwgsxq56y3vS7DC533CrnwWA==
+"@polkadot/ui-keyring@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-keyring/-/ui-keyring-3.2.2.tgz#69a1d04e6195e04cc7ca205e5d098bfbb992b508"
+  integrity sha512-E/4IzYziuU0f3xlw3F3zySch27PUmQ+UNnMp8Hy55Dc95QgQrACVAGFX1e+UaC4415DSRaklEnTzAySwFII1Qg==
   dependencies:
-    "@polkadot/keyring" "^12.0.1"
-    "@polkadot/ui-settings" "3.2.1"
-    "@polkadot/util" "^12.0.1"
-    "@polkadot/util-crypto" "^12.0.1"
+    "@polkadot/keyring" "^12.1.1"
+    "@polkadot/ui-settings" "3.2.2"
+    "@polkadot/util" "^12.1.1"
+    "@polkadot/util-crypto" "^12.1.1"
     mkdirp "^2.1.6"
-    rxjs "^7.8.0"
+    rxjs "^7.8.1"
     store "^2.0.12"
     tslib "^2.5.0"
 
@@ -1922,13 +1922,13 @@
     store "^2.0.12"
     tslib "^2.5.0"
 
-"@polkadot/ui-settings@3.2.1", "@polkadot/ui-settings@^3.1.4":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-settings/-/ui-settings-3.2.1.tgz#fd373f1d27ebe97619ffef9cc8b2fe8edc7f367a"
-  integrity sha512-RufWgGg0y9uBUyMD1ENF/sqwNK1yZhQ9iOo+g/k5gUJBJk7bm/qf1Bb4Zc73WBPNatzExNPwNHxqiWUUmohtmA==
+"@polkadot/ui-settings@3.2.2", "@polkadot/ui-settings@^3.1.4":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-settings/-/ui-settings-3.2.2.tgz#043bc2c86dc1ef5e3f71dd9e3c37e3b92c1752bc"
+  integrity sha512-JQGwcvEEYBoZ4MW1sE57alb3uv3Qjgq4NUNMJqVk3ImXyNwcRHDOdD39mJaGcnPHcQkQlI+4uugFTiIf+cwQfw==
   dependencies:
-    "@polkadot/networks" "^12.0.1"
-    "@polkadot/util" "^12.0.1"
+    "@polkadot/networks" "^12.1.1"
+    "@polkadot/util" "^12.1.1"
     eventemitter3 "^5.0.0"
     store "^2.0.12"
     tslib "^2.5.0"
@@ -9133,7 +9133,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-rxjs@^7.8.0, rxjs@^7.8.1:
+rxjs@^7.8.1:
   version "7.8.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
