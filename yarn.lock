@@ -1919,21 +1919,21 @@
     rxjs "^7.8.1"
     tslib "^2.5.3"
 
-"@polkadot/ui-keyring@^3.2.2":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-keyring/-/ui-keyring-3.2.2.tgz#69a1d04e6195e04cc7ca205e5d098bfbb992b508"
-  integrity sha512-E/4IzYziuU0f3xlw3F3zySch27PUmQ+UNnMp8Hy55Dc95QgQrACVAGFX1e+UaC4415DSRaklEnTzAySwFII1Qg==
+"@polkadot/ui-keyring@^3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-keyring/-/ui-keyring-3.5.1.tgz#4a838fe02c6b03953d025f9f13d3fedf5d1b8b80"
+  integrity sha512-qEt3vkqrHhn7MFbJuPIU/VRXq1+HrPg4vHiZiNJFJpPRB9HX56Ri8NVRBvX4xhmYNFiJ7dV3eSHu8cs0QokRAg==
   dependencies:
-    "@polkadot/keyring" "^12.1.1"
-    "@polkadot/ui-settings" "3.2.2"
-    "@polkadot/util" "^12.1.1"
-    "@polkadot/util-crypto" "^12.1.1"
-    mkdirp "^2.1.6"
+    "@polkadot/keyring" "^12.3.1"
+    "@polkadot/ui-settings" "3.5.1"
+    "@polkadot/util" "^12.3.1"
+    "@polkadot/util-crypto" "^12.3.1"
+    mkdirp "^3.0.1"
     rxjs "^7.8.1"
     store "^2.0.12"
-    tslib "^2.5.0"
+    tslib "^2.5.3"
 
-"@polkadot/ui-settings@3.2.2", "@polkadot/ui-settings@^3.1.4":
+"@polkadot/ui-settings@3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@polkadot/ui-settings/-/ui-settings-3.2.2.tgz#043bc2c86dc1ef5e3f71dd9e3c37e3b92c1752bc"
   integrity sha512-JQGwcvEEYBoZ4MW1sE57alb3uv3Qjgq4NUNMJqVk3ImXyNwcRHDOdD39mJaGcnPHcQkQlI+4uugFTiIf+cwQfw==
@@ -1943,6 +1943,17 @@
     eventemitter3 "^5.0.0"
     store "^2.0.12"
     tslib "^2.5.0"
+
+"@polkadot/ui-settings@3.5.1", "@polkadot/ui-settings@^3.1.4":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-settings/-/ui-settings-3.5.1.tgz#53aadb3bc1e8b79c7a7b3b219ab72cf0e37ca612"
+  integrity sha512-3Lhgr9bZZALUuJbpy2zlqRm1sA7YIYnVXGUo0p5YWqWsthGQRL8mR4WhxcAnR+fZumI5fW+nhjosm5SiGzvy/Q==
+  dependencies:
+    "@polkadot/networks" "^12.3.1"
+    "@polkadot/util" "^12.3.1"
+    eventemitter3 "^5.0.1"
+    store "^2.0.12"
+    tslib "^2.5.3"
 
 "@polkadot/ui-shared@3.2.2":
   version "3.2.2"
@@ -7371,10 +7382,10 @@ minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
-mkdirp@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-2.1.6.tgz#964fbcb12b2d8c5d6fbc62a963ac95a273e2cc19"
-  integrity sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==
+mkdirp@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-3.0.1.tgz#e44e4c5607fb279c168241713cc6e0fea9adcb50"
+  integrity sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==
 
 mkdirp@~0.5.1:
   version "0.5.6"
