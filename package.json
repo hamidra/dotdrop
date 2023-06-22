@@ -65,7 +65,7 @@
     "prettier": "^2.8.8",
     "react-app-rewired": "^2.1.8",
     "sass": "^1.62.1",
-    "semistandard": "^16.0.0",
+    "semistandard": "^17.0.0",
     "typescript": "^5.0.4"
   },
   "eslintConfig": {
