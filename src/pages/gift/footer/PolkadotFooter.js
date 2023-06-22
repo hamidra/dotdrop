@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function Footer ({ className }) {
+export default function Footer({ className }) {
   return (
     <footer
       className={`${className} footer d-flex flex-column flex-md-row px-4`}
@@ -8,6 +8,18 @@ export default function Footer ({ className }) {
       <div className="d-flex flex-column flex-sm-row">
         <div>
           © {new Date().getFullYear()} All rights reserved.
+          <span className="d-none d-sm-inline">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        </div>
+        <div>
+          <span>
+            <a
+              href="https://kusama.network/legal-disclosures/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Legal Disclosures
+            </a>
+          </span>
           <span className="d-none d-sm-inline">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
         </div>
         <div>

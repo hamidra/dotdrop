@@ -6,7 +6,11 @@ import { Formik } from 'formik';
 import { stringHelpers } from '../../../utils';
 import analytics from '../../../analytics';
 
-export default function VerifySecret ({ claimGiftHandler, accountSource }) {
+export default function VerifySecret({
+  claimGiftHandler,
+  accountSource,
+  processing,
+}) {
   const { prevStep } = useContext(ClaimContext);
   const redeemHandler = (redeemSecret) => {
     // ToDO: add better input validation to verify redeemSecret is not empty,
@@ -27,19 +31,20 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
   };
   let cardText = 'Enter the gift secret you received in your email.';
   if (accountSource === 'NEW') {
-    cardText += ' (This is not the seed phrase that you saved in the last step)';
+    cardText +=
+      ' (This is not the seed phrase that you saved in the last step)';
   }
   return (
     <>
       <Card.Body className="d-flex flex-column">
         <CardHeader
-          title='Claim Your NFT'
+          title="Claim Your NFT"
           cardText={cardText}
           backClickHandler={prevStep}
         />
         <Formik
           initialValues={{
-            redeemSecret: ''
+            redeemSecret: '',
           }}
           validate={validate}
           onSubmit={(values, actions) => {
@@ -86,7 +91,9 @@ export default function VerifySecret ({ claimGiftHandler, accountSource }) {
                   <button
                     className="btn btn-primary"
                     disabled={
-                      props.touched.redeemSecret && !!props.errors.redeemSecret
+                      (props.touched.redeemSecret &&
+                        !!props.errors.redeemSecret) ||
+                      processing
                     }
                     onClick={() => {
                       if (!props.isSubmitting) {

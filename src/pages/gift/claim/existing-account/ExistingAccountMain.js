@@ -4,16 +4,17 @@ import EnterAccountAddress from './EnterAccountAddress';
 import ConnectExtension from '../../accounts/ConnectExtension';
 import ConnectSigner from '../../accounts/ConnectSigner';
 
-export default function ExistingAccountMain ({
+export default function ExistingAccountMain({
   setAddressHandler,
-  prevStepHandler
+  prevStepHandler,
 }) {
   const [step, setStep] = useState(0);
 
   const [processing, setProcessing] = useState(false);
   const [processingError, setProcessingError] = useState(null);
   const [processingMsg, setProcessingMsg] = useState('');
-  const [existingAccountSource, setExistingAccountSource] = useState('EXTENSION');
+  const [existingAccountSource, setExistingAccountSource] =
+    useState('EXTENSION');
 
   const resetPresentation = () => {
     setProcessing(false);
@@ -41,22 +42,20 @@ export default function ExistingAccountMain ({
   const accountOption = {
     ENTER: EnterAccountAddress,
     EXTENSION: ConnectExtension,
-    SIGNER: ConnectSigner
+    SIGNER: ConnectSigner,
   };
 
   const steps = [];
 
   // add Step-0
-  const AccountOptionElement = accountOption[existingAccountSource]
-    ? (
-        createElement(accountOption[existingAccountSource], {
-          setAddressHandler,
-          prevStepHandler
-        })
-      )
-    : (
+  const AccountOptionElement = accountOption[existingAccountSource] ? (
+    createElement(accountOption[existingAccountSource], {
+      setAddressHandler,
+      prevStepHandler,
+    })
+  ) : (
     <div>No account type is selected</div>
-      );
+  );
   steps.push(AccountOptionElement);
 
   return <>{steps[step]}</>;

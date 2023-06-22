@@ -1,13 +1,13 @@
 const getClaimedUniquesAsset = async (api, classId, instanceId) => {
   const asset = {
     classId,
-    instanceId
+    instanceId,
   };
   try {
     if (classId && instanceId) {
       let [classMeta, instanceMeta] = await Promise.all([
         api.query.uniques.classMetadataOf(classId),
-        api.query.uniques.instanceMetadataOf(classId, instanceId)
+        api.query.uniques.instanceMetadataOf(classId, instanceId),
       ]);
 
       classMeta = classMeta?.unwrapOrDefault()?.toHuman();
@@ -33,7 +33,11 @@ export const getClaimedAssets = async (api, events) => {
       // parse claimed uniques
       const classId = event?.data[0]?.toString();
       const instanceId = event?.data[1]?.toString();
-      const claimedAsset = await getClaimedUniquesAsset(api, classId, instanceId);
+      const claimedAsset = await getClaimedUniquesAsset(
+        api,
+        classId,
+        instanceId
+      );
       claimedAsset && claimed.uniques.push(claimedAsset);
     }
   }

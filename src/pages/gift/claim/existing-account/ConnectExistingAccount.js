@@ -6,7 +6,7 @@ import { useSubstrate } from '../../../../substrate-lib';
 
 const ConnectExistingAccount = ({
   setExistingAccountSourceHandler,
-  prevStepHandler
+  prevStepHandler,
 }) => {
   const { giftTheme } = useSubstrate();
   return (
@@ -21,7 +21,8 @@ const ConnectExistingAccount = ({
           <Col className="mb-3">
             <CardButton
               logo="extension"
-              onClick={() => setExistingAccountSourceHandler('EXTENSION')}>
+              onClick={() => setExistingAccountSourceHandler('EXTENSION')}
+            >
               Polkadot Extension
             </CardButton>
           </Col>
@@ -30,7 +31,8 @@ const ConnectExistingAccount = ({
           <Col className="mb-3">
             <CardButton
               logo="signer"
-              onClick={() => setExistingAccountSourceHandler('SIGNER')}>
+              onClick={() => setExistingAccountSourceHandler('SIGNER')}
+            >
               Parity Signer
             </CardButton>
           </Col>
@@ -39,7 +41,8 @@ const ConnectExistingAccount = ({
         <Row className="justify-content-center pb-4">
           <button
             className="btn btn-link"
-            onClick={() => setExistingAccountSourceHandler('ENTER')}>
+            onClick={() => setExistingAccountSourceHandler('ENTER')}
+          >
             Enter Address Manually
           </button>
         </Row> */}

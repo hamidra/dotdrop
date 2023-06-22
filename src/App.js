@@ -7,7 +7,7 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
@@ -15,7 +15,7 @@ import GenerateMain from './pages/gift/generate/GenerateMain';
 import PrivacyPolicy from './pages/gift/policy/PrivacyPolicy';
 import GiftSecretScanner from './pages/gift/GiftSecretScanner';
 
-function Body () {
+function Body() {
   const { apiState, giftTheme } = useSubstrate();
 
   return (
@@ -70,7 +70,7 @@ function Body () {
   );
 }
 
-export default function App () {
+export default function App() {
   return (
     <SubstrateContextProvider>
       <Router>

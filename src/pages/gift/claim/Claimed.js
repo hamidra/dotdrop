@@ -6,7 +6,7 @@ import giftPolkadot from '../../../images/Gift_Polkadot.svg';
 import giftKusama from '../../../images/Gift_Kusama.svg';
 import { useSubstrate, utils } from '../../../substrate-lib';
 
-export default function Claimed ({ accountAddress, nft }) {
+export default function Claimed({ accountAddress, nft }) {
   const { giftTheme } = useSubstrate();
   const previewUrl = new URL(
     `${nft?.classId}/${nft?.instanceId}`,
@@ -18,21 +18,19 @@ export default function Claimed ({ accountAddress, nft }) {
       <Card.Body className="d-flex flex-column">
         <CardHeader title={'You did it!'} cardText={cardText} />
         <Col className="pt-4 d-flex justify-content-center align-items-center">
-          {nft?.image
-            ? (
+          {nft?.image ? (
             <Image
               style={{ height: 300 }}
               className="nft"
               loading="lazy"
               src={nft.image}
             />
-              )
-            : (
+          ) : (
             <Image
               style={{ width: 256 }}
               src={giftTheme.network === 'Polkadot' ? giftPolkadot : giftKusama}
             />
-              )}
+          )}
         </Col>
         <div className="flex-grow-1" />
         <Col className="pt-5 d-flex justify-content-center align-items-center">

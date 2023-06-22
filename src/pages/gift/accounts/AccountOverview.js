@@ -68,7 +68,7 @@ const WalletInfoField = ({ title, subtitle, ...props }) => {
     </a>
   );
 };
-export default function AccountOverview () {
+export default function AccountOverview() {
   const { api, apiState, chainInfo, giftTheme } = useSubstrate();
   const [balance, setBalance] = useState(null);
 
@@ -102,7 +102,11 @@ export default function AccountOverview () {
         <Row className="p-3 py-sm-5">
           <Col className="d-flex justify-content-center">
             <Card
-              style={{ width: 920, maxWidth: '100%', minHeight: 450 }}
+              style={{
+                width: 920,
+                maxWidth: '100%',
+                minHeight: 450,
+              }}
               className="shadow mb-5 m-sm-0"
             >
               <Card.Header
@@ -162,7 +166,11 @@ export default function AccountOverview () {
                       }
                     />
                     <div className="mt-4">
-                      <a href={`https://polkascan.io/kusama/account/${accountAddress}`} target="_blank" rel="noreferrer">
+                      <a
+                        href={`https://polkascan.io/kusama/account/${accountAddress}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         {'→ See account on Polkascan'}
                       </a>
                     </div>
@@ -171,8 +179,14 @@ export default function AccountOverview () {
                     className="mx-2 d-none d-sm-flex"
                     style={
                       giftTheme.network === 'Kusama'
-                        ? { backgroundColor: '#333', width: '1px' }
-                        : { backgroundColor: '#D5DBE0', width: '1px' }
+                        ? {
+                            backgroundColor: '#333',
+                            width: '1px',
+                          }
+                        : {
+                            backgroundColor: '#D5DBE0',
+                            width: '1px',
+                          }
                     }
                   />
                   <Col className="d-flex flex-column mx-2 align-items-start justify-content-center">
