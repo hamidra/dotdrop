@@ -13,7 +13,7 @@ export default function Footer({ className }) {
         <div>
           <span>
             <a
-              href="https://kusama.network/legal-disclosures/"
+              href="https://polkadot.network/legal-disclosures/"
               rel="noreferrer"
               target="_blank"
             >
