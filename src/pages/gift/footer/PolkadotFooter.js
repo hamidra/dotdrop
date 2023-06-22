@@ -12,6 +12,18 @@ export default function Footer({ className }) {
         </div>
         <div>
           <span>
+            <a
+              href="https://kusama.network/legal-disclosures/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Legal Disclosures
+            </a>
+          </span>
+          <span className="d-none d-sm-inline">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+        </div>
+        <div>
+          <span>
             <Link to="/privacy-policy">Privacy Policy</Link>
           </span>
         </div>
