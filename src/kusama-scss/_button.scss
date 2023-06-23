@@ -1,10 +1,33 @@
 .btn {
-  font-family: 'Space Grotesk', sans-serif !important;
-  font-weight: $font-weight-light;
-  border-radius: 0;
+  font-weight: 500;
+  border-radius: 1.5rem;
   font-size: 16px;
-  padding: 0.5rem 1.5rem;
-  border-width: 2px;
+  padding: 8px 16px;
+
+  &:before {
+    width: 42px;
+    left: -42px;
+    border-radius: 1.5rem;
+  }
+}
+
+.btn-lg,
+.btn-group-lg > .btn {
+  border-radius: 2rem;
+  padding: 16px 20px;
+
+  &:before {
+    width: 58px;
+    left: -58px;
+    border-radius: 2rem;
+  }
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  border-radius: 1.5rem;
+  font-size: 16px;
+  padding: 8px 16px;
 
   &:before {
     width: 42px;
@@ -14,52 +37,177 @@
 }
 
 .btn-primary {
-  color: $primary;
+  color: $white;
   background-color: transparent;
-  border-color: $primary;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 0;
+  transition: all 0.2s ease-in-out;
+  will-change: transform;
+  border: 1px solid $white;
+
+  &.btn-filled {
+    background-color: $white;
+    border-width: 0;
+    border-color: transparent;
+    color: $black;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
+
+  &:before {
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: $primary;
+    transition: all 0.2s ease-in-out;
+    will-change: transform;
+    color: transparent;
+    z-index: -1;
+  }
 
   &:hover,
   &:focus,
   &:active {
-    background: none;
-    color: $cyan;
-    border-color: $cyan;
-  }
-
-  &:not(:disabled):not(.disabled):active,
-  &:not(:disabled):not(.disabled).active {
-    background: none;
-    color: $cyan;
-    border-color: $cyan;
-    box-shadow: none !important;
-  }
-
-  &.disabled,
-  &:disabled {
-    color: $primary;
-    background-color: transparent;
+    background: $primary;
     border-color: $primary;
+    color: $white !important;
+    will-change: transform;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0.2rem 0.2rem rgba(black, 0.1);
+  }
+
+  &:not(:disabled):not(.disabled):active {
+    background-color: transparent;
+  }
+
+  &[type='submit']:hover,
+  &[type='submit']:focus,
+  &[type='submit']:active {
+    background: $primary;
+    color: $white;
+  }
+
+  &:hover:before,
+  &:focus:before,
+  &:active:before {
+    left: 0;
+    width: 100%;
+  }
+
+  &:disabled {
+    background: $white !important;
+    color: $secondary !important;
+    opacity: 0.5 !important;
+    pointer-events: none;
   }
 }
 
-.show > .btn-primary.dropdown-toggle {
+.notification .btn-primary,
+.btn-primary.btn-white {
+  color: $white !important;
+  border-color: $white;
+  border: solid 1px $white;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: $white;
+    color: $primary !important;
+  }
+
+  &:before {
+    content: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: white;
+    transition: all 0.2s ease;
+    will-change: transform;
+    color: transparent;
+    z-index: -1;
+    border: solid 1px $white;
+  }
+}
+
+.btn-white {
+  color: $white !important;
+}
+
+.btn-lng-choice {
   background: none;
-  color: $cyan;
-  border-color: $cyan;
-  box-shadow: none !important;
+
+  span {
+    color: $black;
+  }
+
+  &:focus,
+  &:active {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  &:after {
+    opacity: 0.4;
+    transition: opacity 0.2s ease-in-out;
+
+    @media (min-width: 992px) {
+      opacity: 0;
+    }
+  }
+
+  &:hover:after {
+    opacity: 0.4;
+  }
 }
 
 .btn-link {
   color: $primary;
   background-color: transparent;
   position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.2s ease, border 1ms ease;
+  will-change: transform;
+
+  &:before {
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: $primary;
+    transition: all 0.2s ease;
+    will-change: transform;
+    color: transparent;
+    z-index: -1;
+  }
 
   &:hover,
   &:focus,
   &:active {
-    background: none;
+    background: $primary;
     text-decoration: none;
-    color: $cyan;
+    color: $white;
+    will-change: transform;
+  }
+
+  &:hover:before,
+  &:focus:before,
+  &:active:before {
+    left: 0;
+    width: 100%;
+  }
+
+  &:disabled {
+    opacity: 0.5 !important;
+    pointer-events: none;
   }
 }
 
@@ -70,32 +218,44 @@
   width: 100%;
   padding: 0.75rem;
   text-align: left;
-  background-color: transparent;
-  color: $secondary;
-  border: 2px solid $gray-800;
-  border-radius: 0;
+  background-color: $white;
+  border: 1px solid $gray-300;
+  border-radius: 0.5rem;
 
   &:hover {
-    border: 2px solid $secondary;
-    color: $secondary !important;
-
-    svg {
-      color: $secondary !important;
-    }
-  }
-
-  svg {
-    color: $secondary-darker !important;
+    box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
   }
 }
 
 .card-link {
-  h5 {
-    font-size: 1rem;
-  }
+  color: $black;
 
   &:hover {
+    color: $black;
+    cursor: pointer;
+  }
+
+  .icon {
+    background-color: $gray-200;
     color: $secondary;
+    margin-right: 0.5rem;
+  }
+
+  .caret {
+    color: $gray-600;
+  }
+
+  .subtitle {
+    color: $secondary;
+    line-height: 1.2;
+  }
+}
+
+.navbar {
+  .btn-lng-choice {
+    @media (max-width: 991px) {
+      margin-right: -1rem;
+    }
   }
 }
 
@@ -103,4 +263,38 @@
   position: absolute;
   top: 1.5rem;
   opacity: 0;
+}
+
+.card-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  background-color: $white !important;
+  border-radius: 8px !important;
+  border-color: #d5dbe0 !important;
+  color: #1e1e1e !important;
+  padding: 0.75rem !important;
+  text-align: left !important;
+}
+
+.card-button:hover {
+  background-color: #f9fafb !important;
+  box-shadow: 0 0.25rem 0.5rem rgba(#000, 0.1);
+}
+
+.text-button {
+  padding: 0.75rem !important;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  color: #c40061 !important;
+}
+
+.link-button:hover {
+  color: #c40061 !important;
+}
+
+.link-button:focus {
+  box-shadow: none !important;
 }

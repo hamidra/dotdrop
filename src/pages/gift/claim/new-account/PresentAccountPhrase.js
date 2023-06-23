@@ -76,7 +76,7 @@ export default function PresentAccountPhrase({
               <span>{'Hide secret words'}</span>
             </div>
             <div
-              className={`phrase-toggle text-center p-2 ${
+              className={`phrase-toggle text-button p-2 ${
                 blurred ? 'd-flex' : 'd-none'
               }`}
             >

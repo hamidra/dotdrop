@@ -1,8 +1,9 @@
 .form-control {
   background-color: transparent;
   border-color: $gray-800;
-  border-radius: 0;
+  border-radius: 0.5rem;
   color: $secondary;
+  height: 3rem;
 
   &:focus {
     background-color: transparent;
@@ -22,7 +23,7 @@ form .balance-text {
 }
 
 .form-check-label {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: $secondary;
 }
 
@@ -56,6 +57,7 @@ input[type='checkbox'] + label:before {
   width: 1rem;
   height: 1rem;
   margin-right: 0.5rem;
+  margin-top: 3px;
   color: transparent;
 
   &:hover {

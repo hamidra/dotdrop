@@ -11,13 +11,18 @@
 }
 
 .card {
-  background-color: #000;
-  border: 2px solid $primary;
-  border-radius: 0;
+  background-color: rgba(#000,0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid #222;
+  border-radius: 1rem;
 }
 
 .card-body {
   padding: 2rem;
+  
+  @media (min-width: 576px) {
+    padding: 2rem 3rem;
+  }
 }
 
 .card-footer {

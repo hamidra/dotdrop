@@ -1,7 +1,8 @@
+@import url(/src/fonts/unbounded/font-face.css);
+@import url(/src/fonts/inter/font-face.css);
 @import url(/src/fonts/spacemono/font-face.css);
-@import url(/src/fonts/spacegrotesk/font-face.css);
 
-$font-body: 'Space Mono', sans-serif !important;
+$font-body: 'Inter', sans-serif !important;
 $font-weight-light: 300;
 $font-weight-regular: 400;
 $font-weight-bold: 700;
@@ -9,6 +10,7 @@ $font-weight-bold: 700;
 body {
   font-family: $font-body;
   color: $gray;
+  font-size: 1.125rem;
 }
 
 h1,
@@ -23,19 +25,19 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Space Grotesk', sans-serif !important;
+  font-family: 'Unbounded', sans-serif !important;
   font-weight: $font-weight-bold;
   letter-spacing: -0.04em;
 }
 
 .card-header-title {
-  font-family: 'Space Grotesk', sans-serif !important;
+  font-family: 'Unbounded', sans-serif !important;
   font-weight: $font-weight-bold;
   font-size: 1.75rem;
   color: $secondary-lighter;
 
   @media (min-width: 576px) {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 }
 
@@ -55,7 +57,24 @@ a {
   color: $primary;
 
   &:hover {
-    color: $cyan;
+    color: $primary;
     text-decoration: none;
+  }
+}
+
+.text-sideline {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: "Space Mono", monospace !important;
+  font-size: 0.875rem;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #333;
   }
 }
