@@ -1,10 +1,14 @@
 .seedphrase {
-  background-color: #202020;
+  background-color: rgba(#ddd, 0.1);
+  backdrop-filter: blur(10px);
   padding: 8px;
+  border-radius: 0.5rem;
+  font-family: "Space Mono", monospace !important;
 }
 
 .seedphrase-item-nr {
-  width: 32px;
+  width: 36px;
+  white-space: nowrap;
 }
 
 .blurred {
