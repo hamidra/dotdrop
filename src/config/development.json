@@ -1,5 +1,5 @@
 {
-  "PROVIDER_SOCKET": "ws://127.0.0.1:9944",
+  "PROVIDER_SOCKET": "wss://westend-asset-hub-rpc.polkadot.io",
   "DEVELOPMENT_KEYRING": true,
   "CLAIM_URL": "http://localhost:3000/dotdrop/#/claim"
 }

@@ -103,10 +103,18 @@
   }
 
   &:disabled {
-    background: $white !important;
+    background: transparent !important;
+    border-color: $secondary !important;
     color: $secondary !important;
-    opacity: 0.5 !important;
-    pointer-events: none;
+    opacity: 0.22 !important;
+    // pointer-events: none;
+    cursor: not-allowed !important;
+    position: relative;
+    z-index: 10;
+
+    &:before {
+      display: none;
+    }
   }
 }
 
