@@ -65,9 +65,9 @@ export default function Header({ selectedAccount }) {
                   style={{
                     minWidth: '5rem',
                     fontWeight: '400',
-                    height: '42px',
+                    height: '40px',
                   }}
-                  className="account-box align-items-center text-center d-flex bg-transparent balance-text"
+                  className="account-box align-items-center text-center d-flex balance-text"
                 >
                   <AccountInfoBox accountAddress={selectedAccount} />
                 </div>
