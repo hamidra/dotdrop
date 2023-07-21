@@ -1,9 +1,7 @@
 import React, { useReducer, useContext, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import jsonrpc from '@polkadot/types/interfaces/jsonrpc';
 import queryString from 'query-string';
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
 import keyring from '@polkadot/ui-keyring';
 import config from '../config';
 import BN from 'bn.js';
@@ -247,12 +245,6 @@ const SubstrateContextProvider = (props) => {
       {props.children}
     </SubstrateContext.Provider>
   );
-};
-
-// prop typechecking
-SubstrateContextProvider.propTypes = {
-  socket: PropTypes.string,
-  types: PropTypes.object,
 };
 
 const useSubstrate = () => ({ ...useContext(SubstrateContext) });
