@@ -5,9 +5,9 @@ import AccountOverview from './pages/gift/accounts/AccountOverview';
 import ExtensionOnboarding from './pages/gift/accounts/ExtensionOnboarding';
 import {
   HashRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Redirect,
+  Navigate,
 } from 'react-router-dom';
 import AboutMain from './pages/gift/about/AboutMain';
 import ClaimMain from './pages/gift/claim/ClaimMain';
@@ -21,52 +21,71 @@ function Body() {
 
   return (
     <>
-      <Switch>
-        <Route path={'/about'}>
-          <AboutMain />
-        </Route>
-        <Route path={'/claim'}>
-          <ClaimMain />
-          <Processing
-            show={apiState !== 'READY'}
-            message={`Connecting to ${giftTheme.network}...`}
-          />
-        </Route>
-        <Route path={'/generate'}>
-          <GenerateMain />
-          <Processing
-            show={apiState !== 'READY'}
-            message={`Connecting to ${giftTheme.network}...`}
-          />
-        </Route>
-        <Route path={'/account/:accountAddress'}>
-          <AccountOverview />
-          <Processing
-            show={apiState !== 'READY'}
-            message={`Connecting to ${giftTheme.network}...`}
-          />
-        </Route>
-        <Route path={'/giftScanner'}>
-          <GiftSecretScanner />
-          <Processing
-            show={apiState !== 'READY'}
-            message={`Connecting to ${giftTheme.network}...`}
-          />
-        </Route>
-        <Route path={'/extension/:accountAddress'}>
-          <ExtensionOnboarding />
-          <Processing
-            show={apiState !== 'READY'}
-            message={`Connecting to ${giftTheme.network}...`}
-          />
-        </Route>
-        <Route path={'/privacy-policy'}>
-          <PrivacyPolicy />
-        </Route>
-        <Route path={'/'}>
-          <Redirect to={'/generate'} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path={'/about'} element={<AboutMain />} />
+        <Route
+          path={'/claim'}
+          element={
+            <>
+              <ClaimMain />
+              <Processing
+                show={apiState !== 'READY'}
+                message={`Connecting to ${giftTheme.network}...`}
+              />
+            </>
+          }
+        />
+        <Route
+          path={'/generate'}
+          element={
+            <>
+              <GenerateMain />
+              <Processing
+                show={apiState !== 'READY'}
+                message={`Connecting to ${giftTheme.network}...`}
+              />
+            </>
+          }
+        />
+        <Route
+          path={'/account/:accountAddress'}
+          element={
+            <>
+              <AccountOverview />
+              <Processing
+                show={apiState !== 'READY'}
+                message={`Connecting to ${giftTheme.network}...`}
+              />
+            </>
+          }
+        />
+        <Route
+          path={'/giftScanner'}
+          element={
+            <>
+              <GiftSecretScanner />
+              <Processing
+                show={apiState !== 'READY'}
+                message={`Connecting to ${giftTheme.network}...`}
+              />
+            </>
+          }
+        />
+        <Route
+          path={'/extension/:accountAddress'}
+          element={
+            <>
+              <ExtensionOnboarding />
+              <Processing
+                show={apiState !== 'READY'}
+                message={`Connecting to ${giftTheme.network}...`}
+              />
+            </>
+          }
+        />
+        <Route path={'/privacy-policy'} element={<PrivacyPolicy />} />
+        <Route path={'/'} element={<Navigate to={'/generate'} replace />} />
+      </Routes>
     </>
   );
 }

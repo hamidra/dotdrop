@@ -2,12 +2,12 @@ import { Row, Col, Card, Image } from 'react-bootstrap';
 import CardHeader from '../../../components/CardHeader';
 import giftPolkadot from '../../../images/Gift_Polkadot.svg';
 import giftKusama from '../../../images/Gift_Kusama.svg';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSubstrate, utils } from '../../../substrate-lib';
 import { isWeb3Injected } from '@polkadot/extension-dapp';
 
 export default function Claimed({ amount, accountAddress }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { giftTheme, chainInfo } = useSubstrate();
   const amountStr = utils.formatBalance(amount, chainInfo?.token);
   return (
@@ -36,14 +36,14 @@ export default function Claimed({ amount, accountAddress }) {
           {isWeb3Injected ? (
             <button
               className="btn btn-primary"
-              onClick={() => history.push(`/account/${accountAddress}`)}
+              onClick={() => navigate(`/account/${accountAddress}`)}
             >
               {'See Account'}
             </button>
           ) : (
             <button
               className="btn btn-primary"
-              onClick={() => history.push(`/extension/${accountAddress}`)}
+              onClick={() => navigate(`/extension/${accountAddress}`)}
             >
               {`Set up a ${giftTheme.network} wallet`}
             </button>
