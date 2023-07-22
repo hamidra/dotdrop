@@ -25,6 +25,7 @@ const AccountInfoBox = ({ accountAddress }) => {
 };
 export default function Header({ selectedAccount }) {
   const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   return (
     <>
