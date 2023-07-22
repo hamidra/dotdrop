@@ -1,4 +1,4 @@
-import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
+import { Dropdown, Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
@@ -11,18 +11,18 @@ import { useSubstrate } from '../../../substrate-lib';
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
   return (
-    <Media className="d-flex align-items-center">
-      <div className="mr-1">
+    <div className="d-flex align-items-center">
+      <div className="flex-shrink-0 mr-1">
         <Identicon value={accountAddress} size={20} theme="polkadot" />
       </div>
-      <Media.Body>
+      <div className="flex-grow-1">
         <Row>
           <Col>
             <div className="text-left">{addressStr}</div>
           </Col>
         </Row>
-      </Media.Body>
-    </Media>
+      </div>
+    </div>
   );
 };
 export default function Header({ selectedAccount }) {

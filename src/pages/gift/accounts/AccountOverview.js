@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Card, Row, Col, Spinner, Media, Container } from 'react-bootstrap';
+import { Card, Row, Col, Spinner, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
@@ -50,19 +50,21 @@ const WalletInfoField = ({ title, subtitle, ...props }) => {
       target="blank"
       rel="noopener noreferrer"
     >
-      <Media style={{ alignItems: 'center' }} {...props}>
-        <img
-          width={48}
-          height={48}
-          className="mr-3 rounded"
-          src={logo}
-          alt={title}
-        />
-        <Media.Body className="flex-shrink-0">
+      <div className="d-flex" style={{ alignItems: 'center' }} {...props}>
+        <div className="flex-shrink-0">
+          <img
+            width={48}
+            height={48}
+            className="mr-3 rounded"
+            src={logo}
+            alt={title}
+          />
+        </div>
+        <div className="flex-grow-1 ml-2">
           <h5 style={{ marginBottom: '0.25rem' }}>{title}</h5>
           <div class="text-secondary">{subtitle}</div>
-        </Media.Body>
-      </Media>
+        </div>
+      </div>
       <div className="d-flex flex-grow-1" />
       <CaretRight className="caret flex-shrink-0" size={14} weight="bold" />
     </a>
@@ -83,7 +85,7 @@ export default function AccountOverview() {
         .account(accountAddress, ({ nonce, data: balance }) => {
           setBalance(balance);
           console.log(
-            `free balance is ${balance?.free} with ${balance?.miscFrozen} frozen and ${balance?.reserved} reserved and a nonce of ${nonce}`
+            `free balance is ${balance?.free} with ${balance?.miscFrozen} frozen and ${balance?.reserved} reserved and a nonce of ${nonce}`,
           );
         })
         .then((result) => {
@@ -126,7 +128,7 @@ export default function AccountOverview() {
                         accountAddress &&
                         utils.validateAddress(
                           accountAddress,
-                          chainInfo?.ss58Format
+                          chainInfo?.ss58Format,
                         )
                           ? stringHelpers.truncateMiddle(accountAddress, 5)
                           : 'Not a valid Account'
@@ -139,7 +141,7 @@ export default function AccountOverview() {
                         `${utils.fromChainUnit(
                           utils.getUsableBalances(balance),
                           chainInfo?.decimals,
-                          balanceDecimalPoints
+                          balanceDecimalPoints,
                         )} ${chainInfo?.token}`
                       }
                     />
@@ -150,7 +152,7 @@ export default function AccountOverview() {
                         `${utils.fromChainUnit(
                           balance?.miscFrozen,
                           chainInfo?.decimals,
-                          balanceDecimalPoints
+                          balanceDecimalPoints,
                         )} ${chainInfo?.token}`
                       }
                     />
@@ -161,7 +163,7 @@ export default function AccountOverview() {
                         `${utils.fromChainUnit(
                           balance.reserved,
                           chainInfo?.decimals,
-                          balanceDecimalPoints
+                          balanceDecimalPoints,
                         )} ${chainInfo?.token}`
                       }
                     />

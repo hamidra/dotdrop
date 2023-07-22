@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Row, Col, Card, Container, Media } from 'react-bootstrap';
+import { Row, Col, Card, Container } from 'react-bootstrap';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import { useSubstrate, utils } from '../../../substrate-lib';
@@ -25,7 +25,7 @@ const ExtensionOnboarding = () => {
         .account(accountAddress, ({ nonce, data: balance }) => {
           setBalance(balance);
           console.log(
-            `free balance is ${balance.free} with ${balance.reserved} reserved and a nonce of ${nonce}`
+            `free balance is ${balance.free} with ${balance.reserved} reserved and a nonce of ${nonce}`,
           );
         })
         .then((result) => {
@@ -64,7 +64,7 @@ const ExtensionOnboarding = () => {
                         accountAddress &&
                         utils.validateAddress(
                           accountAddress,
-                          chainInfo?.ss58Format
+                          chainInfo?.ss58Format,
                         )
                           ? stringHelpers.truncateMiddle(accountAddress, 5)
                           : 'Not a valid Account'
@@ -72,7 +72,7 @@ const ExtensionOnboarding = () => {
                     </strong>
                     <ArrowBendDownRight id="arrowbenddownright" size={48} />
                   </div>
-                  <Media className="pt-5">
+                  <div className="pt-5">
                     <img
                       width={64}
                       height={64}
@@ -80,7 +80,7 @@ const ExtensionOnboarding = () => {
                       src={extensionLogo}
                       alt={'Polkadot Extension'}
                     />
-                  </Media>
+                  </div>
                 </Row>
                 <Row>
                   <Col className="d-flex justify-content-center text-secondary">
@@ -89,7 +89,7 @@ const ExtensionOnboarding = () => {
                       utils.fromChainUnit(
                         balance.free,
                         chainInfo?.decimals,
-                        2
+                        2,
                       ) + ` ${chainInfo.token}`}
                   </Col>
                 </Row>
@@ -103,7 +103,7 @@ const ExtensionOnboarding = () => {
                         e.preventDefault();
                         window.open(
                           'https://polkadot.js.org/extension/',
-                          '_blank'
+                          '_blank',
                         );
                       }}
                       type="button"
