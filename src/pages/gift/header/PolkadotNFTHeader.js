@@ -1,5 +1,5 @@
 import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { Bird, DotsThree, Gift } from 'phosphor-react';
@@ -24,8 +24,6 @@ const AccountInfoBox = ({ accountAddress }) => {
   );
 };
 export default function Header({ selectedAccount }) {
-  const history = useHistory();
-  const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
 
   return (

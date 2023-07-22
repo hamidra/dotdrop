@@ -1,5 +1,5 @@
 import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { Bird, DotsThree, Gift } from 'phosphor-react';
@@ -26,7 +26,7 @@ const AccountInfoBox = ({ accountAddress }) => {
   );
 };
 export default function Header({ selectedAccount }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
   const { theme } = useSubstrate();
@@ -58,7 +58,7 @@ export default function Header({ selectedAccount }) {
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
-                onClick={() => history.push('/claim')}
+                onClick={() => navigate('/claim')}
               >
                 Claim
               </Nav.Link>
@@ -66,7 +66,7 @@ export default function Header({ selectedAccount }) {
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/generate' && 'active'}
-                onClick={() => history.push('/generate')}
+                onClick={() => navigate('/generate')}
               >
                 New Gift
               </Nav.Link>
@@ -105,7 +105,7 @@ export default function Header({ selectedAccount }) {
             >
               <Dropdown.Item
                 className="px-3"
-                onClick={() => history.push('/about')}
+                onClick={() => navigate('/about')}
               >
                 <Gift className="mr-2" size={18} />
                 About Gifts
