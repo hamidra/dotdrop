@@ -1,4 +1,4 @@
-import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
+import { Dropdown, Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
@@ -10,24 +10,22 @@ import KusamaIcon from '../../../images/kusama_icon.png';
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
   return (
-    <Media className="d-flex align-items-center">
-      <Identicon
-        className="mr-1"
-        value={accountAddress}
-        size={20}
-        theme="kusama"
-      />
-      <Media.Body>
+    <div className="d-flex align-items-center">
+      <div className="flex-shrink-0 mr-1">
+        <Identicon value={accountAddress} size={20} theme="kusama" />
+      </div>
+      <div className="flex-grow-1">
         <Row>
           <Col>
             <div className="text-left">{addressStr}</div>
           </Col>
         </Row>
-      </Media.Body>
-    </Media>
+      </div>
+    </div>
   );
 };
 export default function Header({ selectedAccount }) {
+  const navigate = useNavigate();
   const navigate = useNavigate();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
@@ -67,6 +65,7 @@ export default function Header({ selectedAccount }) {
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
                 onClick={() => navigate('/claim')}
+                onClick={() => navigate('/claim')}
               >
                 Claim
               </Nav.Link>
@@ -74,6 +73,7 @@ export default function Header({ selectedAccount }) {
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/generate' && 'active'}
+                onClick={() => navigate('/generate')}
                 onClick={() => navigate('/generate')}
               >
                 New Gift
@@ -114,6 +114,7 @@ export default function Header({ selectedAccount }) {
             >
               <Dropdown.Item
                 className="px-3"
+                onClick={() => navigate('/about')}
                 onClick={() => navigate('/about')}
               >
                 <ImageSquare className="mr-2" size={18} />
