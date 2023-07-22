@@ -50,7 +50,6 @@ function Body() {
           path={'/account/:accountAddress'}
           element={
             <>
-              {' '}
               <AccountOverview />
               <Processing
                 show={apiState !== 'READY'}
