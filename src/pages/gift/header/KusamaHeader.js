@@ -26,7 +26,6 @@ const AccountInfoBox = ({ accountAddress }) => {
 };
 export default function Header({ selectedAccount }) {
   const navigate = useNavigate();
-  const navigate = useNavigate();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
   return (
@@ -65,7 +64,6 @@ export default function Header({ selectedAccount }) {
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
                 onClick={() => navigate('/claim')}
-                onClick={() => navigate('/claim')}
               >
                 Claim
               </Nav.Link>
@@ -73,7 +71,6 @@ export default function Header({ selectedAccount }) {
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/generate' && 'active'}
-                onClick={() => navigate('/generate')}
                 onClick={() => navigate('/generate')}
               >
                 New Gift
@@ -114,7 +111,6 @@ export default function Header({ selectedAccount }) {
             >
               <Dropdown.Item
                 className="px-3"
-                onClick={() => navigate('/about')}
                 onClick={() => navigate('/about')}
               >
                 <ImageSquare className="mr-2" size={18} />
