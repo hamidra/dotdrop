@@ -1,51 +1,56 @@
-import { Dropdown, Nav, Navbar, Media, Row, Col } from 'react-bootstrap';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Dropdown, Nav, Navbar, Row, Col } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { stringHelpers } from '../../../utils';
 import Identicon from '@polkadot/react-identicon';
-import { Bird, DotsThree, Gift } from 'phosphor-react';
-import PolkadotCircle from '../../../images/polkadot-circle-new.svg';
-import WestendLogo from '../../../images/westend.svg';
+import { Circle, DotsThree, ImageSquare } from 'phosphor-react';
 import config from '../../../config';
-import { useSubstrate } from '../../../substrate-lib';
+import KusamaLogo from '../../../images/kusama_logo.png';
+import KusamaIcon from '../../../images/kusama_icon.png';
 
 const AccountInfoBox = ({ accountAddress }) => {
   const addressStr = stringHelpers.truncateMiddle(accountAddress, 5);
   return (
-    <Media className="d-flex align-items-center">
-      <div className="mr-1">
-        <Identicon value={accountAddress} size={20} theme="polkadot" />
+    <div className="d-flex align-items-center">
+      <div className="flex-shrink-0 mr-1">
+        <Identicon value={accountAddress} size={20} theme="kusama" />
       </div>
-      <Media.Body>
+      <div className="flex-grow-1">
         <Row>
           <Col>
             <div className="text-left">{addressStr}</div>
           </Col>
         </Row>
-      </Media.Body>
-    </Media>
+      </div>
+    </div>
   );
 };
 export default function Header({ selectedAccount }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const alternativeApp = config.ALTERNATIVE_APP_URL;
-  const { theme } = useSubstrate();
   return (
     <>
       <Navbar
-        className="px-4 py-3"
+        className="px-3 px-sm-4 py-3"
         style={{
           display: 'grid',
-          gridTemplateColumns: '60px 1fr 60px',
+          gridTemplateColumns: '100px 1fr 100px',
         }}
         variant="dark"
       >
         <Navbar.Brand>
           <a href="/" rel="noopener noreferrer">
             <img
-              className="shadow-sm rounded-circle p-1 logo"
-              src={theme == 'westend' ? WestendLogo : PolkadotCircle}
-              alt={'Polkadot'}
+              width={120}
+              className="p-1 d-none d-sm-inline-block"
+              src={KusamaLogo}
+              alt={'Kusama'}
+            />
+            <img
+              width={42}
+              className="p-1 d-sm-none"
+              src={KusamaIcon}
+              alt={'Kusama'}
             />
           </a>
         </Navbar.Brand>
@@ -54,11 +59,11 @@ export default function Header({ selectedAccount }) {
           id="basic-navbar-nav"
           className="justify-content-center"
         >
-          <Nav className="nav-pills shadow-sm p-1">
+          <Nav className="nav-pills shadow-sm">
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/claim' && 'active'}
-                onClick={() => history.push('/claim')}
+                onClick={() => navigate('/claim')}
               >
                 Claim
               </Nav.Link>
@@ -66,33 +71,34 @@ export default function Header({ selectedAccount }) {
             <Nav.Item>
               <Nav.Link
                 className={location.pathname === '/generate' && 'active'}
-                onClick={() => history.push('/generate')}
+                onClick={() => navigate('/generate')}
               >
                 New Gift
               </Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
-        <div className="d-flex justify-content-end">
+        <div className="d-flex align-items-center justify-content-end">
           {selectedAccount && (
             <>
               <div className="d-none d-sm-block w-100 d-sm-none" />
-              <Nav className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm rounded">
+              <div className="d-none d-sm-block flex-grow-0 justify-content-end mr-2 shadow-sm border-0 p-0">
                 <div
                   style={{
                     minWidth: '5rem',
                     fontWeight: '400',
+                    height: '42px',
                   }}
-                  className="py-2 px-3 bg-white rounded text-center h-100 d-flex"
+                  className="account-box align-items-center text-center d-flex bg-transparent balance-text"
                 >
                   <AccountInfoBox accountAddress={selectedAccount} />
                 </div>
-              </Nav>
+              </div>
             </>
           )}
           <Dropdown id="dropdown-item-button">
             <Dropdown.Toggle
-              className="btn-dropdown p-2 rounded shadow-sm"
+              className="btn-dropdown p-1 rounded shadow-sm"
               type="button"
               data-toggle="dropdown"
               id="dropdownMenuButton"
@@ -105,9 +111,9 @@ export default function Header({ selectedAccount }) {
             >
               <Dropdown.Item
                 className="px-3"
-                onClick={() => history.push('/about')}
+                onClick={() => navigate('/about')}
               >
-                <Gift className="mr-2" size={18} />
+                <ImageSquare className="mr-2" size={18} />
                 About Gifts
               </Dropdown.Item>
               {alternativeApp && (
@@ -118,8 +124,8 @@ export default function Header({ selectedAccount }) {
                     window.open(alternativeApp, '_blank');
                   }}
                 >
-                  <Bird className="mr-2" size={18} />
-                  Gift KSM
+                  <Circle className="mr-2" size={18} />
+                  Gift DOT
                 </Dropdown.Item>
               )}
             </Dropdown.Menu>

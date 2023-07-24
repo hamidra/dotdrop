@@ -1,4 +1,3 @@
-import { WrapperOpaque } from '@polkadot/types';
 import { Spinner } from 'react-bootstrap';
 export default function Processing({ show, message }) {
   return (
