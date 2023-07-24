@@ -92,7 +92,7 @@ export default function AccountOverview() {
           unsub = result;
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
 
     return () => unsub && unsub();

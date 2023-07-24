@@ -16,8 +16,6 @@ import GiftSecretScanner from './pages/gift/GiftSecretScanner';
 
 function Body() {
   const { apiState, giftTheme } = useSubstrate();
-  console.log('new deployment!');
-
   return (
     <>
       <Routes>

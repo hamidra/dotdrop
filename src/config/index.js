@@ -6,5 +6,4 @@ import configProdEnv from './production.json' assert { type: 'json' };
 const configEnv = import.meta.env.DEV ? configDevEnv : configProdEnv;
 
 const config = { ...configCommon, ...configEnv, types };
-console.log(`configs: \n ${JSON.stringify(config)}`);
 export default config;

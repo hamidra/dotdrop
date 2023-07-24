@@ -13,6 +13,8 @@ export default defineConfig(() => {
         '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
       },
     },
+    // sets base url to the repo name, enabling github pages deployment to work.
+    base: '/dotdrop/',
     plugins: [react()],
   };
 });
