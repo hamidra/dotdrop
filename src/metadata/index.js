@@ -1,5 +1,5 @@
 import cidMapping from './cidMapping.json';
-const basePath = `${process.env.PUBLIC_URL}/assets/nfts/previews`;
+const basePath = `/assets/nfts/previews`;
 const ext = '.png';
 export const resolveAssetImage = (classMetadata, instanceMetadata) => {
   const filename =

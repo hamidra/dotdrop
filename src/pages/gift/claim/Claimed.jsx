@@ -10,7 +10,7 @@ export default function Claimed({ accountAddress, nft }) {
   const { giftTheme } = useSubstrate();
   const previewUrl = new URL(
     `${nft?.classId}/${nft?.instanceId}`,
-    config.NFT_PREVIEW_URL
+    config.NFT_PREVIEW_URL,
   );
   const cardText = 'Congratulations! You have successfully claimed your NFT.';
   return (
