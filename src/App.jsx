@@ -1,5 +1,4 @@
 import { SubstrateContextProvider, useSubstrate } from './substrate-lib';
-import { DeveloperConsole } from './substrate-lib/components';
 import Processing from './components/Processing';
 import AccountOverview from './pages/gift/accounts/AccountOverview';
 import ExtensionOnboarding from './pages/gift/accounts/ExtensionOnboarding';
@@ -17,8 +16,6 @@ import GiftSecretScanner from './pages/gift/GiftSecretScanner';
 
 function Body() {
   const { apiState, giftTheme } = useSubstrate();
-  console.log('new deployment!');
-
   return (
     <>
       <Routes>
@@ -96,7 +93,6 @@ export default function App() {
       <Router>
         <Body />
       </Router>
-      <DeveloperConsole />
     </SubstrateContextProvider>
   );
 }

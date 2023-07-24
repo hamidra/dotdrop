@@ -29,7 +29,7 @@ export default function GenerateGift({
     ? utils.fromChainUnit(
         utils.getUsableBalances(balance),
         chainInfo?.decimals,
-        balanceDecimalPoints
+        balanceDecimalPoints,
       )
     : null;
   const balanceStr =
@@ -45,7 +45,7 @@ export default function GenerateGift({
           const balance = accountInfo?.data;
           setBalance(balance);
           console.log(
-            `free balance is ${balance?.free} with ${balance?.miscFrozen} frozen and ${balance?.reserved} reserved and a nonce of ${accountInfo?.nonce}`
+            `free balance is ${balance?.free} with ${balance?.miscFrozen} frozen and ${balance?.reserved} reserved and a nonce of ${accountInfo?.nonce}`,
           );
         })
         .then((result) => {
@@ -67,7 +67,7 @@ export default function GenerateGift({
         if (address) {
           const transferTx = api.tx.balances.transfer(
             address,
-            utils.getUsableBalances(balance) || 0
+            utils.getUsableBalances(balance) || 0,
           );
           const remarkTx = api.tx.system.remarkWithEvent('gift::create');
           const txs = [transferTx, remarkTx];
@@ -93,7 +93,7 @@ export default function GenerateGift({
       amountFloat && maxAmountFloat && amountFloat > maxAmountFloat;
     if (isTooHigh) {
       setAmountWarning(
-        `This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`
+        `This looks like a large amount for a gift. We recommend direct account transactions for gifts larger than ${maxAmountStr}.`,
       );
     } else {
       setAmountWarning(null);
@@ -119,7 +119,7 @@ export default function GenerateGift({
       if (giftChainAmount.lt(minChainGiftAmount)) {
         const minGiftAmount = utils.fromChainUnit(
           minChainGiftAmount,
-          chainInfo.decimals
+          chainInfo.decimals,
         );
         const minGiftAmountError = `The amount is below ${minGiftAmount} ${chainInfo?.token}, the existential deposit for the ${chainInfo?.chainName} network.`;
         return minGiftAmountError;
@@ -132,12 +132,12 @@ export default function GenerateGift({
         const freeBalance = utils.fromChainUnit(
           utils.getUsableBalances(balance),
           chainInfo.decimals,
-          balanceDecimalPoints
+          balanceDecimalPoints,
         );
         const fees = utils.fromChainUnit(
           totalTxFees,
           chainInfo.decimals,
-          balanceDecimalPoints
+          balanceDecimalPoints,
         );
         const minAvailableBalanceError = `The account balance of ${freeBalance} ${chainInfo.token} is not enough to pay the gift amount of ${amount} ${chainInfo.token} plus fees of (${fees} ${chainInfo.token})`;
         return minAvailableBalanceError;
@@ -149,7 +149,7 @@ export default function GenerateGift({
       const edAmount =
         utils.fromChainUnit(
           chainInfo?.existentialDeposit,
-          chainInfo?.decimals
+          chainInfo?.decimals,
         ) || 0;
       if (remainingBalance.lt(chainInfo?.existentialDeposit || 0)) {
         const keepAliveError = `The gift amount of ${amount} ${chainInfo.token} will bring your account balance below ${edAmount} ${chainInfo.token} (existential deposit for the ${chainInfo?.chainName} network). This will kill your account and make you lose the remaining funds.`;
@@ -197,7 +197,7 @@ export default function GenerateGift({
             const fee = utils.fromChainUnit(
               totalGiftFee,
               chainInfo.decimals,
-              balanceDecimalPoints
+              balanceDecimalPoints,
             );
 
             setGiftInfoHandler({
