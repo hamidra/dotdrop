@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, Media, Form, Row, Col } from 'react-bootstrap';
+import { Dropdown, Form, Row, Col } from 'react-bootstrap';
 import { stringHelpers } from '../../utils';
 import Identicon from '@polkadot/react-identicon';
 import { CaretDown } from 'phosphor-react';
@@ -11,11 +11,11 @@ const addressPaddingLen = 5;
 const AccountToggleItem = ({ account, balance, token }) => {
   const nameStr = stringHelpers.truncateMiddle(
     account?.meta?.name,
-    namePaddingLen
+    namePaddingLen,
   );
   const addressStr = stringHelpers.truncateMiddle(
     account?.address,
-    addressPaddingLen
+    addressPaddingLen,
   );
   const balanceStr = utils.formatBalance(balance, token);
   const caretSize = 24;
@@ -23,19 +23,19 @@ const AccountToggleItem = ({ account, balance, token }) => {
   let ContentElement;
   if (account) {
     ContentElement = (
-      <Media className="d-flex align-items-center">
-        <div className="mr-2">
+      <div className="d-flex align-items-center">
+        <div className="flex-shrink-0">
           <Identicon value={account?.address} size={40} theme="polkadot" />
         </div>
-        <Media.Body>
+        <div class="flex-grow-1 ml-2">
           <Row className="flex-column flex-sm-row">
             <Col>
               <div className="text-left">{nameStr}</div>
               <div className="text-left">{addressStr}</div>
             </Col>
           </Row>
-        </Media.Body>
-      </Media>
+        </div>
+      </div>
     );
   } else {
     ContentElement = (
@@ -57,7 +57,7 @@ const AccountToggleItem = ({ account, balance, token }) => {
 const AccountDropdownMenu = React.forwardRef(
   (
     { children, style, className, 'aria-labelledby': labeledBy, account },
-    ref
+    ref,
   ) => {
     const [value, setValue] = useState('');
     const filteredChildren = React.Children.toArray(children).filter(
@@ -70,7 +70,7 @@ const AccountDropdownMenu = React.forwardRef(
           str += ` ${account.meta.name} `;
         }
         return !value || str.toLowerCase().includes(value.toLowerCase());
-      }
+      },
     );
 
     return (
@@ -91,23 +91,23 @@ const AccountDropdownMenu = React.forwardRef(
         <ul className="list-unstyled">{filteredChildren}</ul>
       </div>
     );
-  }
+  },
 );
 
 const AccountDropdownItem = React.forwardRef(
   ({ account, balance, token, onClick, active }, ref) => {
     const nameStr = stringHelpers.truncateMiddle(
       account?.meta?.name,
-      namePaddingLen
+      namePaddingLen,
     );
     const addressStr = stringHelpers.truncateMiddle(
       account?.address,
-      addressPaddingLen
+      addressPaddingLen,
     );
     const balanceStr = utils.formatBalance(balance, token) || '';
     return (
       <>
-        <Media
+        <div
           className="account-item d-flex align-items-center p-2 border-top"
           active={active}
           onClick={(e) => {
@@ -115,21 +115,21 @@ const AccountDropdownItem = React.forwardRef(
             onClick(e);
           }}
         >
-          <div className="mr-2">
+          <div className="flex-shrink-0">
             <Identicon value={account?.address} size={40} theme="polkadot" />
           </div>
-          <Media.Body>
+          <div className="flex-grow-1 ml-2">
             <Row className="flex-column flex-sm-row">
               <Col>
                 <div>{nameStr}</div>
                 <div>{addressStr}</div>
               </Col>
             </Row>
-          </Media.Body>
-        </Media>
+          </div>
+        </div>
       </>
     );
-  }
+  },
 );
 export default function AccounSelector({
   accounts,

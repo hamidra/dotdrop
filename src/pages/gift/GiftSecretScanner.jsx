@@ -4,8 +4,8 @@ import CardHeader from '../../components/CardHeader';
 import { useSubstrate, giftProvider } from '../../substrate-lib';
 import { stringHelpers } from '../../utils';
 import config from '../../config';
-import Header from '../gift/header/Header';
-import Footer from '../gift/footer/Footer';
+import Header from './header/Header';
+import Footer from './footer/Footer';
 
 export default function GiftSecretScanner() {
   const { keyring, api, apiState, giftTheme } = useSubstrate();
@@ -21,21 +21,18 @@ export default function GiftSecretScanner() {
 
   const scanGiftSecret = async () => {
     const secret = stringHelpers.removeSpaces(giftSecret);
-    console.log(secret);
     const error = validate(secret);
     if (!error) {
       const giftAccountPair = keyring.createFromUri(
         secret,
         { name: 'interim_gift' },
-        'sr25519'
+        'sr25519',
       );
       setGiftAccountPair(giftAccountPair);
-      console.log(giftAccountPair?.address);
       if (api) {
         const giftAccount = { pairOrAddress: giftAccountPair };
         const assets = await giftProvider?.queryGift(api, giftAccount);
         setGiftAssets(assets);
-        console.log(assets);
       }
     } else {
       setGiftSecretError(error);
@@ -54,7 +51,7 @@ export default function GiftSecretScanner() {
       const path = `account/${giftAccountPair?.address}?tab=transfer`;
       url = new URL(path, base);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     return url;
   };
