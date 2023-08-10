@@ -1,3 +1,8 @@
+> 🚨 🚚   
+Dotdrop dapp has been split into two separate DAPPs. You can find the new dapps in the following locations:
+> - [Substrate GiftApp](https://github.com/paritytech/gift-app)
+> - [Substrate Claim NFT App](https://github.com/paritytech/claim-nft)
+
 # Substrate Gifts
 
 Substrate Gifts is a dapp (decentralized app) built on top of substrate compatible networks to let the users of any substrate based network send tokens as a gift no matter if the recepient has any accounts in the network or not. The sender of a gift can simply wrap their tokens (KSMs, DOTs, etc) as a gift in a unique secret hash that functions as a voucher and share the gift secret with the recipient (through email, message or just simply write it on a paper), while the recipient of the gift can go to the dapp and reveal the recieved voucher (gift secret) to redeem their gifted tokens to their account. If the recipient has no accounts in the network to redeem their gift, the dapp will walk them through account creation steps to let them create an account before redeeming their gift.
